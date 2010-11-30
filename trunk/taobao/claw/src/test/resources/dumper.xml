@@ -24,10 +24,10 @@
 		dbType: 数据库类型，某些场合需要特定的数据库语句执行，目前只支持mysql
 	-->
 	<db id="db1" dataSource="myDs" dbType="mysql"/>
-	<db id="db2" dataSource="yourDs" dbType="mysql" />
-	<db id="db3" dataSource="yourDs" dbType="mysql" />
-	<db id="db4" dataSource="yourDs" dbType="mysql" />
-	<db id="db5" dataSource="yourDs" dbType="mysql" />
+	<db id="db2" dataSource="yourDs1" dbType="mysql" />
+	<db id="db3" dataSource="yourDs2" dbType="mysql" />
+	<db id="db4" dataSource="yourDs3" dbType="mysql" />
+	<db id="db5" dataSource="yourDs4" dbType="mysql" />
 
 	<!-- 配置dumper -->
 	<dumper name="dumper1">
