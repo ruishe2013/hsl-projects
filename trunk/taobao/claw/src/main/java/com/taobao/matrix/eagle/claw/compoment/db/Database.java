@@ -10,7 +10,7 @@ public abstract class Database {
 	
 	private DbType dbType;
 
-	protected abstract QueryExecutor getQueryExecutor();
+	protected abstract QueryGenerator getQueryGenerator();
 	
 	public String getId() {
 		return id;

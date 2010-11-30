@@ -1,5 +1,7 @@
 package com.taobao.matrix.eagle.claw.service;
 
-public interface IncrDumpRestoreService {
+public interface DumpThread {
+	
+	void execute();
 
 }
