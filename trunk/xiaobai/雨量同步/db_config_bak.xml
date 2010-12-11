@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="gb2312"?>
+
+<!--
+	logDir: 	日志路径
+	scanDelay:	每隔多少时间扫描一次 (单位：秒)
+	reConnectDb: 如果数据库连接失败，多少时间后重新连接数据库 (单位：秒)
+	startDelay: 程序启动后多少时间开始同步 （单位：秒） 如果为0，则必须手动启动同步
+-->
+
+<config logDir="d:\logs\" scanDelay="10" reConnectDb="10" startDelay="10">
+	<!-- 源数据	 -->
+	<db_config id="src" ip="127.0.0.1" dbName="aaa" user="hsl" pwd="123456">
+		<table id="table1" name="water">
+			<column id="flag"  name="CEG3" />
+			<column id="id"  name="STCD" />
+			<column id="time" name="TM" />
+			<column id="water"  name="Z" />
+			
+		</table>
+		
+		<table id="table2" name="rain">
+			<column id="id"  name="STCD" />
+			<column id="time" name="TM" />
+			<column id="rain1"  name="RN" />
+			<column id="rain2"  name="R5" />
+			<column id="flag"  name="CEG1" />
+			<column id="flag2"  name="CEG2" />
+		</table>
+	</db_config>
+	
+	<!-- 目标数据 -->
+	<db_config id="dest" ip="127.0.0.1" dbName="bbb" user="hsl" pwd="123456">
+		<table id="table1" name="ST_RIVER_R0">
+			<column id="id"  name="STCD" />
+			<column id="time" name="YMDHM" />
+			<column id="water"  name="ZR" />
+		</table>
+		<table id="table2" name="ST_RNFL_YS">
+			<column id="id"  name="STCD" />
+			<column id="time" name="YMDHM" />
+			<column id="rain1"  name="DTRN" />
+		</table>
+		<table id="table3" name="ST_PPTN_R">
+			<column id="id"  name="STCD" />
+			<column id="time" name="TM" />
+			<column id="rain3"  name="DRP" />
+		</table>
+		
+		<table id="water1" name="ST_RIVER_R">
+			<column id="id"  name="STCD" />
+			<column id="time" name="TM" />
+			<column id="water"  name="Z" />
+		</table>
+	</db_config>
+</config>
