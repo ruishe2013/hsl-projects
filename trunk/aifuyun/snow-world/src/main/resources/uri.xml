@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="GB18030"?>
+<uri-config>
+	<content-uri name="snowModule" turbine="true">
+		<serverURI>${snow.word.url}</serverURI>
+	</content-uri>
+	
+	<content-uri name="staticServer">
+		<serverURI>${static.url}</serverURI>
+	</content-uri>
+	
+	<content-uri name="cssServer" extends="staticServer">
+		<path>css</path>
+	</content-uri>
+	
+	<content-uri name="imgServer" extends="staticServer">
+		<path>images</path>
+	</content-uri>
+	
+	<content-uri name="jsServer" extends="staticServer">
+		<path>js</path>
+	</content-uri>
+	
+</uri-config>

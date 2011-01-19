@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="BaseUserDAO">
+
+	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO" alias="baseUser" />
+
+	<resultMap id="BaseUserMapping" class="baseUser">
+		<result property="gmtModified" column="gmt_modified"/>
+		<result property="id" column="id"/>
+		<result property="gmtCreate" column="gmt_create"/>
+		<result property="nick" column="nick"/>
+		<result property="status" column="status"/>
+		<result property="email" column="email"/>
+		<result property="password" column="password"/>
+	</resultMap>
+
+	<sql id="baseUser-full-columns">
+		t.gmt_modified, t.id, t.gmt_create, t.nick, t.status, t.email, t.password
+	</sql>
+
+	<insert id="create" parameterClass="baseUser">
+		<![CDATA[
+			insert into sw_base_user(gmt_modified, gmt_create, nick, status, email, password) 
+				values (now(), now(), #nick#, #status#, #email#, #password#)
+		]]>
+		<selectKey resultClass="long" keyProperty="id">
+			SELECT LAST_INSERT_ID();
+	   </selectKey>
+	</insert>
+	
+	<select id="queryById" resultMap="BaseUserMapping" parameterClass="long">
+		select
+			<include refid="baseUser-full-columns"/>
+		from
+			sw_base_user t
+		where
+			t.deleted = 0 and t.id = #value#
+	</select>
+	
+	<select id="queryByIdIgnoreDeletedFlag" resultMap="BaseUserMapping" parameterClass="long">
+		select
+			<include refid="baseUser-full-columns"/>
+		from
+			sw_base_user t
+		where
+			t.id = #value#
+	</select>
+	
+	
+	<select id="queryByIds" resultMap="BaseUserMapping" parameterClass="list">
+		select
+			<include refid="baseUser-full-columns"/>
+		from
+			sw_base_user t
+		where
+			t.deleted = 0 and t.id in 
+			<iterate open="(" close=")" conjunction="," > 
+	              #value[]# 
+	 		</iterate>
+	</select>
+	
+	
+	<select id="queryByNick" resultMap="BaseUserMapping" parameterClass="string">
+		select
+			<include refid="baseUser-full-columns"/>
+		from 
+			sw_base_user t
+		where
+			t.deleted = 0 and t.nick = #value#
+		limit 1
+	</select>
+	
+	<select id="queryByNickIgnoreDeletedFlag" resultMap="BaseUserMapping" parameterClass="string">
+		select
+			<include refid="baseUser-full-columns"/>
+		from 
+			sw_base_user t
+		where
+			t.nick = #value#
+		limit 1
+	</select>
+
+	<update id="delete" parameterClass="long">
+		update sw_base_user t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
+	</update>
+	
+	<update id="update" parameterClass="baseUser">
+		<![CDATA[
+			update sw_base_user set 
+				gmt_modified= now(),
+				gmt_create= #gmtCreate#,
+				nick= #nick#,
+				status= #status#,
+				email= #email#,
+				password= #password#
+			where id = #id#
+		]]>
+	</update>
+
+</sqlMap>

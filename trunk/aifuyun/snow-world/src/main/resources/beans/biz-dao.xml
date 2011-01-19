@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE beans PUBLIC
+    "-//SPRING//DTD BEAN//EN"
+     "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	
+	<bean id="baseUserDAO" class="com.aifuyun.snow.world.dal.ibatis.user.BaseUserDAOIbatis"></bean>
+	
+</beans>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="gbk"?>    
+<!DOCTYPE configuration>
+
+<configuration>
+	<jmxConfigurator />
+	
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">  
+             <pattern>%d [%X{requestURIWithQueryString}] %-5p %c{2} - %m%n</pattern>  
+        </layout>
+    </appender>
+    
+    <appender name="PROJECT" class="com.zjuh.sweet.slf4j.SplistRollingFileAppender">
+		<File>${log.dir}/snow-world.log</File>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>snow-world.log.%i.bak</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>12</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</Pattern>
+		</layout> 
+    </appender>
+    
+    <appender name="PROJECT-DEBUG" class="com.zjuh.sweet.slf4j.SplistRollingFileAppender">
+        <File>${log.dir}/snow-world-debug.log</File>
+        <append>false</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>snow-world-debug.log.%i.bak</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>12</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</Pattern>
+		</layout>
+    </appender>
+    
+    <appender name="BIZ" class="com.zjuh.sweet.slf4j.SplistRollingFileAppender">
+		<File>${log.dir}/snow-world-biz.log</File>
+		<append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>snow-world-biz.log.%i.bak</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>12</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</Pattern>
+		</layout> 
+    </appender>
+    
+    <appender name="FILTER" class="com.zjuh.sweet.slf4j.SplistRollingFileAppender">
+        <File>${log.dir}/snow-world-filter.log</File>
+        <append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>snow-world-filter.log.%i.bak</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>12</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</Pattern>
+		</layout>
+    </appender>
+    
+    <appender name="APACHE" class="com.zjuh.sweet.slf4j.SplistFileAppender">
+        <File>${log.dir}/snow-world-apache.log</File>
+        <append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>snow-world-apache.log.%i.bak</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>12</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy
+			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</Pattern>
+		</layout>
+    </appender>
+    
+    <appender name="VELOCITY" class="com.zjuh.sweet.slf4j.SplistRollingFileAppender">
+        <File>${log.dir}/snow-world-velocity.log</File>
+        <append>true</append>
+		<rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+			<FileNamePattern>snow-world-velocity.log.%i.bak</FileNamePattern>
+			<MinIndex>1</MinIndex>
+			<MaxIndex>12</MaxIndex>
+		</rollingPolicy>
+		<triggeringPolicy class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+			<MaxFileSize>100MB</MaxFileSize>
+		</triggeringPolicy>
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} -%msg%n</Pattern>
+		</layout>
+    </appender>
+    
+    <!-- ===================================================================== -->
+    <!--  以下是logger的定义                                                   -->
+    <!-- ===================================================================== -->
+    <logger name="com.zjuh.snow.world">
+        <level value="info"/>
+        <appender-ref ref="BIZ"/>
+    </logger>
+    <logger name="com.zjuh.splist.filter">
+        <level value="info"/>
+        <appender-ref ref="FILTER"/>
+    </logger> 
+    <logger name="com.zjuh.splist.web.view.impl.VelocityRenderEngine">
+        <level value="info"/>
+        <appender-ref ref="VELOCITY"/>
+    </logger>
+    <logger name="org.apache">
+        <level value="info"/>
+        <appender-ref ref="APACHE"/>
+    </logger>
+    <logger name="org.apache.commons.beanutils">
+        <level value="error"/>
+    </logger>
+    <logger name="org.apache.commons.digester">
+        <level value="error"/>
+    </logger>
+    
+    <root>
+        <level value="${root.log.level}"/>
+        <appender-ref ref="PROJECT"/>
+        <appender-ref ref="PROJECT-DEBUG"/>
+    </root>
+</configuration>

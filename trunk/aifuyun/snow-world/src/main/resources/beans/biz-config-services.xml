@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE beans PUBLIC
+    "-//SPRING//DTD BEAN//EN"
+     "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+	
+	<bean id="interceptorContainer" class="com.zjuh.splist.core.interceptor.container.DefaultInterceptorContainer">
+		<property name="interceptorsForModules">
+			<list>
+				<bean class="com.zjuh.sweet.author.LoginContextSetterInterceptor" />
+				<ref bean="authorSecurityCheckInterceptor"/>
+				<ref bean="pullSerivceIncerceptor"/>
+			</list>
+		</property>
+	</bean>
+
+	
+	<bean id="pullSerivceIncerceptor" class="com.zjuh.sweet.interceptors.PullSerivceIncerceptor" init-method="init">
+		<property name="pullToolClasses">
+			<map>
+				<entry key="startupDate" value="java.util.Date" />
+			</map>
+		</property>
+	</bean>
+
+	<bean id="authorSecurityCheckInterceptor" class="com.zjuh.sweet.author.AuthorSecurityCheckInterceptor">
+		<property name="loginServer" value="snowModule"></property>
+		<property name="loginUrl" value="login.vm"></property>
+		<property name="loginAction" value="loginAction"></property>
+		<property name="unprotectedUrls">
+			<set>
+				<value>/index.vm</value>
+			</set>
+		</property>
+	</bean>
+	
+	
+</beans>
