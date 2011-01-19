@@ -1,0 +1,29 @@
+<!DOCTYPE web-app PUBLIC
+ "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+ "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app>
+
+	<!-- 
+		此文件打包时会被覆盖	
+	 -->
+	<servlet>
+	  	<servlet-class>com.zjuh.splist.dispatcher.SplistServletDispatcher</servlet-class>
+	  	<servlet-name>SplistServlet</servlet-name>
+	  	<load-on-startup>1</load-on-startup>
+	  	<init-param>
+	  		<param-name>modulesPackage</param-name>
+	  		<param-value>com.aifuyun.snow.world.web.modules</param-value>
+	  	</init-param>
+	  	<init-param>
+	  		<param-name>productMode</param-name>
+	  		<param-value>false</param-value>
+	  	</init-param>
+	  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>SplistServlet</servlet-name>
+  	<url-pattern>*.htm</url-pattern>
+  </servlet-mapping>
+
+</web-app>

@@ -1,0 +1,11 @@
+Ê×Ò³
+
+<form>
+	<input name="name" value="$!name" />
+	<input type="submit" value="submit!" />
+</form>
+
+
+<br />
+
+<a href="$snowModule.setTarget('index').add('name', 'ÄãºÃ')">url!!</a>
