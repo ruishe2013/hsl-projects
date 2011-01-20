@@ -5,7 +5,7 @@ use `snow-world`;
 DROP TABLE IF EXISTS sw_base_user;
 create table sw_base_user (
 	id bigint primary key auto_increment,
-	nick varchar(100) not null,
+	nick varchar(60) not null,
 	password varchar(100) not null,
 	email varchar(255),
 	status tinyint default 0 not null,
@@ -14,4 +14,4 @@ create table sw_base_user (
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
 
-create index ind_base_user_nick on sw_base_user(nick);
+create index ind_base_user_nick on sw_base_user(nick,deleted);
