@@ -10,5 +10,6 @@
 	<import resource="beans/persistence.xml" />
 	<import resource="beans/biz-config-services.xml" />
 	<import resource="beans/${datasource.config.file}" />
+	<import resource="beans/biz-captcha.xml" />
 	
 </beans>

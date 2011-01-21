@@ -30,6 +30,7 @@
 		<property name="unprotectedUrls">
 			<set>
 				<value>/index.vm</value>
+				<value>common/validator.vm</value>
 			</set>
 		</property>
 	</bean>
