@@ -1,10 +1,20 @@
 首页
 
 <form>
-	<input name="name" value="$!name" />
+	验证码：<input size="4" maxlength="4" name="checkcode" value="" /> 
+	<img id="checkCodeImg" src="$!validatorUrl" />
+	<a href="javascript:changeCheckCode();">看不清，换一张</a>
+	<script>
+		function changeCheckCode() {
+			var baseUrl = "$!validatorUrl";
+			var url = baseUrl + "&t=" + new Date().getMilliseconds();
+			document.getElementById('checkCodeImg').src = url;
+		}
+	</script>
 	<input type="submit" value="submit!" />
 </form>
 
+$result
 
 <br />
 

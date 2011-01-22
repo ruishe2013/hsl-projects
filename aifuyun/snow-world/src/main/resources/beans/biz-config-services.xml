@@ -29,8 +29,8 @@
 		<property name="loginAction" value="loginAction"></property>
 		<property name="unprotectedUrls">
 			<set>
-				<value>/index.vm</value>
-				<value>common/validator.vm</value>
+				<value>index</value>
+				<value>common/checkCode</value>
 			</set>
 		</property>
 	</bean>

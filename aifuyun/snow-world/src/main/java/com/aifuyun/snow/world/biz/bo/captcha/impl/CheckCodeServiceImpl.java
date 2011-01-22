@@ -6,11 +6,12 @@ import java.io.OutputStream;
 import javax.imageio.ImageIO;
 
 import com.aifuyun.snow.world.biz.bo.captcha.BOException;
-import com.aifuyun.snow.world.biz.bo.captcha.ValidateService;
+import com.aifuyun.snow.world.biz.bo.captcha.CheckCodeService;
 import com.octo.captcha.service.image.ImageCaptchaService;
+import com.zjuh.splist.core.SplistContext;
 import com.zjuh.sweet.lang.StringUtil;
 
-public class ValidateServiceImpl implements ValidateService {
+public class CheckCodeServiceImpl implements CheckCodeService {
 
 	private ImageCaptchaService imageCaptchaService;
 	
@@ -19,19 +20,21 @@ public class ValidateServiceImpl implements ValidateService {
 	private String imageFormat = DEFAULT_CAPTCHA_IMAGE_FORMAT;
 	
 	@Override
+	public boolean check(String value) {
+		return check(SplistContext.getSession().getId(), value);
+	}
+
+	@Override
 	public boolean check(String sessionId, String value) {
 		if (StringUtil.isEmpty(value)) {
 			return false;
 		}
-		String question = imageCaptchaService.getQuestionForID(sessionId);
-		if (StringUtil.isEmpty(question)) {
-			return false;
-		}
-		return value.equalsIgnoreCase(question);
+		String inputValue = value.toLowerCase();
+		return imageCaptchaService.validateResponseForID(sessionId, inputValue);
 	}
 
 	@Override
-	public void generate(String sessionId, OutputStream os) {
+	public void generateNext(String sessionId, OutputStream os) {
 		try {
 			BufferedImage bi = imageCaptchaService.getImageChallengeForID(sessionId);
 			ImageIO.write(bi, imageFormat, os);
