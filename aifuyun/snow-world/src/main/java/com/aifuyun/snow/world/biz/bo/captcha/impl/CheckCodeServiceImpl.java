@@ -5,6 +5,9 @@ import java.io.OutputStream;
 
 import javax.imageio.ImageIO;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aifuyun.snow.world.biz.bo.captcha.BOException;
 import com.aifuyun.snow.world.biz.bo.captcha.CheckCodeService;
 import com.octo.captcha.service.image.ImageCaptchaService;
@@ -13,9 +16,11 @@ import com.zjuh.sweet.lang.StringUtil;
 
 public class CheckCodeServiceImpl implements CheckCodeService {
 
-	private ImageCaptchaService imageCaptchaService;
-	
 	private static final String DEFAULT_CAPTCHA_IMAGE_FORMAT = "jpeg";
+	
+	private static final Logger log = LoggerFactory.getLogger(CheckCodeServiceImpl.class);
+	
+	private ImageCaptchaService imageCaptchaService;
 	
 	private String imageFormat = DEFAULT_CAPTCHA_IMAGE_FORMAT;
 	
@@ -30,7 +35,12 @@ public class CheckCodeServiceImpl implements CheckCodeService {
 			return false;
 		}
 		String inputValue = value.toLowerCase();
-		return imageCaptchaService.validateResponseForID(sessionId, inputValue);
+		try {
+			return imageCaptchaService.validateResponseForID(sessionId, inputValue);
+		} catch (Exception e) {
+			log.error("校验验证码错误", e);
+			return false;
+		}
 	}
 
 	@Override
