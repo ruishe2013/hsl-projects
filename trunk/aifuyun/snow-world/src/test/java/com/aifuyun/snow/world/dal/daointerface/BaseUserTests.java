@@ -16,7 +16,7 @@ public class BaseUserTests extends BaseTest {
 	public void testCreate() {
 		String testNick = "$$temp_test_user_name";
 		BaseUserDO baseUserDO = new BaseUserDO();
-		baseUserDO.setNick(testNick);
+		baseUserDO.setUsername(testNick);
 		baseUserDO.setPassword("testpassword");
 		long id = baseUserDAO.create(baseUserDO);
 		Assert.assertTrue(id > 0L);
@@ -27,7 +27,7 @@ public class BaseUserTests extends BaseTest {
 	public void testDelete() {
 		String testNick = "$$temp_test_delete";
 		BaseUserDO baseUserDO = new BaseUserDO();
-		baseUserDO.setNick(testNick);
+		baseUserDO.setUsername(testNick);
 		baseUserDO.setPassword("testpassword");
 		long id = baseUserDAO.create(baseUserDO);
 		Assert.assertTrue(id > 0L);
@@ -42,7 +42,7 @@ public class BaseUserTests extends BaseTest {
 		String testNick = "$$temp_test_update";
 		String testpassword = "abcdedfg";
 		BaseUserDO baseUserDO = new BaseUserDO();
-		baseUserDO.setNick(testNick);
+		baseUserDO.setUsername(testNick);
 		baseUserDO.setPassword(testpassword);
 		long id = baseUserDAO.create(baseUserDO);
 		Assert.assertTrue(id > 0L);
@@ -59,7 +59,7 @@ public class BaseUserTests extends BaseTest {
 	public void testQueryById() {
 		String testNick = "$$temp_test_query_by_id";
 		BaseUserDO baseUserDO = new BaseUserDO();
-		baseUserDO.setNick(testNick);
+		baseUserDO.setUsername(testNick);
 		baseUserDO.setPassword("testpassword");
 		long id = baseUserDAO.create(baseUserDO);
 		Assert.assertTrue(id > 0L);
@@ -73,13 +73,13 @@ public class BaseUserTests extends BaseTest {
 	public void testQueryByIds() {
 		String testNick = "$$temp_test_query_by_id";
 		BaseUserDO baseUserDO = new BaseUserDO();
-		baseUserDO.setNick(testNick);
+		baseUserDO.setUsername(testNick);
 		baseUserDO.setPassword("testpassword");
 		long id1 = baseUserDAO.create(baseUserDO);
 		
 		String testNick2 = "$$temp_test_query_by_id22";
 		BaseUserDO baseUserDO2 = new BaseUserDO();
-		baseUserDO2.setNick(testNick2);
+		baseUserDO2.setUsername(testNick2);
 		baseUserDO2.setPassword("testpassword2");
 		long id2 = baseUserDAO.create(baseUserDO);
 		
@@ -99,37 +99,37 @@ public class BaseUserTests extends BaseTest {
 	public void testQueryByNick() {
 		String testNick = "$$temp_test_query_by_nick";
 		BaseUserDO baseUserDO = new BaseUserDO();
-		baseUserDO.setNick(testNick);
+		baseUserDO.setUsername(testNick);
 		baseUserDO.setPassword("testpassword");
 		long id = baseUserDAO.create(baseUserDO);
 		Assert.assertTrue(id > 0L);
-		BaseUserDO objectInDb = baseUserDAO.queryByNick(testNick);
+		BaseUserDO objectInDb = baseUserDAO.queryByUsername(testNick);
 		Assert.assertNotNull(objectInDb);
 		
 		baseUserDAO.delete(id);
-		objectInDb = baseUserDAO.queryByNick(testNick);
+		objectInDb = baseUserDAO.queryByUsername(testNick);
 		Assert.assertNull(objectInDb);
 	}
 	
 	public void testQueryByNickIgnoreDeletedFlag() {
 		String testNick = "$$temp_test_query_by_nick";
 		BaseUserDO baseUserDO = new BaseUserDO();
-		baseUserDO.setNick(testNick);
+		baseUserDO.setUsername(testNick);
 		baseUserDO.setPassword("testpassword");
 		long id = baseUserDAO.create(baseUserDO);
 		Assert.assertTrue(id > 0L);
-		BaseUserDO objectInDb = baseUserDAO.queryByNick(testNick);
+		BaseUserDO objectInDb = baseUserDAO.queryByUsername(testNick);
 		Assert.assertNotNull(objectInDb);
 		
 		baseUserDAO.delete(id);
-		objectInDb = baseUserDAO.queryByNickIgnoreDeletedFlag(testNick);
+		objectInDb = baseUserDAO.queryByUsernameIgnoreDeletedFlag(testNick);
 		Assert.assertNotNull(objectInDb);
 	}
 	
 	public void testQueryByIdIgnoreDeletedFlag() {
 		String testNick = "$$temp_test_query_by_nick";
 		BaseUserDO baseUserDO = new BaseUserDO();
-		baseUserDO.setNick(testNick);
+		baseUserDO.setUsername(testNick);
 		baseUserDO.setPassword("testpassword");
 		long id = baseUserDAO.create(baseUserDO);
 		Assert.assertTrue(id > 0L);
