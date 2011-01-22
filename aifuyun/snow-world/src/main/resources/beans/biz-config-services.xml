@@ -32,6 +32,7 @@
 				<value>index</value>
 				<value>common/checkCode</value>
 				<value>user/reg</value>
+				<value>user/regSuccess</value>
 				<value>userFacadeAction</value>
 			</set>
 		</property>

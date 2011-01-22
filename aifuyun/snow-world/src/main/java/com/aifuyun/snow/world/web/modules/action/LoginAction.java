@@ -3,7 +3,6 @@ package com.aifuyun.snow.world.web.modules.action;
 import com.aifuyun.snow.world.biz.ao.user.LoginAO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
 import com.aifuyun.snow.world.web.common.base.BaseAction;
-import com.zjuh.splist.core.SplistContext;
 import com.zjuh.splist.core.annotation.DefaultTarget;
 import com.zjuh.splist.core.form.Form;
 import com.zjuh.splist.core.module.URLModule;
@@ -35,8 +34,8 @@ public class LoginAction extends BaseAction {
 		if (result.isSuccess()) {
 			String url = rundata.getQueryString().getString(AuthorConstants.REDIRECT_URL_NAME);
 			if (StringUtil.isEmpty(url)) {
-				URLModuleContainer urlModuleContainer = SplistContext.getSplistComponent().getUrlModuleContainers().get("tmServer");
-				URLModule urlModule = urlModuleContainer.setTarget("main.vm");
+				URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
+				URLModule urlModule = urlModuleContainer.setTarget("index");
 				rundata.sendRedirect(urlModule.render());
 			} else {
 				rundata.sendRedirect(url);
@@ -47,10 +46,6 @@ public class LoginAction extends BaseAction {
 		
 	}
 	
-	public void doLogout(RunData rundata, TemplateContext templateContext) {
-
-	}
-
 	public void setLoginAO(LoginAO loginAO) {
 		this.loginAO = loginAO;
 	}

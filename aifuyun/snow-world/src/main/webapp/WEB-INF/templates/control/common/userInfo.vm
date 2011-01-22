@@ -1,0 +1,8 @@
+<div id="common-user-info">
+#if("$!username" == "")
+	欢迎来到爱浮云， 请<a href="$snowModule.setTarget('login').addQueryData('redirectUrl', $currentURL)">登录</a>
+#else
+	你好<strong>$username</strong>，欢迎来到爱浮云， <a href="$snowModule.setTarget('loginOut')">退出</a>
+#end
+##<div id="header-suggestion"><a href="#">我要提意见！</a></div>
+</div>

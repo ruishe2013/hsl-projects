@@ -5,5 +5,8 @@
 <beans default-autowire="byName">
 	
 	<bean id="userAO" class="com.aifuyun.snow.world.biz.ao.user.impl.UserAOImpl"></bean>
+	<bean id="loginAO" class="com.aifuyun.snow.world.biz.ao.user.impl.LoginAOImpl"></bean>
+	
+	
 	
 </beans>
