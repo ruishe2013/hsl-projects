@@ -17,7 +17,6 @@ public class Index extends BaseScreen {
 		boolean result = checkCodeService.check(checkcode);
 		
 		templateContext.put("result", result);
-		templateContext.put("validatorUrl", getValidatorUrl());
 	}
 
 	public void setCheckCodeService(CheckCodeService checkCodeService) {

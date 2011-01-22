@@ -2,15 +2,7 @@
 
 <form>
 	验证码：<input size="4" maxlength="4" name="checkcode" value="" /> 
-	<img id="checkCodeImg" src="$!validatorUrl" />
-	<a href="javascript:changeCheckCode();">看不清，换一张</a>
-	<script>
-		function changeCheckCode() {
-			var baseUrl = "$!validatorUrl";
-			var url = baseUrl + "&t=" + Math.round((Math.random() * 10000));
-			document.getElementById('checkCodeImg').src = url;
-		}
-	</script>
+	$control.setTemplate('common/checkCode.vm')
 	<input type="submit" value="submit!" />
 </form>
 

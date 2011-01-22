@@ -30,6 +30,13 @@ public interface UserBO {
 	BaseUserDO queryByUsernameIgnoreDeletedFlag(String username);
 	
 	/**
+	 * 查询用户
+	 * @param username
+	 * @return
+	 */
+	BaseUserDO queryByUsername(String username);
+	
+	/**
 	 * 该用户是否在敏感词名单里
 	 * @param usename
 	 * @return

@@ -4,6 +4,10 @@ import com.aifuyun.snow.world.biz.bo.captcha.CheckCodeService;
 import com.zjuh.splist.core.SplistContext;
 import com.zjuh.splist.core.form.validator.AbstractValidator;
 
+/**
+ * @author pister
+ * 2011-1-22
+ */
 public class CheckCodeValidator extends AbstractValidator {
 
 	@Override

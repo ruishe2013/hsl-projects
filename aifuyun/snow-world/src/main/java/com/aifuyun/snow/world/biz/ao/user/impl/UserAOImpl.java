@@ -22,7 +22,7 @@ public class UserAOImpl extends BaseAO implements UserAO {
 			}
 			
 			if (isUserExist(userDO.getUsername())) {
-				result.setResultCode(UserResultCodes.USERNAME_EXIST);
+				result.setResultCode(UserResultCodes.USERNAME_HAS_EXIST);
 				return result;
 			}
 			

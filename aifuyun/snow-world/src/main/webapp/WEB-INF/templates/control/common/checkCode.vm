@@ -1,0 +1,9 @@
+<img id="checkCodeImg" src="$!validatorUrl" class="$!imgClass" />
+<a href="javascript:tempChangeCheckCode();">看不清，换一张</a>
+<script>
+	function tempChangeCheckCode() {
+		var baseUrl = "$!validatorUrl";
+		var url = baseUrl + "&t=" + Math.round((Math.random() * 10000));
+		document.getElementById('checkCodeImg').src = url;
+	}
+</script>
