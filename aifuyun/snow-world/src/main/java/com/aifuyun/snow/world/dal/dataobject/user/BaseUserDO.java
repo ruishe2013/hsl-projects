@@ -13,9 +13,9 @@ public class BaseUserDO extends BaseDO {
 	private long id;
 	
 	/**
-	 * 用户nick 唯一
+	 * 用户名 唯一
 	 */
-	private String nick;
+	private String username;
 	
 	/**
 	 * 密码， 已经加密个过
@@ -40,12 +40,12 @@ public class BaseUserDO extends BaseDO {
 		this.id = id;
 	}
 
-	public String getNick() {
-		return nick;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNick(String nick) {
-		this.nick = nick;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getEmail() {

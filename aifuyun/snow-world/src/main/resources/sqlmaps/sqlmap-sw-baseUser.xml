@@ -8,20 +8,20 @@
 		<result property="gmtModified" column="gmt_modified"/>
 		<result property="id" column="id"/>
 		<result property="gmtCreate" column="gmt_create"/>
-		<result property="nick" column="nick"/>
+		<result property="username" column="username"/>
 		<result property="status" column="status"/>
 		<result property="email" column="email"/>
 		<result property="password" column="password"/>
 	</resultMap>
 
 	<sql id="baseUser-full-columns">
-		t.gmt_modified, t.id, t.gmt_create, t.nick, t.status, t.email, t.password
+		t.gmt_modified, t.id, t.gmt_create, t.username, t.status, t.email, t.password
 	</sql>
 
 	<insert id="create" parameterClass="baseUser">
 		<![CDATA[
-			insert into sw_base_user(gmt_modified, gmt_create, nick, status, email, password) 
-				values (now(), now(), #nick#, #status#, #email#, #password#)
+			insert into sw_base_user(gmt_modified, gmt_create, username, status, email, password) 
+				values (now(), now(), #username#, #status#, #email#, #password#)
 		]]>
 		<selectKey resultClass="long" keyProperty="id">
 			SELECT LAST_INSERT_ID();
@@ -60,23 +60,23 @@
 	</select>
 	
 	
-	<select id="queryByNick" resultMap="BaseUserMapping" parameterClass="string">
+	<select id="queryByUsername" resultMap="BaseUserMapping" parameterClass="string">
 		select
 			<include refid="baseUser-full-columns"/>
 		from 
 			sw_base_user t
 		where
-			t.deleted = 0 and t.nick = #value#
+			t.deleted = 0 and t.username = #value#
 		limit 1
 	</select>
 	
-	<select id="queryByNickIgnoreDeletedFlag" resultMap="BaseUserMapping" parameterClass="string">
+	<select id="queryByUsernameIgnoreDeletedFlag" resultMap="BaseUserMapping" parameterClass="string">
 		select
 			<include refid="baseUser-full-columns"/>
 		from 
 			sw_base_user t
 		where
-			t.nick = #value#
+			t.username = #value#
 		limit 1
 	</select>
 
@@ -89,7 +89,7 @@
 			update sw_base_user set 
 				gmt_modified= now(),
 				gmt_create= #gmtCreate#,
-				nick= #nick#,
+				username= #username#,
 				status= #status#,
 				email= #email#,
 				password= #password#

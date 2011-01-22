@@ -51,17 +51,17 @@ public interface BaseUserDAO {
 	List<BaseUserDO> queryByIds(List<Long> ids);
 	
 	/**
-	 * 通过nick查询
-	 * @param nick
+	 * 通过username查询
+	 * @param username
 	 * @return
 	 */
-	BaseUserDO queryByNick(String nick);
+	BaseUserDO queryByUsername(String username);
 	
 	/**
-	 * 通过nick查询，忽略删除标记，也就是能查出表中所有的数据
-	 * @param nick
+	 * 通过username查询，忽略删除标记，也就是能查出表中所有的数据
+	 * @param username
 	 * @return
 	 */
-	BaseUserDO queryByNickIgnoreDeletedFlag(String nick);
+	BaseUserDO queryByUsernameIgnoreDeletedFlag(String username);
 
 }
