@@ -6,4 +6,36 @@
 	
 	<bean id="checkCodeService" class="com.aifuyun.snow.world.biz.bo.captcha.impl.CheckCodeServiceImpl"></bean>
 	
+	<bean id="userBO" class="com.aifuyun.snow.world.biz.bo.user.impl.UserBOImpl">
+		<property name="sensitivitiesList">
+			<set>
+				<value>江泽民</value>
+				<value>毛泽东</value>
+				<value>邓小平</value>
+				<value>刘少奇</value>
+				<value>朱德</value>
+				<value>朱镕基</value>
+				
+				<value>胡锦涛</value>
+				<value>吴邦国</value>
+				<value>温家宝</value>
+				<value>贾庆林</value>
+				<value>李长春</value>
+				<value>习近平</value>
+				<value>李克强</value>
+				<value>贺国强</value>
+				<value>周永康</value>
+				
+				<value>马云</value>
+				<value>史玉柱</value>
+				<value>马化腾</value>
+				<value>李彦宏</value>
+				
+				<value>黄松立</value>
+				<value>邓在超</value>
+			</set>
+		</property>
+	</bean>
+	
+	
 </beans>
