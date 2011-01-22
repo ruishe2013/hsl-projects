@@ -1,4 +1,4 @@
-#set($form = $formFactory.createForm("user.user"))
+#set($form = $formFactory.createForm("user.registerUser"))
 
 #macro(errorMessage, $str)
 	#if( "$!str" != "")
@@ -8,8 +8,8 @@
 
 <div>
 	<form method="post">
-		<input type="hidden" name="action" value="user/userAction" /> 
-		<input type="hidden" name="actionEvent" value="regUser" />
+		<input type="hidden" name="actionEvent" value="regUser" /> 
+		<input type="hidden" name="actionTarget" value="userFacadeAction" />
 		<input type="hidden" name="regUser" value="$tokenUtil.token('regUser')" />
 		
 		<div class="input-item"> 
@@ -31,6 +31,18 @@
 		</div>
 		#errorMessage($!form.fields.confirmPassword.message)
 		
+		
+		<div class="input-item"> 
+			<label for="$!form.fields.checkCode.name">*验证码：</label> 
+			<input type="text" size="6" maxlength="4" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value="" />
+			$control.setTemplate('common/checkCode.vm')
+		
+		</div>
+		#errorMessage($!form.fields.checkCode.message)
+		
+		
+		#errorMessage($!csrfmessage)
+		#errorMessage($!resultmessage.message)
 		
 		<div class="input-item"> 
 			<input id="submit-button" type="submit" value="提交" /> 

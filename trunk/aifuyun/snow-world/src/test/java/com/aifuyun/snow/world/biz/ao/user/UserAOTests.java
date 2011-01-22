@@ -20,7 +20,7 @@ public class UserAOTests extends BaseTest {
 		Assert.assertTrue(result.isSuccess());
 		result = userAO.registerUser(baseUserDO);
 		Assert.assertFalse(result.isSuccess());
-		Assert.assertEquals(UserResultCodes.USERNAME_EXIST, result.getResultCode());
+		Assert.assertEquals(UserResultCodes.USERNAME_HAS_EXIST, result.getResultCode());
 		
 		baseUserDO.setUsername("ª∆À…¡¢");
 		result = userAO.registerUser(baseUserDO);

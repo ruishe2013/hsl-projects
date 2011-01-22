@@ -1,0 +1,24 @@
+#set($renderMessage = '系统错误!')
+
+#if ("$!errorMessage.message" != "") 
+	#set($renderMessage = $!errorMessage.message)
+#end
+
+#if ("$!errorMessage" != "") 
+	#set($renderMessage = $!errorMessage)
+#end
+
+#if ("$!message" != "") 
+	#set($renderMessage = $!message)
+#end
+
+<div id="errorPage-error-message">
+	$renderMessage
+</div>
+<div id="errorPage-error-guider">
+	#if("$!backUrl" != "")
+		<a href="$backUrl">返回之前访问的页面</a>
+	#end
+	<a href="$snowModule.setTarget('index.vm')">返回首页</a>
+</div>
+

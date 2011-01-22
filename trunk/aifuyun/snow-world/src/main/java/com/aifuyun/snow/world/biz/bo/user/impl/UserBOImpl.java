@@ -30,6 +30,11 @@ public class UserBOImpl implements UserBO {
 	}
 
 	@Override
+	public BaseUserDO queryByUsername(String username) {
+		return baseUserDAO.queryByUsername(username);
+	}
+
+	@Override
 	public boolean isUserInSensitivityList(String username) {
 		return sensitivitiesList.contains(username);
 	}
