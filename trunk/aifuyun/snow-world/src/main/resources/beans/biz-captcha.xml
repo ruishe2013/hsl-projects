@@ -35,8 +35,8 @@
 	</bean>
 	
 	<bean id="fontGenerator" class="com.octo.captcha.component.image.fontgenerator.RandomFontGenerator" >
-		<constructor-arg index="0"><value>18</value></constructor-arg> <!-- min font size -->
-		<constructor-arg index="1"><value>20</value></constructor-arg> <!-- max font size -->
+		<constructor-arg index="0"><value>20</value></constructor-arg> <!-- min font size -->
+		<constructor-arg index="1"><value>24</value></constructor-arg> <!-- max font size -->
 		<constructor-arg index="2">
 			<list>
 				<ref bean="textFont"/>
@@ -47,11 +47,11 @@
 	<bean id="textFont" class="java.awt.Font" >
 		<constructor-arg index="0"><value>fontArial</value></constructor-arg>
 		<constructor-arg index="1"><value>0</value></constructor-arg>
-		<constructor-arg index="2"><value>9</value></constructor-arg>
+		<constructor-arg index="2"><value>20</value></constructor-arg>
 	</bean>
 	
 	<bean id="backgroundGenerator" class="com.octo.captcha.component.image.backgroundgenerator.UniColorBackgroundGenerator" >
-		<constructor-arg index="0"><value>60</value></constructor-arg> <!-- width -->
+		<constructor-arg index="0"><value>150</value></constructor-arg> <!-- width -->
 		<constructor-arg index="1"><value>36</value></constructor-arg> <!-- height -->
 	</bean>
 	
