@@ -6,10 +6,12 @@ import java.io.OutputStream;
  * @author pister
  * 2011-1-21
  */
-public interface ValidateService {
+public interface CheckCodeService {
+	
+	boolean check(String value);
 	
 	boolean check(String sessionId, String value);
 	
-	void generate(String sessionId, OutputStream os);
+	void generateNext(String sessionId, OutputStream os);
 
 }

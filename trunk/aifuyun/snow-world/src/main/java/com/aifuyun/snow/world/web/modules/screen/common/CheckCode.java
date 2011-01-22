@@ -5,20 +5,15 @@ import java.io.OutputStream;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.aifuyun.snow.world.biz.bo.captcha.ValidateService;
+import com.aifuyun.snow.world.biz.bo.captcha.CheckCodeService;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.core.SplistContext;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
 
-public class Validator extends BaseScreen {
+public class CheckCode extends BaseScreen {
 
-	private static final Logger log = LoggerFactory.getLogger(Validator.class);
-	
-	private ValidateService validateService;
+	private CheckCodeService checkCodeService;
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
@@ -26,7 +21,7 @@ public class Validator extends BaseScreen {
 			rundata.setUseTemplate(false);
 	        String sessionId = rundata.getQueryString().getString("sessionId");
 			ByteArrayOutputStream bos = new ByteArrayOutputStream();
-			validateService.generate(sessionId, bos);
+			checkCodeService.generateNext(sessionId, bos);
 			
 			HttpServletResponse response = SplistContext.getResponse();
 			response.setHeader("Pragma", "no-cache");
@@ -41,8 +36,8 @@ public class Validator extends BaseScreen {
 		}
 	}
 
-	public void setValidateService(ValidateService validateService) {
-		this.validateService = validateService;
+	public void setCheckCodeService(CheckCodeService checkCodeService) {
+		this.checkCodeService = checkCodeService;
 	}
 
 }

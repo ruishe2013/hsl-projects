@@ -4,6 +4,6 @@
      "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 	
-	<bean id="validateService" class="com.aifuyun.snow.world.biz.bo.captcha.impl.ValidateServiceImpl"></bean>
+	<bean id="checkCodeService" class="com.aifuyun.snow.world.biz.bo.captcha.impl.CheckCodeServiceImpl"></bean>
 	
 </beans>

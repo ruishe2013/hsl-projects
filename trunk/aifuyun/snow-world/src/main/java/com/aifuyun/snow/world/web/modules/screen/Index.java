@@ -1,17 +1,27 @@
 package com.aifuyun.snow.world.web.modules.screen;
 
+import com.aifuyun.snow.world.biz.bo.captcha.CheckCodeService;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
 
 public class Index extends BaseScreen {
 
+	private CheckCodeService checkCodeService;
+	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
-		String name = rundata.getQueryString().getString("name");
-		System.out.println(name);
+		String checkcode = rundata.getQueryString().getString("checkcode");
+		System.out.println(checkcode);
 		
-		templateContext.put("name", name);
+		boolean result = checkCodeService.check(checkcode);
+		
+		templateContext.put("result", result);
+		templateContext.put("validatorUrl", getValidatorUrl());
+	}
+
+	public void setCheckCodeService(CheckCodeService checkCodeService) {
+		this.checkCodeService = checkCodeService;
 	}
 
 }

@@ -11,6 +11,7 @@ import com.zjuh.splist.core.module.URLModule;
 import com.zjuh.splist.core.module.URLModuleContainer;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
+import com.zjuh.splist.web.uri.BaseURI;
 import com.zjuh.splist.web.uri.UrlUtil;
 import com.zjuh.sweet.author.AuthorConstants;
 import com.zjuh.sweet.result.Result;
@@ -33,6 +34,19 @@ public class BaseModule {
 	protected String getCurrentUrl() {
 		HttpServletRequest request = SplistContext.getRequest();
 		return UrlUtil.getRequestURL(request);
+	}
+	
+	/**
+	 * 获取验证码链接地址
+	 * @return
+	 */
+	protected String getValidatorUrl() {
+		BaseURI baseURI = SplistContext.getSplistComponent().getConfigUries().get("validatorServer");
+		StringBuilder sb = new StringBuilder();
+		sb.append(baseURI.render());
+		sb.append("?sessionId=");
+		sb.append(SplistContext.getSession().getId());
+		return sb.toString();
 	}
 	
 	/**

@@ -8,6 +8,10 @@
 		<serverURI>${static.url}</serverURI>
 	</content-uri>
 	
+	<content-uri name="validatorServer">
+		<serverURI>${validator.server.url}</serverURI>
+	</content-uri>
+	
 	<content-uri name="cssServer" extends="staticServer">
 		<path>css</path>
 	</content-uri>
