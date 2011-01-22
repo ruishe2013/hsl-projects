@@ -6,22 +6,30 @@
 
 	<resultMap id="BaseUserMapping" class="baseUser">
 		<result property="gmtModified" column="gmt_modified"/>
-		<result property="id" column="id"/>
+		<result property="sex" column="sex"/>
+		<result property="birthYear" column="birth_year"/>
+		<result property="phone" column="phone"/>
 		<result property="gmtCreate" column="gmt_create"/>
-		<result property="username" column="username"/>
 		<result property="status" column="status"/>
-		<result property="email" column="email"/>
+		<result property="career" column="career"/>
 		<result property="password" column="password"/>
+		<result property="id" column="id"/>
+		<result property="username" column="username"/>
+		<result property="email" column="email"/>
+		<result property="qq" column="qq"/>
+		<result property="registerIp" column="register_ip"/>
+		
 	</resultMap>
 
 	<sql id="baseUser-full-columns">
-		t.gmt_modified, t.id, t.gmt_create, t.username, t.status, t.email, t.password
+		t.gmt_modified, t.sex, t.birth_year, t.phone, t.gmt_create, t.status, t.career, t.password, t.id, t.username, t.email, t.qq, t.register_ip
 	</sql>
 
 	<insert id="create" parameterClass="baseUser">
 		<![CDATA[
-			insert into sw_base_user(gmt_modified, gmt_create, username, status, email, password) 
-				values (now(), now(), #username#, #status#, #email#, #password#)
+			insert into sw_base_user(gmt_modified, sex, birth_year, phone, gmt_create, status, career, password, username, email, qq, register_ip) 
+				values (now(), #sex#, #birthYear#, #phone#, now(), #status#, #career#, #password#, #username#, #email#, #qq#, #registerIp#)
+
 		]]>
 		<selectKey resultClass="long" keyProperty="id">
 			SELECT LAST_INSERT_ID();
@@ -88,11 +96,17 @@
 		<![CDATA[
 			update sw_base_user set 
 				gmt_modified= now(),
+				sex= #sex#,
+				birth_year= #birthYear#,
+				phone= #phone#,
 				gmt_create= #gmtCreate#,
-				username= #username#,
 				status= #status#,
+				career= #career#,
+				password= #password#,
+				username= #username#,
 				email= #email#,
-				password= #password#
+				qq= #qq#,
+				register_ip = #registerIp#
 			where id = #id#
 		]]>
 	</update>
