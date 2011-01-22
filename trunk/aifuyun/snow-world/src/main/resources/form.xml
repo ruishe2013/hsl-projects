@@ -2,4 +2,5 @@
 <forms>
 	
 	<include file="forms/user.xml" />
+	<include file="forms/login.xml" />
 </forms>

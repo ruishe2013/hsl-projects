@@ -1,1 +1,36 @@
-µÇÂ½Ò³Ãæ
+#set($form = $formFactory.createForm("login"))
+
+#macro(errorMessage, $str)
+	#if( "$!str" != "")
+		<div class="common-error-message">${str}</div>
+	#end
+#end
+
+<div id="content">
+	<div id="div-panel"> 
+		<form method="post">
+			<input type="hidden" name="login" value="$tokenUtil.token('login')" />
+			<input type="hidden" name="actionTarget" value="login_action.htm" />
+			<input type="hidden" name="actionEvent" value="login" />
+			
+			<div class="input-item"> 
+				<label for="username">ÓÃ»§Ãû£º</label> 
+				<input type="text" name="$form.fields.username.name" value="$!form.fields.username.value"  /> 
+			</div>
+			#errorMessage($!form.fields.username.message)
+			
+			<div class="input-item"> 
+				<label for="password">ÃÜÂë£º</label> 
+				<input type="password" name="$form.fields.password.name" value="$!form.fields.password.value" /> 
+			</div>
+			#errorMessage($!form.fields.password.message)
+			
+			#errorMessage($!csrfmessage)
+			#errorMessage($!resultmessage.message)
+			<div class="input-item"> 
+				<input id="submit-button" type="submit" value="µÇÂ½" /> 
+			</div> 
+			
+		</form> 
+	</div> 
+</div>

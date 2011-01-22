@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="GB18030"?>
+<forms>
+	<form name="login">
+		<field name="username">
+			<validator type="required" message="用户名不能为空!" />
+			<validator type="string" message="用户名的长度必须在1~20个字符之间!" >
+				<param name="min" value="1" />
+				<param name="max" value="20" />
+			</validator>
+		</field>
+		<field name="password">
+			<validator type="required" message="密码不能为空!" />
+			<validator type="string" message="密码的长度必须在1~20个字符之间!" >
+				<param name="min" value="1" />
+				<param name="max" value="20" />
+			</validator>
+		</field>
+	</form>
+
+</forms>

@@ -1,5 +1,7 @@
 package com.aifuyun.snow.world.web.common.base;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
@@ -118,5 +120,12 @@ public class BaseModule {
 		
 	}
 	
+	protected void sendRedirectUrl(String url) {
+		try {
+			SplistContext.getResponse().sendRedirect(url);
+		} catch (IOException e) {
+			log.error("÷ÿ∂®œÚ ß∞‹", e);
+		}
+	}
 
 }
