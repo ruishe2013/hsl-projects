@@ -6,5 +6,9 @@
 		maxRequests="300" maxSessions="300" maxTransactions="300"/>
 
 	<sqlMap resource="sqlmaps/sqlmap-sw-baseUser.xml" />
+	<sqlMap resource="sqlmaps/sqlmap-sw-area-province.xml" />
+	<sqlMap resource="sqlmaps/sqlmap-sw-area-city.xml" />
+	<sqlMap resource="sqlmaps/sqlmap-sw-area-cityIp.xml" />
+	
 
 </sqlMapConfig>

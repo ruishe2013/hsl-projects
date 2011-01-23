@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="CityDAO">
+
+	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.area.CityDO" alias="city" />
+
+	<resultMap id="cityMapping" class="city">
+		<result property="gmtModified" column="gmt_modified"/>
+		<result property="provinceId" column="province_id"/>
+		<result property="id" column="id"/>
+		<result property="gmtCreate" column="gmt_create"/>
+		<result property="name" column="name"/>
+		<result property="pinyin" column="pinyin"/>
+	</resultMap>
+
+	<sql id="city-full-columns">
+		t.gmt_modified, t.province_id, t.id, t.gmt_create, t.name, t.pinyin
+	</sql>
+
+	<insert id="create" parameterClass="city">
+		<![CDATA[
+			insert into sw_area_city(gmt_modified, province_id, gmt_create, name, pinyin) 
+				values (now(), #provinceId#, now(), #name#, #pinyin#)
+		]]>
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT LAST_INSERT_ID();
+	   </selectKey>
+	</insert>
+	
+	<select id="queryById" resultMap="cityMapping" parameterClass="int">
+		select
+			<include refid="city-full-columns"/>
+		from
+			sw_area_city t
+		where
+			t.deleted = 0 and t.id = #value#
+	</select>
+	
+	<select id="queryByProvinceId" resultMap="cityMapping" parameterClass="int">
+		select
+			<include refid="city-full-columns"/>
+		from
+			sw_area_city t
+		where
+			t.province_id = #value# and t.deleted = 0
+	</select>
+	
+	<update id="delete" parameterClass="int">
+		update sw_area_city t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
+	</update>
+	
+	<update id="update" parameterClass="city">
+		<![CDATA[
+			update sw_area_city set 
+				gmt_modified= now(),
+				province_id= #provinceId#,
+				gmt_create= #gmtCreate#,
+				name= #name#,
+				pinyin= #pinyin#
+			where id = #id#
+		]]>
+	</update>
+
+</sqlMap>

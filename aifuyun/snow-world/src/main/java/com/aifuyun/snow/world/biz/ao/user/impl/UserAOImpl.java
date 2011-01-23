@@ -29,7 +29,9 @@ public class UserAOImpl extends BaseAO implements UserAO {
 			String encryptedPassword = userBO.encryptPassword(userDO.getPassword());
 			userDO.setPassword(encryptedPassword);
 			
-			userBO.create(userDO);
+			long id = userBO.create(userDO);
+			
+			result.setDefaultModel(id);
 			
 			result.setSuccess(true);
 		} catch (Exception e) {

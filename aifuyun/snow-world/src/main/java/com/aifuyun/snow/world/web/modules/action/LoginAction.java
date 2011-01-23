@@ -1,5 +1,8 @@
 package com.aifuyun.snow.world.web.modules.action;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import com.aifuyun.snow.world.biz.ao.user.LoginAO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
 import com.aifuyun.snow.world.web.common.base.BaseAction;
@@ -33,7 +36,7 @@ public class LoginAction extends BaseAction {
 		Result result = loginAO.handleLogin(inputUser);
 		if (result.isSuccess()) {
 			String url = rundata.getQueryString().getString(AuthorConstants.REDIRECT_URL_NAME);
-			if (StringUtil.isEmpty(url)) {
+			if (!canRedirect(url)) {
 				URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
 				URLModule urlModule = urlModuleContainer.setTarget("index");
 				rundata.sendRedirect(urlModule.render());
@@ -44,6 +47,29 @@ public class LoginAction extends BaseAction {
 			this.handleError(result, rundata, templateContext);
 		}
 		
+	}
+	
+	private boolean canRedirect(String url) {
+		// 是否可以跳转到相应页面
+		// 如果原来就是登陆页面，则返回false，也就是跳转到首页
+		if (StringUtil.isEmpty(url)) {
+			return false;
+		}
+		try {
+			URL urlObject = new URL(url);
+			String path = urlObject.getPath();
+			String target = StringUtil.getLastAfter(path, "/");
+			String targetName = StringUtil.getLastBefore(target, ".");
+			if ("login".equalsIgnoreCase(targetName)) {
+				return false;
+			}
+			
+			// TODO 判断跳转到站外域名
+			
+			return true;
+		} catch (MalformedURLException e) {
+			return false;
+		}
 	}
 	
 	public void setLoginAO(LoginAO loginAO) {
