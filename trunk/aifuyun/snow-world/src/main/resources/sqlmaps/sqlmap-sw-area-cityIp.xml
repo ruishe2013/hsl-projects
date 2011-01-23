@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="CityIpDAO">
+
+	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.area.CityIpDO" alias="cityIp" />
+
+	<resultMap id="cityIpMapping" class="cityIp">
+		<result property="gmtModified" column="gmt_modified"/>
+		<result property="id" column="id"/>
+		<result property="gmtCreate" column="gmt_create"/>
+		<result property="cityId" column="city_id"/>
+		<result property="cityName" column="city_name"/>
+		<result property="ipEnd" column="ip_end"/>
+		<result property="ipStart" column="ip_start"/>
+	</resultMap>
+
+	<sql id="cityIp-full-columns">
+		t.gmt_modified, t.id, t.gmt_create, t.city_id, t.city_name, t.ip_end, t.ip_start
+	</sql>
+
+	<insert id="create" parameterClass="cityIp">
+		<![CDATA[
+			insert into sw_area_city_ip(gmt_modified, gmt_create, city_id, city_name, ip_end, ip_start) 
+				values (now(), now(), #cityId#, #cityName#, #ipEnd#, #ipStart#)
+		]]>
+		<selectKey resultClass="long" keyProperty="id">
+			SELECT LAST_INSERT_ID();
+	   </selectKey>
+	</insert>
+	
+	<select id="queryById" resultMap="cityIpMapping" parameterClass="long">
+		select
+			<include refid="cityIp-full-columns"/>
+		from
+			sw_area_city_ip t
+		where
+			t.deleted = 0 and t.id = #value#
+	</select>
+	
+	<select id="queryByNumIp" resultMap="cityIpMapping" parameterClass="long">
+		select
+			<include refid="cityIp-full-columns"/>
+		from
+			sw_area_city_ip t
+		where
+			 t.ip_start &lt;= #value# and t.ip_end &gt;= #value#
+			 and t.deleted = 0
+		order 
+			by gmt_modified desc
+		limit 1
+	</select>
+	
+	<update id="delete" parameterClass="long">
+		update sw_area_city_ip t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
+	</update>
+	
+	<update id="update" parameterClass="cityIp">
+		<![CDATA[
+			update sw_area_city_ip set 
+				gmt_modified= now(),
+				gmt_create= #gmtCreate#,
+				city_id= #cityId#,
+				city_name= #cityName#,
+				ip_end= #ipEnd#,
+				ip_start= #ipStart#
+			where id = #id#
+		]]>
+	</update>
+
+</sqlMap>

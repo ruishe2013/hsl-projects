@@ -5,9 +5,9 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import com.aifuyun.snow.world.BaseTest;
 import com.aifuyun.snow.world.dal.daointerface.user.BaseUserDAO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
+import com.zjuh.sweet.test.BaseTest;
 
 public class BaseUserTests extends BaseTest {
 

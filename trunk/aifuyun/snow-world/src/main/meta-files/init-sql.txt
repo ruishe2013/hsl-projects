@@ -2,7 +2,7 @@ DROP DATABASE IF EXISTS `snow-world`;
 CREATE DATABASE `snow-world`;
 use `snow-world`;
 
-DROP TABLE IF EXISTS sw_base_user;
+DROP TABLE IF EXISTS sw_user_base_user;
 create table sw_base_user (
 	id bigint primary key auto_increment,
 	username varchar(60) not null,
@@ -19,5 +19,45 @@ create table sw_base_user (
 	gmt_create datetime not null,
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+create index ind_base_user_nick on sw_base_user(username, deleted);
 
-create index ind_base_user_nick on sw_base_user(username,deleted);
+
+DROP TABLE IF EXISTS sw_area_province;
+create table sw_area_province (
+	id int primary key auto_increment,
+	name varchar(30) not null,
+	pinyin varchar(60),
+	deleted tinyint default 0 not null,
+	gmt_create datetime not null,
+	gmt_modified datetime not null
+) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+
+
+
+DROP TABLE IF EXISTS sw_area_city;
+create table sw_area_city (
+	id int primary key auto_increment,
+	name varchar(30) not null,
+	pinyin varchar(60),
+	province_id int default 0 not null,
+	deleted tinyint default 0 not null,
+	gmt_create datetime not null,
+	gmt_modified datetime not null
+) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+create index ind_city_prov_id on sw_area_city(province_id, deleted);
+
+
+DROP TABLE IF EXISTS sw_area_city_ip;
+create table sw_area_city_ip (
+	id bigint primary key auto_increment,
+	city_id int default 0 not null,
+	city_name varchar(30) not null,
+	ip_end bigint not null,
+	ip_start bigint not null,
+	deleted tinyint default 0 not null,
+	gmt_create datetime not null,
+	gmt_modified datetime not null
+) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+create index ind_city_ip on sw_area_city_ip(ip_start, ip_end, deleted, gmt_create);
+
+
