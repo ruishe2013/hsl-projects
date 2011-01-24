@@ -1,8 +1,10 @@
-package com.aifuyun.snow.world.biz.bo.captcha;
+package com.aifuyun.snow.world.biz.bo;
 
 import com.aifuyun.snow.world.biz.BizException;
 
 public class BOException extends BizException {
+
+	private static final long serialVersionUID = -5715498203693496914L;
 
 	public BOException() {
 		// TODO Auto-generated constructor stub
