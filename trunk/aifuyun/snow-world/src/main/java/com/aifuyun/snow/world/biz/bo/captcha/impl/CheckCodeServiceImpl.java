@@ -8,7 +8,7 @@ import javax.imageio.ImageIO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aifuyun.snow.world.biz.bo.captcha.BOException;
+import com.aifuyun.snow.world.biz.bo.BOException;
 import com.aifuyun.snow.world.biz.bo.captcha.CheckCodeService;
 import com.octo.captcha.service.image.ImageCaptchaService;
 import com.zjuh.splist.core.SplistContext;
