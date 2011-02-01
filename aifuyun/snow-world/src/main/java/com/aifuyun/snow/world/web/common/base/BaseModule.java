@@ -128,4 +128,10 @@ public class BaseModule {
 		}
 	}
 
+	protected void sendRedirect(String module, String target) {
+		URLModuleContainer urlModuleContainer = getURLModuleContainer(module);
+		URLModule urlModule = urlModuleContainer.setTarget(target);
+		sendRedirectUrl(urlModule.render());
+	}
+	
 }

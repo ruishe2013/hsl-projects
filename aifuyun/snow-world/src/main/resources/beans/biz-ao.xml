@@ -6,7 +6,7 @@
 	
 	<bean id="userAO" class="com.aifuyun.snow.world.biz.ao.user.impl.UserAOImpl"></bean>
 	<bean id="loginAO" class="com.aifuyun.snow.world.biz.ao.user.impl.LoginAOImpl"></bean>
-	
+	<bean id="orderAO" class="com.aifuyun.snow.world.biz.ao.together.impl.OrderAOImpl"></bean>
 	
 	
 </beans>

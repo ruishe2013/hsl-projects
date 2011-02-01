@@ -1,0 +1,71 @@
+#set($form = $formFactory.createForm("together.createTaxiOrder"))
+
+#macro(errorMessage, $str)
+	#if( "$!str" != "")
+		<div class="common-error-message">${str}</div>
+	#end
+#end
+
+<div>
+	<form method="post">
+		<input type="hidden" name="createTaxiOrder" value="$tokenUtil.token('createTaxiOrder')" />
+		<input type="hidden" name="actionTarget" value="together/orderAction" />
+		<input type="hidden" name="actionEvent" value="createTaxiOrder" />
+		
+		<div class="input-item">
+			出发地：
+			出发城市<input type="text" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value"/>
+			出发地<input type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value"/>
+		</div>
+		#errorMessage($!form.fields.fromCity.message)
+		#errorMessage($!form.fields.fromAddr.message)
+		
+		<div class="input-item">
+			目的地：
+			目的城市<input type="text" id="$!form.fields.arriveCity.name" name="$!form.fields.arriveCity.name" value="$!form.fields.arriveCity.value"/>
+			目的地<input type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value"/>
+		</div>
+		#errorMessage($!form.fields.arriveCity.message)
+		#errorMessage($!form.fields.arriveAddr.message)
+	
+	
+		<div class="input-item">
+		出发时间：
+		日期<input type="text" id="$!form.fields.fromTimeDate.name" name="$!form.fields.fromTimeDate.name" name="$!form.fields.fromTimeDate.value"/>
+		时间<input type="text" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.value"/>
+		</div>
+		#errorMessage($!form.fields.fromTimeDate.message)
+		#errorMessage($!form.fields.fromTimeTime.message)
+		
+		
+		<div class="input-item">
+		预计到达时间：
+		日期<input type="text" id="$!form.fields.arriveTimeDate.name" name="$!form.fields.arriveTimeDate.name" name="$!form.fields.arriveTimeDate.value"/>
+		时间<input type="text" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.value"/>
+		</div>
+		#errorMessage($!form.fields.arriveTimDate.message)
+		#errorMessage($!form.fields.arriveTimTime.message)
+		
+		
+		<div class="input-item">
+			空闲座位 <input type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value" />
+		</div>
+		#errorMessage($!form.fields.totalSeats.message)
+		
+		<div class="input-item">
+			描述<textarea name="" cols="40" rows="4" id="$!form.fields.description.name" name="$!form.fields.description.name">$!form.fields.description.value</textarea>
+		</div>
+		
+		<div class="input-item"> 
+			<label for="$!form.fields.checkCode.name">*验证码：</label> 
+			<input type="text" size="6" maxlength="4" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value="" />
+			$control.setTemplate('common/checkCode.vm')
+		</div>
+		#errorMessage($!form.fields.checkCode.message)
+		
+		<div class="input-item">
+			<input type="submit" value="提交" />
+		</div>
+	
+	</form>
+</div>
