@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="GB18030"?>
+<forms>
+	
+	<form name="together.createTaxiOrder">
+		<field name="fromCity">
+			<validator type="required" message="出发城市不能为空!" />
+			<validator type="string" message="出发城市名称长度不能超过20个字符!" >
+				<param name="min" value="1" />
+				<param name="max" value="20" />
+			</validator>
+		</field>
+		<field name="fromAddr">
+			<validator type="required" message="出发地不能为空!" />
+			<validator type="string" message="出发地名称长度不能超过20个字符!" >
+				<param name="min" value="1" />
+				<param name="max" value="20" />
+			</validator>
+		</field>
+		<field name="arriveCity">
+			<validator type="required" message="到达城市不能为空!" />
+			<validator type="string" message="到达城市名称长度不能超过20个字符!" >
+				<param name="min" value="1" />
+				<param name="max" value="20" />
+			</validator>
+		</field>
+		<field name="arriveAddr">
+			<validator type="required" message="到达地不能为空!" />
+			<validator type="string" message="到达地名称长度不能超过20个字符!" >
+				<param name="min" value="1" />
+				<param name="max" value="20" />
+			</validator>
+		</field>
+		<field name="fromTimeDate">
+			<validator type="required" message="出发日期不能为空!" />
+			<validator type="date" message="出发日期的格式必须是yyyy-MM-dd!" >
+				<param name="format" value="yyyy-MM-dd" />
+			</validator>
+		</field>
+		<field name="fromTimeTime">
+			<validator type="required" message="出发时间不能为空!" />
+			<validator type="date" message="出发时间的格式必须是HH:mm!" >
+				<param name="format" value="HH:mm" />
+			</validator>
+		</field>
+		<field name="arriveTimeDate">
+			<validator type="required" message="到达日期不能为空!" />
+			<validator type="date" message="到达日期的格式必须是yyyy-MM-dd!" >
+				<param name="format" value="yyyy-MM-dd" />
+			</validator>
+		</field>
+		<field name="arriveTimeTime">
+			<validator type="required" message="到达时间不能为空!" />
+			<validator type="date" message="到达时间的格式必须是HH:mm!" >
+				<param name="format" value="HH:mm" />
+			</validator>
+		</field>
+		<field name="totalSeats">
+			<validator type="required" message="总座位数不能为空!" />
+			<validator type="int" message="总座位数必须是正整数!" >
+				<param name="min" value="1" />
+			</validator>
+		</field>
+		<field name="description">
+			<validator type="string"></validator>
+		</field>
+		<field name="checkCode">
+			<validator type="required" message="验证码不能为空!" />
+			<validator type="com.aifuyun.snow.world.web.common.validators.CheckCodeValidator" 
+						message="验证码错误!" >
+			</validator>
+		</field>
+	</form>
+	
+</forms>

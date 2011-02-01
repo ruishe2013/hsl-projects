@@ -7,7 +7,7 @@
 
 <div>搜索拼车信息</div>
 
-<div><a href="$snowModule.setTarget('together/createOrder.vm')">发布拼车</a></div>
+<div><a href="$snowModule.setTarget('together/createTaxiOrder')">发布拼车</a></div>
 
 <div>最新拼车信息</div>
 <div>最新成功拼车信息</div>
