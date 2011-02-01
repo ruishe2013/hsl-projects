@@ -1,39 +1,49 @@
 <div>
-	<div>
-	出发地
-	<input type="text" name="fromCity" />
-	<input type="text" name="fromAddress" />
-	</div>
+	<form method="post">
+		<input type="hidden" name="createOrder" value="$tokenUtil.token('createOrder')" />
+		<input type="hidden" name="actionTarget" value="order_action" />
+		<input type="hidden" name="actionEvent" value="createOrder" />
+		
+		<div>
+			出发地
+			<input type="text" name="fromCity" />
+			<input type="text" name="fromAddress" />
+		</div>
+		
+		<div>
+		目的地
+		<input type="text" name="toCity" />
+		<input type="text" name="toAddress" />
+		</div>
 	
-	<div>
-	目的地
-	<input type="text" name="toCity" />
-	<input type="text" name="toAddress" />
-	</div>
-
-
-	<div>
-	出发时间发
-	<input type="text" name="fromDate" />
-	<input type="text" name="fromTime" />
-	</div>
 	
-	<div>
-	到达时间
-	<input type="text" name="toDate" />
-	<input type="text" name="toTime" />
-	</div>
+		<div>
+		出发时间发
+		<input type="text" name="fromDate" />
+		<input type="text" name="fromTime" />
+		</div>
+		
+		<div>
+		到达时间
+		<input type="text" name="toDate" />
+		<input type="text" name="toTime" />
+		</div>
+		
+		<div>
+			空闲座位 <input type="text" name="freeSeats" />
+		</div>
+		
+		<div>
+			描述<textarea name="" cols="40" rows="4"></textarea>
+		</div>
+		
+		<div>
+			验证码 <input type="text" name="checkCode" />
+		</div>
+		
+		<div>
+			<input type="submit" value="提交" />
+		</div>
 	
-	<div>
-		空闲座位 <input type="text" name="freeSeats" />
-	</div>
-	
-	<div>
-		描述<textarea name=""></textarea>
-	</div>
-	
-	<div>
-		验证码 <input type="text" name="checkCode" />
-	</div>
-	
+	</form>
 </div>
