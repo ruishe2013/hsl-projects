@@ -4,7 +4,8 @@ package com.aifuyun.snow.world.dal.dataobject.together;
 import java.util.Date;
 
 import com.aifuyun.snow.world.dal.dataobject.BaseDO;
-import com.aifuyun.snow.world.dal.dataobject.enums.TogetherTypeEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
 
 /**
  * 拼车单
@@ -12,7 +13,7 @@ import com.aifuyun.snow.world.dal.dataobject.enums.TogetherTypeEnum;
  * @author pister
  *
  */
-public class TogetherOrderDO extends BaseDO {
+public class OrderDO extends BaseDO {
 
 	private static final long serialVersionUID = -1043735610343203644L;
 	
@@ -72,9 +73,26 @@ public class TogetherOrderDO extends BaseDO {
 	 * 类型
 	 */
 	private int type;
+	
+	/**
+	 * 状态
+	 */
+	private int status;
 
-	public TogetherTypeEnum getTogetherTypeEnum() {
-		return TogetherTypeEnum.valueOf(type);
+	public OrderStatusEnum getOrderStatusEnum() {
+		return OrderStatusEnum.valueOf(status);
+	}
+	
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
+	public OrderTypeEnum getTogetherTypeEnum() {
+		return OrderTypeEnum.valueOf(type);
 	}
 	
 	public int getType() {

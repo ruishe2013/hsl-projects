@@ -31,8 +31,8 @@
 	
 		<div class="input-item">
 		出发时间：
-		日期<input type="text" id="$!form.fields.fromTimeDate.name" name="$!form.fields.fromTimeDate.name" name="$!form.fields.fromTimeDate.value"/>
-		时间<input type="text" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.value"/>
+		日期<input type="text" id="$!form.fields.fromTimeDate.name" name="$!form.fields.fromTimeDate.name" value="$!form.fields.fromTimeDate.value"/>
+		时间<input type="text" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="$!form.fields.fromTimeTime.value"/>
 		</div>
 		#errorMessage($!form.fields.fromTimeDate.message)
 		#errorMessage($!form.fields.fromTimeTime.message)
@@ -40,11 +40,11 @@
 		
 		<div class="input-item">
 		预计到达时间：
-		日期<input type="text" id="$!form.fields.arriveTimeDate.name" name="$!form.fields.arriveTimeDate.name" name="$!form.fields.arriveTimeDate.value"/>
-		时间<input type="text" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.value"/>
+		日期<input type="text" id="$!form.fields.arriveTimeDate.name" name="$!form.fields.arriveTimeDate.name" value="$!form.fields.arriveTimeDate.value"/>
+		时间<input type="text" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" value="$!form.fields.arriveTimeTime.value"/>
 		</div>
-		#errorMessage($!form.fields.arriveTimDate.message)
-		#errorMessage($!form.fields.arriveTimTime.message)
+		#errorMessage($!form.fields.arriveTimeDate.message)
+		#errorMessage($!form.fields.arriveTimeTime.message)
 		
 		
 		<div class="input-item">
@@ -53,8 +53,9 @@
 		#errorMessage($!form.fields.totalSeats.message)
 		
 		<div class="input-item">
-			描述<textarea name="" cols="40" rows="4" id="$!form.fields.description.name" name="$!form.fields.description.name">$!form.fields.description.value</textarea>
+			描述<textarea cols="40" rows="4" id="$!form.fields.description.name" name="$!form.fields.description.name">$!form.fields.description.value</textarea>
 		</div>
+		#errorMessage($!form.fields.description.message)
 		
 		<div class="input-item"> 
 			<label for="$!form.fields.checkCode.name">*验证码：</label> 

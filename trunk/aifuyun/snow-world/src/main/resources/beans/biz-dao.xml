@@ -8,5 +8,6 @@
 	<bean id="provinceDAO" class="com.aifuyun.snow.world.dal.ibatis.area.ProvinceDAOIbatis"></bean>
 	<bean id="cityDAO" class="com.aifuyun.snow.world.dal.ibatis.area.CityDAOIbatis"></bean>
 	<bean id="cityIpDAO" class="com.aifuyun.snow.world.dal.ibatis.area.CityIpDAOIbatis"></bean>
+	<bean id="orderDAO" class="com.aifuyun.snow.world.dal.ibatis.together.OrderDAOIbatis"></bean>
 	
 </beans>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="OrderDAO">
+
+	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.together.OrderDO" alias="order" />
+
+	<resultMap id="orderMapping" class="order">
+		<result property="gmtModified" column="gmt_modified"/>
+		<result property="fromAddr" column="from_addr"/>
+		<result property="gmtCreate" column="gmt_create"/>
+		<result property="creatorUsername" column="creator_username"/>
+		<result property="creatorId" column="creator_id"/>
+		<result property="fromTime" column="from_time"/>
+		<result property="type" column="type"/>
+		<result property="id" column="id"/>
+		<result property="totalSeats" column="total_seats"/>
+		<result property="arriveTime" column="arrive_time"/>
+		<result property="description" column="description"/>
+		<result property="fromCity" column="from_city"/>
+		<result property="arriveCity" column="arrive_city"/>
+		<result property="arriveAddr" column="arrive_addr"/>
+		<result property="status" column="status"/>
+	</resultMap>
+
+	<sql id="order-full-columns">
+		t.gmt_modified, t.from_addr, t.gmt_create, t.creator_username, 
+			t.creator_id, t.from_time, t.type, t.id, t.total_seats,
+		 t.arrive_time, t.description, t.from_city, t.arrive_city, t.arrive_addr, t.status
+	</sql>
+
+	<insert id="create" parameterClass="order">
+		<![CDATA[
+			insert into sw_order(gmt_modified, from_addr, gmt_create, creator_username, creator_id, from_time, type, total_seats, arrive_time, description, from_city, arrive_city, arrive_addr, status) 
+				values (now(), #fromAddr#, now(), #creatorUsername#, #creatorId#, #fromTime#, #type#, #totalSeats#, #arriveTime#, #description#, #fromCity#, #arriveCity#, #arriveAddr#, #status#)
+		]]>
+		<selectKey resultClass="long" keyProperty="id">
+			SELECT LAST_INSERT_ID();
+	   </selectKey>
+	</insert>
+	
+	<select id="queryById" resultMap="orderMapping" parameterClass="long">
+		select
+			<include refid="order-full-columns"/>
+		from
+			sw_order t
+		where
+			t.deleted = 0 and t.id = #value#
+	</select>
+	
+	<update id="delete" parameterClass="long">
+		update sw_order t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
+	</update>
+	
+	<update id="update" parameterClass="order">
+		<![CDATA[
+			update sw_order set 
+				gmt_modified= now(),
+				from_addr= #fromAddr#,
+				gmt_create= #gmtCreate#,
+				creator_username= #creatorUsername#,
+				creator_id= #creatorId#,
+				from_time= #fromTime#,
+				type= #type#,
+				total_seats= #totalSeats#,
+				arrive_time= #arriveTime#,
+				description= #description#,
+				from_city= #fromCity#,
+				arrive_city= #arriveCity#,
+				arrive_addr= #arriveAddr#,
+				status = #status#
+			where id = #id#
+		]]>
+	</update>
+
+</sqlMap>

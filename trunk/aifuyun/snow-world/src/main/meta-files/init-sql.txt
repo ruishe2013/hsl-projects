@@ -61,3 +61,22 @@ create table sw_area_city_ip (
 create index ind_city_ip on sw_area_city_ip(ip_start, ip_end, deleted, gmt_create);
 
 
+DROP TABLE IF EXISTS sw_order;
+create table sw_order (
+	id bigint primary key auto_increment,
+	from_addr varchar(100) not null,
+	from_time datetime not null,
+	from_city varchar(30) not null,
+	arrive_addr varchar(100) not null,
+	arrive_city varchar(30) not null,
+	arrive_time datetime,
+	description varchar(1024),
+	creator_username varchar(60) not null,
+	creator_id bigint not null,
+	status int default 0 not null,
+	type tinyint default 0 not null,
+	total_seats int default 0 not null,
+	deleted tinyint default 0 not null,
+	gmt_create datetime not null,
+	gmt_modified datetime not null
+) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';

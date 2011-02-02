@@ -37,6 +37,13 @@ public interface UserBO {
 	BaseUserDO queryByUsername(String username);
 	
 	/**
+	 * 根据id查询用户
+	 * @param id
+	 * @return
+	 */
+	BaseUserDO queryById(long id);
+	
+	/**
 	 * 该用户是否在敏感词名单里
 	 * @param usename
 	 * @return

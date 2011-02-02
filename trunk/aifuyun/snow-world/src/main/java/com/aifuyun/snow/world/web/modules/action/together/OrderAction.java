@@ -4,7 +4,7 @@ import java.util.Date;
 
 import com.aifuyun.snow.world.biz.ao.together.OrderAO;
 import com.aifuyun.snow.world.common.DateTimeUtil;
-import com.aifuyun.snow.world.dal.dataobject.together.TogetherOrderDO;
+import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.web.common.base.BaseAction;
 import com.zjuh.splist.core.annotation.DefaultTarget;
 import com.zjuh.splist.core.form.Form;
@@ -33,8 +33,8 @@ public class OrderAction extends BaseAction {
 		if (!form.validate()) {
 			return;
 		}
-		TogetherOrderDO togetherOrderDO = new TogetherOrderDO();
-		form.apply(togetherOrderDO);
+		OrderDO orderDO = new OrderDO();
+		form.apply(orderDO);
 		
 		Date fromTimeDate = rundata.getQueryString().getDate("fromTimeDate", DATE_FMT);
 		Date fromTimeTime = rundata.getQueryString().getDate("fromTimeTime", TIME_FMT);
@@ -45,12 +45,12 @@ public class OrderAction extends BaseAction {
 		Date fromTime = DateTimeUtil.componentDateAndTime(fromTimeDate, fromTimeTime);
 		Date arriveTime = DateTimeUtil.componentDateAndTime(arriveTimeDate, arriveTimeTime);
 		
-		togetherOrderDO.setFromTime(fromTime);
-		togetherOrderDO.setArriveTime(arriveTime);
+		orderDO.setFromTime(fromTime);
+		orderDO.setArriveTime(arriveTime);
 		
-		Result result = orderAO.createTaxiOrder(togetherOrderDO);
+		Result result = orderAO.createTaxiOrder(orderDO);
 		if (result.isSuccess()) {
-			this.sendRedirect("snowModule", "together/createTaxiOrderSuccess");
+			this.sendRedirect("snowModule", "together/confirmPersonalInfo");
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}

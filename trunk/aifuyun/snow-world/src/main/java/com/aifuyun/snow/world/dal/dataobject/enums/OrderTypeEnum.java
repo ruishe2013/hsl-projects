@@ -4,14 +4,14 @@ package com.aifuyun.snow.world.dal.dataobject.enums;
  * @author pister
  *
  */
-public enum TogetherTypeEnum {
+public enum OrderTypeEnum {
 	
 	UNKNOWN(0, "Î´Öª"),
 	TAXI(1, "Æ´µÄ")
 	
 	;
 	
-	private TogetherTypeEnum(int value, String name) {
+	private OrderTypeEnum(int value, String name) {
 		this.value = value;
 		this.name = name;
 	}
@@ -20,8 +20,8 @@ public enum TogetherTypeEnum {
 	
 	private final String name;
 
-	public static TogetherTypeEnum valueOf(int value) {
-		for (TogetherTypeEnum e : values()) {
+	public static OrderTypeEnum valueOf(int value) {
+		for (OrderTypeEnum e : values()) {
 			if (e.getValue() == value) {
 				return e;
 			}
