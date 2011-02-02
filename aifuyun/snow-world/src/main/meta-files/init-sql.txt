@@ -9,6 +9,7 @@ create table sw_base_user (
 	password varchar(100) not null,
 	sex tinyint default 0 not null,
 	birth_year smallint default 0 not null,
+	real_name varchar(60),
 	email varchar(255),
 	phone varchar(100),
 	career varchar(100),

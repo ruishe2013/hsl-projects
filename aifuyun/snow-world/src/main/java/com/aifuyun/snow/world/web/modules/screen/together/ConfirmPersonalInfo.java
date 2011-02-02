@@ -13,11 +13,18 @@ public class ConfirmPersonalInfo extends BaseScreen {
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		Result result = userAO.confirmPersonalInfo();
-		if (result.isSuccess()) {
-			this.result2Context(result, templateContext, "user");
-		} else {
+		if (!result.isSuccess()) {
 			this.handleError(result, rundata, templateContext);
+			return;
 		}
+		boolean userInfoCompeleted = (Boolean)result.getModels().get("userInfoCompeleted");
+		if (!userInfoCompeleted) {
+			// 如果个人资料不完整， 跳转到补充完成个人资料界面
+			this.sendRedirect("snowModule", "user/modifyPersonalInfo");
+			return;
+		}
+		this.result2Context(result, templateContext, "user");
+		this.result2Context(result, templateContext, "userInfoCompeleted");
 	}
 
 	public void setUserAO(UserAO userAO) {

@@ -1,4 +1,4 @@
-package com.aifuyun.snow.world.web.modules.action;
+package com.aifuyun.snow.world.web.modules.action.user;
 
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
@@ -9,25 +9,22 @@ import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
 import com.zjuh.sweet.result.Result;
 
-public class UserFacadeAction extends BaseAction {
-
+public class UserAction extends BaseAction {
+	
 	private UserAO userAO;
 	
-	@DefaultTarget("user/reg")
-	public void doRegUser(RunData rundata, TemplateContext templateContext) {
-		if (!checkCsrf(templateContext, "regUser")) {
-			return;
-		}
-		final Form form = rundata.getForm("user.registerUser");
+	@DefaultTarget("user/modifyPersonalInfo")
+	public void doModifyPersonalInfo(RunData rundata, TemplateContext templateContext) {
+		final Form form = rundata.getForm("user.personalInfo");
 		if (!form.validate()) {
 			return;
 		}
+		BaseUserDO inputBaseUser = new BaseUserDO();
+		form.apply(inputBaseUser);
 		
-		BaseUserDO baseUserDO = new BaseUserDO();
-		form.apply(baseUserDO);
-		Result result = userAO.registerUser(baseUserDO);
+		Result result = userAO.modifyPersonalInfo(inputBaseUser);
 		if (result.isSuccess()) {
-			this.sendRedirect("snowModule", "user/regSuccess");
+			this.sendRedirect("snowModule", "together/confirmPersonalInfo");
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
@@ -36,5 +33,5 @@ public class UserFacadeAction extends BaseAction {
 	public void setUserAO(UserAO userAO) {
 		this.userAO = userAO;
 	}
-	
+
 }

@@ -15,6 +15,11 @@ public class UserBOImpl implements UserBO {
 	private Set<String> sensitivitiesList = CollectionUtil.newHashSet();
 	
 	@Override
+	public void update(BaseUserDO baseUserDO) {
+		baseUserDAO.update(baseUserDO);
+	}
+
+	@Override
 	public BaseUserDO queryById(long id) {
 		return baseUserDAO.queryById(id);
 	}

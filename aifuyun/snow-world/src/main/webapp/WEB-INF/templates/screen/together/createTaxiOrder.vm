@@ -64,6 +64,9 @@
 		</div>
 		#errorMessage($!form.fields.checkCode.message)
 		
+		#errorMessage($!csrfmessage)
+		#errorMessage($!resultmessage.message)
+		
 		<div class="input-item">
 			<input type="submit" value="Ìá½»" />
 		</div>

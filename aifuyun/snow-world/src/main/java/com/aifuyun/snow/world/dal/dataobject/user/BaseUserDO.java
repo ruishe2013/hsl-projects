@@ -1,6 +1,7 @@
 package com.aifuyun.snow.world.dal.dataobject.user;
 
 import com.aifuyun.snow.world.dal.dataobject.BaseDO;
+import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.SexEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.UserStatusEnum;
 
@@ -22,6 +23,11 @@ public class BaseUserDO extends BaseDO {
 	 * 密码， 已经加密个过
 	 */
 	private String password;
+	
+	/**
+	 * 真实姓名
+	 */
+	private String realName;
 	
 	/**
 	 * 性别
@@ -119,6 +125,10 @@ public class BaseUserDO extends BaseDO {
 		this.sex = sex;
 	}
 
+	public BirthYearEnum getBirthYearEnum() {
+		return BirthYearEnum.valueOf(this.birthYear);
+	}
+	
 	public int getBirthYear() {
 		return birthYear;
 	}
@@ -157,5 +167,13 @@ public class BaseUserDO extends BaseDO {
 
 	public void setRegisterIp(String registerIp) {
 		this.registerIp = registerIp;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
 	}
 }

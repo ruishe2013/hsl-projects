@@ -50,4 +50,10 @@ public interface UserBO {
 	 */
 	boolean isUserInSensitivityList(String username);
 	
+	/**
+	 * 更新用户，根据id更新
+	 * @param baseUserDO
+	 */
+	void update(BaseUserDO baseUserDO);
+	
 }

@@ -18,17 +18,18 @@
 		<result property="email" column="email"/>
 		<result property="qq" column="qq"/>
 		<result property="registerIp" column="register_ip"/>
+		<result property="realName" column="real_name"/>
 		
 	</resultMap>
 
 	<sql id="baseUser-full-columns">
-		t.gmt_modified, t.sex, t.birth_year, t.phone, t.gmt_create, t.status, t.career, t.password, t.id, t.username, t.email, t.qq, t.register_ip
+		t.gmt_modified, t.sex, t.birth_year, t.phone, t.gmt_create, t.status, t.career, t.password, t.id, t.username, t.email, t.qq, t.register_ip, t.real_name
 	</sql>
 
 	<insert id="create" parameterClass="baseUser">
 		<![CDATA[
-			insert into sw_base_user(gmt_modified, sex, birth_year, phone, gmt_create, status, career, password, username, email, qq, register_ip) 
-				values (now(), #sex#, #birthYear#, #phone#, now(), #status#, #career#, #password#, #username#, #email#, #qq#, #registerIp#)
+			insert into sw_base_user(gmt_modified, sex, birth_year, phone, gmt_create, status, career, password, username, email, qq, register_ip, real_name) 
+				values (now(), #sex#, #birthYear#, #phone#, now(), #status#, #career#, #password#, #username#, #email#, #qq#, #registerIp#, #realName#)
 
 		]]>
 		<selectKey resultClass="long" keyProperty="id">
@@ -106,7 +107,8 @@
 				username= #username#,
 				email= #email#,
 				qq= #qq#,
-				register_ip = #registerIp#
+				register_ip = #registerIp#,
+				real_name = #realName#
 			where id = #id#
 		]]>
 	</update>
