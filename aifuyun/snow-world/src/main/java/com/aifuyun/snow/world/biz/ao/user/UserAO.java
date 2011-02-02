@@ -18,4 +18,10 @@ public interface UserAO {
 	 */
 	Result registerUser(BaseUserDO userDO);
 	
+	/**
+	 * 确认当前登录用户的信息
+	 * @return
+	 */
+	Result confirmPersonalInfo();
+	
 }

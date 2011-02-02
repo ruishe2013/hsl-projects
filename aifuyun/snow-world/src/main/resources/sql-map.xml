@@ -9,6 +9,7 @@
 	<sqlMap resource="sqlmaps/sqlmap-sw-area-province.xml" />
 	<sqlMap resource="sqlmaps/sqlmap-sw-area-city.xml" />
 	<sqlMap resource="sqlmaps/sqlmap-sw-area-cityIp.xml" />
+	<sqlMap resource="sqlmaps/sqlmap-sw-order.xml" />
 	
 
 </sqlMapConfig>

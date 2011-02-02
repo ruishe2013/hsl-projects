@@ -2,6 +2,8 @@ package com.aifuyun.snow.world.biz;
 
 public class BizException extends RuntimeException {
 
+	private static final long serialVersionUID = 4296347782246074584L;
+
 	public BizException() {
 		// TODO Auto-generated constructor stub
 	}

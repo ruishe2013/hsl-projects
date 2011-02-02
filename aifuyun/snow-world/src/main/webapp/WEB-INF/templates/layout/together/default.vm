@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html> 
+	<head> 
+		<title>爱浮云</title> 
+		<meta http-equiv="Content-Type" content="text/html; charset=gbk"/> 
+	</head>
+	<body>
+		<div id="container">
+		## 顶部	
+			$control.setTemplate("common/userInfo.vm")
+		## 头部
+			$control.setTemplate("common/header.vm")
+			
+			$control.setTemplate("together/progressBar.vm")
+			
+			
+		## 内容
+			<div id="content">
+				$control.setTemplate('common/crumbList.vm')
+				$screen_content
+			</div>
+
+		## 底部
+			$control.setTemplate("common/footer.vm")
+		</div>
+	</body>
+</html>

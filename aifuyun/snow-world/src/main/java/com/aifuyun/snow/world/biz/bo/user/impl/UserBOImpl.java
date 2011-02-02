@@ -15,6 +15,11 @@ public class UserBOImpl implements UserBO {
 	private Set<String> sensitivitiesList = CollectionUtil.newHashSet();
 	
 	@Override
+	public BaseUserDO queryById(long id) {
+		return baseUserDAO.queryById(id);
+	}
+
+	@Override
 	public String encryptPassword(String password) {
 		return MD5.encrypt(password);
 	}
