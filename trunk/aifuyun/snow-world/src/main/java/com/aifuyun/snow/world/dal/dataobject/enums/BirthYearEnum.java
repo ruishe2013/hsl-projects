@@ -15,6 +15,22 @@ public enum BirthYearEnum {
 		this.name = name;
 	}
 
+	public static BirthYearEnum valueOf(int value) {
+		for (BirthYearEnum s : BirthYearEnum.values()) {
+			if (s.getValue() == value) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
+	public static boolean inRange(int value) {
+		if (value < YEAR_40S.value || value > YEAR_00S.value) {
+			return false;
+		}
+		return true;
+	}
+	
 	private final int value;
 	
 	public int getValue() {

@@ -2,7 +2,7 @@ package com.aifuyun.snow.world.dal.dataobject.enums;
 
 public enum SexEnum {
 	
-	UNKNOWN(0, "保密"),
+	UNKNOWN(0, "未知"),
 	MALE(1, "先生"),
 	FEMAILE(2, "女士");
 	

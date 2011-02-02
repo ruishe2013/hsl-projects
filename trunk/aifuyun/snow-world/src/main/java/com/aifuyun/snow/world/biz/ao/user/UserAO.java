@@ -24,4 +24,17 @@ public interface UserAO {
 	 */
 	Result confirmPersonalInfo();
 	
+	/**
+	 * 浏览修改个人信息
+	 * @return
+	 */
+	Result viewModifyPersonalInfo();
+	
+	/**
+	 * 修改个人信息
+	 * @param inputBaseUser
+	 * @return
+	 */
+	Result modifyPersonalInfo(BaseUserDO inputBaseUser);
+	
 }

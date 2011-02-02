@@ -1,2 +1,11 @@
+#if ($userInfoCompeleted)
+	
+#else
+
+#end
+
 确认个人信息，你的个人信息如下，请确认
 $user
+$userInfoCompeleted
+
+<a href="$snowModule.setTarget('user/modifyPersonalInfo')">修改</a>
