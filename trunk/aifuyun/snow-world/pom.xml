@@ -96,6 +96,7 @@
 			<version>1.0-RC6</version>
 		</dependency>
 		
+
 	</dependencies>
 
 	<build>
