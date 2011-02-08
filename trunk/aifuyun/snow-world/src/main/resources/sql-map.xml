@@ -10,6 +10,7 @@
 	<sqlMap resource="sqlmaps/sqlmap-sw-area-city.xml" />
 	<sqlMap resource="sqlmaps/sqlmap-sw-area-cityIp.xml" />
 	<sqlMap resource="sqlmaps/sqlmap-sw-order.xml" />
+	<sqlMap resource="sqlmaps/sqlmap-sw-orderUser.xml" />
 	
 
 </sqlMapConfig>

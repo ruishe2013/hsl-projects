@@ -1,0 +1,73 @@
+#set($form = $formFactory.createForm("together.personalInfo"))
+
+#macro(errorMessage, $str)
+	#if( "$!str" != "")
+		<div class="common-error-message">${str}</div>
+	#end
+#end
+
+
+填写联系方式
+<form method="post">
+	<input type="hidden" name="actionEvent" value="publishOrder" /> 
+	<input type="hidden" name="actionTarget" value="together/orderAction" />
+	<input type="hidden" name="$!form.fields.id.name" value="$!form.fields.id.value" />
+	
+	<div class="input-item">
+		<label for="$!form.fields.realName.name">*真实姓名：</label>
+		<input type="text" id="$!form.fields.realName.name" name="$!form.fields.realName.name" value="$!form.fields.realName.value" />
+	</div>
+	#errorMessage($!form.fields.realName.message)
+	
+	<div class="input-item">
+		<label>*性别：</label>
+		<input type="radio" id="sexMale" name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end /><label for="sexMale">先生</label>
+		<input type="radio" id="sexFemale" name="$!form.fields.sex.name" value="2" #if("$!form.fields.sex.value" == "2") checked #end/><label for="sexFemale">女士</label>
+	</div>
+	#errorMessage($!form.fields.sex.message)
+	
+	<div class="input-item">
+		<label for="$!form.fields.birthYear.name">*出生年代：</label>
+		<select id="$!form.fields.birthYear.name" name="$!form.fields.birthYear.name">
+			#if ("$!form.fields.birthYear.value" != "0")
+				#set($selectedYear =	"$!form.fields.birthYear.value")
+			#end 
+			#foreach($year in $years)
+				<option value="$!year.value" #if("$!selectedYear" == "$!year.value") selected #end >$!year.name</option>
+			#end
+		</select>
+	</div>
+	#errorMessage($!form.fields.birthYear.message)
+	
+	<div class="input-item">
+		<label for="$!form.fields.phone.name">*手机号码：</label>
+		<input type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value" />
+	</div>
+	#errorMessage($!form.fields.phone.message)
+	
+	<div class="input-item">
+		<label for="$!form.fields.career.name">*职业：</label>
+		<input type="text" id="$!form.fields.career.name" name="$!form.fields.career.name" value="$!form.fields.career.value" />
+		<a href="#">选择职业...</a>
+	</div>
+	#errorMessage($!form.fields.career.message)
+	
+	
+	<div class="input-item">
+		<label for="$!form.fields.email.name">电子邮箱：</label>
+		<input type="text" id="$!form.fields.email.name" name="$!form.fields.email.name" value="$!form.fields.email.value" />
+	</div>
+	#errorMessage($!form.fields.email.message)
+		
+	<div class="input-item">
+		<label for="$!form.fields.qq.name">qq号码：</label>
+		<input type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value" />
+	</div>
+	#errorMessage($!form.fields.qq.message)
+	
+	#errorMessage($!csrfmessage)
+	#errorMessage($!resultmessage.message)
+	<div class="input-item">
+		<input type="submit" value="提交" />
+	</div>
+</form>

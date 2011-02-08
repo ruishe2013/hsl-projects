@@ -2,18 +2,26 @@ package com.aifuyun.snow.world.biz.ao.user.impl;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.resultcode.CommonResultCodes;
+import com.aifuyun.snow.world.biz.ao.resultcode.OrderResultCodes;
 import com.aifuyun.snow.world.biz.ao.resultcode.UserResultCodes;
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
+import com.aifuyun.snow.world.biz.bo.together.OrderBO;
+import com.aifuyun.snow.world.biz.bo.together.OrderUserBO;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
+import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
+import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
-import com.zjuh.sweet.lang.StringUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
 
 public class UserAOImpl extends BaseAO implements UserAO {
 
 	private UserBO userBO;
+	
+	private OrderBO orderBO;
+	
+	private OrderUserBO orderUserBO;
 	
 	private int defaultSelectedYear = BirthYearEnum.YEAR_80S.getValue();
 	
@@ -128,7 +136,7 @@ public class UserAOImpl extends BaseAO implements UserAO {
 	}
 	
 	@Override
-	public Result confirmPersonalInfo() {
+	public Result viewPersonalInfoForOrder(long orderId) {
 		Result result = new ResultSupport(false);
 		try {
 			long userId = this.getLoginUserId();
@@ -136,15 +144,37 @@ public class UserAOImpl extends BaseAO implements UserAO {
 				result.setResultCode(CommonResultCodes.USER_NOT_LOGIN);
 				return result;
 			}
-			
 			BaseUserDO baseUserDO = userBO.queryById(userId);
 			if (baseUserDO == null) {
 				result.setResultCode(UserResultCodes.USER_NOT_EXIST);
 				return result;
 			}
-			boolean userInfoCompeleted = isUserInfoCompeleted(baseUserDO);
-			result.getModels().put("user", baseUserDO);
-			result.getModels().put("userInfoCompeleted", userInfoCompeleted);
+			
+			OrderDO order = orderBO.queryById(orderId);
+			if (order == null) {
+				result.setResultCode(OrderResultCodes.ORDER_NOT_EXIST);
+				return result;
+			}
+			
+			if (order.getCreatorId() != userId) {
+				result.setResultCode(OrderResultCodes.CANNOT_EDIT_OTHERS_ORDER);
+				return result;
+			}
+			
+			OrderUserDO orderUserDO = orderUserBO.queryOrderCreator(orderId);
+			if (orderUserDO == null) {
+				orderUserDO = assignDefaultFromUser(baseUserDO);
+			}
+			
+			BirthYearEnum[] years = BirthYearEnum.values();
+			
+			int selectedYear = getSelectedYear(orderUserDO);
+			
+			result.getModels().put("years", years);
+			result.getModels().put("selectedYear", selectedYear);
+			
+			result.getModels().put("orderUser", orderUserDO);
+			result.getModels().put("order", order);
 			result.setSuccess(true);
 		} catch (Exception e) {
 			log.error("确认个人信息失败", e);
@@ -152,12 +182,36 @@ public class UserAOImpl extends BaseAO implements UserAO {
 		return result;
 	}
 	
+	private int getSelectedYear(OrderUserDO orderUserDO) {
+		if (orderUserDO == null) {
+			return defaultSelectedYear;
+		}
+		if (BirthYearEnum.inRange(orderUserDO.getBirthYear())) {
+			return orderUserDO.getBirthYear();
+		}
+		return defaultSelectedYear;
+	}
+	
+	private OrderUserDO assignDefaultFromUser(BaseUserDO baseUserDO) {
+		OrderUserDO ret = new OrderUserDO();
+		ret.setBirthYear(baseUserDO.getBirthYear());
+		ret.setCareer(baseUserDO.getCareer());
+		ret.setEmail(baseUserDO.getEmail());
+		ret.setPhone(baseUserDO.getPhone());
+		ret.setQq(baseUserDO.getQq());
+		ret.setRealName(baseUserDO.getRealName());
+		ret.setUserId(baseUserDO.getId());
+		ret.setUsername(baseUserDO.getUsername());
+		ret.setSex(baseUserDO.getSex());		
+		return ret;
+	}
+	
 	/**
 	 * 用户信息是否完整
 	 * @param baseUserDO
 	 * @return
 	 */
-	private boolean isUserInfoCompeleted(BaseUserDO baseUserDO) {
+/*	private boolean isUserInfoCompeleted(BaseUserDO baseUserDO) {
 		if (baseUserDO == null) {
 			return false;
 		}
@@ -177,7 +231,7 @@ public class UserAOImpl extends BaseAO implements UserAO {
 			return false;
 		}
 		return true;
-	}
+	}*/
 
 	private boolean isUserExist(String username) {
 		return null != userBO.queryByUsernameIgnoreDeletedFlag(username);
@@ -189,6 +243,14 @@ public class UserAOImpl extends BaseAO implements UserAO {
 
 	public void setDefaultSelectedYear(int defaultSelectedYear) {
 		this.defaultSelectedYear = defaultSelectedYear;
+	}
+
+	public void setOrderBO(OrderBO orderBO) {
+		this.orderBO = orderBO;
+	}
+
+	public void setOrderUserBO(OrderUserBO orderUserBO) {
+		this.orderUserBO = orderUserBO;
 	}
 
 }
