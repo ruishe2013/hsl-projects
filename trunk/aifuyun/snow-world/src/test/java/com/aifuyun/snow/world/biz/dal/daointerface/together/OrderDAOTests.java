@@ -4,6 +4,7 @@ import junit.framework.Assert;
 
 import com.aifuyun.snow.world.common.DateTimeUtil;
 import com.aifuyun.snow.world.dal.daointerface.together.OrderDAO;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.zjuh.sweet.test.BaseTest;
 
@@ -55,6 +56,21 @@ public class OrderDAOTests extends BaseTest {
 		inDb = orderDAO.queryById(id);
 		Assert.assertNotNull(inDb);
 		Assert.assertEquals(newAddr, inDb.getArriveAddr());
+	}
+	
+	public void testUpdateStatus() {
+		OrderDO orderDO = createMockOrderDO();
+		long id = orderDAO.create(orderDO);
+		Assert.assertTrue(id > 0L);
+		orderDAO.updateStatus(id, OrderStatusEnum.FINISH);
+		OrderDO inDb = orderDAO.queryById(id);
+		Assert.assertNotNull(inDb);
+		Assert.assertEquals(OrderStatusEnum.FINISH.getValue(), inDb.getStatus());
+		
+		orderDAO.updateStatus(id, OrderStatusEnum.WAIT_CONFIRM);
+		inDb = orderDAO.queryById(id);
+		Assert.assertNotNull(inDb);
+		Assert.assertEquals(OrderStatusEnum.WAIT_CONFIRM.getValue(), inDb.getStatus());
 	}
 	
 	private OrderDO createMockOrderDO() {

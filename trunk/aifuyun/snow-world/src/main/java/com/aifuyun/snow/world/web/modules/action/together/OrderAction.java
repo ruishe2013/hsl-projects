@@ -27,6 +27,12 @@ public class OrderAction extends BaseAction {
 	
 	private OrderAO orderAO;
 	
+	@DefaultTarget("together/confirmOrder")
+	public void doConfirmOrder(RunData rundata, TemplateContext templateContext) {
+		long orderId = rundata.getQueryString().getLong("orderId");
+		
+	}
+	
 	@DefaultTarget("together/personalInfo")
 	public void doFillCreatorInfo(RunData rundata, TemplateContext templateContext) {
 		final Form form = rundata.getForm("together.personalInfo");

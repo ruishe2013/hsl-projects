@@ -66,13 +66,18 @@
 	
 	<div class="input-item">
 		<input type="checkbox" id="saveToUserInfo" name="saveToUserInfo" value="true" #if ($!isUserInfoEmpty) checked #end/>
-		<label for="saveToUserInfo">同时更新到我的信息</label>
+		<label for="saveToUserInfo">同时更新我的个人资料</label>
 	</div>
-	
 	
 	#errorMessage($!csrfmessage)
 	#errorMessage($!resultmessage.message)
 	<div class="input-item">
-		<input type="submit" value="提交" />
+		<input type="submit" value="保存修改并进入下一步" />
+		
+		#if ($creatorExist)
+			<a href="$snowModule.setTarget('together/confirmOrder').add('orderId', $order.id)">不保存，直接进入下一步</a>
+		#end
+		
+		<a href="#">返回上一步</a>
 	</div>
 </form>

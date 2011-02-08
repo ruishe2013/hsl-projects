@@ -2,6 +2,7 @@ package com.aifuyun.snow.world.biz.bo.together.impl;
 
 import com.aifuyun.snow.world.biz.bo.together.OrderBO;
 import com.aifuyun.snow.world.dal.daointerface.together.OrderDAO;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 
 public class OrderBOImpl implements OrderBO {
@@ -21,4 +22,9 @@ public class OrderBOImpl implements OrderBO {
 		this.orderDAO = orderDAO;
 	}
 
+	@Override
+	public void updateStatus(long id, OrderStatusEnum orderStatus) {
+		orderDAO.updateStatus(id, orderStatus);
+	}
+	
 }

@@ -1,1 +1,54 @@
-确认拼单！！
+<table width="500px;">
+	<caption>拼单信息</caption>
+	<tr>
+		<td>出发地</td><td>$!{order.fromCity} $!{order.fromAddr}</td>
+	</tr>
+	<tr>
+		<td>出发时间</td><td>$!dateUtil.formatFullDate($order.fromTime)</td>
+	</tr>
+	<tr>
+		<td>达到地</td><td>$!{order.arriveCity} $!{order.arriveAddr}</td>
+	</tr>
+	<tr>
+		<td>达到时间</td><td>$!dateUtil.formatFullDate($order.arriveTime)</td>
+	</tr>
+	<tr>
+		<td>空余座位 </td><td>$!order.totalSeats</td>
+	</tr>
+	<tr>
+		<td>描述</td><td>$!order.description</td>
+	</tr>
+</table>
+
+<table width="500px;">
+	<caption>发起人信息</caption>
+	<tr>
+		<td>真实姓名</td><td>$!creator.realName</td>
+	</tr>
+	<tr>
+		<td>性别</td><td>$!creator.sexEnum.name</td>
+	</tr>
+	<tr>
+		<td>出生年代</td><td>$!creator.birthYearEnum.name</td>
+	</tr>
+	<tr>
+		<td>手机号码 </td><td>$!creator.phone</td>
+	</tr>
+	<tr>
+		<td>职业</td><td>$!creator.career</td>
+	</tr>
+	<tr>
+		<td>电子邮箱</td><td>$!creator.email</td>
+	</tr>
+	<tr>
+		<td>qq号码</td><td>$!creator.qq</td>
+	</tr>
+</table>
+
+<form method="post">
+	<input type="hidden" name="actionTarget" value="together/orderAction" />
+	<input type="hidden" name="actionEvent" value="confirmOrder" />
+	<input type="hidden" name="orderId" value="$order.id" />
+	<input type="submit" value="确认发布" />
+</form>
+<a href="$snowModule.setTarget('together/personalInfo').add('orderId', $order.id)">返回修改</a>

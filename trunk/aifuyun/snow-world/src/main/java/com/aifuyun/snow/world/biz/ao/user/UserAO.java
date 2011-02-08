@@ -19,12 +19,6 @@ public interface UserAO {
 	Result registerUser(BaseUserDO userDO);
 	
 	/**
-	 * 浏览用户信息
-	 * @return
-	 */
-	Result viewPersonalInfoForOrder(long orderId);
-	
-	/**
 	 * 浏览修改个人信息
 	 * @return
 	 */

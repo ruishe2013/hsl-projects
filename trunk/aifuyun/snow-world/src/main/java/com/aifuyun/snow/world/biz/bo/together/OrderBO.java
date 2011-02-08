@@ -1,5 +1,6 @@
 package com.aifuyun.snow.world.biz.bo.together;
 
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 
 /**
@@ -21,5 +22,12 @@ public interface OrderBO {
 	 * @return
 	 */
 	OrderDO queryById(long id);
+
+	/**
+	 * ¸üÐÂ×´Ì¬
+	 * @param id
+	 * @param orderStatus
+	 */
+	void updateStatus(long id, OrderStatusEnum orderStatus);
 	
 }
