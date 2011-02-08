@@ -12,6 +12,7 @@ import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
+import com.zjuh.sweet.lang.StringUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
 
@@ -170,6 +171,10 @@ public class UserAOImpl extends BaseAO implements UserAO {
 			
 			int selectedYear = getSelectedYear(orderUserDO);
 			
+			boolean isUserInfoEmpty = isUserInfoEmpty(baseUserDO);
+			
+			result.getModels().put("isUserInfoEmpty", isUserInfoEmpty);
+			
 			result.getModels().put("years", years);
 			result.getModels().put("selectedYear", selectedYear);
 			
@@ -211,27 +216,24 @@ public class UserAOImpl extends BaseAO implements UserAO {
 	 * @param baseUserDO
 	 * @return
 	 */
-/*	private boolean isUserInfoCompeleted(BaseUserDO baseUserDO) {
-		if (baseUserDO == null) {
+	private boolean isUserInfoEmpty(BaseUserDO baseUserDO) {
+		if (StringUtil.isNotEmpty(baseUserDO.getRealName())) {
 			return false;
 		}
-		if (StringUtil.isEmpty(baseUserDO.getRealName())) {
+		if (baseUserDO.getBirthYear() > 0) {
 			return false;
 		}
-		if (baseUserDO.getBirthYear() <= 0) {
+		if (StringUtil.isNotEmpty(baseUserDO.getCareer())) {
 			return false;
 		}
-		if (StringUtil.isEmpty(baseUserDO.getCareer())) {
+		if (StringUtil.isNotEmpty(baseUserDO.getPhone())) {
 			return false;
 		}
-		if (StringUtil.isEmpty(baseUserDO.getPhone())) {
-			return false;
-		}
-		if (baseUserDO.getSex() <=0 ) {
+		if (baseUserDO.getSex() > 0 ) {
 			return false;
 		}
 		return true;
-	}*/
+	}
 
 	private boolean isUserExist(String username) {
 		return null != userBO.queryByUsernameIgnoreDeletedFlag(username);

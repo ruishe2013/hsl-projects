@@ -1,11 +1,9 @@
 package com.aifuyun.snow.world.dal.dataobject.user;
 
-import com.aifuyun.snow.world.dal.dataobject.BaseDO;
-import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
-import com.aifuyun.snow.world.dal.dataobject.enums.SexEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.UserStatusEnum;
+import com.aifuyun.snow.world.dal.dataobject.misc.AbstractUserInfoHolder;
 
-public class BaseUserDO extends BaseDO {
+public class BaseUserDO extends AbstractUserInfoHolder {
 	
 	private static final long serialVersionUID = -8132857887020879215L;
 
@@ -15,7 +13,7 @@ public class BaseUserDO extends BaseDO {
 	private long id;
 	
 	/**
-	 * 用户名 唯一
+	 * 用户名
 	 */
 	private String username;
 	
@@ -24,41 +22,6 @@ public class BaseUserDO extends BaseDO {
 	 */
 	private String password;
 	
-	/**
-	 * 真实姓名
-	 */
-	private String realName;
-	
-	/**
-	 * 性别
-	 */
-	private int sex;
-	
-	/**
-	 * 出生年代
-	 */
-	private int birthYear;
-	
-	/**
-	 * 手机号码
-	 */
-	private String phone;
-	
-	/**
-	 * 职业
-	 */
-	private String career;
-	
-	/**
-	 * qq号
-	 */
-	private String qq;
-	
-	/**
-	 * 电子邮件
-	 */
-	private String email;
-
 	/**
 	 * 注册ip
 	 */
@@ -85,14 +48,6 @@ public class BaseUserDO extends BaseDO {
 		this.username = username;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
 	public UserStatusEnum getUserStatusEnum() {
 		return UserStatusEnum.valueOf(status);
 	}
@@ -113,54 +68,6 @@ public class BaseUserDO extends BaseDO {
 		this.password = password;
 	}
 
-	public SexEnum getSexEnum() {
-		return SexEnum.valueOf(sex);
-	}
-	
-	public int getSex() {
-		return sex;
-	}
-
-	public void setSex(int sex) {
-		this.sex = sex;
-	}
-
-	public BirthYearEnum getBirthYearEnum() {
-		return BirthYearEnum.valueOf(this.birthYear);
-	}
-	
-	public int getBirthYear() {
-		return birthYear;
-	}
-
-	public void setBirthYear(int birthYear) {
-		this.birthYear = birthYear;
-	}
-
-	public String getPhone() {
-		return phone;
-	}
-
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
-	public String getCareer() {
-		return career;
-	}
-
-	public void setCareer(String career) {
-		this.career = career;
-	}
-
-	public String getQq() {
-		return qq;
-	}
-
-	public void setQq(String qq) {
-		this.qq = qq;
-	}
-
 	public String getRegisterIp() {
 		return registerIp;
 	}
@@ -169,11 +76,4 @@ public class BaseUserDO extends BaseDO {
 		this.registerIp = registerIp;
 	}
 
-	public String getRealName() {
-		return realName;
-	}
-
-	public void setRealName(String realName) {
-		this.realName = realName;
-	}
 }

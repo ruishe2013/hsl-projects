@@ -160,6 +160,8 @@ public class UserAOTests extends SnowWorldTest {
 		Assert.assertNotNull(orderUser);
 		OrderDO order = (OrderDO)result.getModels().get("order");
 		Assert.assertNotNull(order);
+		Assert.assertTrue((Boolean)result.getModels().get("isUserInfoEmpty"));
+		
 		
 		orderId = createOrderDO(existUserId + 1, username);
 		result = userAO.viewPersonalInfoForOrder(orderId);
