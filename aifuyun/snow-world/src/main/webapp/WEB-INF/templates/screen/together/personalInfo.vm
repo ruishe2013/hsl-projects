@@ -11,7 +11,7 @@
 <form method="post">
 	<input type="hidden" name="actionEvent" value="publishOrder" /> 
 	<input type="hidden" name="actionTarget" value="together/orderAction" />
-	<input type="hidden" name="$!form.fields.id.name" value="$!form.fields.id.value" />
+	<input type="hidden" name="orderId" value="$order.id" />
 	
 	<div class="input-item">
 		<label for="$!form.fields.realName.name">*真实姓名：</label>
@@ -41,7 +41,7 @@
 	
 	<div class="input-item">
 		<label for="$!form.fields.phone.name">*手机号码：</label>
-		<input type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value" />
+		<input type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value" size="11" maxlength="11"/>
 	</div>
 	#errorMessage($!form.fields.phone.message)
 	
@@ -51,7 +51,6 @@
 		<a href="#">选择职业...</a>
 	</div>
 	#errorMessage($!form.fields.career.message)
-	
 	
 	<div class="input-item">
 		<label for="$!form.fields.email.name">电子邮箱：</label>

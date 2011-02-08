@@ -71,13 +71,7 @@
 		</field>
 	</form>
 	
-		<form name="together.personalInfo">
-		<field name="id">
-			<validator type="required" message="id不能为空!" />
-			<validator type="long" message="id必须是正整数!" >
-				<param name="min" value="0" />
-			</validator>
-		</field>
+	<form name="together.personalInfo">
 		<field name="realName">
 			<validator type="required" message="真实姓名不能为空!" />
 			<validator type="string" message="真实姓名长度不能超过30个字符!" >

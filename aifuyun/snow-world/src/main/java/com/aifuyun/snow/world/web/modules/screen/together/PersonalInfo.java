@@ -14,7 +14,7 @@ public class PersonalInfo extends BaseScreen {
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
-		long orderId = rundata.getQueryString().getLong("id");
+		long orderId = rundata.getQueryString().getLong("orderId");
 		Result result = userAO.viewPersonalInfoForOrder(orderId);
 		if (!result.isSuccess()) {
 			this.handleError(result, rundata, templateContext);

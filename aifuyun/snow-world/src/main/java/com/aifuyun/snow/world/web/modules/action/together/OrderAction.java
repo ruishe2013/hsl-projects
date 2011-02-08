@@ -8,6 +8,8 @@ import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.web.common.base.BaseAction;
 import com.zjuh.splist.core.annotation.DefaultTarget;
 import com.zjuh.splist.core.form.Form;
+import com.zjuh.splist.core.module.URLModule;
+import com.zjuh.splist.core.module.URLModuleContainer;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
 import com.zjuh.sweet.result.Result;
@@ -24,6 +26,15 @@ public class OrderAction extends BaseAction {
 	
 	private OrderAO orderAO;
 	
+	@DefaultTarget("together/personalInfo")
+	public void doPublishOrder(RunData rundata, TemplateContext templateContext) {
+		final Form form = rundata.getForm("together.personalInfo");
+		if (!form.validate()) {
+			return;
+		}
+		System.out.println("doPublishOrder");
+	}
+	
 	@DefaultTarget("together/createTaxiOrder")
 	public void doCreateTaxiOrder(RunData rundata, TemplateContext templateContext) {
 		if (!checkCsrf(templateContext, "createTaxiOrder")) {
@@ -38,10 +49,8 @@ public class OrderAction extends BaseAction {
 		
 		Date fromTimeDate = rundata.getQueryString().getDate("fromTimeDate", DATE_FMT);
 		Date fromTimeTime = rundata.getQueryString().getDate("fromTimeTime", TIME_FMT);
-		
 		Date arriveTimeDate = rundata.getQueryString().getDate("arriveTimeDate", DATE_FMT);
 		Date arriveTimeTime = rundata.getQueryString().getDate("arriveTimeTime", TIME_FMT);
-		
 		Date fromTime = DateTimeUtil.componentDateAndTime(fromTimeDate, fromTimeTime);
 		Date arriveTime = DateTimeUtil.componentDateAndTime(arriveTimeDate, arriveTimeTime);
 		
@@ -50,12 +59,20 @@ public class OrderAction extends BaseAction {
 		
 		Result result = orderAO.createTaxiOrder(orderDO);
 		if (result.isSuccess()) {
-			this.sendRedirect("snowModule", "together/personalInfo");
+			long orderId = (Long)result.getModels().get("orderId");
+			sendToPersonalInfoPage(orderId);			
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
 	}
 
+	private void sendToPersonalInfoPage(long orderId) {
+		URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
+		URLModule urlModule = urlModuleContainer.setTarget("together/personalInfo");
+		urlModule.add("orderId", orderId);
+		sendRedirectUrl(urlModule.render());
+	}
+	
 	public void setOrderAO(OrderAO orderAO) {
 		this.orderAO = orderAO;
 	}
