@@ -12,6 +12,16 @@ public class OrderUserBOImpl implements OrderUserBO {
 	private OrderUserDAO orderUserDAO;
 	
 	@Override
+	public long create(OrderUserDO orderUserDO) {
+		return orderUserDAO.create(orderUserDO);
+	}
+
+	@Override
+	public void update(OrderUserDO orderUserDO) {
+		orderUserDAO.update(orderUserDO);
+	}
+
+	@Override
 	public OrderUserDO queryOrderCreator(long orderId) {
 		List<OrderUserDO> creators = orderUserDAO.queryByOrderIdAndRole(orderId, OrderUserRoleEnum.CREATOR.getValue());
 		if (creators == null || creators.isEmpty()) {

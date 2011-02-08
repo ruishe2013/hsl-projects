@@ -9,7 +9,7 @@
 
 填写联系方式
 <form method="post">
-	<input type="hidden" name="actionEvent" value="publishOrder" /> 
+	<input type="hidden" name="actionEvent" value="fillCreatorInfo" /> 
 	<input type="hidden" name="actionTarget" value="together/orderAction" />
 	<input type="hidden" name="orderId" value="$order.id" />
 	
@@ -63,6 +63,12 @@
 		<input type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value" />
 	</div>
 	#errorMessage($!form.fields.qq.message)
+	
+	<div class="input-item">
+		<input type="checkbox" id="saveToUserInfo" name="saveToUserInfo" value="true" #if ($!isUserInfoEmpty) checked #end/>
+		<label for="saveToUserInfo">同时更新到我的信息</label>
+	</div>
+	
 	
 	#errorMessage($!csrfmessage)
 	#errorMessage($!resultmessage.message)

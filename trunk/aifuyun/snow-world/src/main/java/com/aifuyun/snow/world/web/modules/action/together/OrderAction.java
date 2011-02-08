@@ -5,6 +5,7 @@ import java.util.Date;
 import com.aifuyun.snow.world.biz.ao.together.OrderAO;
 import com.aifuyun.snow.world.common.DateTimeUtil;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
+import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.web.common.base.BaseAction;
 import com.zjuh.splist.core.annotation.DefaultTarget;
 import com.zjuh.splist.core.form.Form;
@@ -27,12 +28,29 @@ public class OrderAction extends BaseAction {
 	private OrderAO orderAO;
 	
 	@DefaultTarget("together/personalInfo")
-	public void doPublishOrder(RunData rundata, TemplateContext templateContext) {
+	public void doFillCreatorInfo(RunData rundata, TemplateContext templateContext) {
 		final Form form = rundata.getForm("together.personalInfo");
 		if (!form.validate()) {
 			return;
 		}
-		System.out.println("doPublishOrder");
+		OrderUserDO orderUserDO = new OrderUserDO();
+		form.apply(orderUserDO);
+		
+		long orderId = rundata.getQueryString().getLong("orderId");
+		boolean saveToUserInfo = rundata.getQueryString().getBoolean("saveToUserInfo");
+		Result result = orderAO.fillCreatorInfo(orderUserDO, orderId, saveToUserInfo);
+		if (result.isSuccess()) {
+			sendToConfirmPage(orderId);
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
+	}
+	
+	private void sendToConfirmPage(long orderId) {
+		URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
+		URLModule urlModule = urlModuleContainer.setTarget("together/confirmOrder");
+		urlModule.add("orderId", orderId);
+		sendRedirectUrl(urlModule.render());
 	}
 	
 	@DefaultTarget("together/createTaxiOrder")
@@ -65,7 +83,7 @@ public class OrderAction extends BaseAction {
 			this.handleError(result, rundata, templateContext);
 		}
 	}
-
+	
 	private void sendToPersonalInfoPage(long orderId) {
 		URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
 		URLModule urlModule = urlModuleContainer.setTarget("together/personalInfo");

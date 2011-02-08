@@ -6,4 +6,7 @@ public interface OrderUserBO {
 	
 	OrderUserDO queryOrderCreator(long orderId);
 
+	long create(OrderUserDO orderUserDO);
+	
+	void update(OrderUserDO orderUserDO);
 }

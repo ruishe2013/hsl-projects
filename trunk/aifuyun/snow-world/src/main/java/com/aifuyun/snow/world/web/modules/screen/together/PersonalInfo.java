@@ -27,6 +27,7 @@ public class PersonalInfo extends BaseScreen {
 			form.holdValues(orderUser);
 		}
 		
+		this.result2Context(result, templateContext, "isUserInfoEmpty");
 		this.result2Context(result, templateContext, "selectedYear");
 		this.result2Context(result, templateContext, "years");
 		this.result2Context(result, templateContext, "orderUser");

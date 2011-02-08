@@ -1,6 +1,7 @@
 package com.aifuyun.snow.world.biz.ao.together;
 
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
+import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.zjuh.sweet.result.Result;
 
 /**
@@ -15,5 +16,14 @@ public interface OrderAO {
 	 * @return
 	 */
 	Result createTaxiOrder(OrderDO orderDO);
+	
+	/**
+	 * 创建者信息
+	 * @param inputCreator
+	 * @param orderId
+	 * @param saveToUserInfo
+	 * @return
+	 */
+	Result fillCreatorInfo(OrderUserDO inputCreator, long orderId, boolean saveToUserInfo);
 	
 }
