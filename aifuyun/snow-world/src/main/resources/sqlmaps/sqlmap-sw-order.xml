@@ -51,6 +51,10 @@
 		update sw_order t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
 	</update>
 	
+	<update id="updateStatus" parameterClass="map">
+		update sw_order t set t.status = #orderStatus#, t.gmt_modified = NOW() where t.id = #id# and t.deleted =0
+	</update>
+	
 	<update id="update" parameterClass="order">
 		<![CDATA[
 			update sw_order set 

@@ -1,8 +1,12 @@
 package com.aifuyun.snow.world.dal.ibatis.together;
 
+import java.util.Map;
+
 import com.aifuyun.snow.world.dal.daointerface.together.OrderDAO;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.ibatis.BaseIbatisDAO;
+import com.zjuh.sweet.lang.CollectionUtil;
 
 public class OrderDAOIbatis extends BaseIbatisDAO implements OrderDAO {
 
@@ -24,6 +28,14 @@ public class OrderDAOIbatis extends BaseIbatisDAO implements OrderDAO {
 	@Override
 	public void update(OrderDO orderDO) {
 		getSqlMapClientTemplate().update("OrderDAO.update", orderDO);
+	}
+	
+	public void updateStatus(long id, OrderStatusEnum orderStatus) {
+		// 只更新一个status字段，比update方法高效
+		Map<String, Object> param = CollectionUtil.newHashMap();
+		param.put("id", id);
+		param.put("orderStatus", orderStatus.getValue());
+		getSqlMapClientTemplate().update("OrderDAO.updateStatus", param);
 	}
 
 }

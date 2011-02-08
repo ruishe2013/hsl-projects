@@ -1,31 +1,16 @@
 package com.aifuyun.snow.world.biz.ao.user;
 
-import java.text.ParseException;
-
 import junit.framework.Assert;
 
 import com.aifuyun.snow.world.SnowWorldTest;
 import com.aifuyun.snow.world.biz.ao.resultcode.CommonResultCodes;
-import com.aifuyun.snow.world.biz.ao.resultcode.OrderResultCodes;
 import com.aifuyun.snow.world.biz.ao.resultcode.UserResultCodes;
-import com.aifuyun.snow.world.common.DateTimeUtil;
-import com.aifuyun.snow.world.dal.daointerface.together.OrderDAO;
-import com.aifuyun.snow.world.dal.daointerface.user.BaseUserDAO;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
-import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.SexEnum;
-import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
-import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
 import com.zjuh.sweet.result.Result;
 
 public class UserAOTests extends SnowWorldTest {
-
-	private UserAO userAO;
-
-	private BaseUserDAO baseUserDAO;
-	
-	private OrderDAO orderDAO;
 	
 	public void testModifyPersonalInfo() {
 		String username = "demo_exist_user1";
@@ -116,96 +101,4 @@ public class UserAOTests extends SnowWorldTest {
 		Assert.assertEquals(UserResultCodes.SENSITIVITY_USER, result.getResultCode());
 	}
 	
-
-	private long createOrderDO(long userId, String username) throws ParseException {
-		OrderDO togetherOrderDO = new OrderDO();
-		togetherOrderDO.setArriveAddr("arrive addr");
-		togetherOrderDO.setArriveCity("arrive city");
-		togetherOrderDO.setArriveTime(DateTimeUtil.parseDate("2010-12-01 19:30:00"));
-		togetherOrderDO.setDescription("this is a description");
-		togetherOrderDO.setFromAddr("from addr");
-		togetherOrderDO.setFromCity("from city");
-		togetherOrderDO.setFromTime(DateTimeUtil.parseDate("2010-12-01 17:30:00"));
-		togetherOrderDO.setTotalSeats(4);
-		
-		togetherOrderDO.setCreatorId(userId);
-		togetherOrderDO.setCreatorUsername(username);
-		togetherOrderDO.setType(OrderTypeEnum.TAXI.getValue());
-		
-		long id = orderDAO.create(togetherOrderDO);
-		Assert.assertTrue(id > 0);
-		return id;
-	}
-	
-	public void testViewPersonalInfoForOrder() throws ParseException {
-		this.setLogout();
-		Result result = userAO.viewPersonalInfoForOrder(0);
-		Assert.assertFalse(result.isSuccess());
-		Assert.assertEquals(CommonResultCodes.USER_NOT_LOGIN, result.getResultCode());
-		
-		String username = "demo_user_temp";
-		long notExistUserId = createDeletedUser(username);
-		this.setLogin(notExistUserId, username);
-		result = userAO.viewPersonalInfoForOrder(0);
-		Assert.assertFalse(result.isSuccess());
-		Assert.assertEquals(UserResultCodes.USER_NOT_EXIST, result.getResultCode());
-		
-		username = "demo_exist_user";
-		long existUserId = createTempUser(username);
-		this.setLogin(existUserId, username);
-		long orderId = createOrderDO(existUserId, username);
-		result = userAO.viewPersonalInfoForOrder(orderId);
-		Assert.assertTrue(result.isSuccess());
-		OrderUserDO orderUser = (OrderUserDO)result.getModels().get("orderUser");
-		Assert.assertNotNull(orderUser);
-		OrderDO order = (OrderDO)result.getModels().get("order");
-		Assert.assertNotNull(order);
-		Assert.assertTrue((Boolean)result.getModels().get("isUserInfoEmpty"));
-		
-		
-		orderId = createOrderDO(existUserId + 1, username);
-		result = userAO.viewPersonalInfoForOrder(orderId);
-		Assert.assertFalse(result.isSuccess());
-		Assert.assertEquals(OrderResultCodes.CANNOT_EDIT_OTHERS_ORDER, result.getResultCode());
-		
-		orderDAO.delete(orderId);
-		result = userAO.viewPersonalInfoForOrder(orderId);
-		Assert.assertFalse(result.isSuccess());
-		Assert.assertEquals(OrderResultCodes.ORDER_NOT_EXIST, result.getResultCode());
-		
-		
-		
-		
-	}
-	
-	private long createTempUser(String username) {
-		BaseUserDO baseUserDO = new BaseUserDO();
-		baseUserDO.setUsername(username);
-		baseUserDO.setPassword("test_password");
-		
-		long userId = baseUserDAO.create(baseUserDO);
-		Assert.assertTrue(userId > 0L);
-		return userId;
-	}
-	
-	private long createDeletedUser(String username) {
-		long userId = createTempUser(username);
-		baseUserDAO.delete(userId);
-		BaseUserDO inDb = baseUserDAO.queryById(userId);
-		Assert.assertNull(inDb);
-		return userId;
-	}
-	
-	public void setUserAO(UserAO userAO) {
-		this.userAO = userAO;
-	}
-
-	public void setBaseUserDAO(BaseUserDAO baseUserDAO) {
-		this.baseUserDAO = baseUserDAO;
-	}
-
-	public void setOrderDAO(OrderDAO orderDAO) {
-		this.orderDAO = orderDAO;
-	}
-
 }

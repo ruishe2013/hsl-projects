@@ -1,6 +1,6 @@
 package com.aifuyun.snow.world.web.modules.screen.together;
 
-import com.aifuyun.snow.world.biz.ao.user.UserAO;
+import com.aifuyun.snow.world.biz.ao.together.OrderAO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.core.form.Form;
@@ -10,12 +10,12 @@ import com.zjuh.sweet.result.Result;
 
 public class PersonalInfo extends BaseScreen {
 
-	private UserAO userAO;
+	private OrderAO orderAO;
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		long orderId = rundata.getQueryString().getLong("orderId");
-		Result result = userAO.viewPersonalInfoForOrder(orderId);
+		Result result = orderAO.viewPersonalInfoForOrder(orderId);
 		if (!result.isSuccess()) {
 			this.handleError(result, rundata, templateContext);
 			return;
@@ -27,6 +27,7 @@ public class PersonalInfo extends BaseScreen {
 			form.holdValues(orderUser);
 		}
 		
+		this.result2Context(result, templateContext, "creatorExist");
 		this.result2Context(result, templateContext, "isUserInfoEmpty");
 		this.result2Context(result, templateContext, "selectedYear");
 		this.result2Context(result, templateContext, "years");
@@ -35,8 +36,8 @@ public class PersonalInfo extends BaseScreen {
 		
 	}
 
-	public void setUserAO(UserAO userAO) {
-		this.userAO = userAO;
+	public void setOrderAO(OrderAO orderAO) {
+		this.orderAO = orderAO;
 	}
 
 }

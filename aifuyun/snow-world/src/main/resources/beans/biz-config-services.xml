@@ -18,7 +18,7 @@
 	<bean id="pullSerivceIncerceptor" class="com.zjuh.sweet.interceptors.PullSerivceIncerceptor" init-method="init">
 		<property name="pullToolClasses">
 			<map>
-				<entry key="startupDate" value="java.util.Date" />
+				<entry key="dateUtil" value="com.zjuh.sweet.lang.DateUtil" />
 			</map>
 		</property>
 	</bean>

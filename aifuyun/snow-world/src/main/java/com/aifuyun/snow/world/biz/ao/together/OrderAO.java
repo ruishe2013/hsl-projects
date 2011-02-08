@@ -26,4 +26,24 @@ public interface OrderAO {
 	 */
 	Result fillCreatorInfo(OrderUserDO inputCreator, long orderId, boolean saveToUserInfo);
 	
+	/**
+	 * 浏览确认拼单
+	 * @param orderId
+	 * @return
+	 */
+	Result viewConfirmOrder(long orderId);
+	
+	/**
+	 * 确认拼单
+	 * @param orderId
+	 * @return
+	 */
+	Result confirmOrder(long orderId);
+	
+	/**
+	 * 浏览用户信息
+	 * @return
+	 */
+	Result viewPersonalInfoForOrder(long orderId);
+	
 }
