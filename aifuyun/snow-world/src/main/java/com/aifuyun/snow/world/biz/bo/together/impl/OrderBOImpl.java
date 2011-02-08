@@ -13,6 +13,10 @@ public class OrderBOImpl implements OrderBO {
 		return orderDAO.create(orderDO);
 	}
 
+	public OrderDO queryById(long id) {
+		return orderDAO.queryById(id);
+	}
+	
 	public void setOrderDAO(OrderDAO orderDAO) {
 		this.orderDAO = orderDAO;
 	}

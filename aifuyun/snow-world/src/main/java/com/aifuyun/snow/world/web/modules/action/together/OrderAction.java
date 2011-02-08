@@ -50,7 +50,7 @@ public class OrderAction extends BaseAction {
 		
 		Result result = orderAO.createTaxiOrder(orderDO);
 		if (result.isSuccess()) {
-			this.sendRedirect("snowModule", "together/confirmPersonalInfo");
+			this.sendRedirect("snowModule", "together/personalInfo");
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}

@@ -8,6 +8,7 @@
 	<bean id="cityIpBO" class="com.aifuyun.snow.world.biz.bo.area.impl.CityIpBOImpl"></bean>
 	<bean id="cityBO" class="com.aifuyun.snow.world.biz.bo.area.impl.CityBOImpl"></bean>
 	<bean id="orderBO" class="com.aifuyun.snow.world.biz.bo.together.impl.OrderBOImpl"></bean>
+	<bean id="orderUserBO" class="com.aifuyun.snow.world.biz.bo.together.impl.OrderUserBOImpl"></bean>
 	
 	<bean id="userBO" class="com.aifuyun.snow.world.biz.bo.user.impl.UserBOImpl">
 		<property name="sensitivitiesList">

@@ -81,3 +81,27 @@ create table sw_order (
 	gmt_create datetime not null,
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+
+
+DROP TABLE IF EXISTS sw_order_user;
+create table sw_order_user (
+	id bigint primary key auto_increment,
+	order_id bigint not null,
+	user_id bigint not null,
+	username varchar(60) not null,
+	sex tinyint default 0 not null,
+	birth_year smallint default 0 not null,
+	real_name varchar(60) not null,
+	phone varchar(100) not null,
+	email varchar(255),
+	career varchar(100),
+	qq varchar(50),
+	status tinyint default 0 not null,
+	order_type tinyint default 0 not null, 
+	role tinyint default 0 not null, 
+	deleted tinyint default 0 not null,
+	gmt_create datetime not null,
+	gmt_modified datetime not null
+) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+create index ind_ord_u_by_u on sw_order_user(user_id, role, status, deleted);
+create index ind_ord_u_by_o on sw_order_user(order_id, status, deleted);

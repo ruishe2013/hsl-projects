@@ -15,4 +15,11 @@ public interface OrderBO {
 	 */
 	long createOrder(OrderDO togetherOrderDO);
 	
+	/**
+	 * 根据id 查询拼单
+	 * @param id
+	 * @return
+	 */
+	OrderDO queryById(long id);
+	
 }

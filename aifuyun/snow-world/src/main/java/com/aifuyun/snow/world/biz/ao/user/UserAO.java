@@ -19,10 +19,10 @@ public interface UserAO {
 	Result registerUser(BaseUserDO userDO);
 	
 	/**
-	 * 确认当前登录用户的信息
+	 * 浏览用户信息
 	 * @return
 	 */
-	Result confirmPersonalInfo();
+	Result viewPersonalInfoForOrder(long orderId);
 	
 	/**
 	 * 浏览修改个人信息
