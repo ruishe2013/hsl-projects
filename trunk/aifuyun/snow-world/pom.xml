@@ -218,8 +218,8 @@
 
 		<profile>
 			<id>product</id>
-			<finalName>snow-world-product</finalName>
 			<build>
+				<finalName>snow-world-product</finalName>
 				<filters>
 					<filter>${basedir}/src/main/filters/snow-world-product.properties</filter>
 				</filters>
