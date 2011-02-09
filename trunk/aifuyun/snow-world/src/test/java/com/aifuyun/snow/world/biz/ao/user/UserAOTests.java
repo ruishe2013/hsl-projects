@@ -95,7 +95,7 @@ public class UserAOTests extends SnowWorldTest {
 		result = userAO.registerUser(baseUserDO);
 		Assert.assertFalse(result.isSuccess());
 		Assert.assertEquals(UserResultCodes.USERNAME_HAS_EXIST, result.getResultCode());
-		baseUserDO.setUsername("ª∆À…¡¢");
+		baseUserDO.setUsername("fuck");
 		result = userAO.registerUser(baseUserDO);
 		Assert.assertFalse(result.isSuccess());
 		Assert.assertEquals(UserResultCodes.SENSITIVITY_USER, result.getResultCode());
