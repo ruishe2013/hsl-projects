@@ -9,7 +9,7 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-		<java.version>1.5</java.version>
+		<java.version>1.6</java.version>
 		<java.encoding>GBK</java.encoding>
 		<project.build.sourceEncoding>GBK</project.build.sourceEncoding>
 	</properties>
