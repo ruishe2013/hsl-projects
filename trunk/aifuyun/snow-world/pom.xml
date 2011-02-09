@@ -197,6 +197,7 @@
 		<profile>
 			<id>daily</id>
 			<build>
+				<finalName>snow-world-daily</finalName>
 				<filters>
 					<filter>${basedir}/src/main/filters/snow-world-daily.properties</filter>
 				</filters>
@@ -217,6 +218,7 @@
 
 		<profile>
 			<id>product</id>
+			<finalName>snow-world-product</finalName>
 			<build>
 				<filters>
 					<filter>${basedir}/src/main/filters/snow-world-product.properties</filter>
