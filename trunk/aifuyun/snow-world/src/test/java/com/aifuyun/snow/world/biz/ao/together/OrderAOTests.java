@@ -6,9 +6,9 @@ import java.util.List;
 import junit.framework.Assert;
 
 import com.aifuyun.snow.world.SnowWorldTest;
-import com.aifuyun.snow.world.biz.ao.resultcode.CommonResultCodes;
-import com.aifuyun.snow.world.biz.ao.resultcode.OrderResultCodes;
-import com.aifuyun.snow.world.biz.ao.resultcode.UserResultCodes;
+import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
+import com.aifuyun.snow.world.biz.resultcodes.OrderResultCodes;
+import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
 import com.aifuyun.snow.world.common.DateTimeUtil;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserRoleEnum;

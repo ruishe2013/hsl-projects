@@ -5,15 +5,16 @@ import javax.servlet.http.HttpSession;
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.user.LoginAO;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
+import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
+import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
 import com.zjuh.splist.core.SplistContext;
 import com.zjuh.sweet.author.LoginContext;
 import com.zjuh.sweet.author.SessionConstants;
 import com.zjuh.sweet.lang.StringUtil;
 import com.zjuh.sweet.result.Result;
-import com.zjuh.sweet.result.ResultCode;
-import com.zjuh.sweet.result.ResultCodeTypeEnum;
 import com.zjuh.sweet.result.ResultSupport;
+import com.zjuh.sweet.result.ResultTypeEnum;
 
 public class LoginAOImpl extends BaseAO implements LoginAO {
 
@@ -24,13 +25,15 @@ public class LoginAOImpl extends BaseAO implements LoginAO {
 		try {
 			BaseUserDO userDO = userBO.queryByUsernameIgnoreDeletedFlag(inputUser.getUsername());
 			if (userDO == null) {
-				result.setResultCode(ResultCode.create("该用户不存在！", ResultCodeTypeEnum.CURRENT_TARGET));
+				result.setResultCode(UserResultCodes.USER_NOT_EXIST);
+				result.setResultTypeEnum(ResultTypeEnum.CURRENT_TARGET);
 				return result;
 			}
 			
 			String encryptedPassword = userBO.encryptPassword(inputUser.getPassword());
 			if (!StringUtil.equals(encryptedPassword, userDO.getPassword())) {
-				result.setResultCode(ResultCode.create("密码错误！", ResultCodeTypeEnum.CURRENT_TARGET));
+				result.setResultCode(UserResultCodes.PASSWORD_INCORRET);
+				result.setResultTypeEnum(ResultTypeEnum.CURRENT_TARGET);
 				return result;
 			}
 			
@@ -40,7 +43,8 @@ public class LoginAOImpl extends BaseAO implements LoginAO {
 			
 			result.setSuccess(true);
 		} catch (Exception e) {
-			result.setResultCode(ResultCode.create("系统错误！", ResultCodeTypeEnum.COMMON_TARGET));
+			result.setResultCode(CommonResultCodes.SYSTEM_ERROR);
+			result.setResultTypeEnum(ResultTypeEnum.COMMON_TARGET);
 			log.error("处理登录错误", e);
 		}		
 		return result;
@@ -50,7 +54,7 @@ public class LoginAOImpl extends BaseAO implements LoginAO {
 		Result result = new ResultSupport(false);
 		try {
 			if (!LoginContext.isUserLogin()) {
-				result.setResultCode(ResultCode.create("用户未登录！"));
+				result.setResultCode(UserResultCodes.USER_NOT_LOGIN);
 				return result;
 			}
 			
@@ -59,7 +63,8 @@ public class LoginAOImpl extends BaseAO implements LoginAO {
 			session.removeAttribute(SessionConstants.USER_NAME_KEY);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			result.setResultCode(ResultCode.create("系统错误！", ResultCodeTypeEnum.COMMON_TARGET));
+			result.setResultCode(CommonResultCodes.SYSTEM_ERROR);
+			result.setResultTypeEnum(ResultTypeEnum.COMMON_TARGET);
 			log.error("处理登录错误", e);
 		}		
 		return result;

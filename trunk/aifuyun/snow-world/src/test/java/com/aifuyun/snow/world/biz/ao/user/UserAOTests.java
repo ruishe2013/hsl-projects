@@ -3,8 +3,8 @@ package com.aifuyun.snow.world.biz.ao.user;
 import junit.framework.Assert;
 
 import com.aifuyun.snow.world.SnowWorldTest;
-import com.aifuyun.snow.world.biz.ao.resultcode.CommonResultCodes;
-import com.aifuyun.snow.world.biz.ao.resultcode.UserResultCodes;
+import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
+import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.SexEnum;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
