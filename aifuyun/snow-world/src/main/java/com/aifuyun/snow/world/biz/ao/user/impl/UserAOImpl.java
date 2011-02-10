@@ -1,15 +1,16 @@
 package com.aifuyun.snow.world.biz.ao.user.impl;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
-import com.aifuyun.snow.world.biz.ao.resultcode.CommonResultCodes;
-import com.aifuyun.snow.world.biz.ao.resultcode.UserResultCodes;
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
+import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
+import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
 import com.aifuyun.snow.world.common.SnowUtils;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
+import com.zjuh.sweet.result.ResultTypeEnum;
 
 public class UserAOImpl extends BaseAO implements UserAO {
 
@@ -93,11 +94,13 @@ public class UserAOImpl extends BaseAO implements UserAO {
 		try {
 			if (userBO.isUserInSensitivityList(userDO.getUsername())) {
 				result.setResultCode(UserResultCodes.SENSITIVITY_USER);
+				result.setResultTypeEnum(ResultTypeEnum.CURRENT_TARGET);
 				return result;
 			}
 			
 			if (isUserExist(userDO.getUsername())) {
 				result.setResultCode(UserResultCodes.USERNAME_HAS_EXIST);
+				result.setResultTypeEnum(ResultTypeEnum.CURRENT_TARGET);
 				return result;
 			}
 			

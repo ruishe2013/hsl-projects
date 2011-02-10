@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aifuyun.snow.world.biz.ao.resultcode.CommonResultCodes;
+import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.zjuh.splist.core.SplistContext;
 import com.zjuh.splist.core.module.URLModule;
 import com.zjuh.splist.core.module.URLModuleContainer;
@@ -18,7 +18,7 @@ import com.zjuh.splist.web.uri.UrlUtil;
 import com.zjuh.sweet.author.AuthorConstants;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultCode;
-import com.zjuh.sweet.result.ResultCodeTypeEnum;
+import com.zjuh.sweet.result.ResultTypeEnum;
 
 
 /**
@@ -58,7 +58,7 @@ public class BaseModule {
 	 */
 	protected String getLoginUrl(boolean withCurrentUrl) {
 		URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
-		URLModule urlModule = urlModuleContainer.setTarget("login.vm");
+		URLModule urlModule = urlModuleContainer.setTarget("login");
 		if (withCurrentUrl) {
 			urlModule.addQueryData(AuthorConstants.REDIRECT_URL_NAME, getCurrentUrl());
 		}
@@ -105,16 +105,16 @@ public class BaseModule {
 	 * @param templateContext
 	 */
 	protected void handleError(Result result, RunData rundata, TemplateContext templateContext) {
-		ResultCodeTypeEnum resultCodeTypeEnum = result.getResultCode().getResultCodeTypeEnum();
+		ResultTypeEnum resultCodeTypeEnum = result.getResultTypeEnum();
 		ResultCode resultCode = result.getResultCode();
 		if (resultCode == null) {
 			resultCode = CommonResultCodes.SYSTEM_ERROR;
 		}
-		if (ResultCodeTypeEnum.COMMON_TARGET.equals(resultCodeTypeEnum)) {
+		if (ResultTypeEnum.COMMON_TARGET.equals(resultCodeTypeEnum)) {
 			templateContext.put("errorMessage", resultCode);
 			templateContext.put("backUrl", getBackUrl(rundata));
-			rundata.setTarget("error.vm");
-		} else if(ResultCodeTypeEnum.CURRENT_TARGET.equals(resultCodeTypeEnum)) {
+			rundata.setTarget("error");
+		} else if(ResultTypeEnum.CURRENT_TARGET.equals(resultCodeTypeEnum)) {
 			templateContext.put("resultmessage", resultCode);
 		}
 		
