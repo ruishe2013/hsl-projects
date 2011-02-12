@@ -1,10 +1,13 @@
 package com.aifuyun.snow.world.biz.ao.together.impl;
 
+import java.util.List;
+
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.together.OrderAO;
 import com.aifuyun.snow.world.biz.bo.together.OrderBO;
 import com.aifuyun.snow.world.biz.bo.together.OrderUserBO;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
+import com.aifuyun.snow.world.biz.query.OrderQuery;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.OrderResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
@@ -33,6 +36,20 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	
 	private UserBO userBO;
 	
+	@Override
+	public Result viewMyOrders(OrderQuery orderQuery) {
+		Result result = new ResultSupport(false);
+		try {
+			final long userId = this.getLoginUserId();
+			List<OrderDO> orders = orderUserBO.queryOrdersByUserIdAndRole(userId, orderQuery.getOrderUserRole());
+			result.getModels().put("orders", orders);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("查看我的订单失败", e);
+		}
+		return result;
+	}
+
 	@Override
 	public Result confirmOrder(long orderId) {
 		Result result = new ResultSupport(false);

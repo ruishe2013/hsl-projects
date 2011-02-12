@@ -4,11 +4,21 @@ import java.util.List;
 import java.util.Map;
 
 import com.aifuyun.snow.world.dal.daointerface.together.OrderUserDAO;
+import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.dal.ibatis.BaseIbatisDAO;
 import com.zjuh.sweet.lang.CollectionUtil;
 
 public class OrderUserDAOIbatis extends BaseIbatisDAO implements OrderUserDAO {
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role) {
+		Map<String, Object> param = CollectionUtil.newHashMap();
+		param.put("userId", userId);
+		param.put("role", role);
+		return (List<OrderDO>)getSqlMapClientTemplate().queryForList("OrderUserDAO.queryOrdersByUserIdAndRole", param);
+	}
 
 	@Override
 	public long create(OrderUserDO orderUserDO) {

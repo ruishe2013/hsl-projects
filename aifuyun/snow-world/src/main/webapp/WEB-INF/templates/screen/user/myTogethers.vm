@@ -1,0 +1,8 @@
+ÎÒµÄÆ´³µ
+<ul>
+#foreach($order in $orders)
+	<li>
+		$order.fromCity $order.fromAddr => $order.arriveAddr
+	</li>
+#end
+</ul>
