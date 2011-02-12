@@ -5,12 +5,18 @@ import java.util.List;
 import com.aifuyun.snow.world.biz.bo.together.OrderUserBO;
 import com.aifuyun.snow.world.dal.daointerface.together.OrderUserDAO;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserRoleEnum;
+import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 
 public class OrderUserBOImpl implements OrderUserBO {
 
 	private OrderUserDAO orderUserDAO;
 	
+	@Override
+	public List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role) {
+		return orderUserDAO.queryOrdersByUserIdAndRole(userId, role);
+	}
+
 	@Override
 	public long create(OrderUserDO orderUserDO) {
 		return orderUserDAO.create(orderUserDO);

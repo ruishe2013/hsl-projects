@@ -1,5 +1,6 @@
 package com.aifuyun.snow.world.biz.ao.together;
 
+import com.aifuyun.snow.world.biz.query.OrderQuery;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.zjuh.sweet.result.Result;
@@ -45,5 +46,11 @@ public interface OrderAO {
 	 * @return
 	 */
 	Result viewPersonalInfoForOrder(long orderId);
+	
+	/**
+	 * 查看我的拼单
+	 * @return
+	 */
+	Result viewMyOrders(OrderQuery orderQuery);
 	
 }

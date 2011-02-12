@@ -30,7 +30,12 @@ public class OrderAction extends BaseAction {
 	@DefaultTarget("together/confirmOrder")
 	public void doConfirmOrder(RunData rundata, TemplateContext templateContext) {
 		long orderId = rundata.getQueryString().getLong("orderId");
-		
+		Result result = orderAO.confirmOrder(orderId);
+		if (result.isSuccess()) {
+			this.sendRedirect("snowModule", "together/createOrderSuccess");
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
 	}
 	
 	@DefaultTarget("together/personalInfo")

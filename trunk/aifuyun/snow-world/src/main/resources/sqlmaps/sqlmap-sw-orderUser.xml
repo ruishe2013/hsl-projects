@@ -57,6 +57,22 @@
 			t.order_id = #orderId# and t.role = #role# and t.deleted = 0 
 	</select>
 	
+	<select id="queryOrdersByUserIdAndRole" resultMap="OrderDAO.orderMapping" parameterClass="map">
+		select 
+			<include refid="OrderDAO.order-full-columns"/>
+		from 
+		 	sw_order t 
+		 where t.id in
+			 (
+				select
+					u.order_id
+				from
+					sw_order_user u
+				where
+					u.user_id = #userId# and u.role = #role# and u.deleted = 0 
+			)
+	</select>
+	
 	<select id="queryByOrderId" resultMap="orderUserMapping" parameterClass="long">
 		select
 			<include refid="orderUser-full-columns"/>
