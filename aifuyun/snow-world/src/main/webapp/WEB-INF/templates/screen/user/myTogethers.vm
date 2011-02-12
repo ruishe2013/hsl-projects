@@ -1,4 +1,6 @@
-我的拼车
+<a href="$snowModule.setTarget('user/myTogethers')">我的拼车</a>
+ <a href="$snowModule.setTarget('user/myTogethers').add('type', 1)">我发起的拼车</a>
+ <a href="$snowModule.setTarget('user/myTogethers').add('type', 2)">我参加的拼车</a>
 <ul>
 #foreach($order in $orders)
 	<li>
