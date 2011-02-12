@@ -86,6 +86,7 @@ create table sw_order (
 	gmt_create datetime not null,
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+create index ind_city_id on sw_order(city_id, deleted, gmt_modified);
 
 
 DROP TABLE IF EXISTS sw_order_user;
