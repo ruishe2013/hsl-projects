@@ -11,6 +11,16 @@
 
 
 <div>最新拼车信息</div>
-<div>最新成功拼车信息</div>
+
+<ul>
+#foreach($order in $recentOrders)
+	<li>$order.fromCity $order.fromAddr => $order.arriveAddr 
+	$dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm') 
+	$dateUtil.formatDate($order.arriveTime, 'yyyy-MM-dd HH:mm')
+	
+	<a href="#">加入拼车</a>
+	</li>
+#end
+</ul>
 
 <div>已经成功完成9999次拼车</div>

@@ -20,6 +20,11 @@ public class OrderDO extends BaseDO {
 	private long id;
 	
 	/**
+	 * 所在城市id
+	 */
+	private int cityId;
+	
+	/**
 	 * 创建者id
 	 */
 	private long creatorId;
@@ -189,6 +194,14 @@ public class OrderDO extends BaseDO {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public int getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(int cityId) {
+		this.cityId = cityId;
 	}
 
 }

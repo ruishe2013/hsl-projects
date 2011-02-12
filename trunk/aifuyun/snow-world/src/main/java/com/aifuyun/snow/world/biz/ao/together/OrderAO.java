@@ -50,7 +50,16 @@ public interface OrderAO {
 	/**
 	 * 查看我的拼单
 	 * @return
+	 * 
 	 */
+	// TODO 单元测试待完成
 	Result viewMyOrders(OrderQuery orderQuery);
+	
+	/**
+	 * 查看最近拼车
+	 * @param cityId
+	 * @return
+	 */
+	Result handleForIndex(int cityId);
 	
 }

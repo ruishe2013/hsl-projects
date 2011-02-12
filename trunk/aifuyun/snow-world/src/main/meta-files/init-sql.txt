@@ -69,6 +69,7 @@ create index ind_city_ip on sw_area_city_ip(ip_start, ip_end, deleted, gmt_creat
 DROP TABLE IF EXISTS sw_order;
 create table sw_order (
 	id bigint primary key auto_increment,
+	city_id int default 0 not null,
 	from_addr varchar(100) not null,
 	from_time datetime not null,
 	from_city varchar(30) not null,
