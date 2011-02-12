@@ -2,8 +2,9 @@ package com.aifuyun.snow.world.dal.dataobject.enums;
 
 public enum OrderUserRoleEnum {
 	
-	JOINER(0, "参与人"),
-	CREATOR(1, "创建人")
+	
+	CREATOR(1, "创建人"),
+	JOINER(2, "参与人")
 	;
 	
 	private OrderUserRoleEnum(int value, String name) {

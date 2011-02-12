@@ -2,7 +2,6 @@ package com.aifuyun.snow.world.web.modules.screen.user;
 
 import com.aifuyun.snow.world.biz.ao.together.OrderAO;
 import com.aifuyun.snow.world.biz.query.OrderQuery;
-import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserRoleEnum;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
@@ -14,7 +13,7 @@ public class MyTogethers extends BaseScreen {
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
-		int type = rundata.getQueryString().getInt("type", OrderUserRoleEnum.CREATOR.getValue());
+		int type = rundata.getQueryString().getInt("type");
 		OrderQuery orderQuery = new OrderQuery();
 		orderQuery.setOrderUserRole(type);
 		Result result = orderAO.viewMyOrders(orderQuery);

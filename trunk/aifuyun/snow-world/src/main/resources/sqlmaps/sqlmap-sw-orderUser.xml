@@ -69,7 +69,11 @@
 				from
 					sw_order_user u
 				where
-					u.user_id = #userId# and u.role = #role# and u.deleted = 0 
+					u.user_id = #userId# 
+					<isNotEqual prepend="and" property="role" compareValue="0">
+						u.role = #role# 
+					</isNotEqual>
+					and u.deleted = 0 
 			)
 	</select>
 	
