@@ -1,5 +1,7 @@
 package com.aifuyun.snow.world.dal.daointerface.together;
 
+import java.util.List;
+
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 
@@ -18,5 +20,7 @@ public interface OrderDAO {
 	void update(OrderDO orderDO);
 	
 	void updateStatus(long id, OrderStatusEnum orderStatus);
+	
+	List<OrderDO> queryRecentOrders(int cityId);
 	
 }

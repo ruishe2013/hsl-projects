@@ -5,6 +5,7 @@
 	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.together.OrderDO" alias="order" />
 
 	<resultMap id="orderMapping" class="order">
+		<result property="cityId" column="city_id"/>
 		<result property="gmtModified" column="gmt_modified"/>
 		<result property="fromAddr" column="from_addr"/>
 		<result property="gmtCreate" column="gmt_create"/>
@@ -23,15 +24,15 @@
 	</resultMap>
 
 	<sql id="order-full-columns">
-		t.gmt_modified, t.from_addr, t.gmt_create, t.creator_username, 
+		t.city_id, t.gmt_modified, t.from_addr, t.gmt_create, t.creator_username, 
 			t.creator_id, t.from_time, t.type, t.id, t.total_seats,
 		 t.arrive_time, t.description, t.from_city, t.arrive_city, t.arrive_addr, t.status
 	</sql>
 
 	<insert id="create" parameterClass="order">
 		<![CDATA[
-			insert into sw_order(gmt_modified, from_addr, gmt_create, creator_username, creator_id, from_time, type, total_seats, arrive_time, description, from_city, arrive_city, arrive_addr, status) 
-				values (now(), #fromAddr#, now(), #creatorUsername#, #creatorId#, #fromTime#, #type#, #totalSeats#, #arriveTime#, #description#, #fromCity#, #arriveCity#, #arriveAddr#, #status#)
+			insert into sw_order(gmt_modified, from_addr, gmt_create, creator_username, creator_id, from_time, type, total_seats, arrive_time, description, from_city, arrive_city, arrive_addr, status, city_id) 
+				values (now(), #fromAddr#, now(), #creatorUsername#, #creatorId#, #fromTime#, #type#, #totalSeats#, #arriveTime#, #description#, #fromCity#, #arriveCity#, #arriveAddr#, #status#, #cityId#)
 		]]>
 		<selectKey resultClass="long" keyProperty="id">
 			SELECT LAST_INSERT_ID();
@@ -47,6 +48,25 @@
 			t.deleted = 0 and t.id = #value#
 	</select>
 	
+	<select id="queryRecentOrders" resultMap="orderMapping" parameterClass="int">
+		select
+			<include refid="order-full-columns"/>
+		from
+			sw_order t
+		where
+			<![CDATA[
+				t.status <> 0
+			]]>
+			<isNotEqual prepend="and" compareValue="0">
+				t.city_id = #value# 
+			</isNotEqual>
+			and t.deleted = 0
+		order 
+			by gmt_modified desc		
+	</select>
+	
+	
+	
 	<update id="delete" parameterClass="long">
 		update sw_order t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
 	</update>
@@ -59,6 +79,7 @@
 		<![CDATA[
 			update sw_order set 
 				gmt_modified= now(),
+				city_id = #cityId#,
 				from_addr= #fromAddr#,
 				gmt_create= #gmtCreate#,
 				creator_username= #creatorUsername#,

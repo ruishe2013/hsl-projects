@@ -1,5 +1,6 @@
 package com.aifuyun.snow.world.dal.ibatis.together;
 
+import java.util.List;
 import java.util.Map;
 
 import com.aifuyun.snow.world.dal.daointerface.together.OrderDAO;
@@ -9,6 +10,12 @@ import com.aifuyun.snow.world.dal.ibatis.BaseIbatisDAO;
 import com.zjuh.sweet.lang.CollectionUtil;
 
 public class OrderDAOIbatis extends BaseIbatisDAO implements OrderDAO {
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<OrderDO> queryRecentOrders(int cityId) {
+		return (List<OrderDO>)getSqlMapClientTemplate().queryForList("OrderDAO.queryRecentOrders", cityId);
+	}
 
 	@Override
 	public long create(OrderDO orderDO) {
