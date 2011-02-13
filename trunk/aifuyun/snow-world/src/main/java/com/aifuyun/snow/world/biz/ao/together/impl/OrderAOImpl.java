@@ -47,10 +47,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				return result;
 			}
 			long userId = this.getLoginUserId();
-			if (userId <= 0L) {
-				result.setResultCode(CommonResultCodes.USER_NOT_LOGIN);
-				return result;
-			}
+			
 			// 是否创建者本人
 			boolean isCreatorSelf = (order.getCreatorId() == userId) ? true : false;
 			
@@ -74,6 +71,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 		}
 		return result;
 	}
+	
 	
 	private boolean hasBeenJoin(long userId, long orderId) {
 		List<OrderUserDO> joiners = orderUserBO.queryOrderJoiners(orderId);
