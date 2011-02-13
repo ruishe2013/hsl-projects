@@ -33,6 +33,7 @@
 				<value>common/checkCode</value>
 				<value>user/reg</value>
 				<value>user/regSuccess</value>
+				<value>together/orderDetail</value>
 				<value>userFacadeAction</value>
 			</set>
 		</property>
