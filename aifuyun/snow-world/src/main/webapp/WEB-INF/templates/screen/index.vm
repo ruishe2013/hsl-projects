@@ -18,7 +18,7 @@
 	$dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm') 
 	$dateUtil.formatDate($order.arriveTime, 'yyyy-MM-dd HH:mm')
 	
-	<a href="#">加入拼车</a>
+	<a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)">加入拼车</a>
 	</li>
 #end
 </ul>

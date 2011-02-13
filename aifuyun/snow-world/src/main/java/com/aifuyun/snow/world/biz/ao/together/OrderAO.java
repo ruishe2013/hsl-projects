@@ -12,6 +12,13 @@ import com.zjuh.sweet.result.Result;
 public interface OrderAO {
 
 	/**
+	 * 浏览加入拼车单页面
+	 * @param orderId
+	 * @return
+	 */
+	Result viewOrderDetail(long orderId);
+	
+	/**
 	 * 创建出租车拼单
 	 * @param orderDO
 	 * @return
