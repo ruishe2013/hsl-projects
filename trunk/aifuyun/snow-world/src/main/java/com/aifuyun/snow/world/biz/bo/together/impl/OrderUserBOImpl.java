@@ -13,6 +13,11 @@ public class OrderUserBOImpl implements OrderUserBO {
 	private OrderUserDAO orderUserDAO;
 	
 	@Override
+	public List<OrderUserDO> queryOrderJoiners(long orderId) {
+		return orderUserDAO.queryByOrderIdAndRole(orderId, OrderUserRoleEnum.JOINER.getValue());
+	}
+
+	@Override
 	public List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role) {
 		return orderUserDAO.queryOrdersByUserIdAndRole(userId, role);
 	}

@@ -1,5 +1,6 @@
 package com.aifuyun.snow.world.biz.ao.together.impl;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
@@ -36,6 +37,61 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	
 	private UserBO userBO;
 	
+	@Override
+	public Result viewOrderDetail(long orderId) {
+		Result result = new ResultSupport(false);
+		try {
+			OrderDO order = orderBO.queryById(orderId);
+			if (order == null) {
+				result.setResultCode(OrderResultCodes.ORDER_NOT_EXIST);
+				return result;
+			}
+			long userId = this.getLoginUserId();
+			if (userId <= 0L) {
+				result.setResultCode(CommonResultCodes.USER_NOT_LOGIN);
+				return result;
+			}
+			// 是否创建者本人
+			boolean isCreatorSelf = (order.getCreatorId() == userId) ? true : false;
+			
+			List<OrderUserDO> joiners = orderUserBO.queryOrderJoiners(orderId);
+			
+			// 是否已经加入
+			boolean hasBeenJoin = hasBeenJoin(userId, orderId);
+			
+			// 剩余座位数
+			int leftSeatCount = order.getTotalSeats() - joiners.size();
+			leftSeatCount = Math.max(leftSeatCount, 0);
+			
+			result.getModels().put("order", order);
+			result.getModels().put("isCreatorSelf", isCreatorSelf);
+			result.getModels().put("hasBeenJoin", hasBeenJoin);
+			result.getModels().put("leftSeatCount", leftSeatCount);
+			
+ 			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("查看最近拼车失败", e);
+		}
+		return result;
+	}
+	
+	private boolean hasBeenJoin(long userId, long orderId) {
+		List<OrderUserDO> joiners = orderUserBO.queryOrderJoiners(orderId);
+		if (isUserInJoiners(userId, joiners)) {
+			return true;
+		}
+		return false;
+	}
+	
+	private boolean isUserInJoiners(long userId, Collection<OrderUserDO> joiners) {
+		for (OrderUserDO orderUser : joiners) {
+			if (orderUser.getUserId() == userId) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public Result handleForIndex(int cityId) {
 		Result result = new ResultSupport(false);

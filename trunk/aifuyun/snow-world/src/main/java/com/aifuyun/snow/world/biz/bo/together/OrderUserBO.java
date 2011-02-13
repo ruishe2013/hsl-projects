@@ -14,4 +14,6 @@ public interface OrderUserBO {
 	void update(OrderUserDO orderUserDO);
 	
 	List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role);
+	
+	List<OrderUserDO> queryOrderJoiners(long orderId);
 }
