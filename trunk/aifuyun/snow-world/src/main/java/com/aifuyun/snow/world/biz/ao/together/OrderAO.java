@@ -12,6 +12,13 @@ import com.zjuh.sweet.result.Result;
 public interface OrderAO {
 
 	/**
+	 * 加入拼车
+	 * @param orderId
+	 * @return
+	 */
+	Result joinOrder(long orderId);
+	
+	/**
 	 * 浏览加入拼车单页面
 	 * @param orderId
 	 * @return

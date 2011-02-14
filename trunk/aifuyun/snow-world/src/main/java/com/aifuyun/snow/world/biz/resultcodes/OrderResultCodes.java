@@ -15,5 +15,11 @@ public class OrderResultCodes extends ResultCode {
 	public static final ResultCode ORDER_HAS_BEEN_PROCESSED = ResultCode.create();
 	
 	public static final ResultCode ORDER_CREATOR_INFO_NOT_COMPLETE = ResultCode.create();
+	
+	public static final ResultCode ORDER_CREATED_BY_YOURSELF = ResultCode.create();
+	
+	public static final ResultCode ORDER_HAS_BEEN_JOINED = ResultCode.create();
+	
+	public static final ResultCode ORDER_SEAT_IS_FULL = ResultCode.create();
 
 }

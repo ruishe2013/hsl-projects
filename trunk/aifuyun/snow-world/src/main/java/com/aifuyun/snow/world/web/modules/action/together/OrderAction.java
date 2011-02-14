@@ -27,6 +27,17 @@ public class OrderAction extends BaseAction {
 	
 	private OrderAO orderAO;
 	
+	@DefaultTarget("together/orderDetail")
+	public void doJoinOrder(RunData rundata, TemplateContext templateContext) {
+		long orderId = rundata.getQueryString().getLong("orderId");
+		Result result = orderAO.joinOrder(orderId);
+		if (result.isSuccess()) {
+			// 加入成功
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
+	}
+	
 	@DefaultTarget("together/confirmOrder")
 	public void doConfirmOrder(RunData rundata, TemplateContext templateContext) {
 		long orderId = rundata.getQueryString().getLong("orderId");
