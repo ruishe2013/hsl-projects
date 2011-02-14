@@ -1,3 +1,9 @@
+#macro(errorMessage, $str)
+	#if( "$!str" != "")
+		<div class="common-error-message">${str}</div>
+	#end
+#end
+
 
 <table width="500px;">
 	<caption>拼单信息</caption>
@@ -21,6 +27,8 @@
 	</tr>
 </table>
 
+#errorMessage($!resultmessage.message)
+
 #if ($isCreatorSelf)
 	你是该拼单的创建者，你可以 <a href="#">取消拼车</a>
 #elseif ($hasBeenJoin)
@@ -28,7 +36,7 @@
 #elseif ("$leftSeatCount" == "0")
 	对不起，该拼车的位置已经满了，推荐你<a href="#">去别拼车单看看</a>
 #else
-	<a href="#">确认加入拼车</a>
+	<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'joinOrder').add('orderId', $order.id)">确认加入拼车</a>
 #end
 
 

@@ -38,6 +38,74 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	private UserBO userBO;
 	
 	@Override
+	public Result joinOrder(long orderId) {
+		Result result = new ResultSupport(false);
+		try {
+			long userId = this.getLoginUserId();
+			if (userId < 0L) {
+				result.setResultCode(CommonResultCodes.USER_NOT_LOGIN);
+				return result;
+			}
+			
+			OrderDO order = orderBO.queryById(orderId);
+			if (order == null) {
+				result.setResultCode(OrderResultCodes.ORDER_NOT_EXIST);
+				return result;
+			}
+			
+			// 是否创建者本人
+			boolean isCreatorSelf = (order.getCreatorId() == userId) ? true : false;
+			
+			if (isCreatorSelf) {
+				result.setResultCode(OrderResultCodes.ORDER_CREATED_BY_YOURSELF);
+				return result;
+			}
+			
+			List<OrderUserDO> joiners = orderUserBO.queryOrderJoiners(orderId);
+			
+			// 是否已经加入
+			boolean hasBeenJoin = hasBeenJoin(userId, orderId);
+			
+			if (hasBeenJoin) {
+				result.setResultCode(OrderResultCodes.ORDER_HAS_BEEN_JOINED);
+				return result;
+			}
+			
+			// 剩余座位数
+			int leftSeatCount = order.getTotalSeats() - joiners.size();
+			leftSeatCount = Math.max(leftSeatCount, 0);
+			
+			if (leftSeatCount <= 0) {
+				result.setResultCode(OrderResultCodes.ORDER_SEAT_IS_FULL);
+				return result;
+			}
+			
+			OrderUserDO orderUserDO = new OrderUserDO();
+			orderUserDO.setUserId(userId);
+			orderUserDO.setOrderId(orderId);
+			// TODO 需要确认。。
+			orderUserDO.setBirthYear(BirthYearEnum.YEAR_50S.getValue());
+			orderUserDO.setCareer("ccc");
+			orderUserDO.setEmail("test@ccc.xxx");
+			orderUserDO.setOrderType(order.getType());
+			orderUserDO.setPhone("139");
+			orderUserDO.setQq("qqqq");
+			orderUserDO.setRealName("name!!");
+			orderUserDO.setRole(OrderUserRoleEnum.JOINER.getValue());
+			// TODO
+			//orderUserDO.set
+			
+			orderUserBO.create(orderUserDO);
+			
+ 			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("加入拼车失败", e);
+		}
+		return result;
+	}
+
+
+	@Override
 	public Result viewOrderDetail(long orderId) {
 		Result result = new ResultSupport(false);
 		try {
