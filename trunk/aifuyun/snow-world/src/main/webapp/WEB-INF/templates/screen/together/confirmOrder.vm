@@ -49,6 +49,5 @@
 	<input type="hidden" name="actionTarget" value="together/orderAction" />
 	<input type="hidden" name="actionEvent" value="confirmOrder" />
 	<input type="hidden" name="orderId" value="$order.id" />
-	<input type="submit" value="确认发布" />
+	<input type="submit" value="提交" />
 </form>
-<a href="$snowModule.setTarget('together/personalInfo').add('orderId', $order.id)">返回修改</a>

@@ -15,5 +15,7 @@ public interface OrderUserBO {
 	
 	List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role);
 	
+	OrderUserDO queryByOrderAndUserId(long orderId, long userId);
+	
 	List<OrderUserDO> queryOrderJoiners(long orderId);
 }

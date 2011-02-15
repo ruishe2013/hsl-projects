@@ -16,7 +16,7 @@ public interface OrderAO {
 	 * @param orderId
 	 * @return
 	 */
-	Result joinOrder(long orderId);
+	Result joinOrder(OrderUserDO inputJoiner, long orderId, boolean saveToUserInfo);
 	
 	/**
 	 * 浏览加入拼车单页面
@@ -59,7 +59,7 @@ public interface OrderAO {
 	 * 浏览用户信息
 	 * @return
 	 */
-	Result viewPersonalInfoForOrder(long orderId);
+	Result viewPersonalInfoForOrder(long orderId, boolean join);
 	
 	/**
 	 * 查看我的拼单

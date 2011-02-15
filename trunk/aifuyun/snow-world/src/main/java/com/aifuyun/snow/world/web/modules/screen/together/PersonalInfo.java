@@ -15,7 +15,8 @@ public class PersonalInfo extends BaseScreen {
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		long orderId = rundata.getQueryString().getLong("orderId");
-		Result result = orderAO.viewPersonalInfoForOrder(orderId);
+		boolean join = rundata.getQueryString().getBoolean("join");
+		Result result = orderAO.viewPersonalInfoForOrder(orderId, join);
 		if (!result.isSuccess()) {
 			this.handleError(result, rundata, templateContext);
 			return;
@@ -27,6 +28,7 @@ public class PersonalInfo extends BaseScreen {
 			form.holdValues(orderUser);
 		}
 		
+		this.result2Context(result, templateContext, "actionEvent");
 		this.result2Context(result, templateContext, "creatorExist");
 		this.result2Context(result, templateContext, "isUserInfoEmpty");
 		this.result2Context(result, templateContext, "selectedYear");

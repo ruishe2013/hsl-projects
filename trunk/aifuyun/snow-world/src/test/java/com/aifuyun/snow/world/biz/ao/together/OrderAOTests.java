@@ -33,14 +33,14 @@ public class OrderAOTests extends SnowWorldTest {
 	
 	public void testViewPersonalInfoForOrder() throws ParseException {
 		this.setLogout();
-		Result result = orderAO.viewPersonalInfoForOrder(0);
+		Result result = orderAO.viewPersonalInfoForOrder(0, false);
 		Assert.assertFalse(result.isSuccess());
 		Assert.assertEquals(CommonResultCodes.USER_NOT_LOGIN, result.getResultCode());
 		
 		String username = "demo_user_temp";
 		long notExistUserId = createDeletedUser(username);
 		this.setLogin(notExistUserId, username);
-		result = orderAO.viewPersonalInfoForOrder(0);
+		result = orderAO.viewPersonalInfoForOrder(0, false);
 		Assert.assertFalse(result.isSuccess());
 		Assert.assertEquals(UserResultCodes.USER_NOT_EXIST, result.getResultCode());
 		
@@ -48,7 +48,7 @@ public class OrderAOTests extends SnowWorldTest {
 		long existUserId = createTempUser(username);
 		this.setLogin(existUserId, username);
 		long orderId = createOrderDO(existUserId, username);
-		result = orderAO.viewPersonalInfoForOrder(orderId);
+		result = orderAO.viewPersonalInfoForOrder(orderId, false);
 		Assert.assertTrue(result.isSuccess());
 		OrderUserDO orderUser = (OrderUserDO)result.getModels().get("orderUser");
 		Assert.assertNotNull(orderUser);
@@ -59,17 +59,17 @@ public class OrderAOTests extends SnowWorldTest {
 		
 		OrderUserDO creator = createTempOrderUserDO();
 		orderAO.fillCreatorInfo(creator, orderId, false);
-		result = orderAO.viewPersonalInfoForOrder(orderId);
+		result = orderAO.viewPersonalInfoForOrder(orderId, false);
 		Assert.assertTrue(result.isSuccess());
 		Assert.assertTrue((Boolean)result.getModels().get("creatorExist"));
 		
 		orderId = createOrderDO(existUserId + 1, username);
-		result = orderAO.viewPersonalInfoForOrder(orderId);
+		result = orderAO.viewPersonalInfoForOrder(orderId, false);
 		Assert.assertFalse(result.isSuccess());
 		Assert.assertEquals(OrderResultCodes.CANNOT_EDIT_OTHERS_ORDER, result.getResultCode());
 		
 		orderDAO.delete(orderId);
-		result = orderAO.viewPersonalInfoForOrder(orderId);
+		result = orderAO.viewPersonalInfoForOrder(orderId, false);
 		Assert.assertFalse(result.isSuccess());
 		Assert.assertEquals(OrderResultCodes.ORDER_NOT_EXIST, result.getResultCode());
 		
