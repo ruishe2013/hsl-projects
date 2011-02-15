@@ -18,7 +18,7 @@ public class OrderDetail extends BaseScreen {
 			this.result2Context(result, templateContext, "order");
 			this.result2Context(result, templateContext, "isCreatorSelf");
 			this.result2Context(result, templateContext, "hasBeenJoin");
-			this.result2Context(result, templateContext, "leftSeatCount");
+			this.result2Context(result, templateContext, "joinersCount");
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}

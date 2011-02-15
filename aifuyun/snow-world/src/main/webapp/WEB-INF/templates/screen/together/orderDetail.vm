@@ -20,7 +20,7 @@
 		<td>达到时间</td><td>$!dateUtil.formatFullDate($order.arriveTime)</td>
 	</tr>
 	<tr>
-		<td>空余座位 </td><td>$!order.totalSeats</td>
+		<td>参加人数/总座位数 </td><td>$!joinersCount/$!order.totalSeats</td>
 	</tr>
 	<tr>
 		<td>描述</td><td>$!order.description</td>
@@ -29,14 +29,17 @@
 
 #errorMessage($!resultmessage.message)
 
+#set($leftSeatCount = $!order.totalSeats - $joinersCount )
+
 #if ($isCreatorSelf)
 	你是该拼单的创建者，你可以 <a href="#">取消拼车</a>
 #elseif ($hasBeenJoin)
 	你已经加入该拼车，你可以<a href="#">退出该拼车</a>
-#elseif ("$leftSeatCount" == "0")
+#elseif ($leftSeatCount <= 0)
 	对不起，该拼车的位置已经满了，推荐你<a href="#">去别拼车单看看</a>
 #else
-	<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'joinOrder').add('orderId', $order.id)">确认加入拼车</a>
+	<a href="$snowModule.setTarget('together/personalInfo').add('orderId', $order.id).add('join', 'true')">加入拼车</a>
+	##<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'joinOrder').add('orderId', $order.id)">确认加入拼车</a>
 #end
 
 

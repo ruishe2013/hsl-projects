@@ -17,6 +17,7 @@ import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserRoleEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.misc.UserInfoHolder;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
@@ -38,7 +39,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	private UserBO userBO;
 	
 	@Override
-	public Result joinOrder(long orderId) {
+	public Result joinOrder(OrderUserDO inputJoiner, long orderId, boolean saveToUserInfo) {
 		Result result = new ResultSupport(false);
 		try {
 			long userId = this.getLoginUserId();
@@ -80,20 +81,19 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				return result;
 			}
 			
-			OrderUserDO orderUserDO = new OrderUserDO();
+			final String username = this.getLoginUsername();
+			
+			OrderUserDO orderUserDO = inputJoiner;
 			orderUserDO.setUserId(userId);
+			orderUserDO.setUsername(username);
 			orderUserDO.setOrderId(orderId);
-			// TODO 需要确认。。
-			orderUserDO.setBirthYear(BirthYearEnum.YEAR_50S.getValue());
-			orderUserDO.setCareer("ccc");
-			orderUserDO.setEmail("test@ccc.xxx");
-			orderUserDO.setOrderType(order.getType());
-			orderUserDO.setPhone("139");
-			orderUserDO.setQq("qqqq");
-			orderUserDO.setRealName("name!!");
+			
 			orderUserDO.setRole(OrderUserRoleEnum.JOINER.getValue());
-			// TODO
-			//orderUserDO.set
+			orderUserDO.setStatus(OrderUserStatusEnum.NOT_CONFIRM.getValue());
+			
+			if (saveToUserInfo) {
+				copyUserInfo(userId, orderUserDO, result);
+			}
 			
 			orderUserBO.create(orderUserDO);
 			
@@ -125,13 +125,12 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			boolean hasBeenJoin = hasBeenJoin(userId, orderId);
 			
 			// 剩余座位数
-			int leftSeatCount = order.getTotalSeats() - joiners.size();
-			leftSeatCount = Math.max(leftSeatCount, 0);
+			int joinersCount = joiners.size();
 			
 			result.getModels().put("order", order);
 			result.getModels().put("isCreatorSelf", isCreatorSelf);
 			result.getModels().put("hasBeenJoin", hasBeenJoin);
-			result.getModels().put("leftSeatCount", leftSeatCount);
+			result.getModels().put("joinersCount", joinersCount);
 			
  			result.setSuccess(true);
 		} catch (Exception e) {
@@ -227,7 +226,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	}
 	
 	@Override
-	public Result viewPersonalInfoForOrder(long orderId) {
+	public Result viewPersonalInfoForOrder(long orderId, boolean join) {
 		Result result = new ResultSupport(false);
 		try {
 			long userId = this.getLoginUserId();
@@ -247,12 +246,8 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				return result;
 			}
 			
-			if (order.getCreatorId() != userId) {
-				result.setResultCode(OrderResultCodes.CANNOT_EDIT_OTHERS_ORDER);
-				return result;
-			}
+			OrderUserDO orderUserDO = orderUserBO.queryByOrderAndUserId(orderId, userId);
 			
-			OrderUserDO orderUserDO = orderUserBO.queryOrderCreator(orderId);
 			boolean creatorExist = false;
 			if (orderUserDO == null) {
 				orderUserDO = assignDefaultFromUser(baseUserDO);
@@ -260,10 +255,32 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				creatorExist = true;
 			}
 			
+			boolean isCreator = (order.getCreatorId() == userId);
+			String actionEvent = null;
+			if (join) {
+				// 加入
+				if (isCreator) {
+					result.setResultCode(OrderResultCodes.ORDER_CREATED_BY_YOURSELF);
+					return result;
+				}
+				actionEvent = "joinOrder";
+			} else {
+				// 创建
+				if (order.getCreatorId() != userId) {
+					result.setResultCode(OrderResultCodes.CANNOT_EDIT_OTHERS_ORDER);
+					return result;
+				}
+				
+				actionEvent = "fillCreatorInfo";
+			}
+			
+			 
 			int selectedYear = SnowUtils.getSelectedYear(orderUserDO);
 			boolean isUserInfoEmpty = isUserInfoEmpty(baseUserDO);
 			
 			BirthYearEnum[] years = BirthYearEnum.values();
+			
+			result.getModels().put("actionEvent", actionEvent);
 			result.getModels().put("creatorExist", creatorExist);
 			result.getModels().put("isUserInfoEmpty", isUserInfoEmpty);
 			result.getModels().put("years", years);

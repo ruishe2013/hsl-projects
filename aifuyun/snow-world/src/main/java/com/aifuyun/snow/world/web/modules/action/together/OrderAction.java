@@ -29,10 +29,20 @@ public class OrderAction extends BaseAction {
 	
 	@DefaultTarget("together/orderDetail")
 	public void doJoinOrder(RunData rundata, TemplateContext templateContext) {
+		final Form form = rundata.getForm("together.personalInfo");
+		if (!form.validate()) {
+			return;
+		}
+		OrderUserDO orderUserDO = new OrderUserDO();
+		form.apply(orderUserDO);
+		
 		long orderId = rundata.getQueryString().getLong("orderId");
-		Result result = orderAO.joinOrder(orderId);
+		boolean saveToUserInfo = rundata.getQueryString().getBoolean("saveToUserInfo");
+		
+		Result result = orderAO.joinOrder(orderUserDO, orderId, saveToUserInfo);
 		if (result.isSuccess()) {
 			// 加入成功
+			this.sendRedirect("snowModule", "together/joinSuccess");
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}

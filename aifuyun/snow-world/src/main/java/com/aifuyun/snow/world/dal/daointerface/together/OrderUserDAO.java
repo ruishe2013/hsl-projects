@@ -7,6 +7,8 @@ import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 
 public interface OrderUserDAO {
 	
+	OrderUserDO queryByOrderAndUserId(long orderId, long userId);
+	
 	long create(OrderUserDO orderUserDO);
 	
 	void delete(long id);

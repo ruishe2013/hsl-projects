@@ -111,3 +111,4 @@ create table sw_order_user (
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
 create index ind_ord_u_by_u on sw_order_user(user_id, role, status, deleted);
 create index ind_ord_u_by_o on sw_order_user(order_id, status, deleted);
+create index ind_ord_u_by_o on sw_order_user(order_id, user_id, deleted);

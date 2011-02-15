@@ -11,6 +11,14 @@ import com.zjuh.sweet.lang.CollectionUtil;
 
 public class OrderUserDAOIbatis extends BaseIbatisDAO implements OrderUserDAO {
 
+	@Override
+	public OrderUserDO queryByOrderAndUserId(long orderId, long userId) {
+		Map<String, Object> param = CollectionUtil.newHashMap();
+		param.put("orderId", orderId);
+		param.put("userId", userId);
+		return (OrderUserDO)getSqlMapClientTemplate().queryForObject("OrderUserDAO.queryByOrderAndUserId", param);
+	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role) {
