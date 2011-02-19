@@ -65,8 +65,8 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			List<OrderUserDO> joiners = orderUserBO.queryOrderJoiners(orderId);
 			
 			// 是否已经加入
-			boolean hasBeenJoin = hasBeenJoin(userId, orderId);
-			
+			OrderUserStatusEnum userJoinStatus = getUserJoinStatus(userId, joiners);
+			boolean hasBeenJoin = hasBeenConfirmJoin(userJoinStatus);
 			if (hasBeenJoin) {
 				result.setResultCode(OrderResultCodes.ORDER_HAS_BEEN_JOINED);
 				return result;
@@ -89,7 +89,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			orderUserDO.setOrderId(orderId);
 			
 			orderUserDO.setRole(OrderUserRoleEnum.JOINER.getValue());
-			orderUserDO.setStatus(OrderUserStatusEnum.NOT_CONFIRM.getValue());
+			orderUserDO.setStatus(OrderUserStatusEnum.WAIT_CONFIRM.getValue());
 			
 			if (saveToUserInfo) {
 				copyUserInfo(userId, orderUserDO, result);
@@ -119,42 +119,64 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			// 是否创建者本人
 			boolean isCreatorSelf = (order.getCreatorId() == userId) ? true : false;
 			
+			// 所有参加人
 			List<OrderUserDO> joiners = orderUserBO.queryOrderJoiners(orderId);
-			
-			// 是否已经加入
-			boolean hasBeenJoin = hasBeenJoin(userId, orderId);
+			OrderUserStatusEnum userJoinStatus = getUserJoinStatus(userId, joiners);
+			boolean hasBeenJoin = hasBeenConfirmJoin(userJoinStatus);
 			
 			// 剩余座位数
 			int joinersCount = joiners.size();
+			if (isCreatorSelf) {
+				// 创建者的权限
+				// 已经确认的参加者
+				List<OrderUserDO> confirmedJoiners = this.orderUserBO.queryOrderJoinersByStatus(orderId, OrderUserStatusEnum.CONFIRMED.getValue());
+				result.getModels().put("confirmedJoiners", confirmedJoiners);
+				
+				// 待确认的参加者
+				List<OrderUserDO> waitConfirmJoiners = this.orderUserBO.queryOrderJoinersByStatus(orderId, OrderUserStatusEnum.WAIT_CONFIRM.getValue());
+				result.getModels().put("waitConfirmJoiners", waitConfirmJoiners);
+			} else if (hasBeenJoin) {
+				// 加入者的权限
+				
+				// 已经确认的参加者
+				List<OrderUserDO> confirmedJoiners = this.orderUserBO.queryOrderJoinersByStatus(orderId, OrderUserStatusEnum.CONFIRMED.getValue());
+				result.getModels().put("confirmedJoiners", confirmedJoiners);
+			}
 			
+			boolean showJoiners = false;
+			if (isCreatorSelf || hasBeenJoin) {
+				showJoiners = true;
+			}
 			result.getModels().put("order", order);
 			result.getModels().put("isCreatorSelf", isCreatorSelf);
+			if (userJoinStatus != null) {
+				result.getModels().put("userJoinStatusValue", userJoinStatus.getValue());
+			}
 			result.getModels().put("hasBeenJoin", hasBeenJoin);
+			result.getModels().put("showJoiners", showJoiners);
 			result.getModels().put("joinersCount", joinersCount);
 			
  			result.setSuccess(true);
 		} catch (Exception e) {
-			log.error("查看最近拼车失败", e);
+			log.error("查看拼车detail失败", e);
 		}
 		return result;
 	}
 	
-	
-	private boolean hasBeenJoin(long userId, long orderId) {
-		List<OrderUserDO> joiners = orderUserBO.queryOrderJoiners(orderId);
-		if (isUserInJoiners(userId, joiners)) {
-			return true;
+	private boolean hasBeenConfirmJoin(OrderUserStatusEnum userJoinStatus) {
+		if (userJoinStatus == null) {
+			return false;
 		}
-		return false;
+		return userJoinStatus == OrderUserStatusEnum.CONFIRMED;
 	}
 	
-	private boolean isUserInJoiners(long userId, Collection<OrderUserDO> joiners) {
+	private OrderUserStatusEnum getUserJoinStatus(long userId, Collection<OrderUserDO> joiners) {
 		for (OrderUserDO orderUser : joiners) {
 			if (orderUser.getUserId() == userId) {
-				return true;
+				return orderUser.getStatusEnum();
 			}
 		}
-		return false;
+		return null;
 	}
 
 	@Override

@@ -56,6 +56,15 @@ public class OrderUserDAOIbatis extends BaseIbatisDAO implements OrderUserDAO {
 		param.put("role", role);
 		return (List<OrderUserDO>)getSqlMapClientTemplate().queryForList("OrderUserDAO.queryByOrderIdAndRole", param);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<OrderUserDO> queryByOrderIdAndRoleAndStatus(long orderId, int role, int status) {
+		Map<String, Object> param = CollectionUtil.newHashMap();
+		param.put("orderId", orderId);
+		param.put("role", role);
+		param.put("status", status);
+		return (List<OrderUserDO>)getSqlMapClientTemplate().queryForList("OrderUserDAO.queryByOrderIdAndRoleAndStatus", param);
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

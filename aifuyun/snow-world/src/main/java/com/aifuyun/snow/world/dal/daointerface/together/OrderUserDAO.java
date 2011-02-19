@@ -23,4 +23,5 @@ public interface OrderUserDAO {
 	
 	List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role);
 	
+	List<OrderUserDO> queryByOrderIdAndRoleAndStatus(long orderId, int role, int status);
 }

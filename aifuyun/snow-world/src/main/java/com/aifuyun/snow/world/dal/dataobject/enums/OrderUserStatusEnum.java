@@ -2,10 +2,10 @@ package com.aifuyun.snow.world.dal.dataobject.enums;
 
 public enum OrderUserStatusEnum {
 	
-	NOT_CONFIRM(0, "待确认"),
-	HAS_CANCEL(1, "已取消"),
-	CONFIRMED(2, "已确认"),
-	BEAN_OUT(3, "已踢出")
+	WAIT_CONFIRM(0, "待确认"),
+	HAS_CANCEL(10, "已取消"),
+	CONFIRMED(20, "已确认"),
+	BEAN_OUT(30, "已踢出")
 	;
 	
 	private OrderUserStatusEnum(int value, String name) {

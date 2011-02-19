@@ -7,6 +7,8 @@ import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 
 public interface OrderUserBO {
 	
+	List<OrderUserDO> queryOrderJoinersByStatus(long orderId, int status);
+	
 	OrderUserDO queryOrderCreator(long orderId);
 
 	long create(OrderUserDO orderUserDO);

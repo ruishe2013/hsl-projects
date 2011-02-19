@@ -66,6 +66,17 @@
 			t.order_id = #orderId# and t.role = #role# and t.deleted = 0 
 	</select>
 	
+	<select id="queryByOrderIdAndRoleAndStatus" resultMap="orderUserMapping" parameterClass="map">
+		select
+			<include refid="orderUser-full-columns"/>
+		from
+			sw_order_user t
+		where
+			t.order_id = #orderId# and t.role = #role# and t.status = #status# and t.deleted = 0 
+		order by
+			t.gmt_modified desc
+	</select>
+	
 	<select id="queryOrdersByUserIdAndRole" resultMap="OrderDAO.orderMapping" parameterClass="map">
 		select 
 			<include refid="OrderDAO.order-full-columns"/>
