@@ -4,7 +4,7 @@
 <ul>
 #foreach($order in $orders)
 	<li>
-		$order.fromCity $order.fromAddr => $order.arriveAddr
+		$order.fromCity $order.fromAddr => $order.arriveAddr <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)">²é¿´ÏêÇé...</a>
 	</li>
 #end
 </ul>
