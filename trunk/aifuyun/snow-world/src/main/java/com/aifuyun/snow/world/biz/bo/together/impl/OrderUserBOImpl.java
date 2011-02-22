@@ -5,6 +5,7 @@ import java.util.List;
 import com.aifuyun.snow.world.biz.bo.together.OrderUserBO;
 import com.aifuyun.snow.world.dal.daointerface.together.OrderUserDAO;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserRoleEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 
@@ -12,6 +13,11 @@ public class OrderUserBOImpl implements OrderUserBO {
 
 	private OrderUserDAO orderUserDAO;
 	
+	@Override
+	public void updateStatus(long id, OrderUserStatusEnum orderUserStatusEnum) {
+		orderUserDAO.updateStatus(id, orderUserStatusEnum);
+	}
+
 	public List<OrderUserDO> queryByOrderIdAndRoleAndStatus(long orderId, int role, int status) {
 		return orderUserDAO.queryByOrderIdAndRoleAndStatus(orderId, role, status);
 	}

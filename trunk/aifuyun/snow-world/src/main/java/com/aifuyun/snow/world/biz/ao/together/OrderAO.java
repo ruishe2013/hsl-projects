@@ -12,6 +12,15 @@ import com.zjuh.sweet.result.Result;
 public interface OrderAO {
 
 	/**
+	 * 批准用户加入
+	 * @param orderId 
+	 * @param userId
+	 * @param argee 是否同意批准加入
+	 * @return
+	 */
+	Result confirmUserJoin(long orderId, long userId, boolean agree);
+	
+	/**
 	 * 加入拼车
 	 * @param orderId
 	 * @return

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.aifuyun.snow.world.dal.daointerface.together.OrderUserDAO;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.dal.ibatis.BaseIbatisDAO;
@@ -70,6 +71,14 @@ public class OrderUserDAOIbatis extends BaseIbatisDAO implements OrderUserDAO {
 	@Override
 	public List<OrderUserDO> queryByOrderId(long orderId) {
 		return (List<OrderUserDO>)getSqlMapClientTemplate().queryForList("OrderUserDAO.queryByOrderId", orderId);
+	}
+
+	@Override
+	public void updateStatus(long id, OrderUserStatusEnum orderUserStatusEnum) {
+		Map<String, Object> param = CollectionUtil.newHashMap();
+		param.put("id", id);
+		param.put("status", orderUserStatusEnum.getValue());
+		getSqlMapClientTemplate().update("OrderUserDAO.updateStatus", param);
 	}
 
 }

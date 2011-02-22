@@ -22,7 +22,8 @@ public class OrderDetail extends BaseScreen {
 			this.result2Context(result, templateContext, "confirmedJoiners");
 			this.result2Context(result, templateContext, "waitConfirmJoiners");
 			this.result2Context(result, templateContext, "userJoinStatusValue");
-			
+			this.result2Context(result, templateContext, "showJoiners");
+			this.result2Context(result, templateContext, "showConfirmOrderBtn");
 			
 		} else {
 			this.handleError(result, rundata, templateContext);

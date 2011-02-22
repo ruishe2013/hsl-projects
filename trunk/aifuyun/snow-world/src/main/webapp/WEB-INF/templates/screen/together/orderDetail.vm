@@ -35,7 +35,7 @@
 	<div>参加人</div>
 	<ul>
 	#foreach($orderUser in $confirmedJoiners)
-		<li>$orderUser.realName</li>
+		<li>$orderUser.realName $orderUser.phone #if($isCreatorSelf) <a href="#">移除该用户</a> #end</li>
 	#end
 	</ul>
 #end
@@ -46,14 +46,17 @@
 	<div>申请人</div>
 	<ul>
 	#foreach($orderUser in $waitConfirmJoiners)
-		<li>$orderUser.realName $orderUser.phone <a href="#">同意加入</a> <a href="#">不同意加入</a></li>
+		<li>$orderUser.realName $orderUser.phone <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('orderId', $orderUser.orderId).add('userId', $orderUser.userId).add('agree', 'true')">同意加入</a> <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('orderId', $orderUser.orderId).add('userId', $orderUser.userId).add('agree', 'false')">不同意加入</a></li>
 	#end
 	</ul>
 #end
 
 #set($leftSeatCount = $!order.totalSeats - $joinersCount )
 #if ($isCreatorSelf)
-	你是该拼单的创建者，你可以 <a href="#">取消拼车</a>
+	你是该拼单的创建者， <a href="#">取消该拼车</a>
+	#if ($showConfirmOrderBtn)
+		<a href="#">确认该拼车</a>
+	#end
 #elseif ($hasBeenJoin)
 	你已经加入该拼车，你可以<a href="#">退出该拼车</a>
 #elseif ("$!userJoinStatusValue" == "0") 

@@ -2,10 +2,13 @@ package com.aifuyun.snow.world.dal.daointerface.together;
 
 import java.util.List;
 
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 
 public interface OrderUserDAO {
+	
+	void updateStatus(long id, OrderUserStatusEnum orderUserStatusEnum);
 	
 	OrderUserDO queryByOrderAndUserId(long orderId, long userId);
 	

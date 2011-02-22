@@ -4,8 +4,9 @@ public enum OrderUserStatusEnum {
 	
 	WAIT_CONFIRM(0, "待确认"),
 	HAS_CANCEL(10, "已取消"),
-	CONFIRMED(20, "已确认"),
-	BEAN_OUT(30, "已踢出")
+	CONFIRM_PASSED(20, "确认通过"),
+	CONFIRM_NOT_PASSED(30, "确认不通过"),
+	BEAN_OUT(40, "已踢出")
 	;
 	
 	private OrderUserStatusEnum(int value, String name) {

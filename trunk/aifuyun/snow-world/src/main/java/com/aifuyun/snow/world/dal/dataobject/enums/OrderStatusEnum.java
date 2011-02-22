@@ -7,10 +7,9 @@ package com.aifuyun.snow.world.dal.dataobject.enums;
 public enum OrderStatusEnum {
 	
 	NOT_EFFECT(0, "未生效"),
-	PROGRESSING(10, "进行中"),
-	WAIT_CONFIRM(20, "待确认"),
-	HAS_CONFIRM(30, "已确认"),
-	FINISH(40, "已完成")
+	WAIT_CONFIRM(10, "待确认"),
+	HAS_CONFIRM(20, "已确认"),
+	FINISH(30, "已完成")
 	;
 	
 	private OrderStatusEnum(int value, String name) {
