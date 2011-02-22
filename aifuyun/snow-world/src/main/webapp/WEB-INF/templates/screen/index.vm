@@ -14,7 +14,8 @@
 
 <ul>
 #foreach($order in $recentOrders)
-	<li>$order.fromCity $order.fromAddr => $order.arriveAddr 
+	<li>
+	$order.fromCity $order.fromAddr => $order.arriveAddr 
 	$dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm') 
 	$dateUtil.formatDate($order.arriveTime, 'yyyy-MM-dd HH:mm')
 	

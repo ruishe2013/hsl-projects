@@ -87,7 +87,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				return result;
 			}
 			
-			if (!canJoin(orderId, userId, result)) {
+			if (!canConfirmJoin(orderId, userId, result)) {
 				return result;
 			}
 			
@@ -103,6 +103,20 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 		return result;
 	}
 
+	private boolean canConfirmJoin(long orderId, long userId, Result result) {
+		List<OrderUserDO> orderUsers = orderUserBO.queryByOrderAndUserId(orderId, userId);
+		if (orderUsers == null || orderUsers.isEmpty()) {
+			return true;
+		}
+		for (OrderUserDO orderUser : orderUsers) {
+			if (orderUser.getStatus() == OrderUserStatusEnum.CONFIRM_PASSED.getValue()) {
+				result.setResultCode(OrderResultCodes.USER_HAS_BEEN_JOINED);
+				return false;
+			}
+		}
+		return true;
+	}
+	
 	private boolean canJoin(long orderId, long userId, Result result) {
 		List<OrderUserDO> orderUsers = orderUserBO.queryByOrderAndUserId(orderId, userId);
 		if (orderUsers == null || orderUsers.isEmpty()) {
