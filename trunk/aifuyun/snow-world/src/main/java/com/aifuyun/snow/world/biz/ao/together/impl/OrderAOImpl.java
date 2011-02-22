@@ -327,6 +327,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				return result;
 			}
 			
+			orderBO.updateStatus(orderId, OrderStatusEnum.WAIT_CONFIRM);			
 			result.setSuccess(true);
 		} catch (Exception e) {
 			log.error("»∑»œ∂©µ• ß∞‹", e);
