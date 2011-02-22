@@ -55,7 +55,6 @@
 			sw_order_user t
 		where
 			t.order_id = #orderId# and t.user_id = #userId# and t.deleted = 0 
-		limit 1
 	</select>
 	
 	<select id="queryByOrderIdAndRole" resultMap="orderUserMapping" parameterClass="map">

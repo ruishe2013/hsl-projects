@@ -16,11 +16,13 @@ public interface OrderUserBO {
 	
 	void update(OrderUserDO orderUserDO);
 	
+	OrderUserDO queryById(long id);
+	
 	void updateStatus(long id, OrderUserStatusEnum orderUserStatusEnum);
 	
 	List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role);
 	
-	OrderUserDO queryByOrderAndUserId(long orderId, long userId);
+	List<OrderUserDO> queryByOrderAndUserId(long orderId, long userId);
 	
 	List<OrderUserDO> queryOrderJoiners(long orderId);
 }

@@ -29,12 +29,12 @@ public class OrderAction extends BaseAction {
 	
 	@DefaultTarget("together/orderDetail")
 	public void doConfirmUserJoin(RunData rundata, TemplateContext templateContext) {
-		long orderId = rundata.getQueryString().getLong("orderId");
-		long userId = rundata.getQueryString().getLong("userId");
+		long id = rundata.getQueryString().getLong("id");
 		boolean agree = rundata.getQueryString().getBoolean("agree");
-		Result result = orderAO.confirmUserJoin(orderId, userId, agree);
+		Result result = orderAO.confirmUserJoin(id, agree);
 		if (result.isSuccess()) {
-			sendToOrderDetailPage(orderId);
+			OrderDO order = (OrderDO)result.getModels().get("order");
+			sendToOrderDetailPage(order.getId());
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}

@@ -10,7 +10,7 @@ public interface OrderUserDAO {
 	
 	void updateStatus(long id, OrderUserStatusEnum orderUserStatusEnum);
 	
-	OrderUserDO queryByOrderAndUserId(long orderId, long userId);
+	List<OrderUserDO> queryByOrderAndUserId(long orderId, long userId);
 	
 	long create(OrderUserDO orderUserDO);
 	

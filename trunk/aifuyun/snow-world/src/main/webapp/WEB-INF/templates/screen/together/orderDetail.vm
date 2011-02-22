@@ -46,7 +46,9 @@
 	<div>申请人</div>
 	<ul>
 	#foreach($orderUser in $waitConfirmJoiners)
-		<li>$orderUser.realName $orderUser.phone <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('orderId', $orderUser.orderId).add('userId', $orderUser.userId).add('agree', 'true')">同意加入</a> <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('orderId', $orderUser.orderId).add('userId', $orderUser.userId).add('agree', 'false')">不同意加入</a></li>
+		<li>$orderUser.realName $orderUser.phone 
+		 <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('id', $orderUser.id).add('agree', 'true')">同意加入</a>
+		 <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('id', $orderUser.id).add('agree', 'false')">不同意加入</a></li>
 	#end
 	</ul>
 #end

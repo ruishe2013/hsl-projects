@@ -14,6 +14,11 @@ public class OrderUserBOImpl implements OrderUserBO {
 	private OrderUserDAO orderUserDAO;
 	
 	@Override
+	public OrderUserDO queryById(long id) {
+		return orderUserDAO.queryById(id);
+	}
+	
+	@Override
 	public void updateStatus(long id, OrderUserStatusEnum orderUserStatusEnum) {
 		orderUserDAO.updateStatus(id, orderUserStatusEnum);
 	}
@@ -28,7 +33,7 @@ public class OrderUserBOImpl implements OrderUserBO {
 	}
 
 	@Override
-	public OrderUserDO queryByOrderAndUserId(long orderId, long userId) {
+	public List<OrderUserDO> queryByOrderAndUserId(long orderId, long userId) {
 		return orderUserDAO.queryByOrderAndUserId(orderId, userId);
 	}
 
