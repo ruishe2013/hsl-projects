@@ -18,8 +18,6 @@ public class OrderResultCodes extends ResultCode {
 	
 	public static final ResultCode ORDER_CREATED_BY_YOURSELF = ResultCode.create();
 	
-	public static final ResultCode ORDER_HAS_BEEN_JOINED = ResultCode.create();
-	
 	public static final ResultCode ORDER_SEAT_IS_FULL = ResultCode.create();
 	
 	public static final ResultCode ONLY_OPERATE_WAIT_CONFIRM = ResultCode.create();
@@ -29,5 +27,9 @@ public class OrderResultCodes extends ResultCode {
 	public static final ResultCode USER_NOT_JOIN_YET = ResultCode.create();
 	
 	public static final ResultCode ONLY_OPERATE_CONFIRM_JOIN = ResultCode.create();
+	
+	public static final ResultCode USER_IN_WAIT_CONFIRM = ResultCode.create();
+	
+	public static final ResultCode USER_HAS_BEEN_JOINED = ResultCode.create();
 
 }

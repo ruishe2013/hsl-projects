@@ -13,12 +13,11 @@ public interface OrderAO {
 
 	/**
 	 * 批准用户加入
-	 * @param orderId 
-	 * @param userId
+	 * @param id 
 	 * @param argee 是否同意批准加入
 	 * @return
 	 */
-	Result confirmUserJoin(long orderId, long userId, boolean agree);
+	Result confirmUserJoin(long id, boolean agree);
 	
 	/**
 	 * 加入拼车
