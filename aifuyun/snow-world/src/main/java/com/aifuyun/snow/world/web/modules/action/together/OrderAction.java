@@ -28,6 +28,19 @@ public class OrderAction extends BaseAction {
 	private OrderAO orderAO;
 	
 	@DefaultTarget("together/orderDetail")
+	public void doConfirmUserJoin(RunData rundata, TemplateContext templateContext) {
+		long orderId = rundata.getQueryString().getLong("orderId");
+		long userId = rundata.getQueryString().getLong("userId");
+		boolean agree = rundata.getQueryString().getBoolean("agree");
+		Result result = orderAO.confirmUserJoin(orderId, userId, agree);
+		if (result.isSuccess()) {
+			sendToOrderDetailPage(orderId);
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
+	}
+	
+	@DefaultTarget("together/orderDetail")
 	public void doJoinOrder(RunData rundata, TemplateContext templateContext) {
 		final Form form = rundata.getForm("together.personalInfo");
 		if (!form.validate()) {
@@ -81,6 +94,13 @@ public class OrderAction extends BaseAction {
 	private void sendToConfirmPage(long orderId) {
 		URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
 		URLModule urlModule = urlModuleContainer.setTarget("together/confirmOrder");
+		urlModule.add("orderId", orderId);
+		sendRedirectUrl(urlModule.render());
+	}
+	
+	private void sendToOrderDetailPage(long orderId) {
+		URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
+		URLModule urlModule = urlModuleContainer.setTarget("together/orderDetail");
 		urlModule.add("orderId", orderId);
 		sendRedirectUrl(urlModule.render());
 	}
