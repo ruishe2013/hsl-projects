@@ -662,6 +662,9 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			inputCreator.setUserId(userId);
 			inputCreator.setUsername(username);
 			
+			BaseUserDO baseUser = userBO.queryById(userId);
+			inputCreator.setEmail(baseUser.getEmail());
+			
 			insertOrUpdateOrderCreator(orderDO, inputCreator);
 			
 			if (saveToUserInfo) {
@@ -709,12 +712,12 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 		copyUserHolderInfo(dest, src);
 		dest.setUsername(orderDO.getCreatorUsername());
 		dest.setUserId(orderDO.getCreatorId());
+		dest.setEmail(src.getEmail());
 	}
 	
 	private void copyUserHolderInfo(UserInfoHolder dest, OrderUserDO src) {
 		dest.setBirthYear(src.getBirthYear());
 		dest.setCareer(src.getCareer());
-		dest.setEmail(src.getEmail());
 		dest.setPhone(src.getPhone());
 		dest.setQq(src.getQq());
 		dest.setRealName(src.getRealName());

@@ -38,7 +38,7 @@
 		<td>职业</td><td>$!creator.career</td>
 	</tr>
 	<tr>
-		<td>电子邮箱</td><td>$!creator.email</td>
+		<td>Email</td><td>$!creator.email</td>
 	</tr>
 	<tr>
 		<td>qq号码</td><td>$!creator.qq</td>

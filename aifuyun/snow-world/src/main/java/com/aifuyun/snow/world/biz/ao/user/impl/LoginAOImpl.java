@@ -23,7 +23,14 @@ public class LoginAOImpl extends BaseAO implements LoginAO {
 	public Result handleLogin(BaseUserDO inputUser) {
 		Result result = new ResultSupport(false);
 		try {
+			// 先尝试用户名登陆
 			BaseUserDO userDO = userBO.queryByUsernameIgnoreDeletedFlag(inputUser.getUsername());
+			String email = inputUser.getEmail();
+			if (userDO == null && StringUtil.isNotEmpty(email)) {
+				// 再尝试用email登陆
+				userDO = userBO.queryByEmailIgnoreDeletedFlag(email);
+			}
+			
 			if (userDO == null) {
 				result.setResultCode(UserResultCodes.USER_NOT_EXIST);
 				result.setResultTypeEnum(ResultTypeEnum.CURRENT_TARGET);

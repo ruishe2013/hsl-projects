@@ -53,12 +53,6 @@
 	#errorMessage($!form.fields.career.message)
 	
 	<div class="input-item">
-		<label for="$!form.fields.email.name">µç×ÓÓÊÏä£º</label>
-		<input type="text" id="$!form.fields.email.name" name="$!form.fields.email.name" value="$!form.fields.email.value" />
-	</div>
-	#errorMessage($!form.fields.email.message)
-		
-	<div class="input-item">
 		<label for="$!form.fields.qq.name">qqºÅÂë£º</label>
 		<input type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value" />
 	</div>

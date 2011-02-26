@@ -16,6 +16,8 @@ public class UserResultCodes extends ResultCode {
 	
 	public static final ResultCode USERNAME_HAS_EXIST = ResultCode.create();
 	
+	public static final ResultCode EMAIL_HAS_EXIST = ResultCode.create();
+	
 	public static final ResultCode SENSITIVITY_USER = ResultCode.create();
 	
 }

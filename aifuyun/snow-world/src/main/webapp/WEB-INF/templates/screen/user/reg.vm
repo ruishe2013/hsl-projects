@@ -31,6 +31,11 @@
 		</div>
 		#errorMessage($!form.fields.confirmPassword.message)
 		
+		<div class="input-item"> 
+			<label for="$!form.fields.email.name">*Email£º</label> 
+			<input type="text" id="$!form.fields.email.name" name="$!form.fields.email.name" value="$!form.fields.email.value" />
+		</div>
+		#errorMessage($!form.fields.email.message)
 		
 		<div class="input-item"> 
 			<label for="$!form.fields.checkCode.name">*ÑéÖ¤Âë£º</label> 
