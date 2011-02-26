@@ -4,7 +4,7 @@
 <ul>
 #foreach($order in $orders)
 	<li>
-		$order.fromCity $order.fromAddr => $order.arriveAddr <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)">查看详情...</a>
+		[$order.orderStatusEnum.name] $order.fromCity $order.fromAddr => $order.arriveAddr <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)">查看详情...</a>
 	</li>
 #end
 </ul>

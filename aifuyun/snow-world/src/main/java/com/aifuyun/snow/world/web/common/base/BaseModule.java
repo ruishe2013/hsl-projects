@@ -113,7 +113,7 @@ public class BaseModule {
 		if (ResultTypeEnum.COMMON_TARGET.equals(resultCodeTypeEnum)) {
 			templateContext.put("errorMessage", resultCode);
 			templateContext.put("backUrl", getBackUrl(rundata));
-			rundata.setTarget("error");
+			rundata.setRedirectTarget("error");
 		} else if(ResultTypeEnum.CURRENT_TARGET.equals(resultCodeTypeEnum)) {
 			templateContext.put("resultmessage", resultCode);
 		}

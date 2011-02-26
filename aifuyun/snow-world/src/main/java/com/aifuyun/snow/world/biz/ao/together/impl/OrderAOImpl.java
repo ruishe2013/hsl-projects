@@ -22,6 +22,7 @@ import com.aifuyun.snow.world.dal.dataobject.misc.UserInfoHolder;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
+import com.zjuh.sweet.lang.CollectionUtil;
 import com.zjuh.sweet.lang.StringUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
@@ -38,6 +39,54 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	
 	private UserBO userBO;
 	
+	@Override
+	public Result confirmTogetherOrder(long orderId) {
+		Result result = new ResultSupport(false);
+		try {
+			OrderDO order = orderBO.queryById(orderId);
+			if (order == null) {
+				result.setResultCode(OrderResultCodes.ORDER_NOT_EXIST);
+				return result;
+			}
+			final long userId = this.getLoginUserId();
+			if (order.getCreatorId() != userId) {
+				result.setResultCode(OrderResultCodes.CANNOT_EDIT_OTHERS_ORDER);
+				return result;
+			}
+			
+			if (OrderStatusEnum.HAS_CONFIRM == order.getOrderStatusEnum()) {
+				// 该订单已经确认了，不需要再确认。
+				result.setResultCode(OrderResultCodes.ORDER_HAS_BEEN_CONFIRMED);
+				return result;
+			}
+			
+			if (OrderStatusEnum.WAIT_CONFIRM != order.getOrderStatusEnum()) {
+				// 只能确认待确认的订单
+				result.setResultCode(OrderResultCodes.ORDER_HAS_NOT_WAIT_CONFIRM);
+				return result;
+			}
+			
+			List<OrderUserDO> confirmedJoiners = this.orderUserBO.queryOrderJoinersByStatus(orderId, OrderUserStatusEnum.CONFIRM_PASSED.getValue());
+			if (CollectionUtil.isEmpty(confirmedJoiners)) {
+				result.setResultCode(OrderResultCodes.CAN_NOT_CONFIRM_EMPTY_JOINERS_ORDER);
+				return result;
+			}
+			
+			OrderUserDO orderUser = orderUserBO.queryOrderCreator(orderId);
+			if (orderUser == null) {
+				result.setResultCode(OrderResultCodes.CANNOT_FIND_ORDER_CREATOR);
+				return result;
+			}
+			
+			orderBO.updateStatus(orderId, OrderStatusEnum.HAS_CONFIRM);
+			
+			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("确认订单失败", e);
+		}
+		return result;
+	}
+
 	@Override
 	public Result exitOrder(long id) {
 		Result result = new ResultSupport(false);
@@ -63,6 +112,12 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			if (userId != loginUserId) {
 				// 不能让别人退出
 				result.setResultCode(OrderResultCodes.YOU_EXIT_WRONG_ORDER);
+				return result;
+			}
+			
+			if (OrderStatusEnum.HAS_CONFIRM == order.getOrderStatusEnum()) {
+				// 该订单已经确认了，不能退出。
+				result.setResultCode(OrderResultCodes.CAN_NOT_EXIT_ORDER_FOR_CONFIRMED);
 				return result;
 			}
 			
@@ -106,6 +161,12 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			if (userId == loginUserId) {
 				// 不能移除本人
 				result.setResultCode(OrderResultCodes.CANNOT_REMOVE_SELF);
+				return result;
+			}
+			
+			if (OrderStatusEnum.HAS_CONFIRM == order.getOrderStatusEnum()) {
+				// 该订单已经确认了，不能移除。
+				result.setResultCode(OrderResultCodes.CAN_NOT_REMOVE_USER_FOR_CONFIRMED);
 				return result;
 			}
 			
@@ -384,7 +445,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	}
 
 	@Override
-	public Result confirmOrder(long orderId) {
+	public Result confirmFinishOrder(long orderId) {
 		Result result = new ResultSupport(false);
 		try {
 			OrderDO order = orderBO.queryById(orderId);
