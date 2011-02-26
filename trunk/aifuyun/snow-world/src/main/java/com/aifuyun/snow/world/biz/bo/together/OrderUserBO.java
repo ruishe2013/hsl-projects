@@ -16,6 +16,8 @@ public interface OrderUserBO {
 	
 	void update(OrderUserDO orderUserDO);
 	
+	void delete(long id);
+	
 	OrderUserDO queryById(long id);
 	
 	void updateStatus(long id, OrderUserStatusEnum orderUserStatusEnum);

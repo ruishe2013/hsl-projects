@@ -14,6 +14,11 @@ public class OrderUserBOImpl implements OrderUserBO {
 	private OrderUserDAO orderUserDAO;
 	
 	@Override
+	public void delete(long id) {
+		orderUserDAO.delete(id);
+	}
+
+	@Override
 	public OrderUserDO queryById(long id) {
 		return orderUserDAO.queryById(id);
 	}
