@@ -12,6 +12,20 @@ import com.zjuh.sweet.result.Result;
 public interface OrderAO {
 
 	/**
+	 * 用户主动退出
+	 * @param id
+	 * @return
+	 */
+	Result exitOrder(long id);
+	
+	/**
+	 * 从订单从移除用户
+	 * @param id
+	 * @return
+	 */
+	Result removeUserFromOrder(long id);
+	
+	/**
 	 * 批准用户加入
 	 * @param id 
 	 * @param argee 是否同意批准加入

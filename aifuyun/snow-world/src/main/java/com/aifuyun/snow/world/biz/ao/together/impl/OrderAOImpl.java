@@ -39,6 +39,87 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	private UserBO userBO;
 	
 	@Override
+	public Result exitOrder(long id) {
+		Result result = new ResultSupport(false);
+		try {
+			long loginUserId = this.getLoginUserId();
+			
+			OrderUserDO orderUser = orderUserBO.queryById(id);
+			if (orderUser == null) {
+				// 未加入该拼车
+				result.setResultCode(OrderResultCodes.YOU_ARE_NOT_JOIN_YET);
+				return result;
+			}
+			
+			long orderId = orderUser.getOrderId();
+			long userId = orderUser.getUserId();
+			
+			OrderDO order = orderBO.queryById(orderId);
+			if (order == null) {
+				// 拼车单不存在
+				result.setResultCode(OrderResultCodes.ORDER_NOT_EXIST);
+				return result;
+			}
+			if (userId != loginUserId) {
+				// 不能让别人退出
+				result.setResultCode(OrderResultCodes.YOU_EXIT_WRONG_ORDER);
+				return result;
+			}
+			
+			orderUserBO.delete(id);
+			
+			result.getModels().put("order", order);
+ 			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("退出拼车失败", e);
+		}
+		return result;
+	}
+
+	@Override
+	public Result removeUserFromOrder(long id) {
+		Result result = new ResultSupport(false);
+		try {
+			long loginUserId = this.getLoginUserId();
+			
+			OrderUserDO orderUser = orderUserBO.queryById(id);
+			if (orderUser == null) {
+				// 该用户还未加入拼车
+				result.setResultCode(OrderResultCodes.USER_NOT_JOIN_YET);
+				return result;
+			}
+			
+			long orderId = orderUser.getOrderId();
+			long userId = orderUser.getUserId();
+			
+			OrderDO order = orderBO.queryById(orderId);
+			if (order == null) {
+				// 拼车单不存在
+				result.setResultCode(OrderResultCodes.ORDER_NOT_EXIST);
+				return result;
+			}
+			if (order.getCreatorId() != loginUserId) {
+				// 创建者不是本人
+				result.setResultCode(OrderResultCodes.CANNOT_EDIT_OTHERS_ORDER);
+				return result;
+			}
+			if (userId == loginUserId) {
+				// 不能移除本人
+				result.setResultCode(OrderResultCodes.CANNOT_REMOVE_SELF);
+				return result;
+			}
+			
+			orderUserBO.delete(id);
+			
+			result.getModels().put("order", order);
+ 			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("移除用户失败", e);
+		}
+		return result;
+	}
+
+	@Override
 	public Result confirmUserJoin(long id, boolean agree) {
 		Result result = new ResultSupport(false);
 		try {
@@ -98,7 +179,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			
  			result.setSuccess(true);
 		} catch (Exception e) {
-			log.error("确认拼车拼车失败", e);
+			log.error("确认加入拼车失败", e);
 		}
 		return result;
 	}
@@ -210,7 +291,12 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			// 所有参加人
 			List<OrderUserDO> joiners = orderUserBO.queryOrderJoiners(orderId);
 			List<OrderUserDO> confirmedJoiners = this.orderUserBO.queryOrderJoinersByStatus(orderId, OrderUserStatusEnum.CONFIRM_PASSED.getValue());
-			OrderUserStatusEnum userJoinStatus = getUserJoinStatus(userId, joiners);
+			
+			OrderUserDO joinedOrderUser = getJoinedOrderUser(userId, joiners);
+			OrderUserStatusEnum userJoinStatus = null;
+			if (joinedOrderUser != null) {
+				userJoinStatus = joinedOrderUser.getStatusEnum();
+			}
 			boolean hasBeenConfirmJoin = hasBeenConfirmJoin(userJoinStatus);
 			
 			// 剩余座位数
@@ -237,12 +323,13 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			if (userJoinStatus != null) {
 				result.getModels().put("userJoinStatusValue", userJoinStatus.getValue());
 			}
-			
 			result.getModels().put("confirmedJoiners", confirmedJoiners);
 			result.getModels().put("hasBeenJoin", hasBeenConfirmJoin);
 			result.getModels().put("showJoiners", showJoiners);
 			result.getModels().put("joinersCount", joinersCount);
 			result.getModels().put("showConfirmOrderBtn", showConfirmOrderBtn);
+			result.getModels().put("joinedOrderUser", joinedOrderUser);
+			
 			
  			result.setSuccess(true);
 		} catch (Exception e) {
@@ -258,15 +345,15 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 		return userJoinStatus == OrderUserStatusEnum.CONFIRM_PASSED;
 	}
 	
-	private OrderUserStatusEnum getUserJoinStatus(long userId, Collection<OrderUserDO> joiners) {
+	private OrderUserDO getJoinedOrderUser(long userId, Collection<OrderUserDO> joiners) {
 		for (OrderUserDO orderUser : joiners) {
 			if (orderUser.getUserId() == userId) {
-				return orderUser.getStatusEnum();
+				return orderUser;
 			}
 		}
 		return null;
 	}
-
+	
 	@Override
 	public Result handleForIndex(int cityId) {
 		Result result = new ResultSupport(false);

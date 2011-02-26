@@ -35,7 +35,7 @@
 	<div>参加人</div>
 	<ul>
 	#foreach($orderUser in $confirmedJoiners)
-		<li>$orderUser.realName $orderUser.phone #if($isCreatorSelf) <a href="#">移除该用户</a> #end</li>
+		<li>$orderUser.realName $orderUser.phone #if($isCreatorSelf) <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'removeUserFromOrder').add('id', $orderUser.id)">移除该用户</a> #end</li>
 	#end
 	</ul>
 #end
@@ -60,9 +60,9 @@
 		<a href="#">确认该拼车</a>
 	#end
 #elseif ($hasBeenJoin)
-	你已经加入该拼车，你可以<a href="#">退出该拼车</a>
+	你已经加入该拼车，你可以<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)">退出该拼车</a>
 #elseif ("$!userJoinStatusValue" == "0") 
-	你的申请还在等发起人确认，请耐心等待；或者你可以<a href="#">退出拼车申请</a>
+	你的申请还在等发起人确认，请耐心等待；或者你可以<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)">退出拼车申请</a>
 #elseif ($leftSeatCount <= 0)
 	对不起，该拼车的位置已经满了，推荐你<a href="#">去别拼车单看看</a>
 #else

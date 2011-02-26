@@ -24,6 +24,8 @@ public class OrderResultCodes extends ResultCode {
 	
 	public static final ResultCode CANNOT_CONFIRM_SELF = ResultCode.create();
 	
+	public static final ResultCode CANNOT_REMOVE_SELF = ResultCode.create();
+	
 	public static final ResultCode USER_NOT_JOIN_YET = ResultCode.create();
 	
 	public static final ResultCode ONLY_OPERATE_CONFIRM_JOIN = ResultCode.create();
@@ -31,5 +33,9 @@ public class OrderResultCodes extends ResultCode {
 	public static final ResultCode USER_IN_WAIT_CONFIRM = ResultCode.create();
 	
 	public static final ResultCode USER_HAS_BEEN_JOINED = ResultCode.create();
+	
+	public static final ResultCode YOU_ARE_NOT_JOIN_YET = ResultCode.create();
+	
+	public static final ResultCode YOU_EXIT_WRONG_ORDER = ResultCode.create();
 
 }

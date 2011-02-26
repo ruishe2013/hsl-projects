@@ -28,6 +28,30 @@ public class OrderAction extends BaseAction {
 	private OrderAO orderAO;
 	
 	@DefaultTarget("together/orderDetail")
+	public void doExitOrder(RunData rundata, TemplateContext templateContext) {
+		long id = rundata.getQueryString().getLong("id");
+		Result result = orderAO.exitOrder(id);
+		if (result.isSuccess()) {
+			OrderDO order = (OrderDO)result.getModels().get("order");
+			sendToOrderDetailPage(order.getId());
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
+	}
+	
+	@DefaultTarget("together/orderDetail")
+	public void doRemoveUserFromOrder(RunData rundata, TemplateContext templateContext) {
+		long id = rundata.getQueryString().getLong("id");
+		Result result = orderAO.removeUserFromOrder(id);
+		if (result.isSuccess()) {
+			OrderDO order = (OrderDO)result.getModels().get("order");
+			sendToOrderDetailPage(order.getId());
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
+	}
+	
+	@DefaultTarget("together/orderDetail")
 	public void doConfirmUserJoin(RunData rundata, TemplateContext templateContext) {
 		long id = rundata.getQueryString().getLong("id");
 		boolean agree = rundata.getQueryString().getBoolean("agree");
