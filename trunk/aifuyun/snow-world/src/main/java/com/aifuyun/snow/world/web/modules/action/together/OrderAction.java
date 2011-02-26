@@ -28,6 +28,17 @@ public class OrderAction extends BaseAction {
 	private OrderAO orderAO;
 	
 	@DefaultTarget("together/orderDetail")
+	public void doConfirmTogetherOrder(RunData rundata, TemplateContext templateContext) {
+		long orderId = rundata.getQueryString().getLong("orderId");
+		Result result = orderAO.confirmTogetherOrder(orderId);
+		if (result.isSuccess()) {
+			sendToOrderDetailPage(orderId);
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
+	}
+	
+	@DefaultTarget("together/orderDetail")
 	public void doExitOrder(RunData rundata, TemplateContext templateContext) {
 		long id = rundata.getQueryString().getLong("id");
 		Result result = orderAO.exitOrder(id);
@@ -88,7 +99,7 @@ public class OrderAction extends BaseAction {
 	@DefaultTarget("together/confirmOrder")
 	public void doConfirmOrder(RunData rundata, TemplateContext templateContext) {
 		long orderId = rundata.getQueryString().getLong("orderId");
-		Result result = orderAO.confirmOrder(orderId);
+		Result result = orderAO.confirmFinishOrder(orderId);
 		if (result.isSuccess()) {
 			this.sendRedirect("snowModule", "together/createOrderSuccess");
 		} else {

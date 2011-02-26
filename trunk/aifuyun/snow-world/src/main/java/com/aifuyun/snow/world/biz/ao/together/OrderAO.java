@@ -11,6 +11,8 @@ import com.zjuh.sweet.result.Result;
  */
 public interface OrderAO {
 
+	Result confirmTogetherOrder(long orderId);
+	
 	/**
 	 * 用户主动退出
 	 * @param id
@@ -71,11 +73,11 @@ public interface OrderAO {
 	Result viewConfirmOrder(long orderId);
 	
 	/**
-	 * 确认拼单
+	 * 确认完成拼单
 	 * @param orderId
 	 * @return
 	 */
-	Result confirmOrder(long orderId);
+	Result confirmFinishOrder(long orderId);
 	
 	/**
 	 * 浏览用户信息

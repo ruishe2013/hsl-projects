@@ -37,5 +37,16 @@ public class OrderResultCodes extends ResultCode {
 	public static final ResultCode YOU_ARE_NOT_JOIN_YET = ResultCode.create();
 	
 	public static final ResultCode YOU_EXIT_WRONG_ORDER = ResultCode.create();
-
+	
+	public static final ResultCode ORDER_HAS_BEEN_CONFIRMED = ResultCode.create();
+	
+	public static final ResultCode ORDER_HAS_NOT_WAIT_CONFIRM = ResultCode.create();
+	
+	public static final ResultCode CAN_NOT_EXIT_ORDER_FOR_CONFIRMED = ResultCode.create();
+	
+	public static final ResultCode CAN_NOT_CONFIRM_EMPTY_JOINERS_ORDER = ResultCode.create();
+	
+	public static final ResultCode CAN_NOT_REMOVE_USER_FOR_CONFIRMED = ResultCode.create();
+	
+	
 }
