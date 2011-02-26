@@ -13,8 +13,8 @@ create table sw_base_user (
 	password varchar(100) not null,
 	sex tinyint default 0 not null,
 	birth_year smallint default 0 not null,
+	email varchar(60) not null,
 	real_name varchar(60),
-	email varchar(255),
 	phone varchar(100),
 	career varchar(100),
 	qq varchar(50),
@@ -25,6 +25,7 @@ create table sw_base_user (
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
 create index ind_base_user_nick on sw_base_user(username, deleted);
+create index ind_base_user_email on sw_base_user(email, deleted);
 
 
 DROP TABLE IF EXISTS sw_area_province;

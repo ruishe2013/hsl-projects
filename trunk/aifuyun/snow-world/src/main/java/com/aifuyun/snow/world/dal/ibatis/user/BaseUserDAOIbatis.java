@@ -48,4 +48,14 @@ public class BaseUserDAOIbatis extends BaseIbatisDAO implements BaseUserDAO {
 		return (BaseUserDO)getSqlMapClientTemplate().queryForObject("BaseUserDAO.queryByUsernameIgnoreDeletedFlag", username);
 	}
 
+	@Override
+	public BaseUserDO queryByEmail(String email) {
+		return (BaseUserDO)getSqlMapClientTemplate().queryForObject("BaseUserDAO.queryByEmail", email);
+	}
+
+	@Override
+	public BaseUserDO queryByEmailIgnoreDeletedFlag(String email) {
+		return (BaseUserDO)getSqlMapClientTemplate().queryForObject("BaseUserDAO.queryByEmailIgnoreDeletedFlag", email);
+	}
+
 }

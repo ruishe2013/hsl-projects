@@ -58,10 +58,24 @@ public interface BaseUserDAO {
 	BaseUserDO queryByUsername(String username);
 	
 	/**
+	 * 通过email查询
+	 * @param email
+	 * @return
+	 */
+	BaseUserDO queryByEmail(String email);
+	
+	/**
 	 * 通过username查询，忽略删除标记，也就是能查出表中所有的数据
 	 * @param username
 	 * @return
 	 */
 	BaseUserDO queryByUsernameIgnoreDeletedFlag(String username);
+	
+	/**
+	 * 通过email查询，忽略删除标记，也就是能查出表中所有的数据
+	 * @param email
+	 * @return
+	 */
+	BaseUserDO queryByEmailIgnoreDeletedFlag(String email);
 
 }

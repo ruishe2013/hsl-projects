@@ -104,6 +104,12 @@ public class UserAOImpl extends BaseAO implements UserAO {
 				return result;
 			}
 			
+			if (isUserExistByEmail(userDO.getEmail())) {
+				result.setResultCode(UserResultCodes.EMAIL_HAS_EXIST);
+				result.setResultTypeEnum(ResultTypeEnum.CURRENT_TARGET);
+				return result;
+			}
+			
 			String encryptedPassword = userBO.encryptPassword(userDO.getPassword());
 			userDO.setPassword(encryptedPassword);
 			
@@ -120,6 +126,10 @@ public class UserAOImpl extends BaseAO implements UserAO {
 	
 	private boolean isUserExist(String username) {
 		return null != userBO.queryByUsernameIgnoreDeletedFlag(username);
+	}
+	
+	private boolean isUserExistByEmail(String email) {
+		return null != userBO.queryByEmailIgnoreDeletedFlag(email);
 	}
 
 	public void setUserBO(UserBO userBO) {

@@ -39,11 +39,6 @@
 				<param name="max" value="30" />
 			</validator>
 		</field>
-		<field name="email">
-			<validator type="string" message="请输入正确的电子邮箱!" >
-				<param name="max" value="100" />
-			</validator>
-		</field>
 		<field name="qq">
 			<validator type="string" message="请输入qq号码!" >
 				<param name="max" value="20" />
@@ -77,6 +72,12 @@
 			<validator type="string" message="确认密码的长度必须在4~20个字符之间!" >
 				<param name="min" value="4" />
 				<param name="max" value="20" />
+			</validator>
+		</field>
+		<field name="email">
+			<validator type="required" message="Email不能为空!" />
+			<validator type="email" message="请输入正确的Email!" >
+				<param name="max" value="100" />
 			</validator>
 		</field>
 		<field name="checkCode">

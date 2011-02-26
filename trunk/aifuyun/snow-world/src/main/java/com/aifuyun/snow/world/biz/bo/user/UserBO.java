@@ -9,6 +9,20 @@ import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
 public interface UserBO {
 
 	/**
+	 * 通过email查询
+	 * @param email
+	 * @return
+	 */
+	BaseUserDO queryByEmail(String email);
+
+	/**
+	 * 通过email查询(忽略删除标记)
+	 * @param email
+	 * @return
+	 */
+	BaseUserDO queryByEmailIgnoreDeletedFlag(String email);
+	
+	/**
 	 * 加密密码
 	 * @param password
 	 * @return

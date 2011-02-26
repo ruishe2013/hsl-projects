@@ -68,6 +68,25 @@
 	 		</iterate>
 	</select>
 	
+	<select id="queryByEmail" resultMap="BaseUserMapping" parameterClass="string">
+		select
+			<include refid="baseUser-full-columns"/>
+		from 
+			sw_base_user t
+		where
+			t.deleted = 0 and t.email = #value#
+		limit 1
+	</select>
+	
+	<select id="queryByEmailIgnoreDeletedFlag" resultMap="BaseUserMapping" parameterClass="string">
+		select
+			<include refid="baseUser-full-columns"/>
+		from 
+			sw_base_user t
+		where
+			t.email = #value#
+		limit 1
+	</select>
 	
 	<select id="queryByUsername" resultMap="BaseUserMapping" parameterClass="string">
 		select

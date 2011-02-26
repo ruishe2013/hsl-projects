@@ -49,6 +49,14 @@ public class UserBOImpl implements UserBO {
 		return sensitivitiesList.contains(username);
 	}
 
+	public BaseUserDO queryByEmail(String email) {
+		return baseUserDAO.queryByEmail(email);
+	}
+
+	public BaseUserDO queryByEmailIgnoreDeletedFlag(String email) {
+		return baseUserDAO.queryByEmailIgnoreDeletedFlag(email);
+	}
+
 	public void setBaseUserDAO(BaseUserDAO baseUserDAO) {
 		this.baseUserDAO = baseUserDAO;
 	}

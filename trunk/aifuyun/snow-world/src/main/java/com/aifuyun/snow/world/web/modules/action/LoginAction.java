@@ -33,6 +33,9 @@ public class LoginAction extends BaseAction {
 		BaseUserDO inputUser = new BaseUserDO();
 		form.apply(inputUser);
 		
+		// 把用户名设置到email字段，以便也尝试用email登陆
+		inputUser.setEmail(inputUser.getUsername());
+		
 		Result result = loginAO.handleLogin(inputUser);
 		if (result.isSuccess()) {
 			String url = rundata.getQueryString().getString(AuthorConstants.REDIRECT_URL_NAME);
