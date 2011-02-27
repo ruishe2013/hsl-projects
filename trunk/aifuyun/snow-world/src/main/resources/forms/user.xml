@@ -69,9 +69,8 @@
 		</field>
 		<field name="confirmPassword">
 			<validator type="required" message="确认密码不能为空!" />
-			<validator type="string" message="确认密码的长度必须在4~20个字符之间!" >
-				<param name="min" value="4" />
-				<param name="max" value="20" />
+			<validator type="compare" message="请确认和刚才的密码输入一致!" >
+				<param name="compareField" value="password" />
 			</validator>
 		</field>
 		<field name="email">
