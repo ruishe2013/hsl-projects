@@ -435,13 +435,30 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 		Result result = new ResultSupport(false);
 		try {
 			final long userId = this.getLoginUserId();
-			List<OrderDO> orders = orderUserBO.queryOrdersByUserIdAndRole(userId, orderQuery.getOrderUserRole());
+			final int roleValue = orderQuery.getOrderUserRole();
+			if (!isRoleValid(roleValue)) {
+				result.setResultCode(OrderResultCodes.INVALID_ROLE_VALUE);
+				return result;
+			}
+			
+			List<OrderDO> orders = orderUserBO.queryOrdersByUserIdAndRole(userId, roleValue);
 			result.getModels().put("orders", orders);
 			result.setSuccess(true);
 		} catch (Exception e) {
 			log.error("查看我的订单失败", e);
 		}
 		return result;
+	}
+	
+	private boolean isRoleValid(int roleValue) {
+		if (roleValue == 0) {
+			return true;
+		}
+		OrderUserRoleEnum userRole = OrderUserRoleEnum.valueOf(roleValue);
+		if (userRole == null) {
+			return false;
+		}
+		return true;
 	}
 
 	@Override

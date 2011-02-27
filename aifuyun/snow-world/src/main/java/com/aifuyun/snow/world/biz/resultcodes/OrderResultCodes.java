@@ -48,5 +48,7 @@ public class OrderResultCodes extends ResultCode {
 	
 	public static final ResultCode CAN_NOT_REMOVE_USER_FOR_CONFIRMED = ResultCode.create();
 	
+	public static final ResultCode INVALID_ROLE_VALUE = ResultCode.create();
+	
 	
 }
