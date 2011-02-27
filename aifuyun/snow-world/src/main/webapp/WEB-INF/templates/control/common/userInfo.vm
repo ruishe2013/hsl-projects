@@ -1,7 +1,7 @@
 <div id="common-user-info">
 <a href="$snowModule.setTarget('index')">返回首页</a>
 #if("$!username" == "")
-	欢迎来到爱浮云， 请<a href="$snowModule.setTarget('login').addQueryData('redirectUrl', $currentURL)">登录</a>
+	欢迎来到一辆车拼车网， 请<a href="$snowModule.setTarget('login').addQueryData('redirectUrl', $currentURL)">登录</a>
 #else
 	你好<strong>$username</strong>，<a href="$snowModule.setTarget('user/myTogethers')">我的拼车</a>
 	
