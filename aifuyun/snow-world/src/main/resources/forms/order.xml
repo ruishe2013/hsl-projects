@@ -80,9 +80,8 @@
 		</field>
 		<field name="sex">
 			<validator type="required" message="请选择您的的性别!" />
-			<validator type="int" message="请选择您的的性别!" >
-				<param name="min" value="1" />
-				<param name="max" value="2" />
+			<validator type="enums" message="请选择您的的性别!" >
+				<param name="values" value="1,2" />
 			</validator>
 		</field>
 		<field name="birthYear">
