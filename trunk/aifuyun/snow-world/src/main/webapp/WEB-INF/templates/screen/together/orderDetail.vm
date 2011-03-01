@@ -35,7 +35,10 @@
 	<div>参加人</div>
 	<ul>
 	#foreach($orderUser in $confirmedJoiners)
-		<li>$orderUser.realName $orderUser.phone #if($isCreatorSelf) <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'removeUserFromOrder').add('id', $orderUser.id)">移除该用户</a> #end</li>
+		<li>$orderUser.realName $orderUser.phone #if($isCreatorSelf) 
+		#if ($order.status != 20)
+			<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'removeUserFromOrder').add('id', $orderUser.id)">移除该用户</a> #end</li>
+		#end
 	#end
 	</ul>
 #end
@@ -44,9 +47,6 @@
 #if ($order.status == 20)
 	## 已经确认
 	该拼车已经确认
-#elseif ($order.status == 30)
-	## 已经完成
-	该拼车已经完成
 #else
 	## 拼车单待确认
 	
