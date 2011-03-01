@@ -11,6 +11,11 @@ public class OrderBOImpl implements OrderBO {
 
 	private OrderDAO orderDAO;
 	
+	@Override
+	public void delete(long id) {
+		orderDAO.delete(id);
+	}
+
 	public List<OrderDO> queryRecentOrders(int cityId) {
 		return orderDAO.queryRecentOrders(cityId);
 	}

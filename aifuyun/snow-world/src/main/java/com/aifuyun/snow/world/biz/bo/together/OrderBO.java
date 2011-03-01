@@ -11,6 +11,8 @@ import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
  */
 public interface OrderBO {
 
+	void delete(long id);
+	
 	/**
 	 * 创建拼车单
 	 * @param togetherOrderDO

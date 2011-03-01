@@ -9,8 +9,7 @@ public enum OrderStatusEnum {
 	NOT_EFFECT(0, "未生效"),
 	WAIT_CONFIRM(10, "待确认"),
 	HAS_CONFIRM(20, "已确认"),
-	FINISH(30, "已完成")
-	;
+	FINISH(30, "已完成");
 	
 	private OrderStatusEnum(int value, String name) {
 		this.value = value;

@@ -66,7 +66,7 @@
 	
 	#set($leftSeatCount = $!order.totalSeats - $joinersCount )
 	#if ($isCreatorSelf)
-		你是该拼单的创建者， <a href="#">取消该拼车</a>
+		你是该拼单的创建者， <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'cancelOrder').add('orderId', $order.id)">取消该拼车</a>
 		#if ($showConfirmOrderBtn)
 			<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmTogetherOrder').add('orderId', $order.id)">确认该拼车</a>
 		#end
