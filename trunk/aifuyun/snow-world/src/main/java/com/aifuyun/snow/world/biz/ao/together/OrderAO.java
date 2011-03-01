@@ -11,6 +11,18 @@ import com.zjuh.sweet.result.Result;
  */
 public interface OrderAO {
 
+	/**
+	 * 取消拼车（创建人发起）
+	 * @param orderId
+	 * @return
+	 */
+	Result cancelOrder(long orderId);
+	
+	/**
+	 * 确认拼车
+	 * @param orderId
+	 * @return
+	 */
 	Result confirmTogetherOrder(long orderId);
 	
 	/**

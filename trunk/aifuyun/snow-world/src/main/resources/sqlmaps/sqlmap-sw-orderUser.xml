@@ -95,6 +95,7 @@
 					</isNotEqual>
 					and u.deleted = 0 
 			)
+			and t.deleted = 0
 	</select>
 	
 	<select id="queryByOrderId" resultMap="orderUserMapping" parameterClass="long">

@@ -40,6 +40,38 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	private UserBO userBO;
 	
 	@Override
+	public Result cancelOrder(long orderId) {
+		Result result = new ResultSupport(false);
+		try {
+			OrderDO order = orderBO.queryById(orderId);
+			if (order == null) {
+				// 拼车不存在
+				result.setResultCode(OrderResultCodes.ORDER_NOT_EXIST);
+				return result;
+			}
+			final long userId = this.getLoginUserId();
+			if (order.getCreatorId() != userId) {
+				// 不能编辑其他人的拼车
+				result.setResultCode(OrderResultCodes.CANNOT_EDIT_OTHERS_ORDER);
+				return result;
+			}
+			
+			if (OrderStatusEnum.HAS_CONFIRM == order.getOrderStatusEnum()) {
+				// 该订单已经确认了，不能取消。
+				result.setResultCode(OrderResultCodes.CAN_NOT_CANCEL_BY_CONFIRMED);
+				return result;
+			}
+			
+			orderBO.delete(orderId);
+			
+			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("取消拼车失败", e);
+		}
+		return result;
+	}
+
+	@Override
 	public Result confirmTogetherOrder(long orderId) {
 		Result result = new ResultSupport(false);
 		try {

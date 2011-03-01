@@ -28,6 +28,21 @@ public class OrderAction extends BaseAction {
 	private OrderAO orderAO;
 	
 	@DefaultTarget("together/orderDetail")
+	public void doCancelOrder(RunData rundata, TemplateContext templateContext) {
+		long orderId = rundata.getQueryString().getLong("orderId");
+		Result result = orderAO.cancelOrder(orderId);
+		if (result.isSuccess()) {
+			redirect2CancelOrderSuccessPage();
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
+	}
+	
+	private void redirect2CancelOrderSuccessPage() {
+		this.sendRedirect("snowModule", "together/cancelOrderSuccess.vm");
+	}
+	
+	@DefaultTarget("together/orderDetail")
 	public void doConfirmTogetherOrder(RunData rundata, TemplateContext templateContext) {
 		long orderId = rundata.getQueryString().getLong("orderId");
 		Result result = orderAO.confirmTogetherOrder(orderId);

@@ -50,5 +50,7 @@ public class OrderResultCodes extends ResultCode {
 	
 	public static final ResultCode INVALID_ROLE_VALUE = ResultCode.create();
 	
+	public static final ResultCode CAN_NOT_CANCEL_BY_CONFIRMED = ResultCode.create();
+	
 	
 }
