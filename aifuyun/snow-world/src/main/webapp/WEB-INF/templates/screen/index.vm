@@ -1,6 +1,8 @@
 Ê×Ò³
 
-<div>³ÇÊÐÇÐ»»</div>
+<div>
+<a href="$snowModule.setTarget('city/cityList')">ÇÐ»»³ÇÊÐ</a>
+</div>
 
 <div><a href="$snowModule.setTarget('user/reg')">×¢²á</a></div>
 <div><a href="$snowModule.setTarget('login')">µÇÂ½</a></div>
