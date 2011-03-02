@@ -35,6 +35,7 @@
 				<value>user/regSuccess</value>
 				<value>together/orderDetail</value>
 				<value>userFacadeAction</value>
+				<value>city/cityList</value>
 			</set>
 		</property>
 	</bean>
