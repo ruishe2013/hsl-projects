@@ -34,7 +34,13 @@ public class BaseModule {
 	
 	protected Cookie getCookie(String name) {
 		Cookie[] cookies = SplistContext.getRequest().getCookies();
+		if (cookies == null) {
+			return null;
+		}
 		for (Cookie ck : cookies) {
+			if (ck == null) {
+				continue;
+			}
 			if (StringUtil.equals(name, ck.getName())) {
 				return ck;
 			}
