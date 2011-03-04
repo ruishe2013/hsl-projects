@@ -1,6 +1,7 @@
 package com.aifuyun.snow.world.biz.bo.user;
 
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
+import com.aifuyun.snow.world.dal.dataobject.user.ExtUserDO;
 
 /**
  * @author pister
@@ -69,5 +70,13 @@ public interface UserBO {
 	 * @param baseUserDO
 	 */
 	void update(BaseUserDO baseUserDO);
+	
+	public void createExtUser(ExtUserDO extUserDO);
+	
+	public ExtUserDO queryExtUser(long userId);
+	
+	public void updateExtUser(ExtUserDO extUserDO);
+	
+	public void delete(long id);
 	
 }

@@ -2,12 +2,14 @@ package com.aifuyun.snow.world.web.common.base;
 
 import java.io.IOException;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
+import com.aifuyun.snow.world.common.IpUtil;
 import com.zjuh.splist.core.SplistContext;
 import com.zjuh.splist.core.module.URLModule;
 import com.zjuh.splist.core.module.URLModuleContainer;
@@ -16,6 +18,7 @@ import com.zjuh.splist.web.TemplateContext;
 import com.zjuh.splist.web.uri.BaseURI;
 import com.zjuh.splist.web.uri.UrlUtil;
 import com.zjuh.sweet.author.AuthorConstants;
+import com.zjuh.sweet.lang.StringUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultCode;
 import com.zjuh.sweet.result.ResultTypeEnum;
@@ -28,6 +31,36 @@ import com.zjuh.sweet.result.ResultTypeEnum;
 public class BaseModule {
 	
 	protected final Logger log = LoggerFactory.getLogger(getClass());
+	
+	protected Cookie getCookie(String name) {
+		Cookie[] cookies = SplistContext.getRequest().getCookies();
+		for (Cookie ck : cookies) {
+			if (StringUtil.equals(name, ck.getName())) {
+				return ck;
+			}
+		}
+		return null;		
+	}
+	
+	protected String getCookieValue(String name) {
+		return getCookieValue(name, null);
+	}
+	
+	protected String getCookieValue(String name, String defaultValue) {
+		Cookie ck = getCookie(name);
+		if (ck == null) {
+			return defaultValue;
+		}
+		String value = ck.getValue();
+		if (value == null) {
+			return defaultValue;
+		}
+		return value;
+	}
+	
+	protected String getRemoteAddress() {
+		return IpUtil.getRemoteIpAddress();
+	}
 	
 	/**
 	 * 获取当前的  url

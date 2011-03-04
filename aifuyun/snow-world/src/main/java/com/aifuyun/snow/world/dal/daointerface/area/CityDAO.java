@@ -33,6 +33,8 @@ public interface CityDAO {
 	 */
 	List<CityDO> queryByProvinceId(int provinceId);
 	
+	List<CityDO> queryByProvinceIds(List<Integer> provinceIds);
+	
 	/**
 	 * É¾³ý
 	 * @param id

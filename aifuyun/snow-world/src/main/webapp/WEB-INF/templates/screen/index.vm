@@ -1,6 +1,8 @@
 Ê×Ò³
 
 <div>
+$control.setTemplate('common/citySelected.vm')
+
 <a href="$snowModule.setTarget('city/cityList')">ÇÐ»»³ÇÊÐ</a>
 </div>
 

@@ -29,6 +29,12 @@ public class CityDAOIbatis extends BaseIbatisDAO implements CityDAO {
 		return (List<CityDO>)getSqlMapClientTemplate().queryForList("CityDAO.queryByProvinceId", provinceId);
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CityDO> queryByProvinceIds(List<Integer> provinceIds) {
+		return (List<CityDO>)getSqlMapClientTemplate().queryForList("CityDAO.queryByProvinceIds", provinceIds);
+	}
+
 	@Override
 	public void delete(int id) {
 		getSqlMapClientTemplate().update("CityDAO.delete", id);
