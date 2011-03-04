@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="ExtUserDAO">
+
+	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.user.ExtUserDO" alias="extUser" />
+
+	<resultMap id="ExtUserMapping" class="extUser">
+		<result property="gmtModified" column="gmt_modified"/>
+		<result property="lastLoginIp" column="last_login_ip"/>
+		<result property="lastSelectCity" column="last_select_city"/>
+		<result property="username" column="username"/>
+		<result property="gmtCreate" column="gmt_create"/>
+		<result property="badScore" column="bad_score"/>
+		<result property="lastLoginDate" column="last_login_date"/>
+		<result property="goodScore" column="good_score"/>
+		<result property="userId" column="user_id"/>
+		<result property="middleScore" column="middle_score"/>
+		<result property="lastSelectCityId" column="last_select_city_id"/>
+	</resultMap>
+
+	<sql id="extUser-full-columns">
+		t.gmt_modified, t.last_login_ip, t.last_select_city, t.username, t.gmt_create, t.bad_score, t.last_login_date, t.good_score, t.user_id, t.middle_score, t.last_select_city_id
+	</sql>
+
+	<insert id="create" parameterClass="extUser">
+		<![CDATA[
+			insert into sw_ext_user(gmt_modified, last_login_ip, last_select_city, username, gmt_create, bad_score, last_login_date, good_score, user_id, middle_score, last_select_city_id) 
+				values (now(), #lastLoginIp#, #lastSelectCity#, #username#, now(), #badScore#, #lastLoginDate#, #goodScore#, #userId#, #middleScore#, #lastSelectCityId#)
+		]]>
+	</insert>
+	
+	<select id="queryByUserId" resultMap="ExtUserMapping" parameterClass="long">
+		select
+			<include refid="extUser-full-columns"/>
+		from
+			sw_ext_user t
+		where
+			t.deleted = 0 and t.user_id = #value#
+	</select>
+	
+	<update id="delete" parameterClass="long">
+		update sw_ext_user t set t.deleted = 1, t.gmt_modified = NOW() where t.user_id = #value#
+	</update>
+	
+	<update id="update" parameterClass="extUser">
+		<![CDATA[
+			update sw_ext_user set 
+					gmt_modified= now(),
+					last_login_ip= #lastLoginIp#,
+					last_select_city= #lastSelectCity#,
+					username= #username#,
+					bad_score= #badScore#,
+					last_login_date= #lastLoginDate#,
+					good_score= #goodScore#,
+					user_id= #userId#,
+					middle_score= #middleScore#,
+					last_select_city_id= #lastSelectCityId#
+			where user_id = #userId# and deleted = 0
+		]]>
+	</update>
+
+</sqlMap>

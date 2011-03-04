@@ -5,6 +5,7 @@
 <beans default-autowire="byName">
 	
 	<bean id="baseUserDAO" class="com.aifuyun.snow.world.dal.ibatis.user.BaseUserDAOIbatis"></bean>
+	<bean id="extUserDAO" class="com.aifuyun.snow.world.dal.ibatis.user.ExtUserDAOIbatis"></bean>
 	<bean id="provinceDAO" class="com.aifuyun.snow.world.dal.ibatis.area.ProvinceDAOIbatis"></bean>
 	<bean id="cityDAO" class="com.aifuyun.snow.world.dal.ibatis.area.CityDAOIbatis"></bean>
 	<bean id="cityIpDAO" class="com.aifuyun.snow.world.dal.ibatis.area.CityIpDAOIbatis"></bean>

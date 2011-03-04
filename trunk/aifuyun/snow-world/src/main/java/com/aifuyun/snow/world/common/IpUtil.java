@@ -1,5 +1,8 @@
 package com.aifuyun.snow.world.common;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.zjuh.splist.core.SplistContext;
 import com.zjuh.sweet.lang.ConvertUtil;
 import com.zjuh.sweet.lang.StringUtil;
 
@@ -23,6 +26,15 @@ public class IpUtil {
 		ret |= (part2 << 8);
 		ret |= (part3);
 		return ret;		
+	}
+	
+	public static String getRemoteIpAddress() {
+		HttpServletRequest request = SplistContext.getRequest();
+		String addrFromProxy = request.getHeader("x-forwarded-for");
+		if (addrFromProxy != null) {
+			return addrFromProxy;
+		}
+		return request.getRemoteAddr();
 	}
 	
 	public static void main(String[] args) {

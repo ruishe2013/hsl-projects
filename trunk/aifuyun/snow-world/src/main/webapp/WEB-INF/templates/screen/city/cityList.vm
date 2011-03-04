@@ -1,1 +1,14 @@
-cityList
+城市列表
+
+#foreach($entry in $province2Cities.entrySet())
+	#set($provice = $entry.key)
+	#set($cities = $entry.value)
+	<div>
+		<div>$provice.name</div>
+		<div>
+		#foreach($city in $cities)
+			$city.name 
+		#end
+		</div>
+	</div>
+#end

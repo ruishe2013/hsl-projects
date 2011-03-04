@@ -9,7 +9,7 @@ import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 public class CityBOImpl implements CityBO {
 	
 	private CityDAO cityDAO;
-
+	
 	public int create(CityDO cityDO) {
 		return cityDAO.create(cityDO);
 	}
@@ -20,6 +20,11 @@ public class CityBOImpl implements CityBO {
 	
 	public CityDO queryById(int id) {
 		return cityDAO.queryById(id);
+	}
+
+	@Override
+	public List<CityDO> queryByProvinceIds(List<Integer> provinceIds) {
+		return cityDAO.queryByProvinceIds(provinceIds);
 	}
 
 	public List<CityDO> queryByProvinceId(int provinceId) {

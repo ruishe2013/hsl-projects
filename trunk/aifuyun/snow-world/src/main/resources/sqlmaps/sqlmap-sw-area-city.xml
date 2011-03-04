@@ -45,6 +45,21 @@
 			t.province_id = #value# and t.deleted = 0
 	</select>
 	
+	<select id="queryByProvinceIds" resultMap="cityMapping" parameterClass="list">
+		select
+			<include refid="city-full-columns"/>
+		from
+			sw_area_city t
+		where
+			t.province_id in
+			(
+			<iterate conjunction=","> #[]# </iterate>
+			) 
+			and t.deleted = 0
+	</select>
+	
+	
+	
 	<update id="delete" parameterClass="int">
 		update sw_area_city t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
 	</update>

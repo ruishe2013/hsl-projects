@@ -28,6 +28,23 @@ create index ind_base_user_nick on sw_base_user(username, deleted);
 create index ind_base_user_email on sw_base_user(email, deleted);
 
 
+DROP TABLE IF EXISTS sw_ext_user;
+create table sw_ext_user (
+	user_id bigint not null primary key,
+	username varchar(60) not null,
+	last_login_ip varchar(120),
+	last_select_city varchar(100),
+	last_select_city_id int default 0,
+	bad_score int default 0,
+	good_score int default 0,
+	middle_score int default 0,
+	last_login_date datetime,
+	deleted tinyint default 0 not null,
+	gmt_create datetime not null,
+	gmt_modified datetime not null
+) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+
+
 DROP TABLE IF EXISTS sw_area_province;
 create table sw_area_province (
 	id int primary key auto_increment,
@@ -88,7 +105,6 @@ create table sw_order (
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
 create index ind_city_id on sw_order(city_id, deleted, gmt_modified);
-
 
 DROP TABLE IF EXISTS sw_order_user;
 create table sw_order_user (

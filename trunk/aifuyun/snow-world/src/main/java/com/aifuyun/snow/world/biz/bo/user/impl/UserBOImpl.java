@@ -4,7 +4,9 @@ import java.util.Set;
 
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.dal.daointerface.user.BaseUserDAO;
+import com.aifuyun.snow.world.dal.daointerface.user.ExtUserDAO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
+import com.aifuyun.snow.world.dal.dataobject.user.ExtUserDO;
 import com.zjuh.sweet.codec.MD5;
 import com.zjuh.sweet.lang.CollectionUtil;
 
@@ -12,7 +14,27 @@ public class UserBOImpl implements UserBO {
 
 	private BaseUserDAO baseUserDAO;
 	
+	private ExtUserDAO extUserDAO;
+	
 	private Set<String> sensitivitiesList = CollectionUtil.newHashSet();
+	
+	public void createExtUser(ExtUserDO extUserDO) {
+		extUserDAO.create(extUserDO);
+	}
+	
+	public ExtUserDO queryExtUser(long userId) {
+		return extUserDAO.queryByUserId(userId);
+	}
+	
+	
+	public void updateExtUser(ExtUserDO extUserDO) {
+		extUserDAO.update(extUserDO);
+	}
+	
+	public void delete(long id) {
+		baseUserDAO.delete(id);
+		extUserDAO.delete(id);
+	}
 	
 	@Override
 	public void update(BaseUserDO baseUserDO) {
@@ -67,6 +89,14 @@ public class UserBOImpl implements UserBO {
 
 	public void setSensitivitiesList(Set<String> sensitivitiesList) {
 		this.sensitivitiesList = sensitivitiesList;
+	}
+
+	public ExtUserDAO getExtUserDAO() {
+		return extUserDAO;
+	}
+
+	public void setExtUserDAO(ExtUserDAO extUserDAO) {
+		this.extUserDAO = extUserDAO;
 	}
 
 }
