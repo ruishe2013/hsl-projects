@@ -16,6 +16,7 @@ $control.setTemplate('common/citySelected.vm').addAttribute('selectedCity', $sel
 	城市<input type="text" name="fromCity" />
 	出发地<input type="text" name="fromAddr" />
 	目的地<input type="text" name="toAddr" />
+	出发时间<input type="text" name="fromDate" />
 	<input type="submit" value="搜索" />
 </form>
 
