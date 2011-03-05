@@ -6,7 +6,6 @@ import javax.servlet.http.HttpSession;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.user.LoginAO;
-import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
 import com.aifuyun.snow.world.common.IpUtil;
@@ -22,8 +21,6 @@ import com.zjuh.sweet.result.ResultTypeEnum;
 
 public class LoginAOImpl extends BaseAO implements LoginAO {
 
-	private UserBO userBO;
-	
 	public Result handleLogin(BaseUserDO inputUser) {
 		Result result = new ResultSupport(false);
 		try {
@@ -97,10 +94,6 @@ public class LoginAOImpl extends BaseAO implements LoginAO {
 			log.error("´¦ÀíµÇÂ¼´íÎó", e);
 		}		
 		return result;
-	}
-
-	public void setUserBO(UserBO userBO) {
-		this.userBO = userBO;
 	}
 
 }

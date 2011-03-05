@@ -1,7 +1,7 @@
 首页
 
 <div>
-$control.setTemplate('common/citySelected.vm')
+$control.setTemplate('common/citySelected.vm').addAttribute('selectedCity', $selectedCity)
 
 <a href="$snowModule.setTarget('city/cityList')">切换城市</a>
 </div>
@@ -9,7 +9,17 @@ $control.setTemplate('common/citySelected.vm')
 <div><a href="$snowModule.setTarget('user/reg')">注册</a></div>
 <div><a href="$snowModule.setTarget('login')">登陆</a></div>
 
-<div>搜索拼车信息</div>
+<div>
+
+<form>
+搜索拼车信息
+	城市<input type="text" name="fromCity" />
+	出发地<input type="text" name="fromAddr" />
+	目的地<input type="text" name="toAddr" />
+	<input type="submit" value="搜索" />
+</form>
+
+</div>
 
 <div><a href="$snowModule.setTarget('together/createTaxiOrder')">发布拼车</a></div>
 

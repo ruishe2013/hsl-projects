@@ -8,5 +8,7 @@
 	<bean id="loginAO" class="com.aifuyun.snow.world.biz.ao.user.impl.LoginAOImpl"></bean>
 	<bean id="orderAO" class="com.aifuyun.snow.world.biz.ao.together.impl.OrderAOImpl"></bean>
 	<bean id="cityAO" class="com.aifuyun.snow.world.biz.ao.area.impl.CityAOImpl"></bean>
+	<bean id="snowWorldAO" class="com.aifuyun.snow.world.biz.ao.misc.impl.SnowWorldAOImpl"></bean>
 	
+
 </beans>
