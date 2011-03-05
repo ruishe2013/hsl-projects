@@ -15,6 +15,8 @@ import com.aifuyun.snow.world.biz.bo.misc.CookieBO;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.biz.resultcodes.CityResultCode;
 import com.aifuyun.snow.world.common.CookieNames;
+import com.aifuyun.snow.world.common.cache.CacheContants;
+import com.aifuyun.snow.world.common.cache.CacheManager;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.area.CityIpDO;
 import com.aifuyun.snow.world.dal.dataobject.area.ProvinceDO;
@@ -35,6 +37,8 @@ public class CityAOImpl extends BaseAO implements CityAO {
 	private ProvinceBO provinceBO;
 	
 	private CookieBO cookieBO;
+	
+	private CacheManager cacheManager;
 	
 	private int defaultCityId = 1;
 	
@@ -86,22 +90,23 @@ public class CityAOImpl extends BaseAO implements CityAO {
 	}
 
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Result queryAllProviceAndCities() {
 		Result result = new ResultSupport(false);
 		try {
-			// TODO 这里基本不会变，可以加入缓存
-			
-			Map<ProvinceDO, List<CityDO>> province2Cities = CollectionUtil.newTreeMap();
-			List<ProvinceDO> provinces = provinceBO.queryAll();
-			for (ProvinceDO province : provinces) {
-				List<CityDO> cities = cityBO.queryByProvinceId(province.getId());
-				
-				Collections.sort(cities);
-				
-				province2Cities.put(province, cities);
+			Map<ProvinceDO, List<CityDO>>  province2Cities =  (Map<ProvinceDO, List<CityDO>>)cacheManager.get(CacheContants.CITY_LIST_KEY, CacheContants.DEFAULT_KEY);
+			if (province2Cities == null) {
+				// 没有就创建
+				province2Cities = CollectionUtil.newTreeMap();
+				List<ProvinceDO> provinces = provinceBO.queryAll();
+				for (ProvinceDO province : provinces) {
+					List<CityDO> cities = cityBO.queryByProvinceId(province.getId());
+					Collections.sort(cities);
+					province2Cities.put(province, cities);
+				}
+				cacheManager.put(CacheContants.CITY_LIST_KEY, CacheContants.DEFAULT_KEY, province2Cities);
 			}
-			
 			result.getModels().put("province2Cities", province2Cities);			
 			result.setSuccess(true);
 		} catch (Exception e) {
@@ -191,6 +196,10 @@ public class CityAOImpl extends BaseAO implements CityAO {
 
 	public void setCookieBO(CookieBO cookieBO) {
 		this.cookieBO = cookieBO;
+	}
+
+	public void setCacheManager(CacheManager cacheManager) {
+		this.cacheManager = cacheManager;
 	}
 
 }
