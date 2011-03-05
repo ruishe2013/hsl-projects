@@ -26,6 +26,10 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 			if (city != null) {
 				cityId = city.getId();
 			}
+			
+			// TODO 发布拼车时没有记录城市信息，这里暂时为0
+			cityId = 0;
+			
 			List<OrderDO> recentOrders = orderBO.queryRecentOrders(cityId);
 			result.getModels().put("recentOrders", recentOrders);
 			result.getModels().put("selectedCity", city);
