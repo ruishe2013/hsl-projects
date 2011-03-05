@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="GB18030"?>
 <uri-config>
+
 	<content-uri name="snowModule" turbine="true">
 		<serverURI>${snow.word.url}</serverURI>
 	</content-uri>
