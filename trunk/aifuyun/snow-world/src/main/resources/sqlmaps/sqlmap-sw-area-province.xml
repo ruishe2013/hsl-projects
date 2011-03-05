@@ -42,6 +42,8 @@
 			sw_area_province t
 		where
 			t.deleted = 0
+		order
+			by seq_num desc
 	</select>
 	
 	<update id="delete" parameterClass="int">

@@ -4,12 +4,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
+
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.area.CityAO;
 import com.aifuyun.snow.world.biz.bo.area.CityBO;
 import com.aifuyun.snow.world.biz.bo.area.CityIpBO;
 import com.aifuyun.snow.world.biz.bo.area.ProvinceBO;
+import com.aifuyun.snow.world.biz.bo.misc.CookieBO;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
+import com.aifuyun.snow.world.biz.resultcodes.CityResultCode;
+import com.aifuyun.snow.world.common.CookieNames;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.area.CityIpDO;
 import com.aifuyun.snow.world.dal.dataobject.area.ProvinceDO;
@@ -29,8 +34,58 @@ public class CityAOImpl extends BaseAO implements CityAO {
 	
 	private ProvinceBO provinceBO;
 	
+	private CookieBO cookieBO;
+	
 	private int defaultCityId = 1;
 	
+	private int selectedCityCookieExpire = 30 * 24 * 3600; // 30天过期
+	
+	@Override
+	public Result switchCity(int cityId) {
+		Result result = new ResultSupport(false);
+		try {
+			CityDO city = cityBO.queryById(cityId);
+			if (city == null) {
+				result.setResultCode(CityResultCode.CITY_NOT_EXIST);
+				return result;
+			}
+			
+			long userId = this.getLoginUserId();
+			if (userId > 0L) {
+				// 只有登录用户才会记录到数据库
+				saveToDatabase(city, userId);
+			}
+			
+			// 不管用户登录与否，都会记录到cookie
+			saveCityInfoToCookie(city);
+			
+			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("切换城市失败", e);
+		}
+		return result;
+	}
+	
+	private void saveCityInfoToCookie(CityDO city) {
+		Cookie cookie = new Cookie(CookieNames.LAST_SELECT_CITY_ID, String.valueOf(city.getId()));
+		cookie.setMaxAge(selectedCityCookieExpire);
+		//cookie.setDomain(".yiliangche.com");
+		cookieBO.writeCookie(cookie);
+	}
+	
+	private void saveToDatabase(CityDO city, long userId) {
+		ExtUserDO extUser = userBO.queryExtUser(userId);
+		if (extUser == null) {
+			// 由于在用户登录的时候会更新extUser信息，
+			// 所以这个对象肯定会存在，为防止一些数据不一致的问题，这里就执行返回
+			return;
+		}
+		extUser.setLastSelectCity(city.getName());
+		extUser.setLastSelectCityId(city.getId());
+		userBO.updateExtUser(extUser);
+	}
+
+
 	@Override
 	public Result queryAllProviceAndCities() {
 		Result result = new ResultSupport(false);
@@ -57,7 +112,7 @@ public class CityAOImpl extends BaseAO implements CityAO {
 
 
 	@Override
-	public Result querySelectedCity(String ipAddress, String cityIdFromCookie) {
+	public Result querySelectedCity(String ipAddress) {
 		Result result = new ResultSupport(false);
 		try {
 			CityDO selectedCity = null;
@@ -70,6 +125,7 @@ public class CityAOImpl extends BaseAO implements CityAO {
 			
 			if (selectedCity == null) {
 				// 从cookie中取
+				String cityIdFromCookie = cookieBO.getCookieValue(CookieNames.LAST_SELECT_CITY_ID);
 				int cityId = ConvertUtil.toInt(cityIdFromCookie, 0);
 				if (cityId != 0) {
 					selectedCity = cityBO.queryById(cityId);
@@ -131,6 +187,10 @@ public class CityAOImpl extends BaseAO implements CityAO {
 
 	public void setProvinceBO(ProvinceBO provinceBO) {
 		this.provinceBO = provinceBO;
+	}
+
+	public void setCookieBO(CookieBO cookieBO) {
+		this.cookieBO = cookieBO;
 	}
 
 }

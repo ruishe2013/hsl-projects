@@ -50,11 +50,11 @@ create table sw_area_province (
 	id int primary key auto_increment,
 	name varchar(30) not null,
 	pinyin varchar(60),
+	seq_num int default 0 not null,
 	deleted tinyint default 0 not null,
 	gmt_create datetime not null,
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
-
 
 
 DROP TABLE IF EXISTS sw_area_city;
@@ -63,11 +63,13 @@ create table sw_area_city (
 	name varchar(30) not null,
 	pinyin varchar(60),
 	province_id int default 0 not null,
+	seq_num int default 0 not null,
 	deleted tinyint default 0 not null,
 	gmt_create datetime not null,
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
-create index ind_city_prov_id on sw_area_city(province_id, deleted);
+create index ind_city_prov_id on sw_area_city(province_id, deleted, seq_num);
+
 
 
 DROP TABLE IF EXISTS sw_area_city_ip;

@@ -7,11 +7,12 @@ public interface CityAO {
 	/**
 	 * 获取选择的城市
 	 * @param ipAddress
-	 * @param cityIdFromCookie 
 	 * @return
 	 */
-	Result querySelectedCity(String ipAddress, String cityIdFromCookie);
+	Result querySelectedCity(String ipAddress);
 	
 	Result queryAllProviceAndCities();
+	
+	Result switchCity(int cityId);
 
 }

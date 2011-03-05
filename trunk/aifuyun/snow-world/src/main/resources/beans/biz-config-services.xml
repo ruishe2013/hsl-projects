@@ -30,6 +30,7 @@
 		<property name="unprotectedUrls">
 			<set>
 				<value>index</value>
+				<value>city/switchCityAction</value>
 				<value>common/checkCode</value>
 				<value>user/reg</value>
 				<value>user/regSuccess</value>

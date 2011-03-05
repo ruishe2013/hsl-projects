@@ -7,7 +7,8 @@
 		<div>$provice.name</div>
 		<div>
 		#foreach($city in $cities)
-			$city.name 
+			<a href="$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity').add('cityId', $city.id)">$city.name</a>
+			
 		#end
 		</div>
 	</div>

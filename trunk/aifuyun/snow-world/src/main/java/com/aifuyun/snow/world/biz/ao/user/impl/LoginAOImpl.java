@@ -1,5 +1,7 @@
 package com.aifuyun.snow.world.biz.ao.user.impl;
 
+import java.util.Date;
+
 import javax.servlet.http.HttpSession;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
@@ -7,7 +9,9 @@ import com.aifuyun.snow.world.biz.ao.user.LoginAO;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
+import com.aifuyun.snow.world.common.IpUtil;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
+import com.aifuyun.snow.world.dal.dataobject.user.ExtUserDO;
 import com.zjuh.splist.core.SplistContext;
 import com.zjuh.sweet.author.LoginContext;
 import com.zjuh.sweet.author.SessionConstants;
@@ -48,6 +52,8 @@ public class LoginAOImpl extends BaseAO implements LoginAO {
 			session.setAttribute(SessionConstants.USER_ID_KEY, userDO.getId());
 			session.setAttribute(SessionConstants.USER_NAME_KEY, userDO.getUsername());
 			
+			handleUpadate(userDO);
+			
 			result.setSuccess(true);
 		} catch (Exception e) {
 			result.setResultCode(CommonResultCodes.SYSTEM_ERROR);
@@ -55,6 +61,22 @@ public class LoginAOImpl extends BaseAO implements LoginAO {
 			log.error("´¦ÀíµÇÂ¼´íÎó", e);
 		}		
 		return result;
+	}
+	
+	private void handleUpadate(BaseUserDO userDO) {
+		ExtUserDO extUser = userBO.queryExtUser(userDO.getId());
+		if (extUser == null) {
+			extUser = new ExtUserDO();
+			extUser.setLastLoginDate(new Date());
+			extUser.setLastLoginIp(IpUtil.getRemoteIpAddress());
+			extUser.setUserId(userDO.getId());
+			extUser.setUsername(userDO.getUsername());
+			userBO.createExtUser(extUser);
+		} else {
+			extUser.setLastLoginDate(new Date());
+			extUser.setLastLoginIp(IpUtil.getRemoteIpAddress());
+			userBO.updateExtUser(extUser);
+		}
 	}
 
 	public Result handleLogout() {
