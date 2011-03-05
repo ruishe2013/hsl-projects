@@ -2,7 +2,6 @@ package com.aifuyun.snow.world.biz.ao.user.impl;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
-import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
 import com.aifuyun.snow.world.common.SnowUtils;
@@ -14,8 +13,6 @@ import com.zjuh.sweet.result.ResultTypeEnum;
 
 public class UserAOImpl extends BaseAO implements UserAO {
 
-	private UserBO userBO;
-	
 	@Override
 	public Result modifyPersonalInfo(BaseUserDO inputBaseUser) {
 		Result result = new ResultSupport(false);
@@ -130,10 +127,6 @@ public class UserAOImpl extends BaseAO implements UserAO {
 	
 	private boolean isUserExistByEmail(String email) {
 		return null != userBO.queryByEmailIgnoreDeletedFlag(email);
-	}
-
-	public void setUserBO(UserBO userBO) {
-		this.userBO = userBO;
 	}
 
 }

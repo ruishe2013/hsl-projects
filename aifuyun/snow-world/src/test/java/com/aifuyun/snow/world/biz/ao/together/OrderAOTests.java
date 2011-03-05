@@ -23,14 +23,6 @@ import com.zjuh.sweet.result.Result;
  */
 public class OrderAOTests extends SnowWorldTest {
 	
-	public void testConfirmOrder() throws ParseException {
-		String username = "hello_test_name1235";
-		long userId = createUser(username);
-		setLogin(userId, username);
-		long orderId = createOrderByCreator(userId , username);
-		// TODO 完成确认发起拼车的单元测试
-	}
-	
 	public void testViewPersonalInfoForOrder() throws ParseException {
 		this.setLogout();
 		Result result = orderAO.viewPersonalInfoForOrder(0, false);

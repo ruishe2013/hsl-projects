@@ -7,7 +7,6 @@ import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.together.OrderAO;
 import com.aifuyun.snow.world.biz.bo.together.OrderBO;
 import com.aifuyun.snow.world.biz.bo.together.OrderUserBO;
-import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.biz.query.OrderQuery;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.OrderResultCodes;
@@ -36,8 +35,6 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	private OrderBO orderBO;
 	
 	private OrderUserBO orderUserBO;
-	
-	private UserBO userBO;
 	
 	@Override
 	public Result cancelOrder(long orderId) {
@@ -448,21 +445,6 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	}
 	
 	@Override
-	public Result handleForIndex(int cityId) {
-		Result result = new ResultSupport(false);
-		try {
-			List<OrderDO> recentOrders = orderBO.queryRecentOrders(cityId);
-			
-			result.getModels().put("recentOrders", recentOrders);
-			
-			result.setSuccess(true);
-		} catch (Exception e) {
-			log.error("查看最近拼车失败", e);
-		}
-		return result;
-	}
-
-	@Override
 	public Result viewMyOrders(OrderQuery orderQuery) {
 		Result result = new ResultSupport(false);
 		try {
@@ -804,10 +786,6 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 
 	public void setOrderUserBO(OrderUserBO orderUserBO) {
 		this.orderUserBO = orderUserBO;
-	}
-
-	public void setUserBO(UserBO userBO) {
-		this.userBO = userBO;
 	}
 
 }
