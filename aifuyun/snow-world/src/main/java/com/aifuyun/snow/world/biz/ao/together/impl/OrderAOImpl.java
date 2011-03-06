@@ -12,6 +12,7 @@ import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.OrderResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
 import com.aifuyun.snow.world.common.SnowUtils;
+import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
@@ -36,6 +37,28 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	
 	private OrderUserBO orderUserBO;
 	
+	@Override
+	public Result viewCreateTaxiOrder() {
+		Result result = new ResultSupport(false);
+		try {
+			CityDO city = getSelectedCity(0);
+			if (city != null) {
+				OrderDO order = new OrderDO();
+				order.setCityId(city.getId());
+				order.setArriveCityId(city.getId());
+				order.setFromCity(city.getName());
+				order.setArriveCity(city.getName());
+				// 座位数暂时设置为4个
+				order.setTotalSeats(4);				
+				result.getModels().put("order", order);
+			}
+			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("流量创建拼车页出错", e);
+		}
+		return result;
+	}
+
 	@Override
 	public Result cancelOrder(long orderId) {
 		Result result = new ResultSupport(false);

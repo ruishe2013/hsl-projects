@@ -103,10 +103,10 @@ public class CityAOImpl extends BaseAO implements CityAO {
 
 
 	@Override
-	public Result querySelectedCity(String ipAddress) {
+	public Result querySelectedCity() {
 		Result result = new ResultSupport(false);
 		try {
-			CityDO selectedCity = this.querySelectedCity(ipAddress, defaultCityId);
+			CityDO selectedCity = this.getSelectedCity(defaultCityId);
 			result.getModels().put("selectedCity", selectedCity);			
 			result.setSuccess(true);
 		} catch (Exception e) {

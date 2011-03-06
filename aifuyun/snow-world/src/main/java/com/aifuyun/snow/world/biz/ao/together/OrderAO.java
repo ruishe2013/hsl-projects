@@ -105,4 +105,6 @@ public interface OrderAO {
 	// TODO 单元测试待完成
 	Result viewMyOrders(OrderQuery orderQuery);
 	
+	Result viewCreateTaxiOrder();
+	
 }

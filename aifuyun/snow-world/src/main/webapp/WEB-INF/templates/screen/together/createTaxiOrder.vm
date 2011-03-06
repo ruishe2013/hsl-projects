@@ -12,9 +12,18 @@
 		<input type="hidden" name="actionTarget" value="together/orderAction" />
 		<input type="hidden" name="actionEvent" value="createTaxiOrder" />
 		
+		<input type="hidden" id="$!form.fields.cityId.name" name="$!form.fields.cityId.name" value="$!form.fields.cityId.value" />
+		#errorMessage($!form.fields.cityId.message)
+		#errorMessage($!form.fields.cityId.message)
+		
+		<input type="hidden" id="$!form.fields.arriveCityId.name" name="$!form.fields.arriveCityId.name" value="$!form.fields.arriveCityId.value" />
+		#errorMessage($!form.fields.arriveCityId.message)
+		#errorMessage($!form.fields.arriveCityId.message)
+		
 		<div class="input-item">
 			出发地：
-			出发城市<input type="text" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value"/>
+			出发城市<input type="text" readonly="true" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value"/>
+			<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'cityId').add('onName', 'fromCity')" target="_blank">更换城市...</a>
 			出发地<input type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value"/>
 		</div>
 		#errorMessage($!form.fields.fromCity.message)
@@ -22,7 +31,8 @@
 		
 		<div class="input-item">
 			目的地：
-			目的城市<input type="text" id="$!form.fields.arriveCity.name" name="$!form.fields.arriveCity.name" value="$!form.fields.arriveCity.value"/>
+			目的城市<input type="text" readonly="true" id="$!form.fields.arriveCity.name" name="$!form.fields.arriveCity.name" value="$!form.fields.arriveCity.value"/>
+			<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'arriveCityId').add('onName', 'arriveCity')" target="_blank">更换城市...</a>
 			目的地<input type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value"/>
 		</div>
 		#errorMessage($!form.fields.arriveCity.message)

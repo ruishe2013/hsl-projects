@@ -12,9 +12,17 @@ public class CityList extends BaseScreen {
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
+		boolean isSwitch = rundata.getQueryString().getBoolean("isSwitch");
+		String onId = rundata.getQueryString().getString("onId");
+		String onName = rundata.getQueryString().getString("onName");
+		
 		Result result = cityAO.queryAllProviceAndCities();
 		if (result.isSuccess()) {
 			this.result2Context(result, templateContext, "province2Cities");
+			
+			templateContext.put("isSwitch", isSwitch);
+			templateContext.put("onId", onId);
+			templateContext.put("onName", onName);
 		}
 	}
 
