@@ -3,6 +3,7 @@ package com.aifuyun.snow.world.biz.bo.together.impl;
 import java.util.List;
 
 import com.aifuyun.snow.world.biz.bo.together.OrderUserBO;
+import com.aifuyun.snow.world.biz.query.UserOrderQuery;
 import com.aifuyun.snow.world.dal.daointerface.together.OrderUserDAO;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserRoleEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserStatusEnum;
@@ -48,8 +49,8 @@ public class OrderUserBOImpl implements OrderUserBO {
 	}
 
 	@Override
-	public List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role) {
-		return orderUserDAO.queryOrdersByUserIdAndRole(userId, role);
+	public List<OrderDO> queryOrdersByUserIdAndRole(UserOrderQuery userOrderQuery) {
+		return orderUserDAO.queryOrdersByUserIdAndRole(userOrderQuery);
 	}
 
 	@Override

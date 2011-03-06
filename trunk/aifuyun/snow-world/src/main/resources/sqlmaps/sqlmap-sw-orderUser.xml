@@ -3,6 +3,7 @@
 <sqlMap namespace="OrderUserDAO">
 
 	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO" alias="orderUser" />
+	<typeAlias type="com.aifuyun.snow.world.biz.query.UserOrderQuery" alias="userOrderQuery" />
 
 	<resultMap id="orderUserMapping" class="orderUser">
 		<result property="gmtModified" column="gmt_modified"/>
@@ -77,12 +78,8 @@
 			t.gmt_modified desc
 	</select>
 	
-	<select id="queryOrdersByUserIdAndRole" resultMap="OrderDAO.orderMapping" parameterClass="map">
-		select 
-			<include refid="OrderDAO.order-full-columns"/>
-		from 
-		 	sw_order t 
-		 where t.id in
+	<sql id="queryOrdersByUserIdAndRoleCondition">
+		t.id in
 			 (
 				select
 					u.order_id
@@ -96,6 +93,26 @@
 					and u.deleted = 0 
 			)
 			and t.deleted = 0
+	</sql>
+	
+	<select id="queryOrdersByUserIdAndRole" resultMap="OrderDAO.orderMapping" parameterClass="userOrderQuery">
+		select 
+			<include refid="OrderDAO.order-full-columns"/>
+		from 
+		 	sw_order t 
+		where 
+		 	<include refid="queryOrdersByUserIdAndRoleCondition"/>
+		limit
+			#startRow#, #pageSize#
+	</select>
+	
+	<select id="queryOrdersByUserIdAndRoleCount" resultClass="int" parameterClass="userOrderQuery">
+		select 
+			count(0)
+		from 
+		 	sw_order t 
+		where 
+		 	<include refid="queryOrdersByUserIdAndRoleCondition"/>
 	</select>
 	
 	<select id="queryByOrderId" resultMap="orderUserMapping" parameterClass="long">

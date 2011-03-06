@@ -5,6 +5,7 @@ import java.util.List;
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.misc.SnowWorldAO;
 import com.aifuyun.snow.world.biz.bo.together.OrderBO;
+import com.aifuyun.snow.world.biz.query.OrderQuery;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.zjuh.sweet.result.Result;
@@ -17,7 +18,7 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 	private int defaultCityId = 1;
 	
 	@Override
-	public Result handleForIndex() {
+	public Result handleForIndex(int cityCount) {
 		Result result = new ResultSupport(false);
 		try {
 			CityDO city = this.getSelectedCity(defaultCityId);
@@ -25,8 +26,11 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 			if (city != null) {
 				cityId = city.getId();
 			}
-			
-			List<OrderDO> recentOrders = orderBO.queryRecentOrders(cityId);
+			OrderQuery orderQuery = new OrderQuery();
+			orderQuery.setCityId(cityId);
+			orderQuery.setPageSize(cityCount);
+			orderQuery.setPageNo(1);
+			List<OrderDO> recentOrders = orderBO.queryRecentOrders(orderQuery);
 			result.getModels().put("recentOrders", recentOrders);
 			result.getModels().put("selectedCity", city);
 			result.setSuccess(true);

@@ -10,9 +10,11 @@ public class Index extends BaseScreen {
 
 	private SnowWorldAO snowWorldAO;
 	
+	private int cityCount = 10;
+	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
-		Result result = snowWorldAO.handleForIndex();
+		Result result = snowWorldAO.handleForIndex(cityCount);
 		if (result.isSuccess()) {
 			this.result2Context(result, templateContext, "recentOrders");
 			this.result2Context(result, templateContext, "selectedCity");

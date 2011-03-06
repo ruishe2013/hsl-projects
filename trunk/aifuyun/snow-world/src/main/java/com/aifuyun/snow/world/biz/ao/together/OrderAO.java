@@ -1,6 +1,6 @@
 package com.aifuyun.snow.world.biz.ao.together;
 
-import com.aifuyun.snow.world.biz.query.OrderQuery;
+import com.aifuyun.snow.world.biz.query.UserOrderQuery;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.zjuh.sweet.result.Result;
@@ -102,8 +102,7 @@ public interface OrderAO {
 	 * @return
 	 * 
 	 */
-	// TODO 单元测试待完成
-	Result viewMyOrders(OrderQuery orderQuery);
+	Result viewMyOrders(UserOrderQuery userOrderQuery);
 	
 	Result viewCreateTaxiOrder();
 	

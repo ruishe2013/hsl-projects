@@ -7,7 +7,7 @@ import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.together.OrderAO;
 import com.aifuyun.snow.world.biz.bo.together.OrderBO;
 import com.aifuyun.snow.world.biz.bo.together.OrderUserBO;
-import com.aifuyun.snow.world.biz.query.OrderQuery;
+import com.aifuyun.snow.world.biz.query.UserOrderQuery;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.OrderResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
@@ -468,18 +468,19 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	}
 	
 	@Override
-	public Result viewMyOrders(OrderQuery orderQuery) {
+	public Result viewMyOrders(UserOrderQuery userOrderQuery) {
 		Result result = new ResultSupport(false);
 		try {
 			final long userId = this.getLoginUserId();
-			final int roleValue = orderQuery.getOrderUserRole();
+			final int roleValue = userOrderQuery.getRole();
 			if (!isRoleValid(roleValue)) {
 				result.setResultCode(OrderResultCodes.INVALID_ROLE_VALUE);
 				return result;
 			}
-			
-			List<OrderDO> orders = orderUserBO.queryOrdersByUserIdAndRole(userId, roleValue);
+			userOrderQuery.setUserId(userId);
+			List<OrderDO> orders = orderUserBO.queryOrdersByUserIdAndRole(userOrderQuery);
 			result.getModels().put("orders", orders);
+			result.getModels().put("userOrderQuery", userOrderQuery);
 			result.setSuccess(true);
 		} catch (Exception e) {
 			log.error("查看我的订单失败", e);

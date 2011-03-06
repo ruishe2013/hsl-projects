@@ -3,6 +3,7 @@
 <sqlMap namespace="OrderDAO">
 
 	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.together.OrderDO" alias="order" />
+	<typeAlias type="com.aifuyun.snow.world.biz.query.OrderQuery" alias="orderQuery" />
 
 	<resultMap id="orderMapping" class="order">
 		<result property="cityId" column="city_id"/>
@@ -48,7 +49,7 @@
 			t.deleted = 0 and t.id = #value#
 	</select>
 	
-	<select id="queryRecentOrders" resultMap="orderMapping" parameterClass="int">
+	<select id="queryRecentOrders" resultMap="orderMapping" parameterClass="orderQuery">
 		select
 			<include refid="order-full-columns"/>
 		from
@@ -57,15 +58,15 @@
 			<![CDATA[
 				t.status <> 0
 			]]>
-			<isNotEqual prepend="and" compareValue="0">
-				t.city_id = #value# 
+			<isNotEqual property="cityId" prepend="and" compareValue="0">
+				t.city_id = #cityId# 
 			</isNotEqual>
 			and t.deleted = 0
-		order 
-			by gmt_modified desc		
+		order
+			by gmt_modified desc
+		limit
+			#startRow#, #pageSize#
 	</select>
-	
-	
 	
 	<update id="delete" parameterClass="long">
 		update sw_order t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#

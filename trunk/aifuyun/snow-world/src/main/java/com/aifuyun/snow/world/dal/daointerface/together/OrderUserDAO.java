@@ -2,6 +2,7 @@ package com.aifuyun.snow.world.dal.daointerface.together;
 
 import java.util.List;
 
+import com.aifuyun.snow.world.biz.query.UserOrderQuery;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
@@ -24,7 +25,7 @@ public interface OrderUserDAO {
 	
 	List<OrderUserDO> queryByOrderId(long orderId);
 	
-	List<OrderDO> queryOrdersByUserIdAndRole(long userId, int role);
+	List<OrderDO> queryOrdersByUserIdAndRole(UserOrderQuery userOrderQuery);
 	
 	List<OrderUserDO> queryByOrderIdAndRoleAndStatus(long orderId, int role, int status);
 }

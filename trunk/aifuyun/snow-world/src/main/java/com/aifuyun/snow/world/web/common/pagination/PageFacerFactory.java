@@ -9,6 +9,7 @@ public class PageFacerFactory {
 	
 	static {
 		pageFacers.put("mockPageFacer", new MockPageFacer());
+		pageFacers.put("myTogethersPageFacer", new MyTogethersPageFacer());
 		
 		
 	}
