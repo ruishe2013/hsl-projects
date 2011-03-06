@@ -3,6 +3,7 @@ package com.aifuyun.snow.world.biz.bo.together.impl;
 import java.util.List;
 
 import com.aifuyun.snow.world.biz.bo.together.OrderBO;
+import com.aifuyun.snow.world.biz.query.OrderQuery;
 import com.aifuyun.snow.world.dal.daointerface.together.OrderDAO;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
@@ -16,8 +17,8 @@ public class OrderBOImpl implements OrderBO {
 		orderDAO.delete(id);
 	}
 
-	public List<OrderDO> queryRecentOrders(int cityId) {
-		return orderDAO.queryRecentOrders(cityId);
+	public List<OrderDO> queryRecentOrders(OrderQuery orderQuery) {
+		return orderDAO.queryRecentOrders(orderQuery);
 	}
 
 	@Override

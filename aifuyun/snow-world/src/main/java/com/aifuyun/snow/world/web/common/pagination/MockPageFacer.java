@@ -1,11 +1,14 @@
 package com.aifuyun.snow.world.web.common.pagination;
 
+import com.zjuh.splist.core.module.URLModule;
+
 public class MockPageFacer implements PageFacer {
 
 	@Override
-	public String gotoPage(int page) {
+	public URLModule gotoPage(int page) {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 
 }

@@ -2,6 +2,7 @@ package com.aifuyun.snow.world.biz.bo.together;
 
 import java.util.List;
 
+import com.aifuyun.snow.world.biz.query.OrderQuery;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 
@@ -34,6 +35,6 @@ public interface OrderBO {
 	 */
 	void updateStatus(long id, OrderStatusEnum orderStatus);
 	
-	List<OrderDO> queryRecentOrders(int cityId);
+	List<OrderDO> queryRecentOrders(OrderQuery orderQuery);
 	
 }

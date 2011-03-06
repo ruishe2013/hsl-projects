@@ -1,7 +1,7 @@
 package com.aifuyun.snow.world.web.modules.screen.user;
 
 import com.aifuyun.snow.world.biz.ao.together.OrderAO;
-import com.aifuyun.snow.world.biz.query.OrderQuery;
+import com.aifuyun.snow.world.biz.query.UserOrderQuery;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
@@ -11,14 +11,20 @@ public class MyTogethers extends BaseScreen {
 
 	private OrderAO orderAO;
 	
+	private int pageSize = 20;
+	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		int type = rundata.getQueryString().getInt("type");
-		OrderQuery orderQuery = new OrderQuery();
-		orderQuery.setOrderUserRole(type);
-		Result result = orderAO.viewMyOrders(orderQuery);
+		int page = rundata.getQueryString().getInt("page", 1);
+		UserOrderQuery userOrderQuery = new UserOrderQuery();
+		userOrderQuery.setPageNo(page);
+		userOrderQuery.setPageSize(pageSize);
+		userOrderQuery.setRole(type);
+		Result result = orderAO.viewMyOrders(userOrderQuery);
 		if (result.isSuccess()) {
 			this.result2Context(result, templateContext, "orders");
+			this.result2Context(result, templateContext, "userOrderQuery");
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
