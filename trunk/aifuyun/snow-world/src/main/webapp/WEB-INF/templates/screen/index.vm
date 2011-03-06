@@ -30,7 +30,7 @@ $control.setTemplate('common/citySelected.vm').addAttribute('selectedCity', $sel
 <ul>
 #foreach($order in $recentOrders)
 	<li>
-	$order.fromCity $order.fromAddr => $order.arriveAddr 
+	$order.fromCity $order.fromAddr => $order.arriveCity $order.arriveAddr 
 	$dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm') 
 	$dateUtil.formatDate($order.arriveTime, 'yyyy-MM-dd HH:mm')
 	
