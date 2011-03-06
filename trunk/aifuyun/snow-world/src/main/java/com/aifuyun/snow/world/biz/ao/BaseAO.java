@@ -8,6 +8,7 @@ import com.aifuyun.snow.world.biz.bo.area.CityIpBO;
 import com.aifuyun.snow.world.biz.bo.misc.CookieBO;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.common.CookieNames;
+import com.aifuyun.snow.world.common.IpUtil;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.area.CityIpDO;
 import com.aifuyun.snow.world.dal.dataobject.user.ExtUserDO;
@@ -18,7 +19,7 @@ import com.zjuh.sweet.lang.ConvertUtil;
  * @author pister
  * 2011-1-22
  */
-public abstract class BaseAO {
+public class BaseAO {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -45,7 +46,8 @@ public abstract class BaseAO {
 		return Integer.valueOf(cityId);
 	}
 	
-	protected CityDO querySelectedCity(String ipAddress, int defaultCityId) {
+	protected CityDO getSelectedCity(int defaultCityId) {
+		String ipAddress = IpUtil.getRemoteIpAddress();
 		CityDO selectedCity = null;
 		long userId = this.getLoginUserId();
 		// 根据用户最后选中的查询

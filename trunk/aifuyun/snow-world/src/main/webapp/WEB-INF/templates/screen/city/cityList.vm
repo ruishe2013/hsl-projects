@@ -7,9 +7,28 @@
 		<div>$provice.name</div>
 		<div>
 		#foreach($city in $cities)
-			<a href="$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity').add('cityId', $city.id)">$city.name</a>
-			
+			#if($isSwitch)
+				<a href="javascript:doSwitchCity($city.id, '$city.name');">$city.name</a>
+			#else
+				<a href="$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity').add('cityId', $city.id)">$city.name</a>
+			#end
 		#end
 		</div>
 	</div>
 #end
+
+<script type="text/javascript">
+	function doSwitchCity(cityId, cityName) {
+		if (opener) {
+			var targetId = opener.document.getElementById('$onId');
+			if (targetId) {
+				targetId.value = cityId;
+			}
+			var targetName = opener.document.getElementById('$onName');
+			if (targetName) {
+				targetName.value = cityName;
+			}
+		}
+		window.close();
+	}
+</script>

@@ -15,8 +15,7 @@ public class CitySelected extends BaseControl {
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		CityDO city = (CityDO)templateContext.get("selectedCity");
 		if (city == null) {
-			String ipAddress = this.getRemoteAddress();
-			Result result = cityAO.querySelectedCity(ipAddress);
+			Result result = cityAO.querySelectedCity();
 			if (result.isSuccess()) {
 				this.result2Context(result, templateContext, "selectedCity");
 			}

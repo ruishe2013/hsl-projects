@@ -6,13 +6,12 @@ public interface CityAO {
 	
 	/**
 	 * 获取选择的城市
-	 * @param ipAddress
 	 * @return
 	 */
-	Result querySelectedCity(String ipAddress);
+	Result querySelectedCity();
 	
 	Result queryAllProviceAndCities();
 	
 	Result switchCity(int cityId);
-
+	
 }

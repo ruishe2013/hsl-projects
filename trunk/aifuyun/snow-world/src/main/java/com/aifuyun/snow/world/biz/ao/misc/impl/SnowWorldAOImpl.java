@@ -5,7 +5,6 @@ import java.util.List;
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.misc.SnowWorldAO;
 import com.aifuyun.snow.world.biz.bo.together.OrderBO;
-import com.aifuyun.snow.world.common.IpUtil;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.zjuh.sweet.result.Result;
@@ -21,14 +20,11 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 	public Result handleForIndex() {
 		Result result = new ResultSupport(false);
 		try {
-			CityDO city = this.querySelectedCity(IpUtil.getRemoteIpAddress(), defaultCityId);
+			CityDO city = this.getSelectedCity(defaultCityId);
 			int cityId = defaultCityId;
 			if (city != null) {
 				cityId = city.getId();
 			}
-			
-			// TODO 发布拼车时没有记录城市信息，这里暂时为0
-			cityId = 0;
 			
 			List<OrderDO> recentOrders = orderBO.queryRecentOrders(cityId);
 			result.getModels().put("recentOrders", recentOrders);
