@@ -37,6 +37,7 @@
 				<value>together/orderDetail</value>
 				<value>userFacadeAction</value>
 				<value>city/cityList</value>
+				<value>search/searchOrder</value>
 			</set>
 		</property>
 	</bean>

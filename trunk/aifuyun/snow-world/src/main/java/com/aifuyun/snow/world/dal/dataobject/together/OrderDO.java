@@ -88,6 +88,11 @@ public class OrderDO extends BaseDO {
 	 * ×´Ì¬
 	 */
 	private int status;
+	
+	/**
+	 * Í¾¾¶
+	 */
+	private String approach;
 
 	public OrderStatusEnum getOrderStatusEnum() {
 		return OrderStatusEnum.valueOf(status);
@@ -215,6 +220,14 @@ public class OrderDO extends BaseDO {
 
 	public void setArriveCityId(int arriveCityId) {
 		this.arriveCityId = arriveCityId;
+	}
+
+	public String getApproach() {
+		return approach;
+	}
+
+	public void setApproach(String approach) {
+		this.approach = approach;
 	}
 
 }

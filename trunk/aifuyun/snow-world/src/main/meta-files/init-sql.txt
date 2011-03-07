@@ -95,6 +95,8 @@ create table sw_order (
 	from_city varchar(30) not null,
 	arrive_addr varchar(100) not null,
 	arrive_city varchar(30) not null,
+	arrive_city_id int default 0 not null,
+	approach varchar(1024),
 	arrive_time datetime,
 	description varchar(1024),
 	creator_username varchar(60) not null,
