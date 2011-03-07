@@ -56,7 +56,7 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 		OrderDO orderDO = new OrderDO();
 		orderDO.setId(simpleSolrDocument.getLongValue("id"));
 		orderDO.setApproach(simpleSolrDocument.getStringValue("approach"));
-		orderDO.setArriveAddr(simpleSolrDocument.getStringValue("ArriveAddr"));
+		orderDO.setArriveAddr(simpleSolrDocument.getStringValue("arriveAddr"));
 		orderDO.setArriveCity(simpleSolrDocument.getStringValue("arriveCity"));
 		orderDO.setArriveCityId(simpleSolrDocument.getIntValue("arriveCityId"));
 		// TODO

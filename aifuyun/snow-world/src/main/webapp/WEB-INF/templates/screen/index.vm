@@ -13,9 +13,14 @@ $control.setTemplate('common/citySelected.vm').addAttribute('selectedCity', $sel
 
 <form action="$snowModule.setTarget('search/searchOrder')">
 	搜索拼车信息
+	<div>
 	出发城市<input type="text" name="fromCity" />
-	目的城市<input type="text" name="arriveAddr" />
 	出发地<input type="text" name="fromAddr" />
+	</div>
+	<div>
+	目的城市<input type="text" name="arriveCity" />
+	目的地<input type="text" name="arriveAddr" />
+	</div>
 	<input type="submit" value=" 搜索  " />
 </form>
 

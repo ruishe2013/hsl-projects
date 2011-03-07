@@ -11,10 +11,10 @@ public class OrderSearchBOTest extends BaseTest {
 
 	public void testSearch() {
 		SearchQuery query = new SearchQuery();
-		query.setQ("*:*");
+		query.setQ("arriveCity:Äþ²¨");
 		SearchResult<OrderDO> result = orderSearchBO.queryOrders(query);
 		for (OrderDO order : result.getResult()) {
-			System.out.println(order.getId() + ", " + order.getFromCity());
+			System.out.println(order.getId() + ", " + order.getFromCity() + ", " + order.getArriveAddr());
 		} 
 		
 		
