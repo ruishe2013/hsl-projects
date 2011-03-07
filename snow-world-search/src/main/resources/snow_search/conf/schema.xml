@@ -1,0 +1,46 @@
+<?xml version="1.0" ?>
+
+<schema name="example core" version="1.1">
+	<types>
+		<fieldtype name="string" class="solr.TextField" sortMissingLast="true"></fieldtype>
+		<fieldType name="int" class="solr.TrieIntField"	precisionStep="0" positionIncrementGap="0" />
+		<fieldType name="sint" class="solr.SortableIntField" sortMissingLast="true" omitNorms="true" />
+		<fieldType name="slong" class="solr.SortableLongField" sortMissingLast="true" omitNorms="true" />
+		<fieldType name="date" class="solr.TrieDateField" omitNorms="true" precisionStep="0" positionIncrementGap="0"/>
+		<fieldType name="string_ws" class="solr.TextField" positionIncrementGap="100">
+			<analyzer>
+				<tokenizer class="solr.WhitespaceTokenizerFactory" />
+			</analyzer>
+		</fieldType>
+		<fieldType name="string_sd" class="solr.TextField" sortMissingLast="true" omitNorms="true">
+			<analyzer type="index">
+				<tokenizer class="solr.StandardTokenizerFactory" />
+				<filter class="solr.ChineseFilterFactory" />
+			</analyzer>
+		</fieldType>
+		<fieldType name="tint" class="solr.TrieIntField" precisionStep="8" omitNorms="true" positionIncrementGap="0" />
+	</types>
+
+	<fields>
+		<field name="id" type="slong" indexed="true" stored="true" multiValued="false" required="true" />
+		<field name="creatorId" type="slong" indexed="true" stored="true" multiValued="false" />
+		<field name="creatorUsername" type="string" indexed="true" stored="true" multiValued="false" />
+		<field name="cityId" type="sint" indexed="true" stored="true" multiValued="false" />
+		<field name="fromCity" type="string" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveCityId" type="sint" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveCity" type="string" indexed="true" stored="true" multiValued="false" />
+		<field name="fromAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="arrvieAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="fromDate" type="string" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveDate" type="string" indexed="true" stored="true" multiValued="false" />
+		<field name="description" type="string_sd" indexed="true" stored="false" multiValued="false" />
+		<field name="approach" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="status" type="sint" indexed="true" stored="true" multiValued="false" />
+		<field name="deleted" type="sint" indexed="true" stored="false" multiValued="false" />
+		<field name="type" type="sint" indexed="true" stored="false" multiValued="false" />
+	</fields>
+
+	<uniqueKey>id</uniqueKey>
+	<defaultSearchField>id</defaultSearchField>
+	<solrQueryParser defaultOperator="OR" />
+</schema>

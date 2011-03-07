@@ -1,0 +1,17 @@
+<form>
+出发城市<input type="text" name="fromCity" />
+目的城市<input type="text" name="arriveAddr" />
+出发地<input type="text" name="fromAddr" />
+<input type="submit" value=" 搜索  " />
+</form>
+
+<div>
+共找到$!{numFound}条记录
+
+#foreach($order in $orders)
+	<div>
+	$order.fromCity => $order.arriveCity
+	发布人 $order.creatorUsername
+	</div>
+#end
+</div>

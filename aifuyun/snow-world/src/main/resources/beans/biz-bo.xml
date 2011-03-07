@@ -12,6 +12,14 @@
 	<bean id="orderUserBO" class="com.aifuyun.snow.world.biz.bo.together.impl.OrderUserBOImpl"></bean>
 	<bean id="cookieBO" class="com.aifuyun.snow.world.biz.bo.misc.impl.CookieBOImpl"></bean>
 	
+	<bean id="orderSearchBO" class="com.aifuyun.snow.world.biz.bo.search.impl.SolrOrderSearchBOImpl" init-method="init">
+		<property name="solrUrls">
+			<list>
+				<value>${snow.search.order.url}</value>
+			</list>
+		</property>
+	</bean>
+	
 	<bean id="userBO" class="com.aifuyun.snow.world.biz.bo.user.impl.UserBOImpl">
 		<property name="sensitivitiesList">
 			<set>
