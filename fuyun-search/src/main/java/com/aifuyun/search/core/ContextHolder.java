@@ -6,9 +6,11 @@ import org.apache.solr.core.CoreContainer;
 
 import com.aifuyun.search.SearchException;
 
-public class CoreContainerHolder {
+public class ContextHolder {
 	
 	private static CoreContainer coreContainer = null;
+	
+	private static DataProviderFactory dataProviderFactory;
 	
 	public static CoreContainer getCoreContainer() {
 		return coreContainer;
@@ -25,6 +27,14 @@ public class CoreContainerHolder {
 		} catch (Exception e) {
 			throw new SearchException(e);
 		}
+	}
+
+	public static DataProviderFactory getDataProviderFactory() {
+		return dataProviderFactory;
+	}
+
+	public static void setDataProviderFactory(DataProviderFactory dataProviderFactory) {
+		ContextHolder.dataProviderFactory = dataProviderFactory;
 	}
 
 }

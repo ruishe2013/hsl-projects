@@ -48,8 +48,11 @@ public class FullIndexBuilder extends AbstractIndexBuilder {
 			log.debug("dirData:" + dirData);
 		}
 		try {
-			// 如果原来有数据，则删除
-			FileUtils.cleanDirectory(new File(dirData));
+			File dir = new File(dirData);
+			if (dir.exists()) {
+				// 如果原来有数据，则删除
+				FileUtils.cleanDirectory(dir);
+			}
 		} catch (IOException e) {
 			log.warn("删除目录失败", e);
 		}

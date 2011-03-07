@@ -18,10 +18,10 @@ import org.slf4j.LoggerFactory;
 import com.aifuyun.search.build.DataProvider;
 import com.aifuyun.search.build.IndexBuilder;
 import com.aifuyun.search.build.IndexBuilderFactory;
-import com.aifuyun.search.core.CoreContainerHolder;
+import com.aifuyun.search.core.ContextHolder;
 import com.aifuyun.search.util.StringUtil;
 
-public abstract class AbstractIndexServlet extends HttpServlet {
+public class IndexControlServlet extends HttpServlet {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	
@@ -33,9 +33,13 @@ public abstract class AbstractIndexServlet extends HttpServlet {
 
 	private IndexBuilderFactory indexBuilderFactory = new IndexBuilderFactory();
 	
-	protected abstract DataProvider getFullDataProvider(String coreName);
+	protected DataProvider getFullDataProvider(String coreName) {
+		return ContextHolder.getDataProviderFactory().createFullDataProvider(coreName);
+	}
 	
-	protected abstract DataProvider getIncrDataProvider(String coreName);
+	protected DataProvider getIncrDataProvider(String coreName) {
+		return ContextHolder.getDataProviderFactory().createIncrDataProvider(coreName);
+	}
 	
 	private ExecutorService executorService = Executors.newFixedThreadPool(1);
 	
@@ -57,7 +61,7 @@ public abstract class AbstractIndexServlet extends HttpServlet {
 			return;
 		}
 		
-		CoreContainer cores = CoreContainerHolder.getCoreContainer();
+		CoreContainer cores = ContextHolder.getCoreContainer();
 		SolrCore core = cores.getCore(coreName);
 		if (core == null) {
 			out.println("core²»´æÔÚ£¡");
