@@ -86,33 +86,43 @@ public abstract class AbstractBuilder implements Builder {
 		int sucecessNum = 0;
 		
 		SimpleUpdateHandler simpleUpdateHandler = new SimpleUpdateHandler(newCore);
-		while (dataProvider.hasNext()) {
-			Map<String, String> row = dataProvider.next();
-			if (row == null) {
-				++errorNum;
-				continue;
-			}
-			try {
-				simpleUpdateHandler.addDocument(row);
-				++sucecessNum;
-				if (log.isInfoEnabled()) {
-					int total = sucecessNum + errorNum;
-					if (total % NUMBER_OF_LINES == 0) {
-						log.info("dumping data, sucecess:" + sucecessNum + ", error: " + errorNum + ", total: " + total);
-					}
+		
+		try {
+			dataProvider.init();
+			
+			while (dataProvider.hasNext()) {
+				Map<String, String> row = dataProvider.next();
+				if (row == null) {
+					++errorNum;
+					continue;
 				}
-			} catch (Exception e) {
-				++errorNum;
-				log.info("error: ", e);
+				try {
+					simpleUpdateHandler.addDocument(row);
+					++sucecessNum;
+					if (log.isInfoEnabled()) {
+						int total = sucecessNum + errorNum;
+						if (total % NUMBER_OF_LINES == 0) {
+							log.info("dumping data, sucecess:" + sucecessNum + ", error: " + errorNum + ", total: " + total);
+						}
+					}
+				} catch (Exception e) {
+					++errorNum;
+					log.info("error: ", e);
+				}
 			}
+			
+			int total = sucecessNum + errorNum;
+			if (log.isInfoEnabled()) {
+				log.info("dump data finish. sucecess:" + sucecessNum + ", error: " + errorNum + ", total: " + total);
+				log.info("starting optimze index and commit...");
+			}
+			
+			
+			
+			dataProvider.close();
+		} finally {
+			
 		}
-		
-		int total = sucecessNum + errorNum;
-		if (log.isInfoEnabled()) {
-			log.info("dump data finish. sucecess:" + sucecessNum + ", error: " + errorNum + ", total: " + total);
-			log.info("starting optimze index and commit...");
-		}
-		
 		simpleUpdateHandler.commit(true);
 		if (log.isInfoEnabled()) {
 			log.info("optimze index and commit success!");
