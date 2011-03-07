@@ -1,7 +1,12 @@
 <form>
+<div>
 出发城市<input type="text" name="fromCity" />
-目的城市<input type="text" name="arriveAddr" />
 出发地<input type="text" name="fromAddr" />
+</div>
+<div>
+目的城市<input type="text" name="arriveCity" />
+目的地<input type="text" name="arriveAddr" />
+</div>
 <input type="submit" value=" 搜索  " />
 </form>
 
@@ -10,7 +15,7 @@
 
 #foreach($order in $orders)
 	<div>
-	$order.fromCity => $order.arriveCity
+	$order.fromCity $order.fromAddr => $order.arriveCity $order.arriveAddr
 	发布人 $order.creatorUsername
 	</div>
 #end

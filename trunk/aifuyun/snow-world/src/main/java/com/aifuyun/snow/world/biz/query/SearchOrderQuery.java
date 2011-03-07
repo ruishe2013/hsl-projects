@@ -10,6 +10,8 @@ public class SearchOrderQuery extends Query {
 	
 	String fromAddr;
 	
+	String arriveCity;
+	
 	String arriveAddr;
 
 	public String getFromCity() {
@@ -35,5 +37,13 @@ public class SearchOrderQuery extends Query {
 	public void setArriveAddr(String arriveAddr) {
 		this.arriveAddr = arriveAddr;
 	}
-	
+
+	public String getArriveCity() {
+		return arriveCity;
+	}
+
+	public void setArriveCity(String arriveCity) {
+		this.arriveCity = arriveCity;
+	}
+
 }

@@ -15,12 +15,14 @@ public class SearchOrder extends BaseScreen {
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		String fromCity = rundata.getQueryString().getString("fromCity");
 		String fromAddr = rundata.getQueryString().getString("fromAddr");
+		String arriveCity = rundata.getQueryString().getString("arriveCity");
 		String arriveAddr = rundata.getQueryString().getString("arriveAddr");
 		
 		SearchOrderQuery searchOrderQuery = new SearchOrderQuery();
 		searchOrderQuery.setArriveAddr(arriveAddr);
 		searchOrderQuery.setFromCity(fromCity);
 		searchOrderQuery.setFromAddr(fromAddr);
+		searchOrderQuery.setArriveCity(arriveCity);
 		Result result = orderSearchAO.searchOrder(searchOrderQuery);
 		if (result.isSuccess()) {
 			this.result2Context(result, templateContext, "orders");
