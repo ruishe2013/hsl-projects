@@ -30,7 +30,7 @@
 		<field name="arriveCityId" type="sint" indexed="true" stored="true" multiValued="false" />
 		<field name="arriveCity" type="string" indexed="true" stored="true" multiValued="false" />
 		<field name="fromAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
-		<field name="arrvieAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="fromDate" type="string" indexed="true" stored="true" multiValued="false" />
 		<field name="arriveDate" type="string" indexed="true" stored="true" multiValued="false" />
 		<field name="description" type="string_sd" indexed="true" stored="false" multiValued="false" />
