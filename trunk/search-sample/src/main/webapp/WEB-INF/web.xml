@@ -12,7 +12,7 @@
     </env-entry>
   
   <filter>
-  	<filter-class>com.aifuyun.search.servlet.XSolrDispatchFilter</filter-class>
+  	<filter-class>com.aifuyun.searchsample.SampleSolrDispatchFilter</filter-class>
   	<filter-name>XSolrDispatchFilter</filter-name>
   </filter>
   
@@ -22,7 +22,7 @@
   </filter-mapping>
   
   <servlet>
-  	<servlet-class>com.aifuyun.searchsample.MyIndexServlet</servlet-class>
+  	<servlet-class>com.aifuyun.search.servlet.IndexControlServlet</servlet-class>
   	<servlet-name>IndexServlet</servlet-name>
   </servlet>
   

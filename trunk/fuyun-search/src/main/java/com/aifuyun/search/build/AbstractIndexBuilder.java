@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aifuyun.search.SearchException;
 import com.aifuyun.search.build.util.Counts;
-import com.aifuyun.search.core.CoreContainerHolder;
+import com.aifuyun.search.core.ContextHolder;
 import com.aifuyun.search.util.NumberUtil;
 
 public abstract class AbstractIndexBuilder implements IndexBuilder {
@@ -87,7 +87,7 @@ public abstract class AbstractIndexBuilder implements IndexBuilder {
 	
 	private void onInit() {
 		try {
-			CoreContainer coreContainer = CoreContainerHolder.getCoreContainer();
+			CoreContainer coreContainer = ContextHolder.getCoreContainer();
 			SolrCore oldCore = coreContainer.getCore(coreName);
 			this.solrCore = initCore(oldCore);
 			

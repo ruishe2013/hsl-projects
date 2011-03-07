@@ -2,7 +2,7 @@ package com.aifuyun.search.build;
 
 import junit.framework.TestCase;
 
-import com.aifuyun.search.core.CoreContainerHolder;
+import com.aifuyun.search.core.ContextHolder;
 
 public class FullIndexBuilderTest extends TestCase {
 
@@ -13,7 +13,7 @@ public class FullIndexBuilderTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		CoreContainerHolder.createCoreContainer("d:/solr_home", "d:/solr_home/solr.xml");
+		ContextHolder.createCoreContainer("d:/solr_home", "d:/solr_home/solr.xml");
 		indexBuilderFactory = new IndexBuilderFactory();
 		MyIncrDataProvider dataProvider = new MyIncrDataProvider();
 		builder = indexBuilderFactory.createFullIndexBuilder("search1", dataProvider);
