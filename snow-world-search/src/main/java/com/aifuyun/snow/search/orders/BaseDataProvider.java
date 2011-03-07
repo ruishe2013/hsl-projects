@@ -86,7 +86,7 @@ public abstract class BaseDataProvider implements DataProvider {
 			ret.put("arriveCityId", rs.getString("arrive_city_id"));
 			ret.put("arriveCity", rs.getString("arrive_city"));
 			ret.put("fromAddr", rs.getString("from_addr"));
-			ret.put("arrvieAddr", rs.getString("arrive_addr"));
+			ret.put("arriveAddr", rs.getString("arrive_addr"));
 	//		ret.put("fromDate", rs.getString("from_time"));
 	//		ret.put("arriveDate", rs.getString("arrive_time"));
 			ret.put("description", rs.getString("description"));
