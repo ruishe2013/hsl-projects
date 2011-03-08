@@ -27,7 +27,7 @@ public class HttpSolrServerTest {
 		query.setHighlightSimplePost("</span>");*/
 		query.setSortField("id", ORDER.asc);
 		query.setRows(4);
-		query.setQuery("content:һ");
+		query.setQuery("+content:ʲô");
 		QueryResponse response = solrServer.query(query);
 		SolrDocumentList results = response.getResults();
 		System.out.println(results.getNumFound());

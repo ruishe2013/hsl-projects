@@ -2,11 +2,33 @@
 
 <schema name="example core" version="1.1">
 	<types>
-		<fieldtype name="string" class="solr.TextField" sortMissingLast="true"></fieldtype>
-		<fieldType name="int" class="solr.TrieIntField"	precisionStep="0" positionIncrementGap="0" />
-		<fieldType name="sint" class="solr.SortableIntField" sortMissingLast="true" omitNorms="true" />
-		<fieldType name="slong" class="solr.SortableLongField" sortMissingLast="true" omitNorms="true" />
+		<fieldtype name="string" class="solr.TextField" sortMissingLast="true" />
+		<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
+
+		<fieldType name="int" class="solr.TrieIntField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="float" class="solr.TrieFloatField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="long" class="solr.TrieLongField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+
+		<fieldType name="tint" class="solr.TrieIntField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="tfloat" class="solr.TrieFloatField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="tlong" class="solr.TrieLongField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="tdouble" class="solr.TrieDoubleField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+
 		<fieldType name="date" class="solr.TrieDateField" omitNorms="true" precisionStep="0" positionIncrementGap="0"/>
+		<fieldType name="tdate" class="solr.TrieDateField" omitNorms="true" precisionStep="6" positionIncrementGap="0"/>
+
+		<fieldType name="pint" class="solr.IntField" omitNorms="true"/>
+		<fieldType name="plong" class="solr.LongField" omitNorms="true"/>
+		<fieldType name="pfloat" class="solr.FloatField" omitNorms="true"/>
+		<fieldType name="pdouble" class="solr.DoubleField" omitNorms="true"/>
+
+		<fieldType name="sint" class="solr.SortableIntField" sortMissingLast="true" omitNorms="true"/>
+		<fieldType name="slong" class="solr.SortableLongField" sortMissingLast="true" omitNorms="true"/>
+		<fieldType name="sfloat" class="solr.SortableFloatField" sortMissingLast="true" omitNorms="true"/>
+		<fieldType name="sdouble" class="solr.SortableDoubleField" sortMissingLast="true" omitNorms="true"/>
+
+
 		<fieldType name="string_ws" class="solr.TextField" positionIncrementGap="100">
 			<analyzer>
 				<tokenizer class="solr.WhitespaceTokenizerFactory" />
@@ -18,26 +40,25 @@
 				<filter class="solr.ChineseFilterFactory" />
 			</analyzer>
 		</fieldType>
-		<fieldType name="tint" class="solr.TrieIntField" precisionStep="8" omitNorms="true" positionIncrementGap="0" />
 	</types>
 
 	<fields>
-		<field name="id" type="slong" indexed="true" stored="true" multiValued="false" required="true" />
-		<field name="creatorId" type="slong" indexed="true" stored="true" multiValued="false" />
+		<field name="id" type="long" indexed="true" stored="true" multiValued="false" required="true" />
+		<field name="creatorId" type="long" indexed="true" stored="true" multiValued="false" />
 		<field name="creatorUsername" type="string" indexed="true" stored="true" multiValued="false" />
-		<field name="cityId" type="sint" indexed="true" stored="true" multiValued="false" />
+		<field name="cityId" type="int" indexed="true" stored="true" multiValued="false" />
 		<field name="fromCity" type="string" indexed="true" stored="true" multiValued="false" />
-		<field name="arriveCityId" type="sint" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveCityId" type="int" indexed="true" stored="true" multiValued="false" />
 		<field name="arriveCity" type="string" indexed="true" stored="true" multiValued="false" />
 		<field name="fromAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="arriveAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
-		<field name="fromDate" type="string" indexed="true" stored="true" multiValued="false" />
-		<field name="arriveDate" type="string" indexed="true" stored="true" multiValued="false" />
+		<field name="fromDate" type="tlong" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveDate" type="tlong" indexed="true" stored="true" multiValued="false" />
 		<field name="description" type="string_sd" indexed="true" stored="false" multiValued="false" />
 		<field name="approach" type="string_sd" indexed="true" stored="true" multiValued="false" />
-		<field name="status" type="sint" indexed="true" stored="true" multiValued="false" />
-		<field name="deleted" type="sint" indexed="true" stored="false" multiValued="false" />
-		<field name="type" type="sint" indexed="true" stored="false" multiValued="false" />
+		<field name="status" type="int" indexed="true" stored="true" multiValued="false" />
+		<field name="deleted" type="pint" indexed="true" stored="false" multiValued="false" />
+		<field name="type" type="pint" indexed="true" stored="false" multiValued="false" />
 	</fields>
 
 	<uniqueKey>id</uniqueKey>
