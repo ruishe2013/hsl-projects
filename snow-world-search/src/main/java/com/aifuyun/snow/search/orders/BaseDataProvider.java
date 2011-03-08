@@ -95,7 +95,6 @@ public abstract class BaseDataProvider implements DataProvider {
 			ret.put("status", rs.getString("status"));
 			ret.put("type", rs.getString("type"));
 			ret.put("deleted", rs.getString("deleted"));
-			System.out.println(ret);
 		} catch (Exception e) {
 			log.error("≤È—Ø ß∞‹", e);
 		}
