@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aifuyun.search.build.DataProvider;
+import com.aifuyun.search.util.DateUtil;
 import com.aifuyun.search.util.StringUtil;
 import com.aifuyun.snow.search.util.ConnectionPool;
 import com.aifuyun.snow.search.util.SqlUtil;
@@ -87,8 +88,8 @@ public abstract class BaseDataProvider implements DataProvider {
 			ret.put("arriveCity", rs.getString("arrive_city"));
 			ret.put("fromAddr", rs.getString("from_addr"));
 			ret.put("arriveAddr", rs.getString("arrive_addr"));
-	//		ret.put("fromDate", rs.getString("from_time"));
-	//		ret.put("arriveDate", rs.getString("arrive_time"));
+			ret.put("fromDate", DateUtil.formatDateForDump(rs.getTimestamp("from_time")));
+			ret.put("arriveDate", DateUtil.formatDateForDump(rs.getTimestamp("arrive_time")));
 			ret.put("description", rs.getString("description"));
 			ret.put("approach", rs.getString("approach"));
 			ret.put("status", rs.getString("status"));

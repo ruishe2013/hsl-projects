@@ -9,6 +9,8 @@ public class DateUtil {
 	
 	public static final String DEFALT_DATE_FMT = "yyyy-MM-dd HH:mm:ss";
 	
+	public static final String DUMP_DATE_FMT = "yyyyMMddHHmmss";
+	
 	public static Calendar toCalendar(Date date) {
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(date);
@@ -26,6 +28,13 @@ public class DateUtil {
 	
 	public static String formatDate(Date date) {
 		return formatDate(date, DEFALT_DATE_FMT);
+	}
+	
+	public static String formatDateForDump(Date date) {
+		if (date == null) {
+			return "";
+		}
+		return formatDate(date, DUMP_DATE_FMT);
 	}
 	
 	public static String formatDate(Date date, String fmt) {
