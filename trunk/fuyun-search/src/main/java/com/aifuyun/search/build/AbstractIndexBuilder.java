@@ -135,7 +135,7 @@ public abstract class AbstractIndexBuilder implements IndexBuilder {
 					
 					counts.incrSuccess();
 					if (counts.getSuccess() % showPercount == 0) {
-						log.info("success: " + counts.getSuccess());
+						log.warn("success: " + counts.getSuccess());
 					}
 				} catch (Exception e) {
 					counts.incrFailed();
@@ -144,7 +144,7 @@ public abstract class AbstractIndexBuilder implements IndexBuilder {
 			}
 			commitIndex();
 			updateHandler.close();
-			log.info(coreName + " build 完成: " + counts.reportToString());
+			log.warn(coreName + " build 完成: " + counts.reportToString());
 			onAfterDump();
 		} catch (Exception e) {
 			log.error("build error", e);
