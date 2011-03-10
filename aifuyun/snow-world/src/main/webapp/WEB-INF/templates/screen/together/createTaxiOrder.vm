@@ -40,6 +40,12 @@
 	
 	
 		<div class="input-item">
+			途径 <input type="text" id="$!form.fields.approach.name" name="$!form.fields.approach.name" value="$!form.fields.approach.value" />
+		</div>
+		#errorMessage($!form.fields.approach.message)
+		
+	
+		<div class="input-item">
 		出发时间：
 		日期<input type="text" id="$!form.fields.fromTimeDate.name" name="$!form.fields.fromTimeDate.name" value="$!form.fields.fromTimeDate.value"/>
 		时间<input type="text" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="$!form.fields.fromTimeTime.value"/>
