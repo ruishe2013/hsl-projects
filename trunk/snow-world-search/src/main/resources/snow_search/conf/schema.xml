@@ -59,9 +59,19 @@
 		<field name="status" type="int" indexed="true" stored="true" multiValued="false" />
 		<field name="deleted" type="pint" indexed="true" stored="false" multiValued="false" />
 		<field name="type" type="pint" indexed="true" stored="false" multiValued="false" />
+		<field name="fromAddrText" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveAddrText" type="string_sd" indexed="true" stored="true" multiValued="false" />
 	</fields>
 
 	<uniqueKey>id</uniqueKey>
 	<defaultSearchField>id</defaultSearchField>
 	<solrQueryParser defaultOperator="OR" />
+
+	<copyField source="fromAddr" dest="fromAddrText"/>
+	<copyField source="approach" dest="fromAddrText"/>
+    
+	<copyField source="arriveAddr" dest="arriveAddrText"/>
+	<copyField source="approach" dest="arriveAddrText"/>
+   
+
 </schema>
