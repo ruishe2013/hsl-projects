@@ -20,6 +20,9 @@
 		<td>达到时间</td><td>$!dateUtil.formatFullDate($order.arriveTime)</td>
 	</tr>
 	<tr>
+		<td>途径</td><td>$!order.approach</td>
+	</tr>
+	<tr>
 		<td>参加人数/总座位数 </td><td>$!joinersCount/$!order.totalSeats</td>
 	</tr>
 	<tr>

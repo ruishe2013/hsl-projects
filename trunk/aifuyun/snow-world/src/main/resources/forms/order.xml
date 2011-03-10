@@ -44,6 +44,12 @@
 				<param name="max" value="20" />
 			</validator>
 		</field>
+		<field name="approach">
+			<validator type="string" message="请把途径控制在100个字符之内!" >
+				<param name="min" value="0" />
+				<param name="max" value="100" />
+			</validator>
+		</field>
 		<field name="fromTimeDate">
 			<validator type="required" message="出发日期不能为空!" />
 			<validator type="date" message="出发日期的格式必须是yyyy-MM-dd!" >
