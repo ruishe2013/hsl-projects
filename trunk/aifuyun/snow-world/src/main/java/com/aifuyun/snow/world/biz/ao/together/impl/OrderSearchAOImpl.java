@@ -45,11 +45,11 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 		String cityName = searchOrderQuery.getFromCity();
 		String fromAddr = searchOrderQuery.getFromAddr();
 		String arriveCity = searchOrderQuery.getArriveCity();
-		if (!StringUtil.isEmpty(arriveAddr)) {
-			sb.append(" +arriveAddr:" + arriveAddr);
-		}
 		if (!StringUtil.isEmpty(arriveCity)) {
 			sb.append(" +arriveCity:" + arriveCity);
+		}
+		if (!StringUtil.isEmpty(arriveAddr)) {
+			sb.append(" +arriveAddrText:" + arriveAddr);
 		}
 		
 		if (!StringUtil.isEmpty(cityName)) {
@@ -57,7 +57,7 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 		}
 		
 		if (!StringUtil.isEmpty(fromAddr)) {
-			sb.append(" +fromAddr:" + fromAddr);
+			sb.append(" +fromAddrText:" + fromAddr);
 		}
 		String ret = sb.toString();
 		if (StringUtil.isEmpty(ret)) {
