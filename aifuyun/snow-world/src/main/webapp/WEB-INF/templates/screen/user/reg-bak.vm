@@ -1,0 +1,54 @@
+#set($form = $formFactory.createForm("user.registerUser"))
+
+#macro(errorMessage, $str)
+	#if( "$!str" != "")
+		<div class="common-error-message">${str}</div>
+	#end
+#end
+
+<div>
+	<form method="post">
+		<input type="hidden" name="actionEvent" value="regUser" /> 
+		<input type="hidden" name="actionTarget" value="userFacadeAction" />
+		<input type="hidden" name="regUser" value="$tokenUtil.token('regUser')" />
+		
+		<div class="input-item"> 
+			<label for="$!form.fields.username.name">*用户名：</label> 
+			<input type="text" id="$!form.fields.username.name" name="$!form.fields.username.name" value="$!form.fields.username.value" />
+		</div>
+		#errorMessage($!form.fields.username.message)
+		
+		<div class="input-item"> 
+			<label for="$!form.fields.password.name">*密码：</label> 
+			<input type="password" id="$!form.fields.password.name" name="$form.fields.password.name" value="" />
+		</div>
+		#errorMessage($!form.fields.password.message)
+		
+		<div class="input-item"> 
+			<label for="$!form.fields.confirmPassword.name">*确认密码：</label> 
+			<input type="password" id="$!form.fields.confirmPassword.name" name="$form.fields.confirmPassword.name" value="" />
+		</div>
+		#errorMessage($!form.fields.confirmPassword.message)
+		
+		<div class="input-item"> 
+			<label for="$!form.fields.email.name">*Email：</label> 
+			<input type="text" id="$!form.fields.email.name" name="$!form.fields.email.name" value="$!form.fields.email.value" />
+		</div>
+		#errorMessage($!form.fields.email.message)
+		
+		<div class="input-item"> 
+			<label for="$!form.fields.checkCode.name">*验证码：</label> 
+			<input type="text" size="6" maxlength="4" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value="" />
+			$control.setTemplate('common/checkCode.vm')
+		</div>
+		#errorMessage($!form.fields.checkCode.message)
+		
+		
+		#errorMessage($!csrfmessage)
+		#errorMessage($!resultmessage.message)
+		
+		<div class="input-item"> 
+			<input id="submit-button" type="submit" value="提交" /> 
+		</div> 
+	</form>
+</div>
