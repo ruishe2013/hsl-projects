@@ -1,21 +1,30 @@
-城市列表
-
-#foreach($entry in $province2Cities.entrySet())
-	#set($provice = $entry.key)
-	#set($cities = $entry.value)
-	<div>
-		<div>$provice.name</div>
-		<div>
-		#foreach($city in $cities)
-			#if($isSwitch)
-				<a href="javascript:doSwitchCity($city.id, '$city.name');">$city.name</a>
-			#else
-				<a href="$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity').add('cityId', $city.id)">$city.name</a>
+<div id="cArea"><!--content-2 begin-->
+	<div class="cbox"><!--left end-->
+		<div class="citybox">
+			<h1>城市列表</h1>
+			<ul class="citylist">
+			#foreach($entry in $province2Cities.entrySet())
+				#set($provice = $entry.key)
+				#set($cities = $entry.value)
+				
+				<li>
+					<strong>$!{provice.name}：</strong>
+					<div class="city_w">
+					#foreach($city in $cities)
+						#if($isSwitch)
+							<a href="javascript:doSwitchCity($city.id, '$city.name');">$city.name</a>
+						#else
+							<a href="$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity').add('cityId', $city.id)">$city.name</a>
+						#end
+					#end
+					</div>
+				</li>
 			#end
-		#end
+			</ul>
+			<div class="cl"></div> 
 		</div>
 	</div>
-#end
+</div><!--content-2 end-->
 
 <script type="text/javascript">
 	function doSwitchCity(cityId, cityName) {
