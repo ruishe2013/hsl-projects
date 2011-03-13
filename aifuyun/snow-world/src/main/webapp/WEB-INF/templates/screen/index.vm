@@ -1,46 +1,130 @@
-首页
+<div id="cArea"><!--content-1 begin-->
+    <div class="search_box"><!--search begin-->
+    	<div class="search_t">
+    	<button onclick="location.href='$snowModule.setTarget('together/createTaxiOrder')'" class="but_built" onMouseDown="this.className='but_built'" onmouseover="this.className='but_built_h'" onmouseup="this.className='but_built_h'" onMouseOut="this.className='but_built'"></button></div>
+        <div class="search_form">
 
-<div>
-$control.setTemplate('common/citySelected.vm').addAttribute('selectedCity', $selectedCity)
+        	<form action="$snowModule.setTarget('search/searchOrder')" method="get" name="search">
+                <ul>
+                <li>
+                <label for="inp_name">城市：</label>
+				<p><select name="fromCity" class="select">
+                  <option value="se1">$!{selectedCity.name}</option>
+                </select></p>
+                </li>
 
-<a href="$snowModule.setTarget('city/cityList')">切换城市</a>
+				<input type="hidden" name="arriveCity" id="arriveCity" value="$!{selectedCity.name}<" />
+                
+                <li>
+                <label for="inp_name">地点：</label>
+				<p><input id="inp_name" class="input_out" name="fromAddr" type="text" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" /> 
+				到 <input id="inp_name" class="input_out" name="arriveAddr" type="text" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" /></p>
+                </li>
+                
+                <li>
+                <label for="inp_name">发车时间：</label>
+				<p><input type="text" name="it" class="input_out date-pick" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" /> <select name="fcsj2">
+					<option value="se6">1时</option>
+                    <option value="se7">2时</option>
+                    <option value="se8">3时</option>
+                    <option value="se9">4时</option>
+                    <option value="sel0">5时</option>
+                    <option value="sel1">6时</option>
+                    <option value="sel2">7时</option>
+                    <option value="sel3">8时</option>
+                    <option value="sel4">9时</option>
+                    <option value="sel5">10时</option>
+                    <option value="sel6">11时</option>
+                    <option value="sel7">12时</option>
+                    <option value="sel8">13时</option>
+                    <option value="sel9">14时</option>
+                    <option value="se20">15时</option>
+                    <option value="se21">16时</option>
+                    <option value="se22">17时</option>
+                    <option value="se23">18时</option>
+                    <option value="se24">19时</option>
+                    <option value="se25">20时</option>
+                    <option value="se26">21时</option>
+                    <option value="se27">22时</option>
+                    <option value="se28">23时</option>
+                    <option value="se29">24时</option>
+                </select>
+                <select name="fcsj3">
+					<option value="se30">00分</option>
+                    <option value="se31">15分</option>
+                    <option value="se32">30分</option>
+                    <option value="se33">45分</option>
+                </select></p>
+                </li>
+                <li>
+                <button class="but_search" onMouseDown="this.className='but_search'" onmouseover="this.className='but_search_h'" onmouseup="this.className='but_search_h'"  onMouseOut="this.className='but_search'"></button>
+                </li>
+                </ul>
+				
+            </form>
+        </div>
+        <div class="search_b"></div>
+    </div><!--search end-->
+    <div class="Focus_pic"  id="flashcontent01"><!--Focus_pic begin-->
+    
+<script type="text/javascript">	
+					var speed = 4000;		
+					var pics='$imgServer/Focus_pic/1.jpg|$imgServer/Focus_pic/2.jpg|$imgServer/Focus_pic/3.jpg|$imgServer/Focus_pic/4.jpg|$imgServer/Focus_pic/5.jpg|$imgServer/Focus_pic/6.jpg|$imgServer/Focus_pic/7.jpg';	
+					var mylinks='http://www.yiliangche.com/|http://www.yiliangche.com/|http://www.yiliangche.com/|http://www.yiliangche.com/|http://www.yiliangche.com/|http://www.yiliangche.com/|http://www.yiliangche.com/';
+					var texts='世乒赛-王皓横扫王励勤首度称王|世乒赛女单决赛 张怡宁4-2郭跃夺冠|姚明带伤战胜湖人 小巨人主宰比赛|NBA演义第18回：休城谁最“MAN”？|大阪钢巴抵山东备战 队员紧张戴口罩|曼联备战欧冠半决赛 C罗笑里藏刀|《中超队报》：毛剑卿的青春自己做主';			
+					var sohuFlash2 = new sohuFlash("$imgServer/focus0414a.swf","flashcontent01","630","275","8","#ffffff");
+					
+					
+					
+sohuFlash2.addParam("quality", "medium");
+
+sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",speed);
+						sohuFlash2.addVariable("p",pics);	
+						sohuFlash2.addVariable("l",mylinks);
+						sohuFlash2.addVariable("icon",texts);
+						sohuFlash2.write("flashcontent01");
+					</script>
+
+    </div><!--Focus_pic begin-->
+</div><!--content-1 end-->
+
+<div class="hr_6"></div>
+<div id="cArea"><!--content-2 begin-->
+<div class="newcar_t">
+    <div class="newcar_title">最新拼车</div>
+    <div class="but_release"><a href="$snowModule.setTarget('together/createTaxiOrder')" title="发布拼的">发布拼的</a></div></div>
+<div class="newcar_c">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	  <tr class="font_12_b bgc_dy">
+	  	<td>编号</td>
+	    <td>城市</td>
+	    <td>出发地</td>
+	    <td>目的地</td>
+	    <td>发车时间</td>                         
+	    <td>空余座位</td>
+	    <td>发起时间</td>
+	    <td>发起人</td>
+	    <td>加入拼车</td>
+	  </tr>
+	#set($index=0)
+	#foreach($order in $recentOrders)
+		<tr #if( $index % 2 !=0 )class="bgc_dg" #end>
+			<td>010</td>
+		    <td>$!order.fromCity</td>
+		    <td>$!order.fromAddr</td>
+		    <td>$!order.arriveAddr</td>
+		    <td>$dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm')</td>
+		    <td>2</td>
+		    <td>$dateUtil.formatDate($order.arriveTime, 'yyyy-MM-dd HH:mm')</td>
+		    <td>马学军</td>
+		    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_jrpc">查看详情</a></td>
+		</tr>
+		#set($index= $index + 1)
+	#end
+</table>
+
 </div>
-
-<div><a href="$snowModule.setTarget('user/reg')">注册</a></div>
-<div><a href="$snowModule.setTarget('login')">登陆</a></div>
-
-<div>
-
-<form action="$snowModule.setTarget('search/searchOrder')">
-	搜索拼车信息
-	<div>
-	出发城市<input type="text" name="fromCity" />
-	出发地<input type="text" name="fromAddr" />
-	</div>
-	<div>
-	目的城市<input type="text" name="arriveCity" />
-	目的地<input type="text" name="arriveAddr" />
-	</div>
-	<input type="submit" value=" 搜索  " />
-</form>
-
-</div>
-
-<div><a href="$snowModule.setTarget('together/createTaxiOrder')">发布拼车</a></div>
-
-
-<div>最新拼车信息</div>
-
-<ul>
-#foreach($order in $recentOrders)
-	<li>
-	$order.fromCity $order.fromAddr => $order.arriveCity $order.arriveAddr 
-	$dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm') 
-	$dateUtil.formatDate($order.arriveTime, 'yyyy-MM-dd HH:mm')
-	
-	<a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)">加入拼车</a>
-	</li>
-#end
-</ul>
-
-<div>已经成功完成9999次拼车</div>
+<!--
+<div class="newcar_b"><div class="newcar_b_bg"></div></div>
+-->
+</div><!--content-2 end-->
