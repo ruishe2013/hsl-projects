@@ -93,7 +93,7 @@
 (2)相应的法律及程序要求全景图片网提供用户的个人资料。
 如果用户提供的资料包含有不正确的信息，全景图片网保留结束用户使用网络服务资格的权利。</textarea></p>
             </li> 
-            <li><button class="but_submit" onMouseDown="this.className='but_submit'" onmouseover="this.className='but_submit_h'" onmouseup="this.className='but_submit_h'"  onMouseOut="this.className='but_submit'"></button></li>
+            <li><button type="submit" class="but_submit" onMouseDown="this.className='but_submit'" onmouseover="this.className='but_submit_h'" onmouseup="this.className='but_submit_h'"  onMouseOut="this.className='but_submit'"></button></li>
             </ul>
          </form>
         </div>
