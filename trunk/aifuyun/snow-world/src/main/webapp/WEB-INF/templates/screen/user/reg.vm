@@ -1,55 +1,108 @@
-#set($form = $formFactory.createForm("user.registerUser"))
-
 #macro(errorMessage, $str)
 	#if( "$!str" != "")
-		<div class="common-error-message">${str}</div>
+		<span id="result"><img src="$imgServer/ico_tip.gif" align="absmiddle" border="0" />${str}</span>
 	#end
 #end
 
-<div>
-	<form method="post">
-		<input type="hidden" name="actionEvent" value="regUser" /> 
-		<input type="hidden" name="actionTarget" value="userFacadeAction" />
-		<input type="hidden" name="regUser" value="$tokenUtil.token('regUser')" />
-		
-		<div class="input-item"> 
-			<label for="$!form.fields.username.name">*用户名：</label> 
-			<input type="text" id="$!form.fields.username.name" name="$!form.fields.username.name" value="$!form.fields.username.value" />
-		</div>
-		#errorMessage($!form.fields.username.message)
-		
-		
-		<div class="input-item"> 
-			<label for="$!form.fields.password.name">*密码：</label> 
-			<input type="password" id="$!form.fields.password.name" name="$form.fields.password.name" value="" />
-		</div>
-		#errorMessage($!form.fields.password.message)
-		
-		<div class="input-item"> 
-			<label for="$!form.fields.confirmPassword.name">*确认密码：</label> 
-			<input type="password" id="$!form.fields.confirmPassword.name" name="$form.fields.confirmPassword.name" value="" />
-		</div>
-		#errorMessage($!form.fields.confirmPassword.message)
-		
-		<div class="input-item"> 
-			<label for="$!form.fields.email.name">*Email：</label> 
-			<input type="text" id="$!form.fields.email.name" name="$!form.fields.email.name" value="$!form.fields.email.value" />
-		</div>
-		#errorMessage($!form.fields.email.message)
-		
-		<div class="input-item"> 
-			<label for="$!form.fields.checkCode.name">*验证码：</label> 
-			<input type="text" size="6" maxlength="4" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value="" />
-			$control.setTemplate('common/checkCode.vm')
-		</div>
-		#errorMessage($!form.fields.checkCode.message)
-		
-		
-		#errorMessage($!csrfmessage)
-		#errorMessage($!resultmessage.message)
-		
-		<div class="input-item"> 
-			<input id="submit-button" type="submit" value="提交" /> 
-		</div> 
-	</form>
+#set($form = $formFactory.createForm("user.registerUser"))
+
+<div id="cArea"><!--content-2 begin-->
+<div class="cbox">
+	<div class="reg_l_box"><!--left begin-->
+    	<div class="reg_title"><h1 title="用户注册">用户注册</h1></div>
+        <div class="reg_info">
+        <form action="" method="post">
+        	<input type="hidden" name="actionEvent" value="regUser" /> 
+			<input type="hidden" name="actionTarget" value="userFacadeAction" />
+			<input type="hidden" name="regUser" value="$tokenUtil.token('regUser')" />
+            <ul>
+	            <li>
+		            <label for="$!form.fields.username.name"><em>*</em> 用户名：</label>
+		            <div class="reg_info_li_box">
+			            <p>
+			           		<input id="$!form.fields.username.name" class="reg_input_out" name="$!form.fields.username.name" value="$!form.fields.username.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
+			            	#errorMessage($!form.fields.username.message)
+			            </p>
+			            <p>用户名长度在3到20个字符之间，(可以是中文汉字，英文字母，数字和下划线)。</p>
+		            </div>
+	            </li>
+	            
+	            <li>
+		            <label for="$!form.fields.password.name"><em>*</em> 密码：</label>
+		            <div class="reg_info_li_box">
+		            <p>
+		            <input id="$!form.fields.password.name" class="reg_input_out" name="$!form.fields.password.name" value="$!form.fields.password.value"  type="password" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
+					#errorMessage($!form.fields.password.message)
+		            <p>密码长度6～20位，字母区分大小写。</p>
+		            </div>
+	            </li>
+	            
+	            <li>
+		            <label for="$!form.fields.confirmPassword.name"><em>*</em> 确认密码：</label>
+		            <div class="reg_info_li_box">
+			            <p>
+			            <input id="$!form.fields.confirmPassword.name" class="reg_input_out" name="$!form.fields.confirmPassword.name" value="$!form.fields.confirmPassword.value" type="password" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
+			            #errorMessage($!form.fields.confirmPassword.message)
+			            </p>
+			            <p>请再输一便刚才输入的密码。</p>
+		            </div>
+	            </li>
+	            
+	            <li>
+	            	<label for="$!form.fields.email.name"><em>*</em> 电子邮箱：</label>
+	            	<div class="reg_info_li_box">
+		            	<p>
+		            	<input id="$!form.fields.email.name" class="reg_input_out" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
+		            	#errorMessage($!form.fields.email.message)
+		            	</p>
+		            	<p>请输入您的电子邮箱以便我们方便联系。</p>
+	            	</div>
+	            </li>
+	            
+	            <li>
+	            	<label for="$!form.fields.checkCode.name"><em>*</em> 验证码：</label>
+	            	<div class="reg_info_li_box">
+		            	<p>
+		            	<input id="$!form.fields.checkCode.name" class="reg_input_out" name="$form.fields.checkCode.name" value="$!form.fields.checkCode.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
+		            	#errorMessage($!form.fields.checkCode.message)
+		            	</p>
+		            	<p>请输入下图中的4个字符。</p>
+		            	<p>
+		            	$control.setTemplate('common/checkCode.vm')
+		            	</p>
+	            	</div>
+	            </li>
+	            
+	            <li>
+		            <div class="reg_info_li_box">
+		            #errorMessage($!csrfmessage)
+					#errorMessage($!resultmessage.message)
+					</div>
+            	</li>
+	            
+	            <li style="padding-left:20px;">
+	            <p><input name="checkAgreement" type="checkbox" value="1" checked="checked" /> 我接受并同一辆车网站 用户服务条款</p>
+	            </li>
+            <li style="padding-left:20px;">
+            <p><textarea id=agree_txt style=" font:12px; width:480px; line-height:25px; color:#666; height:110px;" readOnly>完全尊重客户的权利，并根据以下规定使用所取得的客户基本资料。 为了完成特许权的交易，并向北京全景视觉网络科技有限公司客户提供服务，我们需要一些基本资料。通常包括（但不仅限于此）：
+(1)提供详尽、准确的个人资料。
+(2)不断更新注册资料，符合及时、详尽、准确的要求。
+我们使用客户的信息完成合作并向世界各地北京全景视觉网络科技有限公司的分公司及合作者透露这些信息与合作细节。互联网的性质也决定了所有数据可在世界各地传递。
+另外，我们根据注册单上的电子邮件或通讯地址，向客户提供各种促销资料。客户也可以受到关于特殊促销活动、新产品、服务等一系列信息。当收到不再需要这些资料的通知时，我们就不再寄给客户任何资料。我们不共享客户提供的北京全景视觉网络科技有限公司网站之外的任何信息。如果您认为北京全景视觉网络科技有限公司没有认真完全执行以上规定，或者想从北京全景视觉网络科技有限公司系统中取消注册，请随时与我们联系，我们会做出合理的答复或修改全景图片网不公开用户的姓名、地址、电子邮箱和笔名， 除以下情况外：
+(1)用户授权全景图片网透露这些信息。
+(2)相应的法律及程序要求全景图片网提供用户的个人资料。
+如果用户提供的资料包含有不正确的信息，全景图片网保留结束用户使用网络服务资格的权利。</textarea></p>
+            </li> 
+            <li><button class="but_submit" onMouseDown="this.className='but_submit'" onmouseover="this.className='but_submit_h'" onmouseup="this.className='but_submit_h'"  onMouseOut="this.className='but_submit'"></button></li>
+            </ul>
+         </form>
+        </div>
+
+    </div><!--left end-->
+
+  <div class="reg_r_box">
+     <p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;花费你一分钟来进行注册，您就可以享用一辆车网站更多的功能！如果您已经注册过，请直接登录，并注意维护您的个人信息以便我们保持联系。如果您有任何问题，欢迎随时致电我们。</p>
+    </div>
+    <div class="clear"></div>
 </div>
+</div><!--content-2 end-->

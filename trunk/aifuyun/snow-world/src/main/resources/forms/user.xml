@@ -55,14 +55,14 @@
 		<field name="username">
 			<validator type="required" message="用户名不能为空!" />
 			<validator type="string" message="用户名长度不能超过20个字符!" >
-				<param name="min" value="1" />
+				<param name="min" value="3" />
 				<param name="max" value="20" />
 			</validator>
 		</field>
 		<field name="password">
 			<validator type="required" message="密码不能为空!" />
-			<validator type="string" message="密码的长度必须在4~20个字符之间!" >
-				<param name="min" value="4" />
+			<validator type="string" message="密码的长度必须在6~20个字符之间!" >
+				<param name="min" value="6" />
 				<param name="max" value="20" />
 			</validator>
 		</field>
