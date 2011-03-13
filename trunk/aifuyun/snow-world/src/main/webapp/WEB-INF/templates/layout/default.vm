@@ -109,11 +109,17 @@ $screen_content
 
 <div class="hr_6"></div>
 <div id="footer"><!--footer begin-->
-<p><a href="about">关于我们</a> |  <a href="news">新闻中心</a> |  <a href="business_cooperation">合作招商</a> | <a href="advertisement_service">广告服务</a> |  <a href="job">招贤纳才</a> |  <a href="web_map">网站地图</a> |  <a href="friend">友情链接</a> |  <a href="connection">联系我们</a></p> 
-<p>Copyright@2008-2009 www.yiliangche.com All Rights Reserved.</p>
-<p>如果您对网站有任何意见,欢迎发送邮件到web@yiliangche.com</p>
+<p>		
+	<a href="#">关于我们</a> | 
+ 	<a href="#">联系我们</a> | 
+ 	<a href="#">拼车须知</a> | 
+  	<a href="#">友情链接</a> |
+	<a href="http://yiliangche.uueasy.com/" target="_blank">用户论坛</a>
+</p> 
+<p>Copyright@2008-2011 www.yiliangche.com All Rights Reserved.</p>
 <p>浙ICP备11006974号 </p>
 </div><!--footer end-->
 </body>
+<script type="text/javascript" src="http://js.tongji.linezing.com/2319746/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/2319746/tongji.gif"/></a></noscript>
 </html>
 
