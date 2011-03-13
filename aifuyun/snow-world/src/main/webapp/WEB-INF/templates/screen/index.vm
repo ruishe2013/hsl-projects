@@ -10,7 +10,10 @@
                 <label for="inp_name">城市：</label>
 				<p><select name="fromCity" class="select">
                   <option value="$!{selectedCity.name}">$!{selectedCity.name}</option>
-                </select></p>
+                </select>
+                
+                <a href="$snowModule.setTarget('city/cityList')" >切换城市</a>
+                </p>
                 </li>
 
                 <li>
