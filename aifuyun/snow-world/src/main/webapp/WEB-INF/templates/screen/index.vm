@@ -21,37 +21,18 @@
                 
                 <li>
                 <label for="inp_name">发车时间：</label>
-				<p><input type="text" name="it" class="input_out date-pick" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" /> <select name="fcsj2">
-					<option value="se6">1时</option>
-                    <option value="se7">2时</option>
-                    <option value="se8">3时</option>
-                    <option value="se9">4时</option>
-                    <option value="sel0">5时</option>
-                    <option value="sel1">6时</option>
-                    <option value="sel2">7时</option>
-                    <option value="sel3">8时</option>
-                    <option value="sel4">9时</option>
-                    <option value="sel5">10时</option>
-                    <option value="sel6">11时</option>
-                    <option value="sel7">12时</option>
-                    <option value="sel8">13时</option>
-                    <option value="sel9">14时</option>
-                    <option value="se20">15时</option>
-                    <option value="se21">16时</option>
-                    <option value="se22">17时</option>
-                    <option value="se23">18时</option>
-                    <option value="se24">19时</option>
-                    <option value="se25">20时</option>
-                    <option value="se26">21时</option>
-                    <option value="se27">22时</option>
-                    <option value="se28">23时</option>
-                    <option value="se29">24时</option>
+				<p><input type="text" name="it" class="input_out date-pick" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" /> 
+				#set($hours = [1 .. 24])
+				<select name="fcsj2">
+					#foreach ($hour in $hours)
+						<option value="$hour">$hour时</option>
+					#end
                 </select>
                 <select name="fcsj3">
-					<option value="se30">00分</option>
-                    <option value="se31">15分</option>
-                    <option value="se32">30分</option>
-                    <option value="se33">45分</option>
+					<option value="0">00分</option>
+                    <option value="15">15分</option>
+                    <option value="30">30分</option>
+                    <option value="45">45分</option>
                 </select></p>
                 </li>
                 <li>
