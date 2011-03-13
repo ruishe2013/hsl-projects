@@ -13,8 +13,6 @@
                 </select></p>
                 </li>
 
-				<input type="hidden" name="arriveCity" id="arriveCity" value="$!{selectedCity.name}<" />
-                
                 <li>
                 <label for="inp_name">�ص㣺</label>
 				<p><input id="inp_name" class="input_out" name="fromAddr" type="text" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" /> 
