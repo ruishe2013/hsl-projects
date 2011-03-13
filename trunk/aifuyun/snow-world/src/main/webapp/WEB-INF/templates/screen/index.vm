@@ -9,7 +9,7 @@
                 <li>
                 <label for="inp_name">³ÇÊÐ£º</label>
 				<p><select name="fromCity" class="select">
-                  <option value="se1">$!{selectedCity.name}</option>
+                  <option value="$!{selectedCity.name}">$!{selectedCity.name}</option>
                 </select></p>
                 </li>
 
