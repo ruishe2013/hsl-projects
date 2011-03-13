@@ -84,9 +84,8 @@
 	            <p><input name="checkAgreement" type="checkbox" value="1" checked="checked" /> 我接受并同一辆车网站 用户服务条款</p>
 	            </li>
             <li style="padding-left:20px;">
-            <p><textarea id=agree_txt style=" font:12px; width:480px; line-height:25px; color:#666; height:110px;" readOnly>
-            $control.setTemplate('misc/agreement.vm')
-            </textarea></p>
+            <p><textarea id=agree_txt style=" font:12px; width:480px; line-height:25px; color:#666; height:110px;" 
+            readOnly>$control.setTemplate('misc/agreement.vm')</textarea></p>
             </li> 
             <li><button type="submit" class="but_submit" onMouseDown="this.className='but_submit'" onmouseover="this.className='but_submit_h'" onmouseup="this.className='but_submit_h'"  onMouseOut="this.className='but_submit'"></button></li>
             </ul>
