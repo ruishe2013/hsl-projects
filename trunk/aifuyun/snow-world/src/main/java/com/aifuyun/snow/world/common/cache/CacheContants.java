@@ -13,5 +13,10 @@ public interface CacheContants {
 	 * 热门城市
 	 */
 	int HOT_CITIES_KEY = 2;
+	
+	/**
+	 * 每个城市的最新拼车
+	 */
+	int RECENT_CITY_ORDERS = 3;
 
 }

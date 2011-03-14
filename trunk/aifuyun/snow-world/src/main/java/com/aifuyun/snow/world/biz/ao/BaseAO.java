@@ -9,6 +9,7 @@ import com.aifuyun.snow.world.biz.bo.misc.CookieBO;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.common.CookieNames;
 import com.aifuyun.snow.world.common.IpUtil;
+import com.aifuyun.snow.world.common.cache.CacheManager;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.area.CityIpDO;
 import com.aifuyun.snow.world.dal.dataobject.user.ExtUserDO;
@@ -30,6 +31,8 @@ public class BaseAO {
 	protected CookieBO cookieBO;
 	
 	protected CityIpBO cityIpBO;
+	
+	protected CacheManager cacheManager;
 	
 	private Integer getUserLastSelect(long userId) {
 		if (userId <= 0) {
@@ -94,6 +97,10 @@ public class BaseAO {
 
 	public final void setCityIpBO(CityIpBO cityIpBO) {
 		this.cityIpBO = cityIpBO;
+	}
+
+	public final void setCacheManager(CacheManager cacheManager) {
+		this.cacheManager = cacheManager;
 	}
 
 	protected long getLoginUserId() {
