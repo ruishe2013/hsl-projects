@@ -8,10 +8,8 @@
                 <ul>
                 <li>
                 <label for="inp_name">城市：</label>
-				<p><select name="fromCity" class="select">
-                  <option value="$!{selectedCity.name}">$!{selectedCity.name}</option>
-                </select>
-                
+				<p>               
+                <input class="input_out" name="fromCity" value="$!{selectedCity.name}" type="text" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" />
                 <a href="$snowModule.setTarget('city/cityList')" >切换城市</a>
                 </p>
                 </li>
