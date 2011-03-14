@@ -12,7 +12,6 @@ import com.aifuyun.snow.world.biz.bo.area.ProvinceBO;
 import com.aifuyun.snow.world.biz.resultcodes.CityResultCode;
 import com.aifuyun.snow.world.common.CookieNames;
 import com.aifuyun.snow.world.common.cache.CacheContants;
-import com.aifuyun.snow.world.common.cache.CacheManager;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.area.ProvinceDO;
 import com.aifuyun.snow.world.dal.dataobject.user.ExtUserDO;
@@ -23,8 +22,6 @@ import com.zjuh.sweet.result.ResultSupport;
 public class CityAOImpl extends BaseAO implements CityAO {
 
 	private ProvinceBO provinceBO;
-	
-	private CacheManager cacheManager;
 	
 	private int defaultCityId = 1;
 	
@@ -133,10 +130,6 @@ public class CityAOImpl extends BaseAO implements CityAO {
 
 	public void setProvinceBO(ProvinceBO provinceBO) {
 		this.provinceBO = provinceBO;
-	}
-
-	public void setCacheManager(CacheManager cacheManager) {
-		this.cacheManager = cacheManager;
 	}
 
 }
