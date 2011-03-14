@@ -6,7 +6,7 @@ import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
 import com.zjuh.sweet.result.Result;
 
-public class Index extends BaseScreen {
+public class TaxiIndex extends BaseScreen {
 
 	private SnowWorldAO snowWorldAO;
 	
