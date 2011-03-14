@@ -15,8 +15,7 @@ public class Index extends BaseScreen {
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		Result result = snowWorldAO.handleForIndex();
 		if (result.isSuccess()) {
-			this.result2Context(result, templateContext, "recentOrders");
-			this.result2Context(result, templateContext, "selectedCity");
+			this.result2Context(result, templateContext);
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
