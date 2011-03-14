@@ -78,9 +78,13 @@ ldh={
         el.style.left=rect.left+x+'px'
     },
    stop:function (e){
-        e=e||window.event;
-        e.stopPropagation&&e.stopPropagation();
-        e.cancelBubble=true
+   		try {
+	        e=e||window.event;
+	        e.stopPropagation&&e.stopPropagation();
+	        e.cancelBubble=true;
+        }catch(ex){
+        	location.href="$snowModule.setTarget('city/cityList')";
+        }
     },
     onblur:function(el,fn) {
         el=this.get(el);

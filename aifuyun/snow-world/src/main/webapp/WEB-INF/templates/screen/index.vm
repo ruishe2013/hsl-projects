@@ -98,7 +98,7 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 		    <td>$dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm')</td>
 		    <td>2</td>
 		    <td>$dateUtil.formatDate($order.arriveTime, 'yyyy-MM-dd HH:mm')</td>
-		    <td>马学军</td>
+		    <td>$!order.creatorUsername</td>
 		    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_jrpc">查看详情</a></td>
 		</tr>
 		#set($index= $index + 1)
