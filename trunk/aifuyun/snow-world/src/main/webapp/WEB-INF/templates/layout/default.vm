@@ -37,7 +37,7 @@ input.value=str;
 <body>
 <div id="header"><!--top begin-->
 <div class="logo"><a href="index.html" title="一辆车——要上就上一辆车">一辆车</a></div>
-	$control.setTemplate('common/citySelected.vm').addAttribute('selectedCity', $selectedCity)
+	$control.setTemplate('common/citySelected.vm')
 </div>
 
 <div class="nav_login" id="nav_login">

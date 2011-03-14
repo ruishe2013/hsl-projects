@@ -8,6 +8,12 @@ import com.aifuyun.snow.world.dal.ibatis.BaseIbatisDAO;
 
 public class CityDAOIbatis extends BaseIbatisDAO implements CityDAO {
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<CityDO> queryHotcities() {
+		return (List<CityDO>)getSqlMapClientTemplate().queryForList("CityDAO.queryHotcities");
+	}
+
 	@Override
 	public int create(CityDO cityDO) {
 		return (Integer)this.getSqlMapClientTemplate().insert("CityDAO.create", cityDO);

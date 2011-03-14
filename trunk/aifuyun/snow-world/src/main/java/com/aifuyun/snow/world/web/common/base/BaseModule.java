@@ -1,6 +1,7 @@
 package com.aifuyun.snow.world.web.common.base;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -91,6 +92,12 @@ public class BaseModule {
 		Object value = result.getModels().get(name);
 		templateContext.put(name, value);
 		return value;
+	}
+	
+	protected void result2Context(Result result, TemplateContext templateContext) {
+		for (Map.Entry<String, Object> entry : result.getModels().entrySet()) {
+			templateContext.put(entry.getKey(), entry.getValue());
+		}
 	}
 	
 	/**

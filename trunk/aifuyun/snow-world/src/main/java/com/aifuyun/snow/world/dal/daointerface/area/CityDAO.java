@@ -41,4 +41,6 @@ public interface CityDAO {
 	 */
 	void delete(int id);
 	
+	List<CityDO> queryHotcities();
+	
 }

@@ -18,4 +18,6 @@ public interface CityBO {
 
 	public void delete(int id);
 	
+	public List<CityDO> queryHotcities();
+	
 }

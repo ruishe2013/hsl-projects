@@ -14,6 +14,19 @@ public class CityDO extends BaseAreaDO   {
 	 * 所在省份
 	 */
 	private int provinceId;
+	
+	/**
+	 * 是否热门城市
+	 */
+	private boolean hotCity = false;
+
+	public boolean isHotCity() {
+		return hotCity;
+	}
+
+	public void setHotCity(boolean hotCity) {
+		this.hotCity = hotCity;
+	}
 
 	public int getProvinceId() {
 		return provinceId;

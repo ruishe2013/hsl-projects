@@ -1,23 +1,11 @@
 <div class="city">
 	<h2>$!selectedCity.name</h2>
-	<div id="menuBtn" style="cursor:pointer" title="城市切换"><a href="$snowModule.setTarget('city/cityList')" >切换城市</a></div>
+	<div id="menuBtn" style="cursor:pointer" title="城市切换"><a href="#" >切换城市</a></div>
 	<div id="menu" style="display:none;">
     <ul>
-        <li><a href="" >北京</a></li>
-        <li><a href="" >上海</a></li>
-        <li><a href="" >武汉</a></li>
-        <li><a href="" >广州</a></li>
-        <li><a href="" >深圳</a></li>
-        <li class="focus"><a href="" >杭州</a></li>
-        <li><a href="" >南京</a></li>
-        <li><a href="" >成都</a></li>
-        <li><a href="" >天津</a></li>
-        <li><a href="" >西安</a></li>
-        <li><a href="" >福州</a></li>
-        <li><a href="" >重庆</a></li>
-        <li><a href="" >厦门</a></li>
-        <li><a href="" >青岛</a></li>
-        <li><a href="" >大连</a></li>
+    #foreach($city in $hotCities)
+    	<li #if("$!selectedCity.id" == "$!city.id") class="focus" #end ><a href="$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity').add('cityId', $city.id)">$city.name</a></li>
+    #end
     </ul>
-    <div class="menufoot"><a href="$snowModule.setTarget('city/cityList')" >切换城市</a></div>
+    <div class="menufoot"><a href="$snowModule.setTarget('city/cityList')" >更多城市...</a></div>
 </div>
