@@ -4,7 +4,7 @@
      "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 	
-	<bean id="cacheManager" class="com.aifuyun.snow.world.common.cache.SimpleCacheManager">
+	<bean id="cacheManager" class="com.aifuyun.snow.world.common.cache.RAMCacheManagerImpl">
 		<property name="namespaces">
 			<list>
 				<value>1</value>
