@@ -10,6 +10,11 @@ public class CityBOImpl implements CityBO {
 	
 	private CityDAO cityDAO;
 	
+	@Override
+	public List<CityDO> queryHotcities() {
+		return cityDAO.queryHotcities();
+	}
+
 	public int create(CityDO cityDO) {
 		return cityDAO.create(cityDO);
 	}

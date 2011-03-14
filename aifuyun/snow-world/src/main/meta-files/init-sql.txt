@@ -64,6 +64,7 @@ create table sw_area_city (
 	pinyin varchar(60),
 	province_id int default 0 not null,
 	seq_num int default 0 not null,
+	hot_city tinyint default 0 not null,
 	deleted tinyint default 0 not null,
 	gmt_create datetime not null,
 	gmt_modified datetime not null

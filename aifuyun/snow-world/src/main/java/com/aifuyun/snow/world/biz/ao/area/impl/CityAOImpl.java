@@ -30,6 +30,16 @@ public class CityAOImpl extends BaseAO implements CityAO {
 	
 	private int selectedCityCookieExpire = 30 * 24 * 3600; // 30天过期
 	
+	@SuppressWarnings("unchecked")
+	private List<CityDO> getHotCities() {
+		List<CityDO> hotCities = (List<CityDO>)cacheManager.get(CacheContants.HOT_CITIES_KEY, CacheContants.DEFAULT_KEY);
+		if (hotCities == null) {
+			hotCities = this.cityBO.queryHotcities();
+			cacheManager.put(CacheContants.HOT_CITIES_KEY, CacheContants.DEFAULT_KEY, hotCities);
+		}
+		return hotCities;
+	}
+
 	@Override
 	public Result switchCity(int cityId) {
 		Result result = new ResultSupport(false);
@@ -107,7 +117,9 @@ public class CityAOImpl extends BaseAO implements CityAO {
 		Result result = new ResultSupport(false);
 		try {
 			CityDO selectedCity = this.getSelectedCity(defaultCityId);
-			result.getModels().put("selectedCity", selectedCity);			
+			List<CityDO> hotCities = getHotCities();
+			result.getModels().put("selectedCity", selectedCity);	
+			result.getModels().put("hotCities", hotCities);	
 			result.setSuccess(true);
 		} catch (Exception e) {
 			log.error("查询默认选择的城市错误", e);
