@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.common.IpUtil;
 import com.zjuh.splist.core.SplistContext;
+import com.zjuh.splist.core.module.Module;
 import com.zjuh.splist.core.module.URLModule;
 import com.zjuh.splist.core.module.URLModuleContainer;
 import com.zjuh.splist.web.RunData;
@@ -30,6 +31,10 @@ import com.zjuh.sweet.result.ResultTypeEnum;
 public class BaseModule {
 	
 	protected final Logger log = LoggerFactory.getLogger(getClass());
+	
+	protected Module getCurrentScreenModule() {
+		return SplistContext.getCurrentScreenModule();
+	}
 	
 	protected String getRemoteAddress() {
 		return IpUtil.getRemoteIpAddress();
