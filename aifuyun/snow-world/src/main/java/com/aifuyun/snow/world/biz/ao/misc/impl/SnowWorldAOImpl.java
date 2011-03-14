@@ -1,5 +1,6 @@
 package com.aifuyun.snow.world.biz.ao.misc.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
@@ -9,6 +10,7 @@ import com.aifuyun.snow.world.biz.query.OrderQuery;
 import com.aifuyun.snow.world.common.cache.CacheContants;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
+import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
 
@@ -25,6 +27,11 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 	 */
 	private int recentOrdersExpire = 60 * 3;
 	
+	/**
+	 * 首页上默认显示的搜索时间比当前时间迟多少(单位:秒) 默认 30分钟
+	 */
+	private int defaultSearchTimeDelay = 30 * 60;
+	
 	@Override
 	public Result handleForIndex() {
 		Result result = new ResultSupport(false);
@@ -35,6 +42,10 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 				cityId = city.getId();
 			}
 			List<OrderDO> recentOrders = getRecentOrders(cityId);
+			Date defaultSearchDate = DateUtil.addSecond(new Date(), defaultSearchTimeDelay);
+			int defaultSearchMinutes = getQuarterMinute(defaultSearchDate);
+			result.getModels().put("defaultSearchDate", defaultSearchDate);
+			result.getModels().put("defaultSearchMinutes", defaultSearchMinutes);
 			result.getModels().put("recentOrders", recentOrders);
 			result.getModels().put("selectedCity", city);
 			result.setSuccess(true);
@@ -42,6 +53,11 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 			log.error("查看最近拼车失败", e);
 		}
 		return result;
+	}
+	
+	private int getQuarterMinute(Date defaultSearchDate) {
+		int minute = DateUtil.getMinute(defaultSearchDate);
+		return (minute / 15 ) * 15;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -73,6 +89,13 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 
 	public void setRecentOrdersExpire(int recentOrdersExpire) {
 		this.recentOrdersExpire = recentOrdersExpire;
+	}
+
+	public void setDefaultSearchTimeDelay(int defaultSearchTimeDelay) {
+		if (defaultSearchTimeDelay < 0) {
+			defaultSearchTimeDelay = 0;
+		}
+		this.defaultSearchTimeDelay = defaultSearchTimeDelay;
 	}
 
 }
