@@ -31,6 +31,8 @@
 			<set>
 				<value>index</value>
 				<value>taxiIndex</value>
+				<value>interCityIndex</value>
+				<value>rushHourIndex</value>
 				<value>city/switchCityAction</value>
 				<value>common/checkCode</value>
 				<value>user/reg</value>
