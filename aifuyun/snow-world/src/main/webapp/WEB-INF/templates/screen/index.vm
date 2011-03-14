@@ -1,5 +1,2 @@
-## 暂时重定向到 拼的 首页
+## 暂时已经被重定向到 拼的 首页
 
-<script>
-location.href="$snowModule.setTarget('taxiIndex')";
-</script>

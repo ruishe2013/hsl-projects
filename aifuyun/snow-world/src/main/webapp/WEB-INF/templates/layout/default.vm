@@ -51,7 +51,7 @@ input.value=str;
     <div class="fl nav_c">
         <ul>
         <li><a href="$snowModule.setTarget('index')">首 页</a></li>
-        <li><a href="$snowModule.setTarget('index')" class="on">拼的士</a></li>
+        <li><a href="$snowModule.setTarget('taxiIndex')" class="on">拼的士</a></li>
         <li><a href="#">城际拼车</a></li>
         <li><a href="#">上下班拼车</a></li>
         </ul>
