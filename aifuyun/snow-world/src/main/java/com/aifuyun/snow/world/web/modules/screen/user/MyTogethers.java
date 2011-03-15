@@ -1,6 +1,6 @@
 package com.aifuyun.snow.world.web.modules.screen.user;
 
-import com.aifuyun.snow.world.biz.ao.together.OrderAO;
+import com.aifuyun.snow.world.biz.ao.together.taxi.OrderAO;
 import com.aifuyun.snow.world.biz.query.UserOrderQuery;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.web.RunData;

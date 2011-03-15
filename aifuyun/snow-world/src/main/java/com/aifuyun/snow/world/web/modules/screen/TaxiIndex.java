@@ -13,7 +13,7 @@ public class TaxiIndex extends BaseScreen {
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
-		Result result = snowWorldAO.handleForIndex();
+		Result result = snowWorldAO.handleForTaxiIndex();
 		if (result.isSuccess()) {
 			this.result2Context(result, templateContext);
 		} else {

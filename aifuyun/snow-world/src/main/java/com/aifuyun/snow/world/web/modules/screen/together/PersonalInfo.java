@@ -1,6 +1,6 @@
 package com.aifuyun.snow.world.web.modules.screen.together;
 
-import com.aifuyun.snow.world.biz.ao.together.OrderAO;
+import com.aifuyun.snow.world.biz.ao.together.taxi.OrderAO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.core.form.Form;

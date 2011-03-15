@@ -1,4 +1,4 @@
-package com.aifuyun.snow.world.biz.ao.together;
+package com.aifuyun.snow.world.biz.ao.together.taxi;
 
 import com.aifuyun.snow.world.biz.query.UserOrderQuery;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;

@@ -2,7 +2,7 @@ package com.aifuyun.snow.world.web.modules.action.together;
 
 import java.util.Date;
 
-import com.aifuyun.snow.world.biz.ao.together.OrderAO;
+import com.aifuyun.snow.world.biz.ao.together.taxi.OrderAO;
 import com.aifuyun.snow.world.common.DateTimeUtil;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
