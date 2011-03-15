@@ -4,7 +4,7 @@ import java.text.ParseException;
 
 import junit.framework.Assert;
 
-import com.aifuyun.snow.world.biz.ao.together.OrderAO;
+import com.aifuyun.snow.world.biz.ao.together.taxi.OrderAO;
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
 import com.aifuyun.snow.world.common.DateTimeUtil;
 import com.aifuyun.snow.world.dal.daointerface.together.OrderDAO;

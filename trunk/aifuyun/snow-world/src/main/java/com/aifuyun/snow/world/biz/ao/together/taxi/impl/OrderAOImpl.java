@@ -1,10 +1,10 @@
-package com.aifuyun.snow.world.biz.ao.together.impl;
+package com.aifuyun.snow.world.biz.ao.together.taxi.impl;
 
 import java.util.Collection;
 import java.util.List;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
-import com.aifuyun.snow.world.biz.ao.together.OrderAO;
+import com.aifuyun.snow.world.biz.ao.together.taxi.OrderAO;
 import com.aifuyun.snow.world.biz.bo.together.OrderBO;
 import com.aifuyun.snow.world.biz.bo.together.OrderUserBO;
 import com.aifuyun.snow.world.biz.query.UserOrderQuery;
@@ -12,6 +12,7 @@ import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.OrderResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
 import com.aifuyun.snow.world.common.SnowUtils;
+import com.aifuyun.snow.world.common.cache.CacheContants;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
@@ -530,7 +531,11 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				return result;
 			}
 			
-			orderBO.updateStatus(orderId, OrderStatusEnum.WAIT_CONFIRM);			
+			orderBO.updateStatus(orderId, OrderStatusEnum.WAIT_CONFIRM);
+			
+			// 主动失效缓存
+			cacheManager.delete(CacheContants.RECENT_CITY_ORDERS, order.getCityId());
+			
 			result.setSuccess(true);
 		} catch (Exception e) {
 			log.error("确认订单失败", e);

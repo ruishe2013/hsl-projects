@@ -23,9 +23,9 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 	private int cityCount = 10;
 	
 	/**
-	 * 最新拼车， 3分钟缓存
+	 * 最新拼车， 30分钟缓存
 	 */
-	private int recentOrdersExpire = 60 * 3;
+	private int recentOrdersExpire = 60 * 30;
 	
 	/**
 	 * 首页上默认显示的搜索时间比当前时间迟多少(单位:秒) 默认 30分钟
@@ -33,7 +33,7 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 	private int defaultSearchTimeDelay = 30 * 60;
 	
 	@Override
-	public Result handleForIndex() {
+	public Result handleForTaxiIndex() {
 		Result result = new ResultSupport(false);
 		try {
 			CityDO city = this.getSelectedCity(defaultCityId);
