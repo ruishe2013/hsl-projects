@@ -11,5 +11,6 @@
 	<bean id="cityIpDAO" class="com.aifuyun.snow.world.dal.ibatis.area.CityIpDAOIbatis"></bean>
 	<bean id="orderDAO" class="com.aifuyun.snow.world.dal.ibatis.together.OrderDAOIbatis"></bean>
 	<bean id="orderUserDAO" class="com.aifuyun.snow.world.dal.ibatis.together.OrderUserDAOIbatis"></bean>
+	<bean id="leaveWordDAO" class="com.aifuyun.snow.world.dal.ibatis.feedback.LeaveWordDAOIbatis"></bean>
 	
 </beans>

@@ -4,4 +4,5 @@
 	<include file="forms/user.xml" />
 	<include file="forms/login.xml" />
 	<include file="forms/order.xml" />
+	<include file="forms/feedback.xml" />
 </forms>

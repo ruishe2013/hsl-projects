@@ -1,0 +1,67 @@
+#set($form = $formFactory.createForm("feedback.leaveWord"))
+
+#macro(errorMessageForLeaveWorld, $str)
+	#if( "$!str" != "")
+		<div class="leave-word-error" style="color:#f00;font-weight: bold;">${str}</div>
+	#end
+#end
+
+<div id="cArea"><!--content-2 begin-->
+	<div class="cbox">
+		<div style="margin:0 auto; width: 500px;">
+			<h1>
+				我们的成长离不开您的建议，非常感谢您给我们留言。
+			</h1>
+			<form method="post" style="margin-bottom: 20px;">
+				<input type="hidden" name="actionEvent" value="leaveWord" /> 
+				<input type="hidden" name="actionTarget" value="feedbackAction" />
+				
+				<div class="leave-word-field">
+			        <label for="$!form.fields.content.name">*留言内容（请限制在500字之内）：</label>
+			        <div>
+			        	<textarea id="$!form.fields.content.name" name="$!form.fields.content.name" cols="60" rows="10">$!form.fields.content.value</textarea>
+			            <p>
+			            	#errorMessageForLeaveWorld($!form.fields.content.message)
+			            </p>
+			        </div>
+			    </div>
+			    
+			    <div class="leave-word-field">
+			        <label for="$!form.fields.nick.name">您的称呼：</label>
+			        <div>
+			        	<input id="$!form.fields.nick.name" size="30" maxlength="30" name="$form.fields.nick.name" value="$!form.fields.nick.value" type="text" />
+			        	#errorMessageForLeaveWorld($!form.fields.nick.message)
+			        </div>
+			    </div>
+			
+				<div class="leave-word-field">
+			        <label for="$!form.fields.contact.name">您的联系方式：</label>
+			        <div>
+			        	<input id="$!form.fields.contact.name" size="30" maxlength="30" name="$form.fields.contact.name" value="$!form.fields.contact.value" type="text" />
+			        	#errorMessageForLeaveWorld($!form.fields.contact.message)
+			        </div>
+			    </div>
+			
+				<div class="leave-word-field">
+			    	<label for="$!form.fields.checkCode.name">*验证码：</label>
+			    	<div >
+			        	<p>
+			        	<input id="$!form.fields.checkCode.name" size="6" maxlength="4" name="$form.fields.checkCode.name" value="$!form.fields.checkCode.value" type="text" />
+			        	#errorMessageForLeaveWorld($!form.fields.checkCode.message)
+			        	</p>
+			        	<p>请输入下图中的4个字符。</p>
+			        	<p>
+			        	$control.setTemplate('common/checkCode.vm')
+			        	</p>
+			    	</div>
+			    </div>
+			    
+				#errorMessageForLeaveWorld($!csrfmessage)
+				#errorMessageForLeaveWorld($!resultmessage.message)
+					
+				<input type="submit" value="提交" style="width: 60px; "/>
+				
+			</form>
+		</div>
+	</div>
+</div>

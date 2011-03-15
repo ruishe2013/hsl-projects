@@ -120,7 +120,7 @@ $screen_content
  	<a href="#">拼车须知</a> | 
   	<a href="#">友情链接</a> |
 	<a href="http://yiliangche.uueasy.com/" target="_blank">用户论坛</a> |
-	<a href="#">意见反馈</a>
+	<a href="$snowModule.setTarget('feedback/leaveWord')">意见反馈</a>
 </p> 
 <p>杭州爱福韵网络技术有限公司  Copyright@2011 All Rights Reserved.</p>
 <p>浙ICP备11006974号 </p>

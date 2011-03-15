@@ -10,6 +10,7 @@
 	<bean id="cityAO" class="com.aifuyun.snow.world.biz.ao.area.impl.CityAOImpl"></bean>
 	<bean id="snowWorldAO" class="com.aifuyun.snow.world.biz.ao.misc.impl.SnowWorldAOImpl"></bean>
 	<bean id="orderSearchAO" class="com.aifuyun.snow.world.biz.ao.together.impl.OrderSearchAOImpl"></bean>
+	<bean id="leaveWordAO" class="com.aifuyun.snow.world.biz.ao.feedback.impl.LeaveWordAOImpl"></bean>
 	
 
 </beans>
