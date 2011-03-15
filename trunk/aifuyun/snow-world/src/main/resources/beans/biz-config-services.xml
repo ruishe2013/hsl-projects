@@ -41,6 +41,9 @@
 				<value>userFacadeAction</value>
 				<value>city/cityList</value>
 				<value>search/searchOrder</value>
+				<value>feedback/leaveWord</value>
+				<value>feedback/leaveWordSuccess</value>
+				<value>feedbackAction</value>
 			</set>
 		</property>
 	</bean>

@@ -1,0 +1,8 @@
+<div id="cArea"><!--content-2 begin-->
+	<div class="cbox">
+		<div style="margin:0 auto; width: 500px;">
+			<div style="">留言成功！非常感谢您的建议。</div>
+			<div><a href="$snowModule.setTarget('index')">点击这里回首页</a></div>
+		</div>
+	</div>
+</div>

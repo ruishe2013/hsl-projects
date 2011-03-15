@@ -134,3 +134,16 @@ create table sw_order_user (
 create index ind_ord_u_by_u on sw_order_user(user_id, role, status, deleted);
 create index ind_ord_u_by_o on sw_order_user(order_id, status, deleted, role, gmt_modified);
 create index ind_ord_u_by_ou on sw_order_user(order_id, user_id, deleted);
+
+
+DROP TABLE IF EXISTS sw_leave_word;
+create table sw_leave_word (
+	id int primary key auto_increment,
+	nick varchar(80),
+	from_ip varchar(80),
+	contact varchar(80),
+	content varchar(1024) not null,
+	deleted tinyint default 0 not null,
+	gmt_create datetime not null,
+	gmt_modified datetime not null
+) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="GB18030"?>
+<forms>
+	
+	<form name="feedback.leaveWord">
+		<field name="nick">
+			<validator type="string" message="称呼长度不要超过30个字符!" >
+				<param name="min" value="0" />
+				<param name="max" value="30" />
+			</validator>
+		</field>
+		<field name="contact">
+			<validator type="string" message="联系方式长度不要超过30个字符!" >
+				<param name="min" value="0" />
+				<param name="max" value="30" />
+			</validator>
+		</field>
+		<field name="content">
+			<validator type="required" message="留言内容不能为空，谢谢!" />
+			<validator type="string" message="留言的内容请限制在500字之内!" >
+				<param name="min" value="0" />
+				<param name="max" value="500" />
+			</validator>
+		</field>
+		<field name="checkCode">
+			<validator type="required" message="验证码不能为空!" />
+			<validator type="com.aifuyun.snow.world.web.common.validators.CheckCodeValidator" 
+						message="验证码错误!" >
+			</validator>
+		</field>
+	</form>
+	
+</forms>

@@ -11,6 +11,8 @@
 	<bean id="orderBO" class="com.aifuyun.snow.world.biz.bo.together.impl.OrderBOImpl"></bean>
 	<bean id="orderUserBO" class="com.aifuyun.snow.world.biz.bo.together.impl.OrderUserBOImpl"></bean>
 	<bean id="cookieBO" class="com.aifuyun.snow.world.biz.bo.misc.impl.CookieBOImpl"></bean>
+	<bean id="leaveWordBO" class="com.aifuyun.snow.world.biz.bo.feedback.impl.LeaveWordBOImpl"></bean>
+	
 	
 	<bean id="orderSearchBO" class="com.aifuyun.snow.world.biz.bo.search.impl.SolrOrderSearchBOImpl" init-method="init">
 		<property name="solrUrls">

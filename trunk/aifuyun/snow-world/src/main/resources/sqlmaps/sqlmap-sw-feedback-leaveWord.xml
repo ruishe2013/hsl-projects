@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="LeaveWordDAO">
+
+	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.feedback.LeaveWordDO" alias="leaveWord" />
+
+	<resultMap id="leaveWordMapping" class="leaveWord">
+		<result property="gmtModified" column="gmt_modified"/>
+		<result property="content" column="content"/>
+		<result property="id" column="id"/>
+		<result property="gmtCreate" column="gmt_create"/>
+		<result property="fromIp" column="from_ip"/>
+		<result property="nick" column="nick"/>
+		<result property="contact" column="contact"/>
+	</resultMap>
+
+	<sql id="leaveWord-full-columns">
+		t.gmt_modified, t.content, t.id, t.gmt_create, t.from_ip, t.nick, t.contact
+	</sql>
+
+	<insert id="create" parameterClass="leaveWord">
+		<![CDATA[
+			insert into sw_leave_word(gmt_modified, content, gmt_create, from_ip, nick, contact) 
+				values (now(), #content#, now(), #fromIp#, #nick#, #contact#)
+		]]>
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT LAST_INSERT_ID();
+	   </selectKey>
+	</insert>
+	
+	<select id="queryById" resultMap="leaveWordMapping" parameterClass="int">
+		select
+			<include refid="leaveWord-full-columns"/>
+		from
+			sw_leave_word t
+		where
+			t.deleted = 0 and t.id = #value#
+	</select>
+	
+	<update id="delete" parameterClass="int">
+		update sw_leave_word t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
+	</update>
+	
+	<update id="update" parameterClass="leaveWord">
+		<![CDATA[
+			update sw_leave_word set 
+				gmt_modified= now(),
+				content= #content#,
+				gmt_create= #gmtCreate#,
+				from_ip= #fromIp#,
+				nick= #nick#,
+				contact= #contact#
+			where id = #id#
+		]]>
+	</update>
+
+</sqlMap>
