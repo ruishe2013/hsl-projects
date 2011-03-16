@@ -22,24 +22,9 @@
 				<param name="max" value="20" />
 			</validator>
 		</field>
-		
-		<field name="arriveCityId">
-			<validator type="required" message="到达城市cityId不能为空!" />
-			<validator type="int" message="到达城市cityId不能为空!" >
-				<param name="min" value="0" />
-			</validator>
-		</field>
-		
-		<field name="arriveCity">
-			<validator type="required" message="到达城市不能为空!" />
-			<validator type="string" message="到达城市名称长度不能超过20个字符!" >
-				<param name="min" value="1" />
-				<param name="max" value="20" />
-			</validator>
-		</field>
 		<field name="arriveAddr">
 			<validator type="required" message="到达地不能为空!" />
-			<validator type="string" message="到达地名称长度不能超过20个字符!" >
+			<validator type="string" message="目的地地名称长度不能超过20个字符!" >
 				<param name="min" value="1" />
 				<param name="max" value="20" />
 			</validator>
