@@ -123,7 +123,7 @@ $screen_content
 	<a href="$snowModule.setTarget('feedback/leaveWord')">意见反馈</a>
 </p> 
 <p>杭州爱福韵网络技术有限公司  Copyright@2011 All Rights Reserved.</p>
-<p>浙ICP备11006974号 </p>
+<p><a href="http://www.miibeian.gov.cn/" target="_blank">浙ICP备11006974号</a></p>
 </div><!--footer end-->
 </body>
 <script type="text/javascript" src="http://js.tongji.linezing.com/2319746/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/2319746/tongji.gif"/></a></noscript>
