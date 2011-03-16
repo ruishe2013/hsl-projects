@@ -35,7 +35,7 @@
 			</analyzer>
 		</fieldType>
 		<fieldType name="string_sd" class="solr.TextField" sortMissingLast="true" omitNorms="true">
-			<analyzer type="index">
+			<analyzer>
 				<tokenizer class="solr.StandardTokenizerFactory" />
 				<filter class="solr.ChineseFilterFactory" />
 			</analyzer>
@@ -65,7 +65,7 @@
 	</fields>
 
 	<uniqueKey>id</uniqueKey>
-	<defaultSearchField>id</defaultSearchField>
+	<defaultSearchField>arriveAddrText</defaultSearchField>
 	<solrQueryParser defaultOperator="OR" />
 
 	<copyField source="fromAddr" dest="fromAddrText"/>
