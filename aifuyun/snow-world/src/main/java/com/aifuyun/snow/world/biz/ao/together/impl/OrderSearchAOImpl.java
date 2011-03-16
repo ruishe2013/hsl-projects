@@ -10,6 +10,7 @@ import com.aifuyun.snow.world.biz.bo.search.OrderSearchBO;
 import com.aifuyun.snow.world.biz.query.SearchOrderQuery;
 import com.aifuyun.snow.world.biz.query.search.SearchQuery;
 import com.aifuyun.snow.world.biz.query.search.SearchResult;
+import com.aifuyun.snow.world.common.SearchUtil;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
@@ -39,25 +40,24 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 	}
 
 	private String buildSearchQuery(SearchOrderQuery searchOrderQuery) {
-		// TODO Î´¿¼ÂÇÍ¾¾¶µÈ
 		StringBuilder sb = new StringBuilder();
 		String arriveAddr = searchOrderQuery.getArriveAddr();
 		String cityName = searchOrderQuery.getFromCity();
 		String fromAddr = searchOrderQuery.getFromAddr();
 		String arriveCity = searchOrderQuery.getArriveCity();
 		if (!StringUtil.isEmpty(arriveCity)) {
-			sb.append(" +arriveCity:" + arriveCity);
+			sb.append(" +arriveCity:" + SearchUtil.filter(arriveCity));
 		}
 		if (!StringUtil.isEmpty(arriveAddr)) {
-			sb.append(" +arriveAddrText:" + arriveAddr);
+			sb.append(" +arriveAddrText:" + SearchUtil.filter(arriveAddr));
 		}
 		
 		if (!StringUtil.isEmpty(cityName)) {
-			sb.append(" +fromCity:" + cityName);
+			sb.append(" +fromCity:" + SearchUtil.filter(cityName));
 		}
 		
 		if (!StringUtil.isEmpty(fromAddr)) {
-			sb.append(" +fromAddrText:" + fromAddr);
+			sb.append(" +fromAddrText:" + SearchUtil.filter(fromAddr));
 		}
 		String ret = sb.toString();
 		if (StringUtil.isEmpty(ret)) {
