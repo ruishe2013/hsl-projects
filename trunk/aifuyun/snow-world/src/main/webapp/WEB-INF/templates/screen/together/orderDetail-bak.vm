@@ -1,0 +1,87 @@
+#macro(errorMessage, $str)
+	#if( "$!str" != "")
+		<div class="common-error-message">${str}</div>
+	#end
+#end
+
+
+<table width="500px;">
+	<caption>拼单信息</caption>
+	<tr>
+		<td>出发地</td><td>$!{order.fromCity} $!{order.fromAddr}</td>
+	</tr>
+	<tr>
+		<td>出发时间</td><td>$!dateUtil.formatFullDate($order.fromTime)</td>
+	</tr>
+	<tr>
+		<td>达到地</td><td>$!{order.arriveCity} $!{order.arriveAddr}</td>
+	</tr>
+	<tr>
+		<td>达到时间</td><td>$!dateUtil.formatFullDate($order.arriveTime)</td>
+	</tr>
+	<tr>
+		<td>途径</td><td>$!order.approach</td>
+	</tr>
+	<tr>
+		<td>参加人数/总座位数 </td><td>$!joinersCount/$!order.totalSeats</td>
+	</tr>
+	<tr>
+		<td>描述</td><td>$!order.description</td>
+	</tr>
+</table>
+
+#errorMessage($!resultmessage.message)
+
+#if ($showJoiners)
+	## 显示参加人
+	
+	<div>参加人</div>
+	<ul>
+	#foreach($orderUser in $confirmedJoiners)
+		<li>$orderUser.realName $orderUser.phone #if($isCreatorSelf) 
+		#if ($order.status != 20)
+			<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'removeUserFromOrder').add('id', $orderUser.id)">移除该用户</a> #end</li>
+		#end
+	#end
+	</ul>
+#end
+
+
+#if ($order.status == 20)
+	## 已经确认
+	该拼车已经确认
+#else
+	## 拼车单待确认
+	
+	#if ($isCreatorSelf)
+		## 显示申请人
+		
+		<div>申请人</div>
+		<ul>
+		#foreach($orderUser in $waitConfirmJoiners)
+			<li>$orderUser.realName $orderUser.phone 
+			 <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('id', $orderUser.id).add('agree', 'true')">同意加入</a>
+			 <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('id', $orderUser.id).add('agree', 'false')">不同意加入</a></li>
+		#end
+		</ul>
+	#end
+	
+	
+	#set($leftSeatCount = $!order.totalSeats - $joinersCount )
+	#if ($isCreatorSelf)
+		你是该拼单的创建者， <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'cancelOrder').add('orderId', $order.id)">取消该拼车</a>
+		#if ($showConfirmOrderBtn)
+			<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmTogetherOrder').add('orderId', $order.id)">确认该拼车</a>
+		#end
+	#elseif ($hasBeenJoin)
+		你已经加入该拼车，你可以<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)">退出该拼车</a>
+	#elseif ("$!userJoinStatusValue" == "0") 
+		你的申请还在等发起人确认，请耐心等待；或者你可以<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)">退出拼车申请</a>
+	#elseif ($leftSeatCount <= 0)
+		对不起，该拼车的位置已经满了，推荐你<a href="#">去别拼车单看看</a>
+	#else
+		<a href="$snowModule.setTarget('together/personalInfo').add('orderId', $order.id).add('join', 'true')">加入拼车</a>
+	#end
+
+#end
+
