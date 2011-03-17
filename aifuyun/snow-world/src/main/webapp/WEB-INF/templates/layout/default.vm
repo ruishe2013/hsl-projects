@@ -17,7 +17,7 @@
 
 <div class="top_r">
 <p><a href="#">帮助中心</a> | <a href="#">收藏本站</a></p>
-<p>您好，欢迎来到一辆车！[<a href="$snowModule.setTarget('login')">请登录</a>] [<a href="$snowModule.setTarget('user/reg')">免费注册</a>]</p> 
+$control.setTemplate('common/userInfo.vm')
 </div>
 
 <div class="miannav"><!--nav begin-->

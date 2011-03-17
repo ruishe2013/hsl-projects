@@ -1,13 +1,5 @@
-<div id="common-user-info">
-<a href="$snowModule.setTarget('index')">返回首页</a>
 #if("$!username" == "")
-	欢迎来到一辆车拼车网， 请<a href="$snowModule.setTarget('login').addQueryData('redirectUrl', $currentURL)">登录</a>
-#else
-	你好<strong>$username</strong>，<a href="$snowModule.setTarget('user/myTogethers')">我的拼车</a>
-	
-	
-	 <a href="$snowModule.setTarget('loginOut')">退出登录</a>
+<p>您好，欢迎来到一辆车！[<a href="$snowModule.setTarget('login')">请登录</a>] [<a href="$snowModule.setTarget('user/reg')">免费注册</a>]</p>
+#else 
+<p>您好<strong>$username</strong>，欢迎来到一辆车！[<a href="$snowModule.setTarget('loginOut')">退出登录</a>] </p>
 #end
-
-##<div id="header-suggestion"><a href="#">我要提意见！</a></div>
-</div>
