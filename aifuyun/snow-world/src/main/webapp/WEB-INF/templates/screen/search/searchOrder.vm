@@ -22,7 +22,8 @@
     		<tr #if($index % 2 == 0) class="font_12_b bgc_dy" #end >
 		    <td>$order.fromCity</td>
 		    <td>$order.fromAddr</td>
-		    <td>$order.arriveCity $order.arriveAddr</td>
+		    ## $order.arriveCity
+		    <td>$order.arriveAddr</td>
 		    <td>发车时间</td>                         
 		    <td>发起时间</td>
 		    <td> $order.creatorUsername</td>
