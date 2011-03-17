@@ -8,7 +8,7 @@ flush privileges;
 
 
 delete from mysql.user where User = 'dumpsnow';
-grant select on `snow-world`.* to 'dumpsnow'@'localhost' identified by 'dumpsnow';
+grant select on `snow-world`.* to 'dumpsnow'@'localhost' identified by 'dumpsnow123';
 flush privileges;
 
 DROP TABLE IF EXISTS sw_user_base_user;

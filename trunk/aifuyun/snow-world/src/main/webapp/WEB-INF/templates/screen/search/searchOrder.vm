@@ -22,21 +22,21 @@
 		    <td>出发地</td>
 		    <td>目的地</td>
 		    <td>发车时间</td>                         
-		    <td>发起时间</td>
+		    <td>途径</td>
 		    <td>发起人</td>
-		    <td>加入拼车</td>
+		    <td>操作</td>
 		  </tr>
     	#set($index=1)
     	#foreach($order in $orders)
     		<tr #if($index % 2 == 0) class="bgc_dg" #end >
-		    <td>$order.fromCity</td>
-		    <td>$order.fromAddr</td>
-		    ## $order.arriveCity
-		    <td>$order.arriveAddr</td>
+		    <td>$!order.fromCity</td>
+		    <td>$!order.fromAddr</td>
+		    ## $!order.arriveCity
+		    <td>$!order.arriveAddr</td>
 		    <td>发车时间</td>                         
-		    <td>发起时间</td>
-		    <td> $order.creatorUsername</td>
-		    <td>加入拼车</td>
+		    <td>$!order.approach</td>
+		    <td>$!order.creatorUsername </td>
+		    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)">查看详情</a></td>
 		  </tr>
 		  
 		  #set($index=$index + 1)
