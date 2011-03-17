@@ -8,21 +8,23 @@
                 <ul>
                 <li>
                 <label for="inp_name">城市：</label>
-				<p>               
-                <input class="input_out" name="fromCity" value="$!{selectedCity.name}" type="text" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" />
+				<p>
+				<input class="input_95" name="fromCity" value="$!{selectedCity.name}" type="text" onMouseDown="this.className='input_95'" onmouseover="this.className='input_on'" onmouseup="this.className='input_on'" onMouseOut="this.className='input_95'"/>        
                 <a href="$snowModule.setTarget('city/cityList')" >切换城市</a>
                 </p>
                 </li>
 
                 <li>
                 <label for="inp_name">地点：</label>
-				<p><input id="inp_name" class="input_out" name="fromAddr" type="text" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" /> 
-				到 <input id="inp_name" class="input_out" name="arriveAddr" type="text" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" /></p>
+				<p>
+				<input class="input_95" name="fromAddr" type="text" /> 
+				到
+				<input class="input_95" name="arriveAddr" type="text"/
                 </li>
                 
                 <li>
                 <label for="inp_name">发车时间：</label>
-				<p><input type="text" name="it" readonly="readonly" value="$!dateUtil.formatDate($defaultSearchDate, 'dd/MM/yyyy')" class="input_out date-pick" onfocus="this.className='input_on';this.onmouseout=''" onblur="this.className='input_off';this.onmouseout=function(){this.className='input_out'};" onmousemove="this.className='input_move'" onmouseout="this.className='input_out'" /> 
+				<p><input type="text" name="it" readonly="readonly" value="$!dateUtil.formatDate($defaultSearchDate, 'dd/MM/yyyy')"  class="input_95 date-pick" /> 
 				#set($selectedHour = $dateUtil.getHour($defaultSearchDate))
 				#set($hours = [1 .. 24])
 				<select name="fcsj2">
@@ -40,6 +42,15 @@
                 </p>
                 </li>
                 <li>
+                
+                <div style="display: block;">
+                	<div class="search_tip">
+                		<span style="display:none">
+                			<img src="images/ico_tip.gif" align="absmiddle" border="0" />
+                		</span>
+                	</div>
+                </div>
+                
                 <button type="submit" class="but_search" onMouseDown="this.className='but_search'" onmouseover="this.className='but_search_h'" onmouseup="this.className='but_search_h'"  onMouseOut="this.className='but_search'"></button>
                 </li>
                 </ul>
@@ -56,18 +67,14 @@
 					var mylinks='http://www.yiliangche.com/|http://www.yiliangche.com/|http://www.yiliangche.com/|http://www.yiliangche.com/';
 					var texts='世乒赛-王皓横扫王励勤首度称王|世乒赛女单决赛 张怡宁4-2郭跃夺冠|姚明带伤战胜湖人 小巨人主宰比赛|NBA演义第18回：休城谁最“MAN”？';
 					var sohuFlash2 = new sohuFlash("$imgServer/focus0414a.swf","flashcontent01","630","275","8","#ffffff");
-					
-					
-					
-sohuFlash2.addParam("quality", "medium");
 
+sohuFlash2.addParam("quality", "medium");
 sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",speed);
 						sohuFlash2.addVariable("p",pics);	
 						sohuFlash2.addVariable("l",mylinks);
 						sohuFlash2.addVariable("icon",texts);
 						sohuFlash2.write("flashcontent01");
 					</script>
-
     </div><!--Focus_pic begin-->
 </div><!--content-1 end-->
 
@@ -75,8 +82,12 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 <div id="cArea"><!--content-2 begin-->
 <div class="newcar_t">
     <div class="newcar_title">最新拼车</div>
-    <div class="but_release"><a href="$snowModule.setTarget('together/createTaxiOrder')" title="发布拼的">发布拼的</a></div></div>
-<div class="newcar_c">
+	    <div class="but_release">
+	    	<a href="$snowModule.setTarget('together/createTaxiOrder')" class="but_fbpc" title="发布拼的">发布拼的</a>
+	    	<span class="newcar_txt">已经有500人发起拼车 <a href="#">查看更多拼车信息</a></span>
+	    </div>
+    </div>
+	<div class="newcar_c">
 	<table width="100%" cellpadding="0" cellspacing="0">
 	  <tr class="font_12_b bgc_dy">
 	  	<td>编号</td>

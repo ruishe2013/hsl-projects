@@ -37,16 +37,15 @@ input.value=str;
 
 <body>
 <div id="header"><!--top begin-->
-<div class="logo"><a href="index.html" title="一辆车——要上就上一辆车">一辆车</a></div>
+<div class="logo"><a href="index.html" title="绿色出行，同上一辆车">一辆车</a></div>
 	$control.setTemplate('common/citySelected.vm')
 </div>
 
-<div class="nav_login" id="nav_login">
-<form id="loginForm" name="loginForm" method="post" action="$snowModule.setTarget('login')" target="_self" onsubmit="return checkdata();">
-<ul>
-<li>用户名:<input class="login_input" type="text" id="userName" name="userName" tabindex="1"/><label class="auto_login"><span title=一个月内记住用户名、密码自动登录。><input id="auto_login" type="checkbox" name="autoLogin" value="1" checked="checked"/>自动登录</label></span><a href="#" target="_blank">找回密码</a></li>
-<li>密&nbsp;&nbsp;码:<input class="login_input" type="password" name="userPass" id="userPass" tabindex="2"/><input class="login_btn" type="submit" value="立即登录" name="login" id=login tabindex="3"/><a href="$snowModule.setTarget('user/reg')" >免费注册</a></li></ul>
-</form></div>
+<div class="top_r">
+<p><a href="#">帮助中心</a> | <a href="#">收藏本站</a></p>
+<p>您好，欢迎来到一辆车！[<a href="#">请登录</a>] [<a href="#">免费注册</a>]</p> 
+</div>
+
 <div class="miannav"><!--nav begin-->
     <div class="fl nav_l"></div>
     <div class="fl nav_c">
