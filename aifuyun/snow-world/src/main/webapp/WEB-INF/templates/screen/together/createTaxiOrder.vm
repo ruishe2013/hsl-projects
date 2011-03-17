@@ -1,83 +1,199 @@
 #set($form = $formFactory.createForm("together.createTaxiOrder"))
 
-#macro(errorMessage, $str)
+#macro(errorMessageCreateTaxiOrder, $str)
 	#if( "$!str" != "")
-		<div class="common-error-message">${str}</div>
+		<p style="padding:5px 0 0"><span id="result"><img src="images/ico_tip.gif" align="absmiddle" border="0" />$str</span></p>
 	#end
 #end
 
-<div>
-	<form method="post">
-		<input type="hidden" name="createTaxiOrder" value="$tokenUtil.token('createTaxiOrder')" />
-		<input type="hidden" name="actionTarget" value="together/orderAction" />
-		<input type="hidden" name="actionEvent" value="createTaxiOrder" />
-		
-		<input type="hidden" id="$!form.fields.cityId.name" name="$!form.fields.cityId.name" value="$!form.fields.cityId.value" />
-		#errorMessage($!form.fields.cityId.message)
-		
-		<div class="input-item">
-			城市<input type="text" readonly="true" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value"/>
-			<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'cityId').add('onName', 'fromCity')" target="_blank">更换城市...</a>
-		</div>
-		#errorMessage($!form.fields.fromCity.message)
-		
-		<div class="input-item">
-			出发地<input type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value"/>
-		</div>
-		#errorMessage($!form.fields.fromAddr.message)
-		
-		<div class="input-item">
-			目的地<input type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value"/>
-		</div>
-		#errorMessage($!form.fields.arriveAddr.message)
-		
-		<div class="input-item">
-			途径 <input type="text" id="$!form.fields.approach.name" name="$!form.fields.approach.name" value="$!form.fields.approach.value" />
-		</div>
-		#errorMessage($!form.fields.approach.message)
-		
-	
-		<div class="input-item">
-		出发时间：
-		日期<input type="text" id="$!form.fields.fromTimeDate.name" name="$!form.fields.fromTimeDate.name" value="$!form.fields.fromTimeDate.value"/>
-		时间<input type="text" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="$!form.fields.fromTimeTime.value"/>
-		</div>
-		#errorMessage($!form.fields.fromTimeDate.message)
-		#errorMessage($!form.fields.fromTimeTime.message)
-		
-		
-		<div class="input-item">
-		预计到达时间：
-		日期<input type="text" id="$!form.fields.arriveTimeDate.name" name="$!form.fields.arriveTimeDate.name" value="$!form.fields.arriveTimeDate.value"/>
-		时间<input type="text" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" value="$!form.fields.arriveTimeTime.value"/>
-		</div>
-		#errorMessage($!form.fields.arriveTimeDate.message)
-		#errorMessage($!form.fields.arriveTimeTime.message)
-		
-		
-		<div class="input-item">
-			空闲座位 <input type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value" />
-		</div>
-		#errorMessage($!form.fields.totalSeats.message)
-		
-		<div class="input-item">
-			描述<textarea cols="40" rows="4" id="$!form.fields.description.name" name="$!form.fields.description.name">$!form.fields.description.value</textarea>
-		</div>
-		#errorMessage($!form.fields.description.message)
-		
-		<div class="input-item"> 
-			<label for="$!form.fields.checkCode.name">*验证码：</label> 
-			<input type="text" size="6" maxlength="4" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value="" />
-			$control.setTemplate('common/checkCode.vm')
-		</div>
-		#errorMessage($!form.fields.checkCode.message)
-		
-		#errorMessage($!csrfmessage)
-		#errorMessage($!resultmessage.message)
-		
-		<div class="input-item">
-			<input type="submit" value="提交" />
-		</div>
-	
-	</form>
+<div id="cArea"><!--content-2 begin-->
+<div class="cbox">
+	<div class="create_cutbread">
+    	<div class="create_cb_car"></div>
+        <div class="create_cb_info_g_y"></div>
+        <!--
+        <div class="create_cb_info_y"></div>
+        -->
+        <div class="create_cb_suc_g"></div>
+        <!--
+        <div class="create_cb_suc_g_y"></div>
+        <div class="create_cb_suc_y"></div>
+        -->
+    </div>
+    <Div style="height:1px; background:#ccc; width:100%; overflow:hidden"></Div>
+
+	<div class="reg_l_box"><!--left begin-->
+
+        <div class="reg_info">
+        <form action="" method="post" >
+	        <input type="hidden" name="createTaxiOrder" value="$tokenUtil.token('createTaxiOrder')" />
+			<input type="hidden" name="actionTarget" value="together/orderAction" />
+			<input type="hidden" name="actionEvent" value="createTaxiOrder" />
+			
+			<input type="hidden" id="$!form.fields.cityId.name" name="$!form.fields.cityId.name" value="$!form.fields.cityId.value" />
+			#errorMessageCreateTaxiOrder($!form.fields.cityId.message)
+			
+	        <ul>
+	            <li>
+		            <label for="inp_name"><em>*</em> 城市：</label>
+		            <div class="reg_info_li_box">
+			            <p>
+			            	<input type="text" class="input_out" readonly="true" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
+			           		<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'cityId').add('onName', 'fromCity')" target="_blank">更换城市...</a>
+			            </p>
+			            #errorMessageCreateTaxiOrder($!form.fields.fromCity.message)
+		            </div>
+	            </li>
+	            
+	            <li>
+		            <label for="inp_name"><em>*</em> 出发地：</label>
+		            <div class="reg_info_li_box">
+		            <p>
+		           		<input class="input_410" type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value" />
+		            </p>
+		            #errorMessageCreateTaxiOrder($!form.fields.fromAddr.message)
+		            </div>
+	            </li>
+	            
+	            <li>
+	            <label for="inp_name"><em>*</em> 目的地：</label>
+	            <div class="reg_info_li_box">
+	            	<p><input class="input_410" type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value" /></p>
+					#errorMessageCreateTaxiOrder($!form.fields.arriveAddr.message)
+	            </div>
+	            </li>
+	            
+	            <li>
+	            <label for="inp_name">途径：</label>
+	            <div class="reg_info_li_box">
+	            	<p><input class="input_410" type="text" id="$!form.fields.approach.name" name="$!form.fields.approach.name" value="$!form.fields.approach.value"/></p>
+	            	#errorMessageCreateTaxiOrder($!form.fields.approach.message)
+	            </div>
+	            </li>
+	            
+	            <li>
+	            	<label for="inp_name"><em>*</em> 发车时间：</label>
+		            <div class="reg_info_li_box">
+						<p>
+							<input type="text" readonly="readonly" class="input_out date-pick" id="J_fromTimeDate" name="$!form.fields.fromTimeDate.name" value="$!form.fields.fromTimeDate.value" /> 
+							##<input type="hidden" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="$!form.fields.fromTimeTime.value" />
+							## //TODO 这个仅用来做测试
+							<input type="hidden" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="12:0:0" />
+							
+							#set($hours = [1 .. 24])
+							<select name="fcsj2">
+								#foreach ($hour in $hours)
+									<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
+								#end
+			                </select>
+							
+			                #set($minuteIndice = [0 .. 4])
+			                <select name="fcsj3">
+			                	#foreach($minuteIndex in $minuteIndice)
+			                		#set($minute = $minuteIndex * 15)
+									<option value="$minute" #if("$!defaultSearchMinutes" == "$!minute") selected #end>$minute分</option>
+								#end
+			                </select>
+				                
+		                </p>
+		                #errorMessageCreateTaxiOrder($!form.fields.fromTimeDate.message)
+						#errorMessageCreateTaxiOrder($!form.fields.fromTimeTime.message)
+		                </div>
+		            </li>
+	                
+	                <li>
+	                	<label for="inp_name"> 预计到达时间：</label>
+		            	<div class="reg_info_li_box">
+							<p>
+								<input type="text" readonly="readonly" class="input_out date-pick" id="J_arriveTimeDate" name="$!form.fields.arriveTimeDate.name" value="$!form.fields.arriveTimeDate.value"/>
+								##<input type="hidden" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" value="$!form.fields.arriveTimeTime.value" />
+								## // TODO 这个仅用来做测试
+								<input type="hidden" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" value="12:40:00" />
+								
+								#set($hours = [1 .. 24])
+								<select name="fcsj2">
+									#foreach ($hour in $hours)
+										<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
+									#end
+				                </select>
+								
+				                #set($minuteIndice = [0 .. 4])
+				                <select name="fcsj3">
+				                	#foreach($minuteIndex in $minuteIndice)
+				                		#set($minute = $minuteIndex * 15)
+										<option value="$minute" #if("$!defaultSearchMinutes" == "$!minute") selected #end>$minute分</option>
+									#end
+				                </select>
+			                </p>
+			                #errorMessageCreateTaxiOrder($!form.fields.arriveTimeDate.message)
+							#errorMessageCreateTaxiOrder($!form.fields.arriveTimeTime.message)
+		                </div>
+	                </li>
+	                
+	                <li>
+		            <label for="inp_name">空闲座位：</label>
+		            <div class="reg_info_li_box">
+		            	<p>
+		            		<input class="input_410" type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value"/>
+		            	</p>
+		            	#errorMessageCreateTaxiOrder($!form.fields.totalSeats.message)
+		            </div>
+		            </li>
+	                
+	                <li>
+	                <label for="inp_name"> 描述：</label>
+	            	<div class="reg_info_li_box">
+		            	<p>
+		            		<textarea name="ms" cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!form.fields.description.value</textarea>
+		            	</p>
+		            	#errorMessageCreateTaxiOrder($!form.fields.description.message)
+	            	</div>
+	            	
+	            	
+	            	</li> 
+	                <li><label for="inp_name"> 验证码：</label>
+	            	<div class="reg_info_li_box">
+	            	<p>
+	            		<input class="reg_input_out" type="text" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value=""
+	            	</p>
+	            	
+	            	#errorMessageCreateTaxiOrder($!form.fields.checkCode.message)
+	            	$control.setTemplate('common/checkCode.vm')
+	            	
+	            	
+	            	</div>
+	            	</li>
+	            	
+	                <li style="padding-left:105px">
+	                #errorMessageCreateTaxiOrder($!csrfmessage)
+					#errorMessageCreateTaxiOrder($!resultmessage.message)
+					
+	                <button type="submit" class="but_cjpc" onMouseDown="this.className='but_cjpc'" onmouseover="this.className='but_cjpc_h'" onmouseup="this.className='but_cjpc_h'"  onMouseOut="this.className='but_cjpc'"></button>
+	                </li> 
+	            
+	            
+	         </ul>
+        </form>
+        </div>
+
+    </div><!--left end-->
+
+  <div class="reg_r_box">
+     <p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;花费你一分钟来进行注册，您就可以享用一辆车网站更多的功能！如果您已经注册过，请直接登录，并注意维护您的个人信息以便我们保持联系。如果您有任何问题，欢迎随时致电我们。</p>
+    </div>
+  <div class="clear"></div>
 </div>
+
+</div><!--content-2 end--><!--content-2 end-->
+
+<link type="text/css" href="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick.css" rel="stylesheet" />
+<script type="text/javascript" src="${jsServer}/jquery/jquery-1.5.1.js"></script>
+<script type="text/javascript" src="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick.js"></script>
+<script type="text/javascript" src="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick-zh-CN.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#J_fromTimeDate').datepick({dateFormat: 'yyyy-mm-dd'});
+		$('#J_arriveTimeDate').datepick({dateFormat: 'yyyy-mm-dd'});
+	});
+</script>

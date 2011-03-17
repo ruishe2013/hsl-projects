@@ -1,3 +1,4 @@
+
 <div id="cArea"><!--content-1 begin-->
     <div class="search_box"><!--search begin-->
     	<div class="search_t">
@@ -24,7 +25,10 @@
                 
                 <li>
                 <label for="inp_name">发车时间：</label>
-				<p><input type="text" name="it" readonly="readonly" value="$!dateUtil.formatDate($defaultSearchDate, 'dd/MM/yyyy')"  class="input_95 date-pick" /> 
+				<p>
+				<input type="text" id="J_goDate" name="it" readonly="readonly" value="$!dateUtil.formatDate($defaultSearchDate, 'yyyy-MM-dd')" 
+				 class="input_95" />
+				 
 				#set($selectedHour = $dateUtil.getHour($defaultSearchDate))
 				#set($hours = [1 .. 24])
 				<select name="fcsj2">
@@ -46,7 +50,7 @@
                 <div style="display: block;">
                 	<div class="search_tip">
                 		<span style="display:none">
-                			<img src="images/ico_tip.gif" align="absmiddle" border="0" />
+                			<img src="$imgServer/ico_tip.gif" align="absmiddle" border="0" />
                 		</span>
                 	</div>
                 </div>
@@ -122,3 +126,15 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 <div class="newcar_b"><div class="newcar_b_bg"></div></div>
 -->
 </div><!--content-2 end-->
+
+
+<link type="text/css" href="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick.css" rel="stylesheet" />
+<script type="text/javascript" src="${jsServer}/jquery/jquery-1.5.1.js"></script>
+<script type="text/javascript" src="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick.js"></script>
+<script type="text/javascript" src="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick-zh-CN.js"></script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('#J_goDate').datepick({dateFormat: 'yyyy-mm-dd'}); 
+	});
+</script>

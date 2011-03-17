@@ -1,75 +1,127 @@
 #set($form = $formFactory.createForm("together.personalInfo"))
 
-#macro(errorMessage, $str)
+#macro(errorMessagePersonalInfo, $str)
 	#if( "$!str" != "")
-		<div class="common-error-message">${str}</div>
+		<p style="padding:5px 0 0;" >
+			<span id="result">
+				<img src="$imgServer/ico_tip.gif" align="absmiddle" border="0" />$str
+			</span>
+		</p>
 	#end
 #end
 
 
-填写联系方式
-<form method="post">
-	<input type="hidden" name="actionEvent" value="$actionEvent" /> 
-	<input type="hidden" name="actionTarget" value="together/orderAction" />
-	<input type="hidden" name="orderId" value="$order.id" />
-	
-	<div class="input-item">
-		<label for="$!form.fields.realName.name">*真实姓名：</label>
-		<input type="text" id="$!form.fields.realName.name" name="$!form.fields.realName.name" value="$!form.fields.realName.value" />
-	</div>
-	#errorMessage($!form.fields.realName.message)
-	
-	<div class="input-item">
-		<label>*性别：</label>
-		<input type="radio" id="sexMale" name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end /><label for="sexMale">先生</label>
-		<input type="radio" id="sexFemale" name="$!form.fields.sex.name" value="2" #if("$!form.fields.sex.value" == "2") checked #end/><label for="sexFemale">女士</label>
-	</div>
-	#errorMessage($!form.fields.sex.message)
-	
-	<div class="input-item">
-		<label for="$!form.fields.birthYear.name">*出生年代：</label>
-		<select id="$!form.fields.birthYear.name" name="$!form.fields.birthYear.name">
-			#if ("$!form.fields.birthYear.value" != "0")
-				#set($selectedYear =	"$!form.fields.birthYear.value")
-			#end 
-			#foreach($year in $years)
-				<option value="$!year.value" #if("$!selectedYear" == "$!year.value") selected #end >$!year.name</option>
-			#end
-		</select>
-	</div>
-	#errorMessage($!form.fields.birthYear.message)
-	
-	<div class="input-item">
-		<label for="$!form.fields.phone.name">*手机号码：</label>
-		<input type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value" size="11" maxlength="11"/>
-	</div>
-	#errorMessage($!form.fields.phone.message)
-	
-	<div class="input-item">
-		<label for="$!form.fields.career.name">*职业：</label>
-		<input type="text" id="$!form.fields.career.name" name="$!form.fields.career.name" value="$!form.fields.career.value" />
-		<a href="#">选择职业...</a>
-	</div>
-	#errorMessage($!form.fields.career.message)
-	
-	<div class="input-item">
-		<label for="$!form.fields.qq.name">qq号码：</label>
-		<input type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value" />
-	</div>
-	#errorMessage($!form.fields.qq.message)
-	
-	<div class="input-item">
-		<input type="checkbox" id="saveToUserInfo" name="saveToUserInfo" value="true" #if ($!isUserInfoEmpty) checked #end/>
-		<label for="saveToUserInfo">同时更新我的个人资料</label>
-	</div>
-	
-	#errorMessage($!csrfmessage)
-	#errorMessage($!resultmessage.message)
-	<div class="input-item">
-		<input type="submit" value="提交" />
-		
-		#if ($creatorExist)
-			##<a href="$snowModule.setTarget('together/confirmOrder').add('orderId', $order.id)">不保存，直接进入下一步</a>
-		#end
-	</div>
-</form>
+<div id="cArea"><!--content-2 begin-->
+<div class="cbox">
+	<div class="create_cutbread">
+    	<div class="create_cb_car"></div>
+        <!--
+        <div class="create_cb_info_g_y"></div>
+        -->
+        <div class="create_cb_info_y"></div>
+        
+        <!--
+        <div class="create_cb_suc_g"></div>
+        
+        <div class="create_cb_suc_g_y"></div>
+        -->
+        <div class="create_cb_suc_y"></div>
+    </div>
+    <Div style="height:1px; background:#ccc; width:100%; overflow:hidden"></Div>
+    <div class="reg_l_box"><!--left begin-->
+        <div class="reg_info">
+        <form action="" method="post" >
+        	<input type="hidden" name="actionEvent" value="$actionEvent" /> 
+			<input type="hidden" name="actionTarget" value="together/orderAction" />
+			<input type="hidden" name="orderId" value="$order.id" />
+        <ul>
+            <li>
+	            <label for="$!form.fields.realName.name"><em>*</em> 真实姓名：</label>
+	            <div class="reg_info_li_box">
+		            <p><input class="reg_input_out" type="text" id="$!form.fields.realName.name" name="$!form.fields.realName.name" value="$!form.fields.realName.value" /></p>
+		            #errorMessagePersonalInfo($!form.fields.realName.message)
+	            </div>
+            </li>
+            
+            <li>
+            	<label for="inp_name"><em>*</em> 性别：</label>
+	            <div class="reg_info_li_box">
+	            <p>
+	            	<input name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end type="radio" style="border:none"/> 先生
+					<input name="$!form.fields.sex.name"  value="2" #if("$!form.fields.sex.value" == "2") checked #end  type="radio" style="border:none" checked="checked"/> 女士</p>
+	           		#errorMessagePersonalInfo($!form.fields.sex.message)
+	            </div>
+            </li>
+            
+            <li>
+	            <label for="$!form.fields.birthYear.name"><em>*</em> 出生年代：</label>
+	            <div class="reg_info_li_box">
+		            <p>
+			            <select size="1" id="$!form.fields.birthYear.name" name="$!form.fields.birthYear.name">
+			           	#if ("$!form.fields.birthYear.value" != "0")
+							#set($selectedYear = "$!form.fields.birthYear.value")
+						#end 
+						#foreach($year in $years)
+							<option value="$!year.value" #if("$!selectedYear" == "$!year.value") selected #end >$!year.name</option>
+						#end
+			            </select>
+		            </p>
+		            #errorMessagePersonalInfo($!form.fields.birthYear.message)
+	            </div>
+            </li>
+            
+            <li>
+	            <label for="$!form.fields.phone.name"><em>*</em> 手机号：</label>
+	            <div class="reg_info_li_box">
+		            <p><input class="reg_input_out" type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value"/></p>
+		            #errorMessagePersonalInfo($!form.fields.phone.message)
+	            </div>
+            </li>
+            
+            
+            <li><label for="inp_name"><em>*</em> 职业：</label>
+	            <div class="reg_info_li_box">
+					<p>
+						<select id="$!form.fields.career.name" name="$!form.fields.career.name" value="$!form.fields.career.value">
+							<option value="老师">老师</option>
+		                    <option value="律师">律师</option>
+		                    <option value="工程师">工程师</option>
+		                    <option value="按摩师">按摩师</option>
+		                </select>
+	           		</p>
+	            #errorMessagePersonalInfo($!form.fields.career.message)
+	            </div>
+            </li>
+                
+            
+           <li><label for="$!form.fields.qq.name"><em></em> qq：</label>
+            	<div class="reg_info_li_box">
+					<p><input class="reg_input_out" type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value"/></p>
+					#errorMessagePersonalInfo($!form.fields.qq.message)
+                </div>
+           </li>
+            
+            <li><label for="inp_name">&nbsp;&nbsp;</label>
+            	<div class="reg_info_li_box">
+            	<p><input name="" type="checkbox" style="border:none" id="saveToUserInfo" name="saveToUserInfo" value="true" #if ($!isUserInfoEmpty) checked #end /> 同时更新我的个人资料 </p></div>
+            </li>
+            
+            <li style="padding-left:105px">
+            #errorMessagePersonalInfo($!csrfmessage)
+			#errorMessagePersonalInfo($!resultmessage.message)
+            <button type="submit" class="but_g_bg" onMouseDown="this.className='but_g_bg'" onmouseover="this.className='but_g_bg_h'" onmouseup="this.className='but_g_bg_h'"  onMouseOut="this.className='but_g_bg'"><span style="font-size:16px; font-weight:bold; color:#fff">提 交</span></button>
+            </li> 
+            
+         </ul>
+        </form>
+        </div></div>
+        <div class="reg_r_box">
+     <p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;花费你一分钟来进行注册，您就可以享用一辆车网站更多的功能！如果您已经注册过，请直接登录，并注意维护您的个人信息以便我们保持联系。如果您有任何问题，欢迎随时致电我们。</p>
+    </div>
+	<div class="clear"></div>
+    </div>
+    
+	<div class="clear"></div>
+</div>
+
+</div><!--content-2 end--><!--content-2 end-->
