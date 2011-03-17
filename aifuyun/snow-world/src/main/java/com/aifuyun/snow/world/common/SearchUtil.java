@@ -37,7 +37,7 @@ public class SearchUtil {
 	}
 	
 	public static void main(String[] args) {
-		String s = SearchUtil.filter("hello\"&abcd?");
+		String s = SearchUtil.filter("客运 中心");
 		System.out.println(s);
 	}
 
