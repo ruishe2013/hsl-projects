@@ -1,22 +1,37 @@
-<form>
-<div>
-出发城市<input type="text" name="fromCity" />
-出发地<input type="text" name="fromAddr" />
-</div>
-<div>
-目的城市<input type="text" name="arriveCity" />
-目的地<input type="text" name="arriveAddr" />
-</div>
-<input type="submit" value=" 搜索  " />
-</form>
-
-<div>
-共找到$!{numFound}条记录
-
-#foreach($order in $orders)
-	<div>
-	$order.fromCity $order.fromAddr => $order.arriveCity $order.arriveAddr
-	发布人 $order.creatorUsername
+<div id="cArea"><!--content-2 begin-->
+<div class="cbox">
+    <div class="cutbread"><strong>当前位置：</strong><a href="$snowModule.setTarget('index')">首页</a> >> 出租车搜索列表页</div>
+    <div class="index_search">
+    <form action="" method="get">
+	   	 出发地：  <input class="input_95" name="fromAddr" type="text"/>
+		目的地：<input class="input_95" name="arriveAddr" type="text"/> 
+		出发时间：<input class="input_95" name="" type="text"/> 
+		到达时间：<input class="input_95" name="" type="text"/>
+		<button type="submit" class="but_search" onMouseDown="this.className='but_search'" onmouseover="this.className='but_search_h'" onmouseup="this.className='but_search_h'"  onMouseOut="this.className='but_search'"></button>
+	</form>
+    </div>
+    
+    <div>
+	    共找到$!{numFound}条记录
 	</div>
-#end
-</div>
+	
+    <div class="car_list_box">
+    <table width="100%" cellpadding="0" cellspacing="0">
+    	#set($index=1)
+    	#foreach($order in $orders)
+    		<tr #if($index % 2 == 0) class="font_12_b bgc_dy" #end >
+		    <td>$order.fromCity</td>
+		    <td>$order.fromAddr</td>
+		    <td>$order.arriveCity $order.arriveAddr</td>
+		    <td>发车时间</td>                         
+		    <td>发起时间</td>
+		    <td> $order.creatorUsername</td>
+		    <td>加入拼车</td>
+		  </tr>
+		  
+		  #set($index=$index + 1)
+		#end
+</table>
+    </div>
+<div class="hr_10"></div>
+</div></div><!--content-2 end-->

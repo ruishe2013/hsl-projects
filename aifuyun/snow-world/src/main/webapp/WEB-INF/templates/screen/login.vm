@@ -42,7 +42,7 @@
             <div class="hr_10"></div>
             <Div class="hr_310"></Div>
             <div class="hr_10"></div>
-            <div style="text-align:center; margin-bottom:10px;">您还不是本站会员？ 请点这里 <a href="$snowModule.setTarget('user/reg')">注册会员</a></div>
+            <div style="text-align:center; margin-bottom:10px;">您还不是本站会员？  <a href="$snowModule.setTarget('user/reg')">免费注册会员</a></div>
         </div>
         <div class="login_b"></div>
         <div class="login_shadow"></div>
