@@ -6,6 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 <link href="$cssServer/main.css" rel="stylesheet" type="text/css" />
 <link href="$cssServer/datePicker.css" rel="stylesheet" type="text/css"  />
+<link rel="shortcut icon" href="$imgServer/favicon.ico" type="image/x-icon" /> 
 <script src="$jsServer/sohuflash_1.js" type="text/javascript"></script>
 <script src="$jsServer/jquery-1.3.2.min.js" type="text/javascript"></script>
 <script src="$jsServer/jquery.datePicker-min.js" type="text/javascript"></script>
