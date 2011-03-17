@@ -1,38 +1,50 @@
 #set($form = $formFactory.createForm("login"))
 
-#macro(errorMessage, $str)
+#macro(errorMessageLogin, $str)
 	#if( "$!str" != "")
-		<div class="common-error-message">${str}</div>
+		<div class="tip_txt">
+			<img src="$imgServer/ico_tip.gif" width="16" height="16" border="0" align="absmiddle" />${str}
+		</div> 
 	#end
 #end
 
-<a href="$snowModule.setTarget('index')">返回首页</a>
-
-<div id="content">
-	<div id="div-panel"> 
-		<form method="post">
-			<input type="hidden" name="login" value="$tokenUtil.token('login')" />
-			<input type="hidden" name="actionTarget" value="login_action.htm" />
-			<input type="hidden" name="actionEvent" value="login" />
-			
-			<div class="input-item"> 
-				<label for="username">用户名：</label> 
-				<input type="text" name="$form.fields.username.name" value="$!form.fields.username.value"  /> 
-			</div>
-			#errorMessage($!form.fields.username.message)
-			
-			<div class="input-item"> 
-				<label for="password">密码：</label> 
-				<input type="password" name="$form.fields.password.name" value="$!form.fields.password.value" /> 
-			</div>
-			#errorMessage($!form.fields.password.message)
-			
-			#errorMessage($!csrfmessage)
-			#errorMessage($!resultmessage.message)
-			<div class="input-item"> 
-				<input id="submit-button" type="submit" value="登陆" /> 
-			</div> 
-			
-		</form> 
-	</div> 
+<div id="cArea">
+    <div class="loginbox">
+        <div class="login_t"></div>
+        
+        <div class="login_c">
+        <Div class="hr_310"></Div>
+        	<form action="" method="post">
+        		<input type="hidden" name="login" value="$tokenUtil.token('login')" />
+				<input type="hidden" name="actionTarget" value="login_action.htm" />
+				<input type="hidden" name="actionEvent" value="login" />
+            	<div class="field">
+            		<span style="font-size:14px;">用户名：</span>
+            		<input type="text" class="login_input" name="$form.fields.username.name" value="$!form.fields.username.value"/>
+            	</div>
+				#errorMessageLogin($!form.fields.username.message)
+				
+                <div class="field">
+                	<span style="font-size:14px;">密&nbsp;&nbsp;码：</span>
+                	<input type="password" class="login_input" name="$form.fields.password.name" value="$!form.fields.password.value" />
+                </div>
+                #errorMessageLogin($!form.fields.password.message)
+                
+                ##<div class="safe"><input type="checkbox" onclick="addLoginStationing('checkbox')" class="checked"/>记住登录状态      <span class="help_g"><a href="#">查看帮助</a></span></div> 
+                
+                #errorMessageLogin($!csrfmessage)
+				#errorMessageLogin($!resultmessage.message)  
+                <div class="safe">
+	                <button type="submit" class="but_login" onMouseDown="this.className='but_login'" onmouseover="this.className='but_login_h'" onmouseup="this.className='but_login_h'"  onMouseOut="this.className='but_login'"></button>
+	                <a href="#">忘记密码</a>
+                </div>
+            </form>
+            <div class="hr_10"></div>
+            <Div class="hr_310"></Div>
+            <div class="hr_10"></div>
+            <div style="text-align:center; margin-bottom:10px;">您还不是本站会员？ 请点这里 <a href="$snowModule.setTarget('user/reg')">注册会员</a></div>
+        </div>
+        <div class="login_b"></div>
+        <div class="login_shadow"></div>
+    </div>
 </div>
