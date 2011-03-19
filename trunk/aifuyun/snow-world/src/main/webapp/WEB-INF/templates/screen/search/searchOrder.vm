@@ -4,9 +4,9 @@
     <div class="index_search">
     <form action="" method="get">
     	##城市：<input class="input_95" name="fromCity" value="$!{selectedCity.name}" type="text"/>  <a href="$snowModule.setTarget('city/cityList')" >切换城市</a>   
-	   	出发地：  <input class="input_95" name="fromAddr" type="text"/>
-		目的地：<input class="input_95" name="arriveAddr" type="text"/> 
-		日期：<input class="input_95" name="" type="text"/> 
+	   	出发地：  <input class="input_95" name="fromAddr" type="text" value="$!rundata.getQueryString().getString("fromAddr")"/>
+		目的地：<input class="input_95" name="arriveAddr" type="text" value="$!rundata.getQueryString().getString("arriveAddr")"/> 
+		日期：<input class="input_95" name="fromTime" type="text" value="$!rundata.getQueryString().getString("fromTime")"/> 
 		##到达时间：<input class="input_95" name="" type="text"/>
 		<button type="submit" class="but_search" onMouseDown="this.className='but_search'" onmouseover="this.className='but_search_h'" onmouseup="this.className='but_search_h'"  onMouseOut="this.className='but_search'"></button>
 	</form>
@@ -34,7 +34,7 @@
 		    <td>$!order.fromAddr</td>
 		    ## $!order.arriveCity
 		    <td>$!order.arriveAddr</td>
-		    <td>发车时间</td>                         
+		    <td>$dateUtil.formatFullDate($!order.fromTime)</td>                         
 		    <td>$!order.approach</td>
 		    <td>$!order.creatorUsername </td>
 		    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)">查看详情</a></td>

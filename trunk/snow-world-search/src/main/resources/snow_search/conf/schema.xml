@@ -52,13 +52,17 @@
 		<field name="arriveCity" type="string" indexed="true" stored="true" multiValued="false" />
 		<field name="fromAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="arriveAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
-		<field name="fromTime" type="tlong" indexed="true" stored="true" multiValued="false" />
-		<field name="arriveTime" type="tlong" indexed="true" stored="true" multiValued="false" />
+		<field name="fromTime_ymd" type="tlong" indexed="true" stored="false" multiValued="false" />
+		<field name="arriveTime_ymd" type="tlong" indexed="true" stored="false" multiValued="false" />
 		<field name="description" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="approach" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="status" type="int" indexed="true" stored="true" multiValued="false" />
 		<field name="deleted" type="pint" indexed="true" stored="false" multiValued="false" />
 		<field name="type" type="pint" indexed="true" stored="false" multiValued="false" />
+		
+		
+		<field name="fromTime" type="tlong" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveTime" type="tlong" indexed="true" stored="true" multiValued="false" />
 		<field name="gmtCreate" type="tlong" indexed="false" stored="true" multiValued="false" />
 
 		<field name="fromAddrText" type="string_sd" indexed="true" stored="false" multiValued="true" />

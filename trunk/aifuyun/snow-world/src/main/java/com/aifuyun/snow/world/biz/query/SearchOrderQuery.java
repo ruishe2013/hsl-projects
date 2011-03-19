@@ -13,6 +13,26 @@ public class SearchOrderQuery extends Query {
 	String arriveCity;
 	
 	String arriveAddr;
+	
+	private long fromTime;
+	
+	private long arriveTime;
+
+	public long getFromTime() {
+		return fromTime;
+	}
+
+	public void setFromTime(long fromTime) {
+		this.fromTime = fromTime;
+	}
+
+	public long getArriveTime() {
+		return arriveTime;
+	}
+
+	public void setArriveTime(long arriveTime) {
+		this.arriveTime = arriveTime;
+	}
 
 	public String getFromCity() {
 		return fromCity;

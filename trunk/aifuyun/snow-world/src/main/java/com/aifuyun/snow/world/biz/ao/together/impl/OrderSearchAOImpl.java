@@ -46,19 +46,25 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 		String fromAddr = searchOrderQuery.getFromAddr();
 		String arriveCity = searchOrderQuery.getArriveCity();
 		if (!StringUtil.isEmpty(arriveCity)) {
-			sb.append(" +arriveCity:" + SearchUtil.filter(arriveCity));
+			sb.append(" +arriveCity:").append(SearchUtil.filter(arriveCity));
 		}
 		if (!StringUtil.isEmpty(arriveAddr)) {
-			sb.append(" +arriveAddrText:" + SearchUtil.filter(arriveAddr));
+			sb.append(" +arriveAddrText:").append(SearchUtil.filter(arriveAddr));
 		}
 		
 		if (!StringUtil.isEmpty(cityName)) {
-			sb.append(" +fromCity:" + SearchUtil.filter(cityName));
+			sb.append(" +fromCity:").append(SearchUtil.filter(cityName));
 		}
 		
 		if (!StringUtil.isEmpty(fromAddr)) {
-			sb.append(" +fromAddrText:" + SearchUtil.filter(fromAddr));
+			sb.append(" +fromAddrText:").append(SearchUtil.filter(fromAddr));
 		}
+		
+		long fromTime = searchOrderQuery.getFromTime();
+		if (fromTime > 0L) {
+			sb.append(" +fromTime_ymd:").append(fromTime);
+		}
+		
 		String ret = sb.toString();
 		if (StringUtil.isEmpty(ret)) {
 			return "*:*";
