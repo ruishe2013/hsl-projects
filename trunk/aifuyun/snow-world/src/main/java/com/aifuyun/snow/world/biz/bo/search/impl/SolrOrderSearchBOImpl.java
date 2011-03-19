@@ -2,6 +2,7 @@ package com.aifuyun.snow.world.biz.bo.search.impl;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrQuery;
@@ -62,18 +63,26 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 		orderDO.setArriveAddr(simpleSolrDocument.getStringValue("arriveAddr"));
 		orderDO.setArriveCity(simpleSolrDocument.getStringValue("arriveCity"));
 		orderDO.setArriveCityId(simpleSolrDocument.getIntValue("arriveCityId"));
-		orderDO.setArriveTime(DateUtil.parseDate(String.valueOf(simpleSolrDocument.getLongValue("arriveTime")), DUMP_DATE_FMT));
+		orderDO.setArriveTime(dumpTime2Date(simpleSolrDocument, "arriveTime"));
 		orderDO.setCityId(simpleSolrDocument.getIntValue("cityId"));
 		orderDO.setCreatorId(simpleSolrDocument.getLongValue("creatorId"));
 		orderDO.setCreatorUsername(simpleSolrDocument.getStringValue("creatorUsername"));
 		orderDO.setDescription(simpleSolrDocument.getStringValue("description"));
 		orderDO.setFromAddr(simpleSolrDocument.getStringValue("fromAddr"));
 		orderDO.setFromCity(simpleSolrDocument.getStringValue("fromCity"));
-		orderDO.setFromTime(DateUtil.parseDate(String.valueOf(simpleSolrDocument.getLongValue("fromTime")), DUMP_DATE_FMT));
+		orderDO.setFromTime(dumpTime2Date(simpleSolrDocument,"fromTime"));
 		orderDO.setStatus(simpleSolrDocument.getIntValue("status"));
 		orderDO.setType(simpleSolrDocument.getIntValue("type"));
-		orderDO.setGmtCreate(DateUtil.parseDate(String.valueOf(simpleSolrDocument.getLongValue("gmtCreate")), DUMP_DATE_FMT));
+		orderDO.setGmtCreate(dumpTime2Date(simpleSolrDocument,"gmtCreate"));
 		return orderDO;
+	}
+	
+	private Date dumpTime2Date(SimpleSolrDocument simpleSolrDocument, String field) {
+		long fv = simpleSolrDocument.getLongValue(field);
+		if (fv == 0) {
+			return null;
+		}
+		return DateUtil.parseDate(String.valueOf(fv), DUMP_DATE_FMT);
 	}
 
 	public void setSolrServer(SolrServer solrServer) {
