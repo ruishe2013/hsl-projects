@@ -107,12 +107,6 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 -->
 </div><!--content-2 end-->
 
-
-<link type="text/css" href="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick.css" rel="stylesheet" />
-<script type="text/javascript" src="${jsServer}/jquery/jquery-1.5.1.js"></script>
-<script type="text/javascript" src="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick.js"></script>
-<script type="text/javascript" src="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick-zh-CN.js"></script>
-
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('#J_fromTime').datepick({dateFormat: 'yyyy-mm-dd'}); 
