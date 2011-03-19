@@ -402,6 +402,11 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			// 是否创建者本人
 			boolean isCreatorSelf = (order.getCreatorId() == userId) ? true : false;
 			
+			boolean showContactInfo = this.isUserLogin();
+			
+			// 创建人
+			OrderUserDO creator = orderUserBO.queryOrderCreator(orderId);
+			
 			// 所有参加人
 			List<OrderUserDO> joiners = orderUserBO.queryOrderJoiners(orderId);
 			List<OrderUserDO> confirmedJoiners = this.orderUserBO.queryOrderJoinersByStatus(orderId, OrderUserStatusEnum.CONFIRM_PASSED.getValue());
@@ -418,7 +423,6 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			boolean showConfirmOrderBtn = false;
 			if (isCreatorSelf) {
 				// 创建者的权限
-				
 				if (!confirmedJoiners.isEmpty()) {
 					showConfirmOrderBtn = true;
 				}
@@ -443,7 +447,8 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			result.getModels().put("joinersCount", joinersCount);
 			result.getModels().put("showConfirmOrderBtn", showConfirmOrderBtn);
 			result.getModels().put("joinedOrderUser", joinedOrderUser);
-			
+			result.getModels().put("creator", creator);
+			result.getModels().put("showContactInfo", showContactInfo);
 			
  			result.setSuccess(true);
 		} catch (Exception e) {

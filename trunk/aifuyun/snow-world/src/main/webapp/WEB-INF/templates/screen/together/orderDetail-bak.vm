@@ -38,7 +38,8 @@
 	<div>参加人</div>
 	<ul>
 	#foreach($orderUser in $confirmedJoiners)
-		<li>$orderUser.realName $orderUser.phone #if($isCreatorSelf) 
+		<li>$orderUser.realName $orderUser.phone 
+		#if($isCreatorSelf) 
 		#if ($order.status != 20)
 			<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'removeUserFromOrder').add('id', $orderUser.id)">移除该用户</a> #end</li>
 		#end

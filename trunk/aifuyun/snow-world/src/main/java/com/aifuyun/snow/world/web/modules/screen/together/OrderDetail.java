@@ -15,16 +15,7 @@ public class OrderDetail extends BaseScreen {
 		long orderId = rundata.getQueryString().getLong("orderId");
 		Result result = orderAO.viewOrderDetail(orderId);
 		if (result.isSuccess()) {
-			this.result2Context(result, templateContext, "order");
-			this.result2Context(result, templateContext, "isCreatorSelf");
-			this.result2Context(result, templateContext, "hasBeenJoin");
-			this.result2Context(result, templateContext, "joinersCount");
-			this.result2Context(result, templateContext, "confirmedJoiners");
-			this.result2Context(result, templateContext, "waitConfirmJoiners");
-			this.result2Context(result, templateContext, "userJoinStatusValue");
-			this.result2Context(result, templateContext, "showJoiners");
-			this.result2Context(result, templateContext, "showConfirmOrderBtn");
-			this.result2Context(result, templateContext, "joinedOrderUser");
+			this.result2Context(result, templateContext);
 			
 		} else {
 			this.handleError(result, rundata, templateContext);
