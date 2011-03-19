@@ -20,19 +20,17 @@
 				<p>
 				<input class="input_95" name="fromAddr" type="text" /> 
 				µ½
-				<input class="input_95" name="arriveAddr" type="text"/
-                </li>
+				<input class="input_95" name="arriveAddr" type="text"/>
+				</li>
                 
                 <li>
                 <label for="inp_name">ÈÕÆÚ£º</label>
 				<p>
-				<input type="text" id="J_goDate" name="it" readonly="readonly" value="$!dateUtil.formatDate($defaultSearchDate, 'yyyy-MM-dd')" 
-				 class="input_95" />
-				 
+				<input type="text" id="J_fromTime" name="fromTime" value="$!dateUtil.formatDate($defaultSearchDate, 'yyyy-MM-dd')" class="input_95" />
                 </p>
                 </li>
-                <li>
                 
+                <li>
                 <div style="display: block;">
                 	<div class="search_tip">
                 		<span style="display:none">
@@ -40,11 +38,11 @@
                 		</span>
                 	</div>
                 </div>
-                
                 <button type="submit" class="but_search" onMouseDown="this.className='but_search'" onmouseover="this.className='but_search_h'" onmouseup="this.className='but_search_h'"  onMouseOut="this.className='but_search'"></button>
                 </li>
+                
+                
                 </ul>
-				
             </form>
         </div>
         <div class="search_b"></div>
@@ -117,6 +115,6 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#J_goDate').datepick({dateFormat: 'yyyy-mm-dd'}); 
+		$('#J_fromTime').datepick({dateFormat: 'yyyy-mm-dd'}); 
 	});
 </script>
