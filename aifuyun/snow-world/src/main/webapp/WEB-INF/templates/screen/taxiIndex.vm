@@ -51,9 +51,9 @@
     
 <script type="text/javascript">	
 					var speed = 4000;		
-					var pics='$imgServer/Focus_pic/1.jpg|$imgServer/Focus_pic/2.jpg|$imgServer/Focus_pic/3.jpg|$imgServer/Focus_pic/4.jpg';	
-					var mylinks='http://www.yiliangche.com/|http://www.yiliangche.com/|http://www.yiliangche.com/|http://www.yiliangche.com/';
-					var texts='世乒赛-王皓横扫王励勤首度称王|世乒赛女单决赛 张怡宁4-2郭跃夺冠|姚明带伤战胜湖人 小巨人主宰比赛|NBA演义第18回：休城谁最“MAN”？';
+					var pics='$imgServer/Focus_pic/1.jpg|$imgServer/Focus_pic/2.jpg';	
+					var mylinks='http://www.yiliangche.com/|http://www.yiliangche.com/';
+					var texts='世乒赛-王皓横扫王励勤首度称王|世乒赛女单决赛 张怡宁4-2郭跃夺冠';
 					var sohuFlash2 = new sohuFlash("$imgServer/focus0414a.swf","flashcontent01","630","275","8","#ffffff");
 
 sohuFlash2.addParam("quality", "medium");
