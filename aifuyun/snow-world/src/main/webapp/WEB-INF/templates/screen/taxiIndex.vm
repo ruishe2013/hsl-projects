@@ -26,7 +26,7 @@
                 <li>
                 <label for="inp_name">ÈÕÆÚ£º</label>
 				<p>
-				<input type="text" id="J_fromTime" name="fromTime" value="$!dateUtil.formatDate($defaultSearchDate, 'yyyy-MM-dd')" class="input_95" />
+				<input type="text" id="J_fromTime" name="fromTime_None" value="$!dateUtil.formatDate($defaultSearchDate, 'yyyy-MM-dd')" class="input_95" />
                 </p>
                 </li>
                 
