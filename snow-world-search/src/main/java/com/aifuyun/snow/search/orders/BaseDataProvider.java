@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -72,6 +73,14 @@ public abstract class BaseDataProvider implements DataProvider {
 		}
 	}
 
+	private static String fmtDateYMD(Date date) {
+		return DateUtil.formatDate(date, "yyyyMMdd");
+	}
+	
+	private static String fmtDateFull(Date date) {
+		return DateUtil.formatDate(date, "yyyyMMddHHmmss");
+	}
+	
 	@Override
 	public Map<String, String> next() {
 		if (!inited) {
@@ -88,13 +97,15 @@ public abstract class BaseDataProvider implements DataProvider {
 			ret.put("arriveCity", rs.getString("arrive_city"));
 			ret.put("fromAddr", rs.getString("from_addr"));
 			ret.put("arriveAddr", rs.getString("arrive_addr"));
-			ret.put("fromTime", DateUtil.formatDateForDump(rs.getTimestamp("from_time")));
-			ret.put("arriveTime", DateUtil.formatDateForDump(rs.getTimestamp("arrive_time")));
+			ret.put("fromTime_ymd", fmtDateYMD(rs.getTimestamp("from_time")));
+			ret.put("arriveTime_ymd", fmtDateYMD(rs.getTimestamp("arrive_time")));
+			ret.put("fromTime", fmtDateFull(rs.getTimestamp("from_time")));
+			ret.put("arriveTime", fmtDateFull(rs.getTimestamp("arrive_time")));
 			ret.put("description", rs.getString("description"));
 			ret.put("approach", rs.getString("approach"));
 			ret.put("status", rs.getString("status"));
 			ret.put("type", rs.getString("type"));
-			ret.put("gmtCreate", DateUtil.formatDateForDump(rs.getTimestamp("gmt_create")));
+			ret.put("gmtCreate", fmtDateFull(rs.getTimestamp("gmt_create")));
 			ret.put("deleted", rs.getString("deleted"));
 		} catch (Exception e) {
 			log.error("≤È—Ø ß∞‹", e);
