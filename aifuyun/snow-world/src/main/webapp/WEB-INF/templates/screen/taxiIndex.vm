@@ -24,25 +24,11 @@
                 </li>
                 
                 <li>
-                <label for="inp_name">发车时间：</label>
+                <label for="inp_name">日期：</label>
 				<p>
 				<input type="text" id="J_goDate" name="it" readonly="readonly" value="$!dateUtil.formatDate($defaultSearchDate, 'yyyy-MM-dd')" 
 				 class="input_95" />
 				 
-				#set($selectedHour = $dateUtil.getHour($defaultSearchDate))
-				#set($hours = [1 .. 24])
-				<select name="fcsj2">
-					#foreach ($hour in $hours)
-						<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
-					#end
-                </select>
-                #set($minuteIndice = [0 .. 4])
-                <select name="fcsj3">
-                	#foreach($minuteIndex in $minuteIndice)
-                		#set($minute = $minuteIndex * 15)
-						<option value="$minute" #if("$!defaultSearchMinutes" == "$!minute") selected #end>$minute分</option>
-					#end
-                </select>
                 </p>
                 </li>
                 <li>
@@ -94,25 +80,21 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 	<div class="newcar_c">
 	<table width="100%" cellpadding="0" cellspacing="0">
 	  <tr class="font_12_b bgc_dy">
-	  	<td>编号</td>
 	    <td>城市</td>
 	    <td>出发地</td>
 	    <td>目的地</td>
 	    <td>发车时间</td>                         
-	    <td>空余座位</td>
-	    <td>发起时间</td>
+	    <td>预计到达时间</td>
 	    <td>发起人</td>
 	    <td>加入拼车</td>
 	  </tr>
 	#set($index=0)
 	#foreach($order in $recentOrders)
 		<tr #if( $index % 2 !=0 )class="bgc_dg" #end>
-			<td>010</td>
 		    <td>$!order.fromCity</td>
 		    <td>$!order.fromAddr</td>
 		    <td>$!order.arriveAddr</td>
 		    <td>$dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm')</td>
-		    <td>2</td>
 		    <td>$dateUtil.formatDate($order.arriveTime, 'yyyy-MM-dd HH:mm')</td>
 		    <td>$!order.creatorUsername</td>
 		    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_jrpc">查看详情</a></td>
