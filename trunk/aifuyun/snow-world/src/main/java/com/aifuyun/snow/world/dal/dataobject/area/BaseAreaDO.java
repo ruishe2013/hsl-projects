@@ -33,7 +33,7 @@ public abstract class BaseAreaDO extends BaseDO implements Comparable<BaseAreaDO
 		if (other == null) {
 			return 1;
 		}
-		int ret = seqNum - other.seqNum;
+		int ret = other.seqNum - seqNum;
 		if (ret != 0) {
 			return ret;
 		}

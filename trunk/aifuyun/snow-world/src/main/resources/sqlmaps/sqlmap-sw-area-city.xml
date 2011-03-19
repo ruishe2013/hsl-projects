@@ -54,9 +54,10 @@
 		from
 			sw_area_city t
 		where
-			t.hot_city = 1 and t.deleted = 0
+			t.deleted = 0
 		order 
 			by seq_num desc
+		limit 20
 	</select>
 	
 	<select id="queryByProvinceIds" resultMap="cityMapping" parameterClass="list">
