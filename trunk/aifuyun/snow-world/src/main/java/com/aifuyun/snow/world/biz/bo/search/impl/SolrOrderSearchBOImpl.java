@@ -21,9 +21,12 @@ import com.aifuyun.snow.world.biz.query.search.SearchQuery;
 import com.aifuyun.snow.world.biz.query.search.SearchResult;
 import com.aifuyun.snow.world.biz.query.search.SortField;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
+import com.zjuh.sweet.lang.DateUtil;
 
 public class SolrOrderSearchBOImpl implements OrderSearchBO {
 
+	private static final String DUMP_DATE_FMT = "yyyyMMddHHmmss";
+	
 	private SolrServer solrServer;
 	
 	private String[] solrUrls;
@@ -59,18 +62,17 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 		orderDO.setArriveAddr(simpleSolrDocument.getStringValue("arriveAddr"));
 		orderDO.setArriveCity(simpleSolrDocument.getStringValue("arriveCity"));
 		orderDO.setArriveCityId(simpleSolrDocument.getIntValue("arriveCityId"));
-		// TODO
-		orderDO.setArriveTime(null);
+		orderDO.setArriveTime(DateUtil.parseDate(String.valueOf(simpleSolrDocument.getLongValue("arriveTime")), DUMP_DATE_FMT));
 		orderDO.setCityId(simpleSolrDocument.getIntValue("cityId"));
 		orderDO.setCreatorId(simpleSolrDocument.getLongValue("creatorId"));
 		orderDO.setCreatorUsername(simpleSolrDocument.getStringValue("creatorUsername"));
-		//orderDO.setDescription(description)
+		orderDO.setDescription(simpleSolrDocument.getStringValue("description"));
 		orderDO.setFromAddr(simpleSolrDocument.getStringValue("fromAddr"));
 		orderDO.setFromCity(simpleSolrDocument.getStringValue("fromCity"));
-		// TODO
-	//	orderDO.setFromTime(fromTime);
+		orderDO.setFromTime(DateUtil.parseDate(String.valueOf(simpleSolrDocument.getLongValue("fromTime")), DUMP_DATE_FMT));
 		orderDO.setStatus(simpleSolrDocument.getIntValue("status"));
 		orderDO.setType(simpleSolrDocument.getIntValue("type"));
+		orderDO.setGmtCreate(DateUtil.parseDate(String.valueOf(simpleSolrDocument.getLongValue("gmtCreate")), DUMP_DATE_FMT));
 		return orderDO;
 	}
 

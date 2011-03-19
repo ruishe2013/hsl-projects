@@ -88,12 +88,13 @@ public abstract class BaseDataProvider implements DataProvider {
 			ret.put("arriveCity", rs.getString("arrive_city"));
 			ret.put("fromAddr", rs.getString("from_addr"));
 			ret.put("arriveAddr", rs.getString("arrive_addr"));
-			ret.put("fromDate", DateUtil.formatDateForDump(rs.getTimestamp("from_time")));
-			ret.put("arriveDate", DateUtil.formatDateForDump(rs.getTimestamp("arrive_time")));
+			ret.put("fromTime", DateUtil.formatDateForDump(rs.getTimestamp("from_time")));
+			ret.put("arriveTime", DateUtil.formatDateForDump(rs.getTimestamp("arrive_time")));
 			ret.put("description", rs.getString("description"));
 			ret.put("approach", rs.getString("approach"));
 			ret.put("status", rs.getString("status"));
 			ret.put("type", rs.getString("type"));
+			ret.put("gmtCreate", DateUtil.formatDateForDump(rs.getTimestamp("gmt_create")));
 			ret.put("deleted", rs.getString("deleted"));
 		} catch (Exception e) {
 			log.error("≤È—Ø ß∞‹", e);

@@ -52,13 +52,14 @@
 		<field name="arriveCity" type="string" indexed="true" stored="true" multiValued="false" />
 		<field name="fromAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="arriveAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
-		<field name="fromDate" type="tlong" indexed="true" stored="true" multiValued="false" />
-		<field name="arriveDate" type="tlong" indexed="true" stored="true" multiValued="false" />
-		<field name="description" type="string_sd" indexed="true" stored="false" multiValued="false" />
+		<field name="fromTime" type="tlong" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveTime" type="tlong" indexed="true" stored="true" multiValued="false" />
+		<field name="description" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="approach" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="status" type="int" indexed="true" stored="true" multiValued="false" />
 		<field name="deleted" type="pint" indexed="true" stored="false" multiValued="false" />
 		<field name="type" type="pint" indexed="true" stored="false" multiValued="false" />
+		<field name="gmtCreate" type="tlong" indexed="false" stored="true" multiValued="false" />
 
 		<field name="fromAddrText" type="string_sd" indexed="true" stored="false" multiValued="true" />
 		<field name="arriveAddrText" type="string_sd" indexed="true" stored="false" multiValued="true" />
@@ -68,9 +69,13 @@
 	<defaultSearchField>arriveAddrText</defaultSearchField>
 	<solrQueryParser defaultOperator="OR" />
 
+
+	<copyField source="fromCity" dest="fromAddrText"/>
 	<copyField source="fromAddr" dest="fromAddrText"/>
-	<copyField source="arriveAddr" dest="arriveAddrText"/>
 	<copyField source="approach" dest="fromAddrText"/>
+	
+	<copyField source="arriveCity" dest="arriveAddrText"/>
+	<copyField source="arriveAddr" dest="arriveAddrText"/>
 	<copyField source="approach" dest="arriveAddrText"/>
 
 </schema>
