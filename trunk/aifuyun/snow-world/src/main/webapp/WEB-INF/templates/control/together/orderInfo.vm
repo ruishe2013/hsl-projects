@@ -1,0 +1,29 @@
+<li>
+    <h1>
+       	 从 
+       	 <span class="col_g">$!{order.fromCity}$!{order.fromAddr} </span>
+       	 拼车到
+       	 <span class="col_g">$!{order.arriveCity}$!{order.arriveAddr} </span>
+    </h1>
+</li>
+<li>
+    <strong>出发时间：</strong>$!dateUtil.formatFullDate($order.fromTime)
+</li>  
+<li>
+    <strong>预计到达时间：</strong>$!dateUtil.formatFullDate($order.arriveTime)
+</li> 
+<li>
+    <strong>参加人数/总座位数：</strong> $!joinersCount/$!order.totalSeats <span class="color_gray"></span>
+</li> 
+<li>
+    <strong>途径：</strong> $!order.approach
+</li> 
+<li>
+    <strong>描述：</strong><span style="line-height:20px; display:block; float: left">$!{order.description}</span>
+</li>
+<li>
+    <div class="details_tip">
+        	提示:请确保您发布信息无误，拼车前请务必了解对方身份；为了您的安全，请认真阅读
+        <a href="#" >《拼车注意事项》</a>
+    </div>
+</li>

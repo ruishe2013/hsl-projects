@@ -19,8 +19,8 @@ public class IncrOrderDataProvider extends BaseDataProvider implements TimeSuppo
 
 	@Override
 	protected String getSqlCondition() {
-		return " gmt_modified >= '"+ DateUtil.formatDate(start) 
-		+"' and gmt_modified <= '"+  DateUtil.formatDate(end) + "'" ;
+		return " t.gmt_modified >= '"+ DateUtil.formatDate(start) 
+		+"' and t.gmt_modified <= '"+  DateUtil.formatDate(end) + "'" ;
 	}  
 
 }

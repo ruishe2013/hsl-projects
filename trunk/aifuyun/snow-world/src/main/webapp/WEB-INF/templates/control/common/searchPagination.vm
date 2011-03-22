@@ -1,0 +1,68 @@
+<div class="pagination">
+	<div class="pagination-main">
+		#set($pageNo = $query.pageNo)
+		#set($tPage = $query.pagesCount)
+		#set($prePage = $pageNo - 1)
+		#set($nextPage = $pageNo + 1)
+		#if ($pageNo > 1)
+			<a class="page-prev" href='$pageChangerFaced.gotoPage($prePage)'><span>上一页</span></a>
+		#else
+			<span class="page-start"><span>上一页</span></span>
+		#end
+		#set($leftStart = 1)
+		#set($leftEnd = 2)
+		#set($mStart = $pageNo - 2)
+		#set($mEnd = $pageNo + 2)
+		#set($rStart = $tPage - 1)
+		#set($rEnd = $tPage)
+		#if ($mStart <= $leftEnd)
+			#set($leftStart = 0)
+			#set($leftEnd = 0)
+			#set($mStart = 1)
+		#end
+		#if ($mEnd >= $rStart)
+			#set($rStart = 0)
+			#set($rEnd = 0)
+			#set($mEnd = $tPage)
+		#end
+		#if ($leftEnd > $leftStart)
+			#foreach($p in [${leftStart}..${leftEnd}])
+				#if($p != 0)
+					#if($p < 100)
+						<a href='$pageChangerFaced.gotoPage($p)' class="j_page_changer">$p</a>
+					#else
+						<a href='$pageChangerFaced.gotoPage($p)' class="page-100">$p</a>
+					#end
+				#end
+			#end
+			#if($mStart > ($leftEnd +1))
+				<span class="page-break">...</span>
+			#end
+		#end
+		
+		#foreach($p in [${mStart}..${mEnd}])
+			#if($p == $pageNo)
+				<span class="page-cur">$p</span>
+			#else
+				#if($p != 0)
+					#if($p < 100)
+						<a href='$pageChangerFaced.gotoPage($p)' class="j_page_changer">$p</a>
+					#else
+						<a href='$pageChangerFaced.gotoPage($p)' class="page-100">$p</a>
+					#end
+				#end
+			#end
+		#end
+		#if ($rEnd > $rStart )
+			#if($rStart > ($mEnd+1))
+				<span class="page-break">...</span>
+			#end
+		#end
+		#if ($pageNo < $tPage)
+			<a href='$pageChangerFaced.gotoPage($nextPage)' class="page-next j_page_changer"><span>下一页</span></a>
+		#else
+			<span class="page-end"><span>下一页</span></span>
+		#end
+	</div>
+	<div class="common-clean-fixed"></div>
+</div>
