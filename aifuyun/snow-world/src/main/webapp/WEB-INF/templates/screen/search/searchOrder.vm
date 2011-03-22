@@ -1,51 +1,52 @@
-<div id="cArea"><!--content-2 begin-->
-<div class="cbox">
-    <div class="cutbread"><strong>当前位置：</strong><a href="$snowModule.setTarget('index')">首页</a> >> 出租车搜索列表页</div>
-    <div class="index_search">
+<div id="cArea"><!--content begin-->
+
+<div class="index_search">
     <form action="" method="get">
-    	##城市：<input class="input_95" name="fromCity" value="$!{selectedCity.name}" type="text"/>  <a href="$snowModule.setTarget('city/cityList')" >切换城市</a>   
-	   	出发地：  <input class="input_95" name="fromAddr" type="text" value="$!rundata.getQueryString().getString("fromAddr")"/>
-		目的地：<input class="input_95" name="arriveAddr" type="text" value="$!rundata.getQueryString().getString("arriveAddr")"/> 
-		日期：<input class="input_95" id="J_fromTime" name="fromTime" type="text" value="$!rundata.getQueryString().getString("fromTime")"/> 
-		##到达时间：<input class="input_95" name="" type="text"/>
-		<button type="submit" class="but_search" onMouseDown="this.className='but_search'" onmouseover="this.className='but_search_h'" onmouseup="this.className='but_search_h'"  onMouseOut="this.className='but_search'"></button>
-	</form>
-    </div>
-    
-    <div>
-	    共找到$!{numFound}条记录
-	</div>
-	
-    <div class="car_list_box">
-    <table width="100%" cellpadding="0" cellspacing="0">
-    	 <tr class="font_12_b bgc_dy">
-		    <td>城市</td>
-		    <td>出发地</td>
-		    <td>目的地</td>
-		    <td>发车时间</td>                         
-		    <td>途径</td>
-		    <td>发起人</td>
-		    <td>操作</td>
-		  </tr>
-    	#set($index=1)
+        出发地： <input class="input_95" name="fromAddr" type="text" value="$!rundata.getQueryString().getString("fromAddr")"/>
+        目的地：<input class="input_95" name="arriveAddr" type="text" value="$!rundata.getQueryString().getString("arriveAddr")"/> 
+        出发时间：<input class="input_95" id="J_fromTime" name="fromTime" type="text" value="$!rundata.getQueryString().getString("fromTime")"/> 
+    <button type="submit" class="but_search" onMouseDown="this.className='but_search'" onmouseover="this.className='but_search_h'" onmouseup="this.className='but_search_h'"  onMouseOut="this.className='but_search'">
+    </button>
+    </form>
+    <span>共找到 $!{numFound} 条记录</span> 
+</div>
+<div class="list_box"><!--列表 begin-->
+    <ul>
     	#foreach($order in $orders)
-    		<tr #if($index % 2 == 0) class="bgc_dg" #end >
-		    <td>$!order.fromCity</td>
-		    <td>$!order.fromAddr</td>
-		    ## $!order.arriveCity
-		    <td>$!order.arriveAddr</td>
-		    <td>$dateUtil.formatFullDate($!order.fromTime)</td>                         
-		    <td>$!order.approach</td>
-		    <td>$!order.creatorUsername </td>
-		    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)">查看详情</a></td>
-		  </tr>
-		  
-		  #set($index=$index + 1)
-		#end
-</table>
+	        <li>
+	            <h1>
+	            	<div class="but_ckxq">
+	                	<a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class=" col_g" target="_blank">查看详情...</a>
+	                </div>
+	                <img src="$imgServer/car_1.png" width="55" height="30" border="0" align="absmiddle"/>
+	                <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" target="_blank"><span class="col_g">从 $!{order.fromCity} $!{order.fromAddr} 到 $!{order.arriveCity} $!{order.arriveAddr}</span></a>
+	            </h1>
+	            <div class="hr_2"></div>
+	            <p>
+	                <span class="color_gray">发起人：</span> $!{order.creatorRealName} &nbsp;&nbsp;&nbsp;&nbsp;
+	                <span class="color_gray">总座位数：</span> $!{order.totalSeats} &nbsp;&nbsp;&nbsp;&nbsp;
+	                <span class="color_gray">出发时间：</span> $!dateUtil.formatFullDate($!order.fromTime)
+	            </p>
+	            <p>
+	                <span class="color_gray">途径：</span> $!{order.approach}
+	            </p>
+	            <p>
+	                <span class="color_gray">备注：</span> $!{order.description}
+	            </p>
+	
+	        </li>
+        #end
+        
+    </ul>
+    
+    <div class="page">
+    	
+    	$control.setTemplate('common/searchPagination.vm').add('query', $searchOrderQuery).add('pageFacerName', 'orderSearchPageFacer')
+    
     </div>
-<div class="hr_10"></div>
-</div></div><!--content-2 end-->
+</div><!--列表 end-->
+
+</div><!--content end-->
 
 <script type="text/javascript">
 	$(document).ready(function(){

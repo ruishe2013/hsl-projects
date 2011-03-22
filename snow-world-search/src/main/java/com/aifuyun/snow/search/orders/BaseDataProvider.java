@@ -107,6 +107,8 @@ public abstract class BaseDataProvider implements DataProvider {
 			ret.put("type", rs.getString("type"));
 			ret.put("gmtCreate", fmtDateFull(rs.getTimestamp("gmt_create")));
 			ret.put("deleted", rs.getString("deleted"));
+			ret.put("totalSeats", rs.getString("total_seats"));
+			ret.put("creatorRealName", rs.getString("real_name"));
 		} catch (Exception e) {
 			log.error("≤È—Ø ß∞‹", e);
 		}
@@ -118,12 +120,13 @@ public abstract class BaseDataProvider implements DataProvider {
 		String sql = "select t.id, t.city_id, t.gmt_modified, t.from_addr, t.gmt_create, t.creator_username, t.deleted,"+
 			"t.creator_id, t.from_time, t.type, t.id, t.total_seats," +
 		 "t.arrive_time, t.description, t.from_city, t.arrive_city, t.arrive_addr, " +
-		 "t.status, t.approach, t.arrive_city_id from sw_order t ";
+		 "t.status, t.approach, t.arrive_city_id, u.real_name from sw_order t, sw_order_user u " +
+		 " where t.id = u.order_id and t.creator_id = u.user_id and u.deleted = 0 ";
 		String condition = getSqlCondition();
 		if (StringUtil.isEmpty(condition)) {
 			return sql;
 		}
-		return sql + " where " + condition;
+		return sql + " and " + condition;
 	}
 	
 	

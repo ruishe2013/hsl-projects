@@ -5,9 +5,31 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import com.zjuh.splist.SplistException;
+import com.zjuh.sweet.lang.ConvertUtil;
+import com.zjuh.sweet.lang.DateUtil;
+
 public class DateTimeUtil {
 	
 	public static final String FULL_DATE_FMT = "yyyy-MM-dd HH:mm:ss";
+	
+	public static long date2long(String dateString) {
+		Date date = DateUtil.parseDate(dateString, "yyyy-MM-dd");
+		if (date == null) {
+			return 0L;
+		}
+		return ConvertUtil.toLong(DateUtil.formatDate(date, "yyyyMMdd"), 0L);
+	}
+	
+	public static String long2Date(Object t) {
+		try {
+			Date date = parseDate(String.valueOf(t), "yyyyMMdd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			return sdf.format(date);
+		} catch (Exception e) {
+			throw new SplistException(e);
+		}
+	}
 	
 	/**
 	 * 组合datePart的日期部分和timePart的时间成为一个新的日期

@@ -12,7 +12,7 @@ public class OrderSearchBOTest extends BaseTest {
 	public void testSearch() {
 		SearchQuery query = new SearchQuery();
 		query.setQ("arriveAddr:Œ‰¡÷");
-		SearchResult<OrderDO> result = orderSearchBO.queryOrders(query);
+		SearchResult<SearchOrderDO> result = orderSearchBO.queryOrders(query);
 		for (OrderDO order : result.getResult()) {
 			System.out.println(order.getId() + ", " + order.getFromCity() + ", " + order.getArriveAddr());
 		} 

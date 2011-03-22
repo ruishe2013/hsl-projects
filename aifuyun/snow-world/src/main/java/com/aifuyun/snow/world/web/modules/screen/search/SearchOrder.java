@@ -1,31 +1,23 @@
 package com.aifuyun.snow.world.web.modules.screen.search;
 
 
-import java.util.Date;
-
 import com.aifuyun.snow.world.biz.ao.together.OrderSearchAO;
 import com.aifuyun.snow.world.biz.query.SearchOrderQuery;
+import com.aifuyun.snow.world.common.DateTimeUtil;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
-import com.zjuh.sweet.lang.ConvertUtil;
-import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.result.Result;
 
 public class SearchOrder extends BaseScreen {
 
 	private OrderSearchAO orderSearchAO;
 	
-	private static long date2long(String dateString) {
-		Date date = DateUtil.parseDate(dateString, "yyyy-MM-dd");
-		if (date == null) {
-			return 0L;
-		}
-		return ConvertUtil.toLong(DateUtil.formatDate(date, "yyyyMMdd"), 0L);
-	}
+	private int pageSize = 2;
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
+		int page = rundata.getQueryString().getInt("page", 1);
 		String fromCity = rundata.getQueryString().getString("fromCity");
 		String fromAddr = rundata.getQueryString().getString("fromAddr");
 		String arriveCity = rundata.getQueryString().getString("arriveCity");
@@ -34,19 +26,28 @@ public class SearchOrder extends BaseScreen {
 		String arriveTime = rundata.getQueryString().getString("arriveTime");
 		
 		SearchOrderQuery searchOrderQuery = new SearchOrderQuery();
+		searchOrderQuery.setPageSize(pageSize);
+		searchOrderQuery.setPageNo(page);
+		
 		
 		searchOrderQuery.setFromCity(fromCity);
 		searchOrderQuery.setFromAddr(fromAddr);
-		searchOrderQuery.setFromTime(date2long(fromTime));
+		searchOrderQuery.setFromTime(DateTimeUtil.date2long(fromTime));
 		
 		searchOrderQuery.setArriveCity(arriveCity);
 		searchOrderQuery.setArriveAddr(arriveAddr);
-		searchOrderQuery.setArriveTime(date2long(arriveTime));
+		searchOrderQuery.setArriveTime(DateTimeUtil.date2long(arriveTime));
 		
 		Result result = orderSearchAO.searchOrder(searchOrderQuery);
+		
+		Long numFound = (Long)result.getModels().get("numFound");
+		
+		searchOrderQuery.setTotalResultCount(numFound.intValue());
+		
 		if (result.isSuccess()) {
 			this.result2Context(result, templateContext, "orders");
-			this.result2Context(result, templateContext, "numFound");
+			templateContext.put("searchOrderQuery", searchOrderQuery);
+			templateContext.put("numFound", numFound);
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}

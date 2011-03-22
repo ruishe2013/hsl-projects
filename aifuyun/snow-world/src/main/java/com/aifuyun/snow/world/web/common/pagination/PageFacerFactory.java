@@ -9,9 +9,8 @@ public class PageFacerFactory {
 	
 	static {
 		pageFacers.put("mockPageFacer", new MockPageFacer());
-		pageFacers.put("myTogethersPageFacer", new MyTogethersPageFacer());
-		
-		
+		pageFacers.put("myTogethersPageFacer", new  MyTogethersPageFacer());
+		pageFacers.put("orderSearchPageFacer", new  OrderSearchPageFacer());
 	}
 	
 	public static PageFacer getPageFacer(String name) {

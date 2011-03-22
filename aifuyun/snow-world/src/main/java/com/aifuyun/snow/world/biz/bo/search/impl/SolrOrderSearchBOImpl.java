@@ -17,11 +17,11 @@ import org.apache.solr.common.params.SolrParams;
 
 import com.aifuyun.snow.world.biz.BizException;
 import com.aifuyun.snow.world.biz.bo.search.OrderSearchBO;
+import com.aifuyun.snow.world.biz.bo.search.SearchOrderDO;
 import com.aifuyun.snow.world.biz.query.search.FieldOrder;
 import com.aifuyun.snow.world.biz.query.search.SearchQuery;
 import com.aifuyun.snow.world.biz.query.search.SearchResult;
 import com.aifuyun.snow.world.biz.query.search.SortField;
-import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.zjuh.sweet.lang.DateUtil;
 
 public class SolrOrderSearchBOImpl implements OrderSearchBO {
@@ -37,14 +37,14 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 	}
 	
 	@Override
-	public SearchResult<OrderDO> queryOrders(SearchQuery query) {
+	public SearchResult<SearchOrderDO> queryOrders(SearchQuery query) {
 		try {
 			SolrParams solrQuery = asSolrQuery(query);
 			QueryResponse queryResponse = solrServer.query(solrQuery);
 			SolrDocumentList results = queryResponse.getResults();
-			SearchResult<OrderDO> orderResult = new SearchResult<OrderDO>();
+			SearchResult<SearchOrderDO> orderResult = new SearchResult<SearchOrderDO>();
 			orderResult.setNumFound(results.getNumFound());
-			List<OrderDO> orders = new ArrayList<OrderDO>();
+			List<SearchOrderDO> orders = new ArrayList<SearchOrderDO>();
 			for (SolrDocument doc : results) {
 				orders.add(solrDoc2Order(doc));
 			}
@@ -55,9 +55,9 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 		}
 	}
 	
-	private OrderDO solrDoc2Order(SolrDocument doc) {
+	private SearchOrderDO solrDoc2Order(SolrDocument doc) {
 		SimpleSolrDocument simpleSolrDocument = new SimpleSolrDocument(doc);
-		OrderDO orderDO = new OrderDO();
+		SearchOrderDO orderDO = new SearchOrderDO();
 		orderDO.setId(simpleSolrDocument.getLongValue("id"));
 		orderDO.setApproach(simpleSolrDocument.getStringValue("approach"));
 		orderDO.setArriveAddr(simpleSolrDocument.getStringValue("arriveAddr"));
@@ -73,7 +73,9 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 		orderDO.setFromTime(dumpTime2Date(simpleSolrDocument,"fromTime"));
 		orderDO.setStatus(simpleSolrDocument.getIntValue("status"));
 		orderDO.setType(simpleSolrDocument.getIntValue("type"));
+		orderDO.setTotalSeats(simpleSolrDocument.getIntValue("totalSeats"));
 		orderDO.setGmtCreate(dumpTime2Date(simpleSolrDocument,"gmtCreate"));
+		orderDO.setCreatorRealName(simpleSolrDocument.getStringValue("creatorRealName"));
 		return orderDO;
 	}
 	
@@ -92,6 +94,7 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 	protected SolrParams asSolrQuery(SearchQuery query) {
 		SolrQuery solrQuery = new SolrQuery();
 		solrQuery.setRows(query.getRows());
+		solrQuery.setStart(query.getStartRow());
 		for (SortField sf : query.getSortFields()) {
 			solrQuery.addSortField(sf.getName(), toSolrSort(sf.getFieldOrder()));
 		}

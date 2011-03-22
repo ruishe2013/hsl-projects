@@ -4,7 +4,7 @@ public class FullOrderDataProvider extends BaseDataProvider {
 
 	@Override
 	protected String getSqlCondition() {
-		return " deleted = 0 ";
+		return " t.deleted = 0 ";
 	}
 
 	public static void main(String[] args) {

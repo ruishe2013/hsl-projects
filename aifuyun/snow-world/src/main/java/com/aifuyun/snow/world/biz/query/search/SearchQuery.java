@@ -9,6 +9,8 @@ public class SearchQuery {
 	
 	private int rows = 20;
 	
+	private int startRow = 0;
+	
 	private String q;
 
 	public List<SortField> getSortFields() {
@@ -33,6 +35,14 @@ public class SearchQuery {
 
 	public void setQ(String q) {
 		this.q = q;
+	}
+
+	public int getStartRow() {
+		return startRow;
+	}
+
+	public void setStartRow(int startRow) {
+		this.startRow = startRow;
 	}
 	
 }
