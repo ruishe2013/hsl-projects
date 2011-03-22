@@ -13,7 +13,7 @@ public class SearchOrder extends BaseScreen {
 
 	private OrderSearchAO orderSearchAO;
 	
-	private int pageSize = 2;
+	private int pageSize = 20;
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
