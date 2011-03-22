@@ -19,7 +19,8 @@
     <strong>Í¾¾¶£º</strong> $!order.approach
 </li> 
 <li>
-    <strong>ÃèÊö£º</strong><span style="line-height:20px; display:block; float: left">$!{order.description}</span>
+    <strong>ÃèÊö£º</strong>
+   $!{order.description}
 </li>
 <li>
     <div class="details_tip">
