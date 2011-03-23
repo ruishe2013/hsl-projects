@@ -19,16 +19,14 @@
 		        	#if ($isCreatorSelf)
 		            	<li>
 		                    <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'cancelOrder').add('orderId', $order.id)" class="but_cancelcar fr">取消拼车</a>
-		                </li>
 		                #if ($showConfirmOrderBtn)
-			                <li>
-			                    <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmTogetherOrder').add('orderId', $order.id)" class="but_cancelcar fr">确认拼车</a>
-			                </li>
+			                <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmTogetherOrder').add('orderId', $order.id)">确认拼车</a>
 						#end
+						</li>
 					#elseif ($hasBeenJoin)
-						你已经加入该拼车，你可以<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_cancelcar fr">退出拼车</a>
+						你已经加入该拼车，你可以<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcpc fr">退出拼车</a>
 					#elseif ("$!userJoinStatusValue" == "0") 
-						你的申请还在等发起人确认，请耐心等待；或者你可以<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_cancelcar fr">退出申请</a>
+						你的申请还在等发起人确认，请耐心等待；或者你可以<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcsq fr">退出申请</a>
 					#elseif ($leftSeatCount <= 0)
 						对不起，该拼车的位置已经满了，推荐你<a href="#">去别拼车单看看</a>
 					#else
