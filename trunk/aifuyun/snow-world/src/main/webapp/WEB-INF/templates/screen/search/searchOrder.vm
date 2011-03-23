@@ -19,7 +19,9 @@
 	                	<a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class=" col_g" target="_blank">查看详情...</a>
 	                </div>
 	                <img src="$imgServer/car_1.png" width="55" height="30" border="0" align="absmiddle"/>
-	                <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" target="_blank"><span class="col_g">从 $!{order.fromCity} $!{order.fromAddr} 到 $!{order.arriveCity} $!{order.arriveAddr}</span></a>
+	                <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" target="_blank">
+	                	从 <span class="col_g"> $!{order.fromCity} $!{order.fromAddr}</span>
+	                	到<span class="col_g"> $!{order.arriveCity} $!{order.arriveAddr}</span></a>
 	            </h1>
 	            <div class="hr_2"></div>
 	            <p>
