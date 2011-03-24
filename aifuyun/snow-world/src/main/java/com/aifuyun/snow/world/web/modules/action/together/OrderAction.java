@@ -171,8 +171,20 @@ public class OrderAction extends BaseAction {
 		Date fromTimeTime = rundata.getQueryString().getDate("fromTimeTime", TIME_FMT);
 		Date arriveTimeDate = rundata.getQueryString().getDate("arriveTimeDate", DATE_FMT);
 		Date arriveTimeTime = rundata.getQueryString().getDate("arriveTimeTime", TIME_FMT);
+		
 		Date fromTime = DateTimeUtil.componentDateAndTime(fromTimeDate, fromTimeTime);
-		Date arriveTime = DateTimeUtil.componentDateAndTime(arriveTimeDate, arriveTimeTime);
+		
+		Date arriveTime = null;
+		if (arriveTimeDate != null) {
+			if (arriveTimeTime != null) {
+				arriveTime = DateTimeUtil.componentDateAndTime(arriveTimeDate, arriveTimeTime);
+			} else {
+				arriveTime = arriveTimeDate;
+			}
+		} else {
+			// 暂时把除非时间当做到达时间处理
+			//arriveTime = fromTimeDate;
+		}
 		
 		orderDO.setFromTime(fromTime);
 		orderDO.setArriveTime(arriveTime);
