@@ -144,7 +144,7 @@
 	                <label for="inp_name"> √Ë ˆ£∫</label>
 	            	<div class="reg_info_li_box">
 		            	<p>
-		            		<textarea name="ms" cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!form.fields.description.value</textarea>
+		            		<textarea name="ms" cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!{form.fields.description.value}</textarea>
 		            	</p>
 		            	#errorMessageCreateTaxiOrder($!form.fields.description.message)
 	            	</div>

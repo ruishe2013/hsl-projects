@@ -48,13 +48,11 @@
 			</validator>
 		</field>
 		<field name="arriveTimeDate">
-			<validator type="required" message="到达日期不能为空!" />
 			<validator type="date" message="到达日期的格式必须是yyyy-MM-dd!" >
 				<param name="format" value="yyyy-MM-dd" />
 			</validator>
 		</field>
 		<field name="arriveTimeTime">
-			<validator type="required" message="到达时间不能为空!" />
 			<validator type="date" message="到达时间的格式必须是HH:mm!" >
 				<param name="format" value="HH:mm" />
 			</validator>
@@ -66,7 +64,9 @@
 			</validator>
 		</field>
 		<field name="description">
-			<validator type="string"></validator>
+			<validator type="string" message="请把描述控制在500个字符之内!">
+				<param name="max" value="500" />
+			</validator>
 		</field>
 		<field name="checkCode">
 			<validator type="required" message="验证码不能为空!" />
