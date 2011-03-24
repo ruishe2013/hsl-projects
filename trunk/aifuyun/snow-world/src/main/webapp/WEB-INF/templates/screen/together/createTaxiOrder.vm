@@ -2,7 +2,7 @@
 
 #macro(errorMessageCreateTaxiOrder, $str)
 	#if( "$!str" != "")
-		<p style="padding:5px 0 0"><span id="result"><img src="images/ico_tip.gif" align="absmiddle" border="0" />$str</span></p>
+		<p style="padding:5px 0 0"><span id="result"><img src="$imgServer/ico_tip.gif" align="absmiddle" border="0" />$str</span></p>
 	#end
 #end
 
