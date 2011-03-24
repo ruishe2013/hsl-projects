@@ -65,6 +65,7 @@
 		</field>
 		<field name="description">
 			<validator type="string" message="请把描述控制在500个字符之内!">
+				<param name="min" value="0" />
 				<param name="max" value="500" />
 			</validator>
 		</field>
