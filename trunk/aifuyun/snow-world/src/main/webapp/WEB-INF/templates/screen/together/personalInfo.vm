@@ -36,9 +36,9 @@
 			<input type="hidden" name="orderId" value="$order.id" />
         <ul>
             <li>
-	            <label for="$!form.fields.realName.name"><em>*</em> 真实姓名：</label>
+	            <label for="$!form.fields.realName.name"><em>*</em> 联系人：</label>
 	            <div class="reg_info_li_box">
-		            <p><input class="reg_input_out" type="text" id="$!form.fields.realName.name" name="$!form.fields.realName.name" value="$!form.fields.realName.value" /></p>
+		            <p><input class="reg_input_out" maxlength="10" type="text" id="$!form.fields.realName.name" name="$!form.fields.realName.name" value="$!form.fields.realName.value" /></p>
 		            #errorMessagePersonalInfo($!form.fields.realName.message)
 	            </div>
             </li>
@@ -73,7 +73,7 @@
             <li>
 	            <label for="$!form.fields.phone.name"><em>*</em> 手机号：</label>
 	            <div class="reg_info_li_box">
-		            <p><input class="reg_input_out" type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value"/></p>
+		            <p><input class="reg_input_out" maxlength="11" type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value"/></p>
 		            #errorMessagePersonalInfo($!form.fields.phone.message)
 	            </div>
             </li>
@@ -96,7 +96,7 @@
             
            <li><label for="$!form.fields.qq.name"><em></em> qq：</label>
             	<div class="reg_info_li_box">
-					<p><input class="reg_input_out" type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value"/></p>
+					<p><input class="reg_input_out" maxlength="12" type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value"/></p>
 					#errorMessagePersonalInfo($!form.fields.qq.message)
                 </div>
            </li>
