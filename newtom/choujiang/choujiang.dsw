@@ -3,6 +3,33 @@ Microsoft Developer Studio Workspace File, Format Version 6.00
 
 ###############################################################################
 
+Project: "TestCore"=".\TestCore\TestCore.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+    Begin Project Dependency
+    Project_Dep_Name choujiangCore
+    End Project Dependency
+}}}
+
+###############################################################################
+
+Project: "choujiangCore"=".\choujiangCore\choujiangCore.dsp" - Package Owner=<4>
+
+Package=<5>
+{{{
+}}}
+
+Package=<4>
+{{{
+}}}
+
+###############################################################################
+
 Global:
 
 Package=<5>
