@@ -12,14 +12,18 @@ import java.util.Collection;
 import java.util.Date;
 
 public class Downloader {
-
+	
+	public static void main(String[] args) throws IOException {
+		downloadImages("http://jiang-hong-lie.taobao.com/?asker=wangwang&wwdialog=tbdasale", "d:\\temp");
+	}
+	
 	private static String getBaseName() {
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd_HH_mm_ss");
 		return df.format(new Date());
 	}
 	
 	public static int downloadImages(String urlString, String destPath) throws IOException {
-		Collection<String> images = ImageUrlParser.imageUrl(urlString);
+		Collection<String> images = ImageUrlParser.parsePage(urlString);
 		File dir = new File(destPath);
 		if (!dir.exists()) {
 			dir.mkdirs();
@@ -49,10 +53,9 @@ public class Downloader {
 			URL url = new URL(imageUrl);
 			HttpURLConnection conn = (HttpURLConnection)url.openConnection();
 			return conn.getInputStream();
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			return null;
 		}
-		return null;
 	}
 	
 }

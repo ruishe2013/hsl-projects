@@ -18,8 +18,12 @@
 		        #if ("$!order.status" != "20" )
 		        	#if ($isCreatorSelf)
 		            	<li>
+		                    	你是发起人，你可以
 		                    <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'cancelOrder').add('orderId', $order.id)" class="but_cancelcar fr">取消拼车</a>
+		                </li>
 		                #if ($showConfirmOrderBtn)
+		                <li>
+		             	   已经有人加入，你可以
 			                <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmTogetherOrder').add('orderId', $order.id)" class="but_qrpc fr">确认拼车</a>
 						#end
 						</li>

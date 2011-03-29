@@ -1,0 +1,18 @@
+<a href="$snowModule.setTarget('user/myTogethers')">我的拼车</a>
+ <a href="$snowModule.setTarget('user/myTogethers').add('type', 1)">我发起的拼车</a>
+ <a href="$snowModule.setTarget('user/myTogethers').add('type', 2)">我参加的拼车</a>
+<ul>
+
+
+#foreach($order in $orders)
+	<li>
+		[$order.orderStatusEnum.name] $order.fromCity $order.fromAddr => $order.arriveAddr 
+		<a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)">查看详情...</a>
+		#if ("$!order.orderStatusEnum.value" == "0") 
+		<a href="$snowModule.setTarget('together/personalInfo').add('orderId', $order.id)">继续编辑...</a>
+		#end
+	</li>
+#end
+</ul>
+
+$control.setTemplate('common/pagination.vm').add('query', $userOrderQuery).add('pageFacerName', 'myTogethersPageFacer')

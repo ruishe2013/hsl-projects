@@ -4,7 +4,7 @@ import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
-import com.aifuyun.snow.world.common.SnowUtils;
+import com.aifuyun.snow.world.common.SnowUtil;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
 import com.zjuh.sweet.result.Result;
@@ -73,7 +73,7 @@ public class UserAOImpl extends BaseAO implements UserAO {
 			
 			BirthYearEnum[] years = BirthYearEnum.values();
 			
-			int selectedYear = SnowUtils.getSelectedYear(baseUserDO);
+			int selectedYear = SnowUtil.getSelectedYear(baseUserDO);
 			
 			result.getModels().put("years", years);
 			result.getModels().put("selectedYear", selectedYear);

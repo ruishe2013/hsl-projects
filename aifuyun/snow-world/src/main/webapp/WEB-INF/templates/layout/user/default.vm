@@ -1,0 +1,68 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>一辆车——用户中心</title>
+<link href="$cssServer/usercenter.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div id="uc_head">
+	<div class="logo"><a href="http://yiliangche.com/taxi-index.htm" title="绿色出行 同上一辆车">绿色出行 同上一辆车</a></div>
+    <div class="city">
+		<h1>个人中心</h1>
+    </div>
+    <div class="blank19"></div>
+    <div class="headnav">
+    	<ul>
+        	<li class="usercenter">
+                <a href="#" class="current" >
+                	<span><strong>用户中心</strong></span>
+                </a>
+            </li>
+            <li>
+                <a href="$snowModule.setTarget('/index')">
+                	<span><strong>网站首页</strong></span>
+                </a>
+            </li>
+            <li>
+                <a href="$snowModule.setTarget('/taxi-index')">
+                	<span><strong>拼的士</strong></span>
+                </a>
+            </li>
+            <li>
+                <a href="$snowModule.setTarget('/inter-city-index')">
+                	<span><strong>城际拼车</strong></span>
+                </a>
+            </li>
+            <li>
+                <a href="$snowModule.setTarget('/rush-hour-index')">
+                	<span><strong>上下班拼车</strong></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+$screen_content
+
+<div id="footer">
+  <p>
+      <a href="#">关于我们</a> |
+      <a href="#">联系我们</a> |
+      <a href="#">拼车须知</a> |
+      <a href="#">友情链接</a> |
+   	<a href="http://yiliangche.uueasy.com/" target="_blank">用户论坛</a> |
+	<a href="$snowModule.setTarget('feedback/leaveWord')">意见反馈</a>
+  </p>
+  <p>
+  	Copyright@2010-2011 All Rights Reserved. 
+  </p>
+  <p>
+  	<a href="http://www.miibeian.gov.cn/" target="_blank">浙ICP备11006974号</a>
+  </p>
+</div>
+
+<script type="text/javascript" src="http://js.tongji.linezing.com/2319746/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/2319746/tongji.gif"/></a></noscript>
+</body>
+</html>

@@ -11,7 +11,7 @@ import com.aifuyun.snow.world.biz.query.UserOrderQuery;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.OrderResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
-import com.aifuyun.snow.world.common.SnowUtils;
+import com.aifuyun.snow.world.common.SnowUtil;
 import com.aifuyun.snow.world.common.cache.CacheContants;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
@@ -598,7 +598,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			}
 			
 			 
-			int selectedYear = SnowUtils.getSelectedYear(orderUserDO);
+			int selectedYear = SnowUtil.getSelectedYear(orderUserDO);
 			boolean isUserInfoEmpty = isUserInfoEmpty(baseUserDO);
 			
 			BirthYearEnum[] years = BirthYearEnum.values();
