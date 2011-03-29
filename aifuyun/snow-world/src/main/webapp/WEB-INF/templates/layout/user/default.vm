@@ -2,8 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>一辆车——用户中心</title>
-<link href="$cssServer/usercenter.css" rel="stylesheet" type="text/css" />
+<title>一辆车拼车网——用户中心</title>
+<link href="$cssServer/usercenter.css?t=20110329.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
