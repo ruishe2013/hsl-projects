@@ -19,6 +19,7 @@
 		<property name="pullToolClasses">
 			<map>
 				<entry key="dateUtil" value="com.zjuh.sweet.lang.DateUtil" />
+				<entry key="snowUtil" value="com.aifuyun.snow.world.common.SnowUtil" />
 			</map>
 		</property>
 	</bean>

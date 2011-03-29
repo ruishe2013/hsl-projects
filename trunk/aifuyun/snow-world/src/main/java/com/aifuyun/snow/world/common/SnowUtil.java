@@ -3,10 +3,19 @@ package com.aifuyun.snow.world.common;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.SexEnum;
 import com.aifuyun.snow.world.dal.dataobject.misc.UserInfoHolder;
+import com.zjuh.sweet.author.LoginContext;
 import com.zjuh.sweet.lang.StringUtil;
 
-public class SnowUtils {
+public class SnowUtil {
 
+	public static String getLoginUsername() {
+		return LoginContext.getUsername();
+	}
+	
+	public static long getLoginUserId() {
+		return LoginContext.getUserId();
+	}
+	
 	public static int getSelectedYear(UserInfoHolder userInfoHolder) {
 		if (userInfoHolder == null) {
 			return SnowConstants.DEFAULT_SEELECT_YEAR;

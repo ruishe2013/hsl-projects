@@ -1,6 +1,6 @@
 package com.aifuyun.snow.world.dal.dataobject.area;
 
-import com.aifuyun.snow.world.common.SnowUtils;
+import com.aifuyun.snow.world.common.SnowUtil;
 import com.aifuyun.snow.world.dal.dataobject.BaseDO;
 
 /**
@@ -37,9 +37,9 @@ public abstract class BaseAreaDO extends BaseDO implements Comparable<BaseAreaDO
 		if (ret != 0) {
 			return ret;
 		}
-		ret = SnowUtils.compareString(pinyin, other.pinyin);
+		ret = SnowUtil.compareString(pinyin, other.pinyin);
 		if (ret == 0) {
-			ret = SnowUtils.compareString(name, other.name);
+			ret = SnowUtil.compareString(name, other.name);
 		}
 		if (ret == 0) {
 			ret = id - other.id;

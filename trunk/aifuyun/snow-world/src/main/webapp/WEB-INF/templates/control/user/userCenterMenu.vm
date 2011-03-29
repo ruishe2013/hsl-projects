@@ -1,0 +1,37 @@
+ <div class="l_box fl" style="margin:0 -180px 0 0px ; position:relative; z-index:10"><!--left begin-->
+        <div class="personal_top"><b>个人用户登录</b></div>
+        <div class="pers_box">
+            <p style="text-align:center; line-height:30px;">你好：$!{snowUtil.loginUsername}</p>
+            <p style="text-align:center; line-height:20px;"><button style="height:25px; width:80px;" onclick=javascript:location.href="$snowModule.setTarget('loginOut')">注销登录</button></p><div class="hr_10"></div>
+        </div>
+        <div class="hr_6"></div>
+        
+        <div class="personal_top"><b>拼车信息</b></div>
+        <div class="pers_box">
+        	<ul>
+            	<li>
+                    <img src="images/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
+                    <a href="$snowModule.setTarget('user/myTogethers').add('type', 1)">我创建的拼车信息</a>
+                </li>
+                <li>
+                    <img src="images/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
+                    <a href="$snowModule.setTarget('user/myTogethers').add('type', 2)">我参加的拼车信息</a>
+                </li>
+            </ul>
+        </div>
+        <div class="hr_6"></div>
+        
+        <div class="personal_top"><b>用户信息</b></div>
+        <div class="pers_box">
+        	<ul>
+            	<li>
+                <img src="images/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
+                <a href="#">基本信息</a>
+                </li>
+                <li>
+                    <img src="images/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
+                    <a href="#">车辆档案</a>
+                </li>
+            </ul>
+        </div>
+    </div>
