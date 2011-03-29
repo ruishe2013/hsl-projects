@@ -9,7 +9,13 @@
     	<div class="content-inner">
             <div class="pwrap"><!--账号信息-->
             	<div class="phead attendcar-ico">
-                	<h1>我参加的拼车信息</h1>
+                	<h1>
+                	#if ($rundata.queryString.getString('type') == "2")
+                	我参加的拼车信息
+                	#else
+                	我创建的拼车信息
+                	#end
+                	</h1>
                 </div>
                 <div class="pbody">
                 
@@ -23,16 +29,20 @@
                     -->
                     #if ($!orders.empty )
                     	<p style="margin-left:10px;">
-	                        <span style="float:left; line-height:32px">
-	                        	我还没有创建拼车。
-	                        </span>
-	                        <a href="$snowModule.setTarget('together/createTaxiOrder')" class="but_cjpc_h dis fl">创建拼车</a>
+                    			#if ($rundata.queryString.getString('type') == "2")
+	                        		我还没有参加任何拼车。
+			                	#else
+			                	  <span style="float:left; line-height:32px">
+			                        	我还没有创建拼车。
+			                        </span>
+			                        <a href="$snowModule.setTarget('together/createTaxiOrder')" class="but_cjpc_h dis fl">创建拼车</a>
+			                	#end
 	                    </p>
 	                #else
 	                	#foreach($order in $orders)
 		                	<ul>
 		                        <h1 style="border-bottom:#ccc 1px dashed; height:25px;">
-		                            <a href="#" class="fl"><strong>从 $!{order.fromCity}$!{order.fromAddr} 拼车到 $!{order.arriveCity}$!{order.arriveAddr} </strong></a>
+		                            <a href="#" class="fl"><strong>从 $!{order.fromCity}$!{order.fromAddr} 拼车到  $!{order.arriveCity}$!{order.arriveAddr} </strong></a>
 		                            <span class="create_time">$!dateUtil.formatFullDate($order.gmtCreate)</span>
 		                        </h1>
 		                        <div class="cl">
