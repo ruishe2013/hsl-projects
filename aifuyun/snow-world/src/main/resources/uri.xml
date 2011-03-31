@@ -25,4 +25,8 @@
 		<path>js</path>
 	</content-uri>
 	
+	<content-uri name="flashServer" extends="staticServer">
+		<path>flash</path>
+	</content-uri>
+	
 </uri-config>

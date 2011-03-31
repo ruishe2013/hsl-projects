@@ -1,5 +1,5 @@
 #if("$!username" == "")
 <p>您好，欢迎来到一辆车！[<a href="$snowModule.setTarget('login')">请登录</a>] [<a href="$snowModule.setTarget('user/reg')">免费注册</a>]</p>
 #else 
-<p>您好<strong>$username</strong>，欢迎来到一辆车！[<a href="$snowModule.setTarget('loginOut')">退出登录</a>] </p>
+<p>您好<strong>$username</strong>，欢迎来到一辆车！[<a href="$snowModule.setTarget('user/myTogethers')">个人中心</a>] | [<a href="$snowModule.setTarget('loginOut')">退出登录</a>] </p>
 #end
