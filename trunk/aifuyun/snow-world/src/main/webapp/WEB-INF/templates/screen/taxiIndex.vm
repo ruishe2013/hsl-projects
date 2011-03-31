@@ -1,8 +1,7 @@
 
 <div id="cArea"><!--content-1 begin-->
     <div class="search_box"><!--search begin-->
-    	<div class="search_t">
-    	<button onclick="location.href='$snowModule.setTarget('together/createTaxiOrder')'" class="but_built" onMouseDown="this.className='but_built'" onmouseover="this.className='but_built_h'" onmouseup="this.className='but_built_h'" onMouseOut="this.className='but_built'"></button></div>
+    	<div class="search_t"></div>
         <div class="search_form">
 
         	<form action="$snowModule.setTarget('search/searchOrder')" method="get" name="search">
@@ -54,7 +53,7 @@
 					var pics='$imgServer/Focus_pic/1.jpg|$imgServer/Focus_pic/2.jpg';	
 					var mylinks='http://www.yiliangche.com/|http://www.yiliangche.com/';
 					var texts='世乒赛-王皓横扫王励勤首度称王|世乒赛女单决赛 张怡宁4-2郭跃夺冠';
-					var sohuFlash2 = new sohuFlash("$imgServer/focus0414a.swf","flashcontent01","630","275","8","#ffffff");
+					var sohuFlash2 = new sohuFlash("$flashServer/focus0414a.swf","flashcontent01","630","275","8","#ffffff");
 
 sohuFlash2.addParam("quality", "medium");
 sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",speed);
@@ -71,8 +70,7 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 <div class="newcar_t">
     <div class="newcar_title">最新拼车</div>
 	    <div class="but_release">
-	    	<a href="$snowModule.setTarget('together/createTaxiOrder')" class="but_fbpc" title="发布拼的">发布拼的</a>
-	    	<span class="newcar_txt">已经有23516人发起拼车 <a href="#">查看更多拼车信息</a></span>
+	    	<span class="newcar_txt">已经有23516人发起拼车 <a href="#"><a href="#"><span class="col_g">更多...</span></a></a></span>
 	    </div>
     </div>
 	<div class="newcar_c">

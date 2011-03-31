@@ -1,1 +1,16 @@
-加入拼车成功，等待发起人确认中...
+<div id="cArea"><!--content-2 begin-->
+	<div class="cbox">
+		<div class="details_box">
+			<div style="padding:0 20px 20px;">
+		        <div class="tip_box">
+		           	 恭喜您，已经加入该拼车，请等待车主确认。
+		        </div>
+		        
+		        <div>
+		        	  <a href="$snowModule.setTarget('index')">返回首页</a>
+		        </div>
+		        
+		    </div>
+		</div>
+	</div>
+</div>
