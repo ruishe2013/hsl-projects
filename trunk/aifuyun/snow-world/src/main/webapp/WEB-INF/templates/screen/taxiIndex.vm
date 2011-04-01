@@ -9,7 +9,7 @@
                 <li>
                 <label for="inp_name">城市：</label>
 				<p>
-				<input class="input_95" name="fromCity" value="$!{selectedCity.name}" type="text" onMouseDown="this.className='input_95'" onmouseover="this.className='input_on'" onmouseup="this.className='input_on'" onMouseOut="this.className='input_95'"/>        
+				<input class="input_95" name="fromCity" value="$!{selectedCity.name}" type="text"/>        
                 <a href="$snowModule.setTarget('city/cityList')" >切换城市</a>
                 </p>
                 </li>
@@ -70,7 +70,9 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 <div class="newcar_t">
     <div class="newcar_title">最新拼车</div>
 	    <div class="but_release">
-	    	<span class="newcar_txt">已经有23516人发起拼车 <a href="#"><a href="#"><span class="col_g">更多...</span></a></a></span>
+	    	<span class="newcar_txt">已经有23516人发起拼车 
+	    	## <a href="#"><span class="col_g">更多...</span></a>
+	    	</span>
 	    </div>
     </div>
 	<div class="newcar_c">
