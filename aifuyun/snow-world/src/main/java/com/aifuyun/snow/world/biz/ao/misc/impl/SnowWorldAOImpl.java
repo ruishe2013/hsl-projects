@@ -7,6 +7,7 @@ import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.misc.SnowWorldAO;
 import com.aifuyun.snow.world.biz.bo.together.OrderBO;
 import com.aifuyun.snow.world.biz.query.OrderQuery;
+import com.aifuyun.snow.world.common.SnowUtil;
 import com.aifuyun.snow.world.common.cache.CacheContants;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
@@ -43,7 +44,9 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 			}
 			List<OrderDO> recentOrders = getRecentOrders(cityId);
 			Date defaultSearchDate = DateUtil.addSecond(new Date(), defaultSearchTimeDelay);
-			int defaultSearchMinutes = getQuarterMinute(defaultSearchDate);
+			
+			int defaultSearchMinutes = SnowUtil.getRecentMinute(defaultSearchDate, 15);
+			
 			result.getModels().put("defaultSearchDate", defaultSearchDate);
 			result.getModels().put("defaultSearchMinutes", defaultSearchMinutes);
 			result.getModels().put("recentOrders", recentOrders);
@@ -53,11 +56,6 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 			log.error("查看最近拼车失败", e);
 		}
 		return result;
-	}
-	
-	private int getQuarterMinute(Date defaultSearchDate) {
-		int minute = DateUtil.getMinute(defaultSearchDate);
-		return (minute / 15 ) * 15;
 	}
 	
 	@SuppressWarnings("unchecked")

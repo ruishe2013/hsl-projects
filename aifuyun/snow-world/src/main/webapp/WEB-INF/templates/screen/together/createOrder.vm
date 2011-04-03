@@ -28,7 +28,7 @@
 	        <ul>
 	        	<li>
                     <label><em>*</em> 发起人：</label>
-                    <span class="fl color_gray"> $!snowUtil.loginUsername </span>
+                    <span class="fl color_gray">$!snowUtil.loginUsername</span>
                 </li>
                 
                 <li>
@@ -52,7 +52,7 @@
 		            <label for="inp_name"><em>*</em> 城市：</label>
 		            <div class="reg_info_li_box">
 			            <p>
-			            	<input type="text" class="input_out" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
+			            	<input type="text" class="input_95" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
 			           		<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'cityId').add('onName', 'fromCity')" target="_blank">更换城市...</a>
 			            </p>
 		            </div>
@@ -63,7 +63,7 @@
 		            <label for="inp_name"><em>*</em> 出发地：</label>
 		            <div class="reg_info_li_box">
 		            <p>
-		           		<input class="input_410" type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value" />
+		           		<input class="input_400" type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value" />
 		            </p>
 		            </div>
 		             #errorMessageCreateOrder($!form.fields.fromAddr.message)
@@ -72,87 +72,110 @@
 	            <li>
 		            <label for="inp_name"><em>*</em> 目的地：</label>
 		            <div class="reg_info_li_box">
-		            	<p><input class="input_410" type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value" /></p>
+		            	<p><input class="input_400" type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value" /></p>
 		            </div>
 		            #errorMessageCreateOrder($!form.fields.arriveAddr.message)
+	            </li>
+	            
+                <li>
+		            <label for="inp_name"><em>*</em> 座位：</label>
+		            <div class="reg_info_li_box">
+		            	<p>
+		            		<input class="input_95" type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value"/>
+		            	</p>
+		            </div>
+		            #errorMessageCreateOrder($!form.fields.totalSeats.message)
 	            </li>
 	            
 	            <li>
 		            <label for="inp_name">途径：</label>
 		            <div class="reg_info_li_box">
-		            	<p><input class="input_410" type="text" id="$!form.fields.approach.name" name="$!form.fields.approach.name" value="$!form.fields.approach.value"/></p>
+		            	<p><input class="input_400" type="text" id="$!form.fields.approach.name" name="$!form.fields.approach.name" value="$!form.fields.approach.value"/></p>
 		            </div>
 		            #errorMessageCreateOrder($!form.fields.approach.message)
 	            </li>
 	            
 	            <li>
-	            	<label for="inp_name"><em>*</em> 发车时间：</label>
+	            	<label for="inp_name"><em>*</em> 出发日期：</label>
+	            	
+	            	#set($fromDate = $form.fields.fromTimeDate.value)
+	            	#if ("$!fromDate" == "")
+	            		#set($fromDate = $!dateUtil.formatDate($defaultCreateDate, 'yyyy-MM-dd'))
+	            	#end
+	            	
 		            <div class="reg_info_li_box">
 						<p>
-							<input type="text" readonly="readonly" class="input_out date-pick" name="$!form.fields.fromTimeDate.name" value="$!form.fields.fromTimeDate.value" /> 
-							##<input type="hidden" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="$!form.fields.fromTimeTime.value" />
-							## //TODO 这个仅用来做测试
-							<input type="hidden" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="12:0:0" />
-							
-							#set($hours = [0 .. 23])
-							<select name="fcsj2">
-								#foreach ($hour in $hours)
-									<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
-								#end
-			                </select>
-							
-			                #set($minuteIndice = [0 .. 11])
-			                <select name="fcsj3">
-			                	#foreach($minuteIndex in $minuteIndice)
-			                		#set($minute = $minuteIndex * 5)
-									<option value="$minute" #if("$!defaultSearchMinutes" == "$!minute") selected #end>$minute分</option>
-								#end
-			                </select>
-				                
+							<input type="text" readonly="readonly" class="input_95 date-pick" name="$!form.fields.fromTimeDate.name" value="$!fromDate" /> 
 		                </p>
 		                </div>
 		                #errorMessageCreateOrder($!form.fields.fromTimeDate.message)
-						#errorMessageCreateOrder($!form.fields.fromTimeTime.message)
 		            </li>
-	                
-	                <li>
-	                	<label for="inp_name"> 预计到达时间：</label>
-		            	<div class="reg_info_li_box">
+	            
+	            
+	           		<li>
+		            	<label for="inp_name"><em>*</em> 出发时间：</label>
+		            	#set($selectedHour = $form.fields.fromTimeHour.value)
+		            	#if ("$!selectedHour" == "")
+		            		#set($selectedHour = $fromHour)
+		            	#end
+		            	
+		            	#set($selectedMinute = $form.fields.fromTimeMinute.value)
+		            	#if ("$!selectedMinute" == "")
+		            		#set($selectedMinute = $fromMinute)
+		            	#end
+		            	
+			            <div class="reg_info_li_box">
 							<p>
-								<input type="text" readonly="readonly" class="input_out date-pick" name="$!form.fields.arriveTimeDate.name" value="$!form.fields.arriveTimeDate.value"/>
-								##<input type="hidden" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" value="$!form.fields.arriveTimeTime.value" />
-								## // TODO 这个仅用来做测试
-								<input type="hidden" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" value="12:40:00" />
-								
-								#set($hours = [1 .. 24])
-								<select name="fcsj2">
+								#set($hours = [0 .. 23])
+								<select name="$!form.fields.fromTimeHour.name">
 									#foreach ($hour in $hours)
 										<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
 									#end
 				                </select>
 								
-				                #set($minuteIndice = [0 .. 4])
-				                <select name="fcsj3">
+				                #set($minuteIndice = [0 .. 11])
+				                <select name="$!form.fields.fromTimeMinute.name">
 				                	#foreach($minuteIndex in $minuteIndice)
-				                		#set($minute = $minuteIndex * 15)
-										<option value="$minute" #if("$!defaultSearchMinutes" == "$!minute") selected #end>$minute分</option>
+				                		#set($minute = $minuteIndex * 5)
+										<option value="$minute" #if("$!selectedMinute" == "$!minute") selected #end>$minute分</option>
+									#end
+				                </select>
+					                
+			                </p>
+		                </div>
+						#errorMessageCreateOrder($!form.fields.fromTimeHour.message)
+						#errorMessageCreateOrder($!form.fields.fromTimeMinute.message)
+		            </li>
+	                
+	                <li>
+	                	<label for="inp_name"> 预计到达时间：</label>
+	                	#set($arriveSelectedHour = $form.fields.arriveTimeHour.value)
+		            	#set($arriveSelectedMinute = $form.fields.arriveTimeMinute.value)
+	                	
+		            	<div class="reg_info_li_box">
+							<p>
+								#set($hours = [0 .. 23])
+								<select name="$form.fields.arriveTimeHour.name">
+									<option></option>
+									#foreach ($hour in $hours)
+										<option value="$hour" #if ("$!arriveSelectedHour" == "$!hour") selected #end>$hour时</option>
+									#end
+				                </select>
+								
+				                #set($minuteIndice = [0 .. 11])
+				                <select name="$form.fields.arriveTimeMinute.name">
+				                	 <option></option>
+				                	#foreach($minuteIndex in $minuteIndice)
+				                		#set($minute = $minuteIndex * 5)
+										<option value="$minute" #if("$!arriveSelectedMinute" == "$!minute") selected #end>$minute分</option>
 									#end
 				                </select>
 			                </p>
 		                </div>
-		                #errorMessageCreateOrder($!form.fields.arriveTimeDate.message)
-						#errorMessageCreateOrder($!form.fields.arriveTimeTime.message)
+		                #errorMessageCreateOrder($!form.fields.arriveTimeHour.message)
+						#errorMessageCreateOrder($!form.fields.arriveTimeMinute.message)
 	                </li>
 	                
-	                <li>
-		            <label for="inp_name">空闲座位：</label>
-		            <div class="reg_info_li_box">
-		            	<p>
-		            		<input class="input_410" type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value"/>
-		            	</p>
-		            </div>
-		            #errorMessageCreateOrder($!form.fields.totalSeats.message)
-		            </li>
 	                
 	                <li>
 		                <label for="inp_name"> 描述：</label>

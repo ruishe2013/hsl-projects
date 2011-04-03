@@ -2,11 +2,9 @@
 
 #macro(errorMessagePersonalInfo, $str)
 	#if( "$!str" != "")
-		<p style="padding:5px 0 0;" >
-			<span id="result">
-				<img src="$imgServer/ico_tip.gif" align="absmiddle" border="0" />$str
-			</span>
-		</p>
+		<div style="clear:both; margin:5px 0 0 100px; width:180px;" class="error-tip">
+			$str
+		</div>
 	#end
 #end
 
@@ -15,16 +13,7 @@
 <div class="cbox">
 	<div class="create_cutbread">
     	<div class="create_cb_car"></div>
-        <!--
-        <div class="create_cb_info_g_y"></div>
-        -->
         <div class="create_cb_info_y"></div>
-        
-        <!--
-        <div class="create_cb_suc_g"></div>
-        
-        <div class="create_cb_suc_g_y"></div>
-        -->
         <div class="create_cb_suc_y"></div>
     </div>
     <Div style="height:1px; background:#ccc; width:100%; overflow:hidden"></Div>
@@ -39,8 +28,8 @@
 	            <label for="$!form.fields.realName.name"><em>*</em> 联系人：</label>
 	            <div class="reg_info_li_box">
 		            <p><input class="reg_input_out" maxlength="10" type="text" id="$!form.fields.realName.name" name="$!form.fields.realName.name" value="$!form.fields.realName.value" /></p>
-		            #errorMessagePersonalInfo($!form.fields.realName.message)
 	            </div>
+	            #errorMessagePersonalInfo($!form.fields.realName.message)
             </li>
             
             <li>
@@ -49,8 +38,8 @@
 	            <p>
 	            	<input name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end type="radio" style="border:none"/> 先生
 					<input name="$!form.fields.sex.name"  value="2" #if("$!form.fields.sex.value" == "2") checked #end  type="radio" style="border:none" checked="checked"/> 女士</p>
-	           		#errorMessagePersonalInfo($!form.fields.sex.message)
 	            </div>
+	            #errorMessagePersonalInfo($!form.fields.sex.message)
             </li>
             
             <li>
@@ -66,16 +55,16 @@
 						#end
 			            </select>
 		            </p>
-		            #errorMessagePersonalInfo($!form.fields.birthYear.message)
 	            </div>
+	            #errorMessagePersonalInfo($!form.fields.birthYear.message)
             </li>
             
             <li>
 	            <label for="$!form.fields.phone.name"><em>*</em> 手机号：</label>
 	            <div class="reg_info_li_box">
 		            <p><input class="reg_input_out" maxlength="11" type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value"/></p>
-		            #errorMessagePersonalInfo($!form.fields.phone.message)
 	            </div>
+	            #errorMessagePersonalInfo($!form.fields.career.message)
             </li>
             
             
@@ -89,27 +78,27 @@
 		                    <option value="按摩师">按摩师</option>
 		                </select>
 	           		</p>
-	            #errorMessagePersonalInfo($!form.fields.career.message)
 	            </div>
+	            #errorMessagePersonalInfo($!form.fields.career.message)
             </li>
                 
             
            <li><label for="$!form.fields.qq.name"><em></em> qq：</label>
             	<div class="reg_info_li_box">
 					<p><input class="reg_input_out" maxlength="12" type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value"/></p>
-					#errorMessagePersonalInfo($!form.fields.qq.message)
                 </div>
+                #errorMessagePersonalInfo($!form.fields.qq.message)
            </li>
             
             <li><label for="inp_name">&nbsp;&nbsp;</label>
             	<div class="reg_info_li_box">
-            	<p><input name="" type="checkbox" style="border:none" id="saveToUserInfo" name="saveToUserInfo" value="true" #if ($!isUserInfoEmpty) checked #end /> 同时更新我的个人资料 </p></div>
+            	<p><input type="checkbox" style="border:none" id="saveToUserInfo" name="saveToUserInfo" value="true" #if ($!isUserInfoEmpty) checked #end /> 同时更新我的个人资料 </p></div>
             </li>
             
             <li style="padding-left:105px">
-            #errorMessagePersonalInfo($!csrfmessage)
-			#errorMessagePersonalInfo($!resultmessage.message)
-            <button type="submit" class="but_g_bg" onMouseDown="this.className='but_g_bg'" onmouseover="this.className='but_g_bg_h'" onmouseup="this.className='but_g_bg_h'"  onMouseOut="this.className='but_g_bg'"><span style="font-size:16px; font-weight:bold; color:#fff">提 交</span></button>
+	            #errorMessagePersonalInfo($!csrfmessage)
+				#errorMessagePersonalInfo($!resultmessage.message)
+	            <button type="submit" class="but_g_bg"><span style="font-size:16px; font-weight:bold; color:#fff">提 交</span></button>
             </li> 
             
          </ul>
