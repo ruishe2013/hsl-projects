@@ -209,7 +209,7 @@
 							 #errorMessageCreateOrder($!form.fields.arriveTimeMinute.message)
 			                </p>
                             <p class="color_gray attention">
-                            	该项可选填，填写预计到达时间可以明确地将您的需求告诉乘客，避免因时间的误差而引起的争论。如果遇到特殊情况除外(堵车等…)
+                            	该项可选填，填写预计到达时间可以明确地将您的需求告诉乘客，避免因时间的误差而引起的争论。
                             </p>
 		                </div>
 		               
