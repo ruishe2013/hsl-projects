@@ -2,13 +2,12 @@
 
 <div class="index_search">
     <form action="" method="get">
-        出发地： <input class="input_95" name="fromAddr" type="text" value="$!rundata.getQueryString().getString("fromAddr")"/>
-        目的地：<input class="input_95" name="arriveAddr" type="text" value="$!rundata.getQueryString().getString("arriveAddr")"/> 
-        出发时间：<input class="input_95 date-pick" name="fromTime" type="text" readonly="readonly" value="$!rundata.getQueryString().getString("fromTime")"/> 
-    <button type="submit" class="but_search" value="提交">
-    </button>
+	        出发地： <input class="input_95" name="fromAddr" type="text" value="$!rundata.getQueryString().getString("fromAddr")"/>
+	        目的地：<input class="input_95" name="arriveAddr" type="text" value="$!rundata.getQueryString().getString("arriveAddr")"/> 
+	        出发时间：<input class="input_95 date-pick" name="fromTime" type="text" readonly="readonly" value="$!rundata.getQueryString().getString("fromTime")"/> 
+	   <button type="submit" class="but_search" value="提交"></button>
     </form>
-    <span>共找到 $!{numFound} 条记录</span> 
+    <span>共找到  $!{numFound} 条记录</span> 
 </div>
 <div class="list_box"><!--列表 begin-->
     <ul>
