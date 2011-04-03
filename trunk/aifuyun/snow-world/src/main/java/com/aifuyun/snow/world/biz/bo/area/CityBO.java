@@ -6,6 +6,8 @@ import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 
 public interface CityBO {
 
+	public CityDO queryByName(String name);
+	
 	public int create(CityDO cityDO);
 
 	public void update(CityDO cityDO);

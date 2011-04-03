@@ -38,10 +38,17 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	
 	private OrderUserBO orderUserBO;
 	
+	
 	@Override
-	public Result viewCreateTaxiOrder() {
+	public Result viewCreateOrder(int type) {
 		Result result = new ResultSupport(false);
 		try {
+			OrderTypeEnum selectedOrderType = OrderTypeEnum.valueOf(type);
+			if (selectedOrderType == null) {
+				// 默认选择顺丰车
+				selectedOrderType = OrderTypeEnum.TAXI;
+			}
+			
 			CityDO city = getSelectedCity(0);
 			if (city != null) {
 				OrderDO order = new OrderDO();
@@ -49,13 +56,19 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				order.setArriveCityId(city.getId());
 				order.setFromCity(city.getName());
 				order.setArriveCity(city.getName());
+				
 				// 座位数暂时设置为4个
-				order.setTotalSeats(4);				
+				order.setTotalSeats(4);		
 				result.getModels().put("order", order);
 			}
+			
+			
+			result.getModels().put("orderTypes", OrderTypeEnum.values());
+			result.getModels().put("selectedOrderType", selectedOrderType);
+			
 			result.setSuccess(true);
 		} catch (Exception e) {
-			log.error("流量创建拼车页出错", e);
+			log.error("浏览创建拼车页出错", e);
 		}
 		return result;
 	}
@@ -790,7 +803,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	}
 
 	@Override
-	public Result createTaxiOrder(OrderDO orderDO) {
+	public Result createOrder(OrderDO orderDO) {
 		Result result = new ResultSupport(false);
 		try {
 			final long userId = this.getLoginUserId();
@@ -803,6 +816,11 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			orderDO.setCreatorUsername(username);
 			orderDO.setType(OrderTypeEnum.TAXI.getValue());
 			
+			// 出发城市id
+			CityDO fromCityDO = this.cityBO.queryByName(orderDO.getFromCity());
+			if (fromCityDO != null) {
+				orderDO.setCityId(fromCityDO.getId());
+			}
 			long orderId = orderBO.createOrder(orderDO);
 			
 			result.getModels().put("orderId", orderId);			

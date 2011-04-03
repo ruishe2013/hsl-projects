@@ -38,6 +38,15 @@
 			t.deleted = 0 and t.id = #value#
 	</select>
 	
+	<select id="queryByName" resultMap="cityMapping" parameterClass="string">
+		select
+			<include refid="city-full-columns"/>
+		from
+			sw_area_city t
+		where
+			t.deleted = 0 and t.name = #value#
+	</select>
+	
 	<select id="queryByProvinceId" resultMap="cityMapping" parameterClass="int">
 		select
 			<include refid="city-full-columns"/>

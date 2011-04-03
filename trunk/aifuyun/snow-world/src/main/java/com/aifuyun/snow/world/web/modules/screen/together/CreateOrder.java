@@ -8,16 +8,20 @@ import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
 import com.zjuh.sweet.result.Result;
 
-public class CreateTaxiOrder extends BaseScreen {
+public class CreateOrder extends BaseScreen {
 
 	private OrderAO orderAO;
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
-		Result result = orderAO.viewCreateTaxiOrder();
+		int orderType = rundata.getQueryString().getInt("orderType");
+		Result result = orderAO.viewCreateOrder(orderType);
 		if (result.isSuccess()) {
-			final Form form = rundata.getForm("together.createTaxiOrder");
+			final Form form = rundata.getForm("together.createOrder");
 			OrderDO order = (OrderDO)result.getModels().get("order");
+			
+			this.result2Context(result, templateContext);
+			
 			if (!form.isHeldValues()) {
 				form.holdValues(order);
 			}

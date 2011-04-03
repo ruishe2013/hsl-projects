@@ -35,7 +35,7 @@
 			                	  <span style="float:left; line-height:32px">
 			                        	我还没有创建拼车。
 			                        </span>
-			                        <a href="$snowModule.setTarget('together/createTaxiOrder')" class="but_cjpc_h dis fl">创建拼车</a>
+			                        <a href="$snowModule.setTarget('together/createOrder')" class="but_cjpc_h dis fl">创建拼车</a>
 			                	#end
 	                    </p>
 	                #else

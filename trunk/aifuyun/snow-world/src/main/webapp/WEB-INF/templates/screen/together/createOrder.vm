@@ -1,8 +1,10 @@
-#set($form = $formFactory.createForm("together.createTaxiOrder"))
+#set($form = $formFactory.createForm("together.createOrder"))
 
-#macro(errorMessageCreateTaxiOrder, $str)
+#macro(errorMessageCreateOrder, $str)
 	#if( "$!str" != "")
-		<p style="padding:5px 0 0"><span id="result"><img src="$imgServer/ico_tip.gif" align="absmiddle" border="0" />$str</span></p>
+		<div style="clear:both; margin:5px 0 0 100px; width:180px;" class="error-tip">
+			$str
+		</div>
 	#end
 #end
 
@@ -11,14 +13,7 @@
 	<div class="create_cutbread">
     	<div class="create_cb_car"></div>
         <div class="create_cb_info_g_y"></div>
-        <!--
-        <div class="create_cb_info_y"></div>
-        -->
         <div class="create_cb_suc_g"></div>
-        <!--
-        <div class="create_cb_suc_g_y"></div>
-        <div class="create_cb_suc_y"></div>
-        -->
     </div>
     <Div style="height:1px; background:#ccc; width:100%; overflow:hidden"></Div>
 
@@ -26,23 +21,42 @@
 
         <div class="reg_info">
         <form action="" method="post" >
-	        <input type="hidden" name="createTaxiOrder" value="$tokenUtil.token('createTaxiOrder')" />
+	        <input type="hidden" name="createOrder" value="$tokenUtil.token('createOrder')" />
 			<input type="hidden" name="actionTarget" value="together/orderAction" />
-			<input type="hidden" name="actionEvent" value="createTaxiOrder" />
-			
-			<input type="hidden" id="$!form.fields.cityId.name" name="$!form.fields.cityId.name" value="$!form.fields.cityId.value" />
-			#errorMessageCreateTaxiOrder($!form.fields.cityId.message)
+			<input type="hidden" name="actionEvent" value="createOrder" />
 			
 	        <ul>
+	        	<li>
+                    <label><em>*</em> 发起人：</label>
+                    <span class="fl color_gray"> $!snowUtil.loginUsername </span>
+                </li>
+                
+                <li>
+                    <label><em>*</em> 拼车类型：</label>
+                    
+                    #set($selectOrderType = $!form.fields.type.value)
+                    #if ("$!selectOrderType" == "")
+                    	 #set($selectOrderType =$!selectedOrderType.value)
+                    #end
+                    
+                    <div class="reg_info_li_box">
+	                    <select name="$!form.fields.type.name" >
+	                    	#foreach($orderType in $orderTypes)
+		                        <option value="$!orderType.value" #if("$!selectOrderType" == "$!orderType.value") selected #end>$orderType.name</option>
+	                        #end
+	                     </select>
+                     </div>
+                </li>
+	        	
 	            <li>
 		            <label for="inp_name"><em>*</em> 城市：</label>
 		            <div class="reg_info_li_box">
 			            <p>
-			            	<input type="text" class="input_out" readonly="true" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
+			            	<input type="text" class="input_out" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
 			           		<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'cityId').add('onName', 'fromCity')" target="_blank">更换城市...</a>
 			            </p>
-			            #errorMessageCreateTaxiOrder($!form.fields.fromCity.message)
 		            </div>
+		            #errorMessageCreateOrder($!form.fields.fromCity.message)
 	            </li>
 	            
 	            <li>
@@ -51,24 +65,24 @@
 		            <p>
 		           		<input class="input_410" type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value" />
 		            </p>
-		            #errorMessageCreateTaxiOrder($!form.fields.fromAddr.message)
 		            </div>
+		             #errorMessageCreateOrder($!form.fields.fromAddr.message)
 	            </li>
 	            
 	            <li>
-	            <label for="inp_name"><em>*</em> 目的地：</label>
-	            <div class="reg_info_li_box">
-	            	<p><input class="input_410" type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value" /></p>
-					#errorMessageCreateTaxiOrder($!form.fields.arriveAddr.message)
-	            </div>
+		            <label for="inp_name"><em>*</em> 目的地：</label>
+		            <div class="reg_info_li_box">
+		            	<p><input class="input_410" type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value" /></p>
+		            </div>
+		            #errorMessageCreateOrder($!form.fields.arriveAddr.message)
 	            </li>
 	            
 	            <li>
-	            <label for="inp_name">途径：</label>
-	            <div class="reg_info_li_box">
-	            	<p><input class="input_410" type="text" id="$!form.fields.approach.name" name="$!form.fields.approach.name" value="$!form.fields.approach.value"/></p>
-	            	#errorMessageCreateTaxiOrder($!form.fields.approach.message)
-	            </div>
+		            <label for="inp_name">途径：</label>
+		            <div class="reg_info_li_box">
+		            	<p><input class="input_410" type="text" id="$!form.fields.approach.name" name="$!form.fields.approach.name" value="$!form.fields.approach.value"/></p>
+		            </div>
+		            #errorMessageCreateOrder($!form.fields.approach.message)
 	            </li>
 	            
 	            <li>
@@ -80,25 +94,25 @@
 							## //TODO 这个仅用来做测试
 							<input type="hidden" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="12:0:0" />
 							
-							#set($hours = [1 .. 24])
+							#set($hours = [0 .. 23])
 							<select name="fcsj2">
 								#foreach ($hour in $hours)
 									<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
 								#end
 			                </select>
 							
-			                #set($minuteIndice = [0 .. 4])
+			                #set($minuteIndice = [0 .. 11])
 			                <select name="fcsj3">
 			                	#foreach($minuteIndex in $minuteIndice)
-			                		#set($minute = $minuteIndex * 15)
+			                		#set($minute = $minuteIndex * 5)
 									<option value="$minute" #if("$!defaultSearchMinutes" == "$!minute") selected #end>$minute分</option>
 								#end
 			                </select>
 				                
 		                </p>
-		                #errorMessageCreateTaxiOrder($!form.fields.fromTimeDate.message)
-						#errorMessageCreateTaxiOrder($!form.fields.fromTimeTime.message)
 		                </div>
+		                #errorMessageCreateOrder($!form.fields.fromTimeDate.message)
+						#errorMessageCreateOrder($!form.fields.fromTimeTime.message)
 		            </li>
 	                
 	                <li>
@@ -125,9 +139,9 @@
 									#end
 				                </select>
 			                </p>
-			                #errorMessageCreateTaxiOrder($!form.fields.arriveTimeDate.message)
-							#errorMessageCreateTaxiOrder($!form.fields.arriveTimeTime.message)
 		                </div>
+		                #errorMessageCreateOrder($!form.fields.arriveTimeDate.message)
+						#errorMessageCreateOrder($!form.fields.arriveTimeTime.message)
 	                </li>
 	                
 	                <li>
@@ -136,39 +150,38 @@
 		            	<p>
 		            		<input class="input_410" type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value"/>
 		            	</p>
-		            	#errorMessageCreateTaxiOrder($!form.fields.totalSeats.message)
 		            </div>
+		            #errorMessageCreateOrder($!form.fields.totalSeats.message)
 		            </li>
 	                
 	                <li>
-	                <label for="inp_name"> 描述：</label>
-	            	<div class="reg_info_li_box">
-		            	<p>
-		            		<textarea cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!{form.fields.description.value}</textarea>
-		            	</p>
-		            	#errorMessageCreateTaxiOrder($!form.fields.description.message)
-	            	</div>
-	            	
-	            	
+		                <label for="inp_name"> 描述：</label>
+		            	<div class="reg_info_li_box">
+			            	<p>
+			            		<textarea cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!{form.fields.description.value}</textarea>
+			            	</p>
+			            	
+		            	</div>
+		            	#errorMessageCreateOrder($!form.fields.description.message)
 	            	</li> 
+	            	
 	                <li><label for="inp_name"> 验证码：</label>
-	            	<div class="reg_info_li_box">
-	            	<p>
-	            		<input class="reg_input_out" type="text" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value=""
-	            	</p>
-	            	
-	            	#errorMessageCreateTaxiOrder($!form.fields.checkCode.message)
-	            	$control.setTemplate('common/checkCode.vm')
-	            	
-	            	
-	            	</div>
+		            	<div class="reg_info_li_box">
+		            	<p>
+		            		<input class="reg_input_out" type="text" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value=""
+		            	</p>
+		            	</div>
+		            	$control.setTemplate('common/checkCode.vm')
+		            	#errorMessageCreateOrder($!form.fields.checkCode.message)
 	            	</li>
 	            	
-	                <li style="padding-left:105px">
-	                #errorMessageCreateTaxiOrder($!csrfmessage)
-					#errorMessageCreateTaxiOrder($!resultmessage.message)
-					
-	                <button type="submit" class="but_cjpc" onMouseDown="this.className='but_cjpc'" onmouseover="this.className='but_cjpc_h'" onmouseup="this.className='but_cjpc_h'"  onMouseOut="this.className='but_cjpc'"></button>
+	            	
+	                <li>
+	                	#errorMessageCreateOrder($!csrfmessage)
+						#errorMessageCreateOrder($!resultmessage.message)
+						
+						<label>&nbsp;</label>
+	                	<button type="submit" class="but_cjpc" value="提交"></button>
 	                </li> 
 	            
 	            

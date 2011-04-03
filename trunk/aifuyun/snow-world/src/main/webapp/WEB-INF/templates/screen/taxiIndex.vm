@@ -37,7 +37,7 @@
                 		</span>
                 	</div>
                 </div>
-                <button type="submit" class="but_search" onMouseDown="this.className='but_search'" onmouseover="this.className='but_search_h'" onmouseup="this.className='but_search_h'"  onMouseOut="this.className='but_search'"></button>
+                <button type="submit" class="but_search"></button>
                 </li>
                 
                 

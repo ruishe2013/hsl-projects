@@ -36,7 +36,7 @@ $control.setTemplate('common/userInfo.vm')
         <li><a href="$snowModule.setTarget('/inter-city-index')" #if($currentPage == "/inter-city-index") class="on" #end>城际拼车</a></li>
         <li><a href="$snowModule.setTarget('/rush-hour-index')" #if($currentPage == "/rush-hour-index") class="on" #end>上下班拼车</a></li>
         </ul>
-      <div class="fr but_cjpc-s"><a href="$snowModule.setTarget('together/createTaxiOrder')">创建拼车</a></div>
+      <div class="fr but_cjpc-s"><a href="$snowModule.setTarget('together/createOrder')">创建拼车</a></div>
     </div>
     <div class="fl nav_r"></div>
 </div><!--nav end-->
