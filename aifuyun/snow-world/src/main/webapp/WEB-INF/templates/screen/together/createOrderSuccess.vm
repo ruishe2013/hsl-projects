@@ -2,26 +2,17 @@
 <div class="cbox">
 	<div class="create_cutbread">
     	<div class="create_cb_car"></div>
-        <!--
-        <div class="create_cb_info_g_y"></div>
-        -->
         <div class="create_cb_info_y"></div>
-        
-        <!--
-        <div class="create_cb_suc_g"></div>
-        
-        <div class="create_cb_suc_g_y"></div>
-        -->
         <div class="create_cb_suc_y"></div>
     </div>
     
     <div class="create_box" style="margin-bottom: 15px;">
     	<div class="create_suc" ><span class="fl font_14_b col_g">恭喜您，发起拼车成功已经创建完成！</span>
-    		<a href="$snowModule.setTarget('index')">返回首页</a>
+    		<a href="$snowModule.setTarget('index')" class=" but_bg fl"><strong>返回首页</strong></a>
     	</div>
     </div>
     
     <div class="clear"></div>
 </div>
 
-</div><!--content-2 end--><!--content-2 end-->
+</div><!--content-2 end-->

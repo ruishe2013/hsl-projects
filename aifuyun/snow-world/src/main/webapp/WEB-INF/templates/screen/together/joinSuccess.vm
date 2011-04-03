@@ -7,7 +7,7 @@
 		        </div>
 		        
 		        <div>
-		        	  <a href="$snowModule.setTarget('index')">返回首页</a>
+		        	  <a href="$snowModule.setTarget('index')" class=" but_bg fl"><strong>返回首页</strong></a>
 		        </div>
 		        
 		    </div>

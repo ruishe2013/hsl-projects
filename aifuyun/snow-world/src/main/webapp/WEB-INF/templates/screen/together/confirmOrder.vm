@@ -2,16 +2,7 @@
 <div class="cbox">
 	<div class="create_cutbread">
     	<div class="create_cb_car"></div>
-        <!--
-        <div class="create_cb_info_g_y"></div>
-        -->
         <div class="create_cb_info_y"></div>
-        
-        <!--
-        <div class="create_cb_suc_g"></div>
-        
-        <div class="create_cb_suc_g_y"></div>
-        -->
         <div class="create_cb_suc_y"></div>
     </div>
     
@@ -20,23 +11,22 @@
     	</div>
    		<div class="cl"></div>
     <div class="r_c_box">
-        	<table border="0" cellpadding="0" cellspacing="0">
+        	<table border="0" cellpadding="0" cellspacing="0" width="100%">
             	<tr>
-                	<td colspan="3" class="tl"><strong>$!creator.username 发布的拼车信息。</strong></td>
-                    <td colspan="4" class="tr"><span class=" color_gray">把该信息发送到手机   收藏 分享 举报</span></td>
+                	<td colspan="7" class="tl"><strong>$!creator.username 发布的拼车信息。</strong></td>
                 </tr>
                 <tr>
                 	<td width="76" class="tr">出发地：</td>
                     <td width="90">$!{order.fromCity}</td>
                     <td width="185">$!{order.fromAddr}</td>
-                    <td width="100">目的地：</td>
+                    <td width="100" class="tr">目的地：</td>
                     <td width="90">$!{order.arriveCity} </td>
                     <td width="174">$!{order.arriveAddr}</td>
                 </tr>
                 <tr>
                 	<td class="tr">出发时间：</td>
                     <td colspan="2">$!dateUtil.formatFullDate($order.fromTime)</td>
-                    <td>预计到达的时间：</td>
+                    <td class="tr">预计到达的时间：</td>
                     <td colspan="2">$!dateUtil.formatFullDate($order.arriveTime)</td>
                 </tr>
                 <tr>
@@ -45,12 +35,11 @@
                 </tr>
                 <tr>
                 	<td class="tr">空闲座位：</td>
-                    <td>4</td>
-                    <td colspan="5">$!order.totalSeats </td>
+                    <td colspan="6">$!order.totalSeats <span class="col_gray"> 人/辆 空闲座位是出去后指您的座位可使用数</span></td>
                 </tr>
                 <tr>
                 	<td class="tr">描述：</td>
-                    <td colspan="7" style="line-height:25px;">$!order.description </td>
+                    <td colspan="6" style="line-height:22px;">$!order.description </td>
                 </tr>
             </table>
             <div class="hr_6"></div>
@@ -60,28 +49,26 @@
                 </tr>
                 <tr align="center">
                 	<td width="10%" class="tr">姓名：</td>
-                    <td width="44%">$!creator.realName </td>
+                    <td width="22%">$!creator.realName </td>
                     <td width="10%" class="tr">性别：</td>
-                    <td width="36%">$!creator.sexEnum.name </td>
+                    <td width="22%">$!creator.sexEnum.name </td>
+                    <td width="10%" class="tr">年龄段：</td>
+                    <td width="26%">$!creator.birthYearEnum.name</td>
                 </tr>
                 <tr align="center">
-                	<td class="tr">年龄段：</td>
-                    <td>$!creator.birthYearEnum.name</td>
                     <td class="tr">职业：</td>
                     <td>$!creator.career</td>
-                </tr>
-                <tr align="center">
-                	<td class="tr">手机：</td>
+                    <td class="tr">手机：</td>
                     <td>$!creator.phone</td>
                     <td class="tr">QQ号：</td>
                     <td>$!creator.qq</td>
                 </tr>
                 <tr>
                 	<td class="tr">邮箱：</td>
-                    <td colspan="3">
+                    <td colspan="5">
                     
                     <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmOrder').add('orderId', $order.id)" 
-                    style="color:#FFF; "><span class="but_bg_g" style="float:right; margin:5px;">确认提交</span></a>
+                    style="color:#FFF; "><span class="but_bg" style="float:right; margin:5px;">确认提交</span></a>
                    
                     $!creator.email
                     </td>
@@ -92,7 +79,7 @@
             </div>
     </div>
     
-    <div class="clear"></div>
+    <div class=" hr_10"></div>
 </div>
 
-</div><!--content-2 end--><!--content-2 end-->
+</div><!--content-2 end-->
