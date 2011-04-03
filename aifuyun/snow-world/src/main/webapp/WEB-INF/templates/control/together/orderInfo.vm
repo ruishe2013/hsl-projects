@@ -1,8 +1,9 @@
 <li>
     <h1>
-       	 从 
+    	<img src="$imgServer/car.png" width="71" height="48" border="0" align="absmiddle" />
+       	 【拼的士】
        	 <span class="col_g">$!{order.fromCity}$!{order.fromAddr} </span>
-       	 拼车到
+       	 &rarr;
        	 <span class="col_g">$!{order.arriveCity}$!{order.arriveAddr} </span>
     </h1>
 </li>
@@ -13,36 +14,38 @@
 ## 顺风车发起人类型 
 	
 	<li>
-	    <strong>发起人是否提供车：</strong>$order.creatorCarOwnerTypeEnum.name
+	    <span class="col_gray">发起人是否提供车：</span>$order.creatorCarOwnerTypeEnum.name
 	</li>
 	
 	#if ("$!order.creatorCarOwnerType" == "1")
 	## 显示车牌号
 		<li>
-		    <strong>车牌号：</strong>$!order.carNo
+		    <span class="col_gray">车牌号：</span>$!order.carNo
 		</li>
 	#end
 	
 #end
 <li>
-    <strong>出发时间：</strong>$!dateUtil.formatFullDate($order.fromTime)
-</li>  
+    <span style="width:48%" class="fl dis">
+        <span class="col_gray">出发时间：</span>$!dateUtil.formatFullDate($order.fromTime)
+    </span>
+    <span style="width:48%" class="fl dis">
+        <span class="col_gray">预计到达时间：</span>$!dateUtil.formatFullDate($order.arriveTime)
+    </span>
+</li>
 <li>
-    <strong>预计到达时间：</strong>$!dateUtil.formatFullDate($order.arriveTime)
+    <span class="col_gray">参加人数/总座位数：</span> $!joinersCount/$!order.totalSeats
+    <span class="color_gray">人 </span>
 </li> 
 <li>
-    <strong>参加人数/总座位数：</strong> $!joinersCount/$!order.totalSeats <span class="color_gray"></span>
+    <span class="col_gray">途径：</span>$!order.approach
 </li> 
 <li>
-    <strong>途径：</strong> $!order.approach
-</li> 
-<li>
-    <strong>描述：</strong>
-   $!{order.description}
+    <span class="col_gray">描述：</span><span style="line-height:20px;">$!{order.description}</span>
 </li>
 <li>
     <div class="details_tip">
-        	提示:请确保您发布信息无误，拼车前请务必了解对方身份；为了您的安全，请认真阅读
+        提示:请确保您发布信息无误，拼车前请务必了解对方身份；为了您的安全，请认真阅读
         <a href="#" >《拼车注意事项》</a>
     </div>
-</li>
+</li>      
