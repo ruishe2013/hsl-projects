@@ -20,7 +20,7 @@
 		            	<li>
 		            		<div class="details-state_box">
                             	<span class="fr ml10">
-			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'cancelOrder').add('orderId', $order.id)" class="but_cancelcar fr">取消拼车</a>
+			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'cancelOrder').add('orderId', $order.id)" class="but_cancelcar">取消拼车</a>
 			                    </span>
 			                    <span class="fr">
 			                        	你是发起人，你可以
@@ -32,7 +32,7 @@
 		                <li>
 		                	<div class="details-state_box">
                             	<span class="fr ml10">
-									<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmTogetherOrder').add('orderId', $order.id)" class="but_qrpc fr">确认拼车</a>
+									<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmTogetherOrder').add('orderId', $order.id)" class="but_qrpc">确认拼车</a>
 			                    </span>
                                 <span class="fr">您创建的拼车已经有人加入，是否要 </span>
 			                    <div class="cl"></div>
@@ -43,7 +43,7 @@
 						<li>
 		            		<div class="details-state_box">
                             	<span class="fr ml10">
-			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcpc fr">退出拼车</a>
+			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcpc">退出拼车</a>
 			                    </span>
 			                    <span class="fr">
 			                        	你已经加入该拼车，你可以
@@ -55,7 +55,7 @@
 						<li>
 		            		<div class="details-state_box">
                             	<span class="fr ml10">
-			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcsq fr">退出申请</a>
+			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcsq ">退出申请</a>
 			                    </span>
 			                    <span class="fr">
 			                        	你的申请还在等发起人确认，请耐心等待；或者你可以
@@ -79,7 +79,7 @@
 						<li>
 		            		<div class="details-state_box">
                             	<span class="fr ml10">
-			                    	<a href="$snowModule.setTarget('together/personalInfo').add('orderId', $order.id).add('join', 'true')" class="but_addcar fr">加入拼车</a>
+			                    	<a href="$snowModule.setTarget('together/personalInfo').add('orderId', $order.id).add('join', 'true')" class="but_addcar">加入拼车</a>
                                 </span>
 			                    <span class="fr">
 			                        该拼车还有位置，您可以
