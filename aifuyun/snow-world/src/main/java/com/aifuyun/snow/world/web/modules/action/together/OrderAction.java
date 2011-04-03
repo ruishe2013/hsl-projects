@@ -13,6 +13,7 @@ import com.zjuh.splist.core.module.URLModule;
 import com.zjuh.splist.core.module.URLModuleContainer;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
+import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.result.Result;
 
 /**
@@ -166,26 +167,23 @@ public class OrderAction extends BaseAction {
 		form.apply(orderDO);
 		
 		Date fromTimeDate = rundata.getQueryString().getDate("fromTimeDate", DATE_FMT);
-		Date arriveTimeDate = rundata.getQueryString().getDate("arriveTimeDate", DATE_FMT);
 		
 		int fromHour =  rundata.getQueryString().getInt("fromTimeHour");
 		int fromMinute =  rundata.getQueryString().getInt("fromTimeMinute");
 		
-		int arriveHour =  rundata.getQueryString().getInt("arriveHour", -1);
-		int arriveMinute =  rundata.getQueryString().getInt("arriveMinute", 0);
+		int arriveHour =  rundata.getQueryString().getInt("arriveTimeHour", -1);
+		int arriveMinute =  rundata.getQueryString().getInt("arriveTimeMinute", 0);
 		
 		Date fromTime = DateTimeUtil.componentDateAndTime(fromTimeDate, fromHour, fromMinute, 0);
 		
 		Date arriveTime = null;
-		if (arriveTimeDate != null) {
-			if (arriveHour != -1) {
-				arriveTime = DateTimeUtil.componentDateAndTime(arriveTimeDate, arriveHour, arriveMinute, 0);
-			} else {
-				arriveTime = arriveTimeDate;
+		if (arriveHour != -1) {
+			Date arriveTimeDate = fromTimeDate;
+			if (arriveHour < fromHour) {
+				// 如果到达时间比出发时间迟，默认作为第二天处理
+				arriveTimeDate = DateUtil.addDay(fromTimeDate, 1);
 			}
-		} else {
-			// 暂时把除非时间当做到达时间处理
-			//arriveTime = fromTimeDate;
+			arriveTime = DateTimeUtil.componentDateAndTime(arriveTimeDate, arriveHour, arriveMinute, 0);
 		}
 		
 		orderDO.setFromTime(fromTime);
