@@ -14,8 +14,10 @@
 	<div class="create_cutbread">
     	<div class="create_cb_car"></div>
         <div class="create_cb_info_y"></div>
-        <div class="create_cb_suc_y"></div>
+        <div class="create_cb_suc_g_y"></div>
     </div>
+    
+    
     <Div style="height:1px; background:#ccc; width:100%; overflow:hidden"></Div>
     <div class="reg_l_box"><!--left begin-->
         <div class="reg_info">
