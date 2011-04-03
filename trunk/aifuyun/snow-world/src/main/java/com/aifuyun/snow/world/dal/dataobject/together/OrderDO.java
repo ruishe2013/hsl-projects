@@ -6,6 +6,7 @@ import java.util.Date;
 import com.aifuyun.snow.world.dal.dataobject.BaseDO;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.CarOwnerTypeEnum;
 
 /**
  * 拼车单
@@ -93,6 +94,36 @@ public class OrderDO extends BaseDO {
 	 * 途径
 	 */
 	private String approach;
+	
+	/**
+	 * 发起人是否有车
+	 */
+	private int creatorCarOwnerType;
+	
+	/**
+	 * 车牌号
+	 */
+	private String carNo;
+
+	public String getCarNo() {
+		return carNo;
+	}
+
+	public void setCarNo(String carNo) {
+		this.carNo = carNo;
+	}
+
+	public CarOwnerTypeEnum getCreatorCarOwnerTypeEnum() {
+		return CarOwnerTypeEnum.valueOf(creatorCarOwnerType);
+	}
+	
+	public int getCreatorCarOwnerType() {
+		return creatorCarOwnerType;
+	}
+
+	public void setCreatorCarOwnerType(int creatorCarOwnerType) {
+		this.creatorCarOwnerType = creatorCarOwnerType;
+	}
 
 	public OrderStatusEnum getOrderStatusEnum() {
 		return OrderStatusEnum.valueOf(status);

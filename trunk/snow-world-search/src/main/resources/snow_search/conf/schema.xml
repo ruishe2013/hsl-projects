@@ -58,10 +58,13 @@
 		<field name="approach" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="status" type="int" indexed="true" stored="true" multiValued="false" />
 		<field name="deleted" type="pint" indexed="true" stored="false" multiValued="false" />
-		<field name="type" type="pint" indexed="true" stored="false" multiValued="false" />
+		<field name="type" type="pint" indexed="true" stored="true" multiValued="false" />
+		
+		<field name="creatorCarOwnerType" type="int" indexed="false" stored="true" multiValued="false" />
+		<field name="carNo" type="string" indexed="false" stored="true" multiValued="false" />
+		
 		<field name="totalSeats" type="int" indexed="false" stored="true" multiValued="false" />
 		<field name="creatorRealName" type="string" indexed="false" stored="true" multiValued="false" />
-		
 		
 		<field name="fromTime" type="tlong" indexed="true" stored="true" multiValued="false" />
 		<field name="arriveTime" type="tlong" indexed="true" stored="true" multiValued="false" />

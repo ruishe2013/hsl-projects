@@ -75,7 +75,7 @@
 	            	<label for="inp_name"><em>*</em> 发车时间：</label>
 		            <div class="reg_info_li_box">
 						<p>
-							<input type="text" readonly="readonly" class="input_out date-pick" id="J_fromTimeDate" name="$!form.fields.fromTimeDate.name" value="$!form.fields.fromTimeDate.value" /> 
+							<input type="text" readonly="readonly" class="input_out date-pick" name="$!form.fields.fromTimeDate.name" value="$!form.fields.fromTimeDate.value" /> 
 							##<input type="hidden" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="$!form.fields.fromTimeTime.value" />
 							## //TODO 这个仅用来做测试
 							<input type="hidden" id="$!form.fields.fromTimeTime.name" name="$!form.fields.fromTimeTime.name" value="12:0:0" />
@@ -105,7 +105,7 @@
 	                	<label for="inp_name"> 预计到达时间：</label>
 		            	<div class="reg_info_li_box">
 							<p>
-								<input type="text" readonly="readonly" class="input_out date-pick" id="J_arriveTimeDate" name="$!form.fields.arriveTimeDate.name" value="$!form.fields.arriveTimeDate.value"/>
+								<input type="text" readonly="readonly" class="input_out date-pick" name="$!form.fields.arriveTimeDate.name" value="$!form.fields.arriveTimeDate.value"/>
 								##<input type="hidden" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" value="$!form.fields.arriveTimeTime.value" />
 								## // TODO 这个仅用来做测试
 								<input type="hidden" id="$!form.fields.arriveTimeTime.name" name="$!form.fields.arriveTimeTime.name" value="12:40:00" />
@@ -180,15 +180,14 @@
 
   <div class="reg_r_box">
      <p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;花费你一分钟来进行注册，您就可以享用一辆车网站更多的功能！如果您已经注册过，请直接登录，并注意维护您的个人信息以便我们保持联系。如果您有任何问题，欢迎随时致电我们。</p>
-    </div>
+  </div>
   <div class="clear"></div>
 </div>
 
-</div><!--content-2 end--><!--content-2 end-->
+</div><!--content-2 end-->
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#J_fromTimeDate').datepick({dateFormat: 'yyyy-mm-dd'});
-		$('#J_arriveTimeDate').datepick({dateFormat: 'yyyy-mm-dd'});
+		$('.date-pick').datePicker({clickInput:true});
 	});
 </script>

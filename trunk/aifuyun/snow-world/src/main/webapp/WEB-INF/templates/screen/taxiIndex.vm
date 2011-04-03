@@ -25,7 +25,7 @@
                 <li>
                 <label for="inp_name">ÈÕÆÚ£º</label>
 				<p>
-				<input type="text" id="J_fromTime" name="fromTime_None" value="$!dateUtil.formatDate($defaultSearchDate, 'yyyy-MM-dd')" class="input_95" />
+				<input type="text" class="input_95 date-pick"  name="fromTime_None" value="$!dateUtil.formatDate($defaultSearchDate, 'yyyy-MM-dd')" />
                 </p>
                 </li>
                 
@@ -109,6 +109,6 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		$('#J_fromTime').datepick({dateFormat: 'yyyy-mm-dd'}); 
+		$('.date-pick').datePicker({clickInput:true});
 	});
 </script>
