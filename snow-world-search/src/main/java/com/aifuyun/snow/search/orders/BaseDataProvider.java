@@ -74,10 +74,16 @@ public abstract class BaseDataProvider implements DataProvider {
 	}
 
 	private static String fmtDateYMD(Date date) {
+		if (date == null) {
+			return null;
+		}
 		return DateUtil.formatDate(date, "yyyyMMdd");
 	}
 	
 	private static String fmtDateFull(Date date) {
+		if (date == null) {
+			return null;
+		}
 		return DateUtil.formatDate(date, "yyyyMMddHHmmss");
 	}
 	
