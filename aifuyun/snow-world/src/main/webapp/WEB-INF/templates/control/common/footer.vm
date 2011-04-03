@@ -1,2 +1,16 @@
-<hr />
-版权信息
+<div id="footer"><!--footer begin-->
+<p>		
+	<a href="#">关于我们</a> | 
+ 	<a href="#">联系我们</a> | 
+ 	<a href="#">拼车须知</a> | 
+  	<a href="#">友情链接</a> |
+	<a href="http://yiliangche.uueasy.com/" target="_blank">用户论坛</a> |
+	<a href="$snowModule.setTarget('feedback/leaveWord')">意见反馈</a>
+</p> 
+<p>
+Copyright@2010-2011 All Rights Reserved.
+</p>
+<p>浙ICP备11006974号</p>
+</div><!--footer end-->
+
+<script type="text/javascript" src="http://js.tongji.linezing.com/2319746/tongji.js"></script><noscript><a href="http://www.linezing.com"><img src="http://img.tongji.linezing.com/2319746/tongji.gif"/></a></noscript>
