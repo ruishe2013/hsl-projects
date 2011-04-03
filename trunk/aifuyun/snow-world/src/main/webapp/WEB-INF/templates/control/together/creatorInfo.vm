@@ -1,50 +1,46 @@
 <div class="details_r">
-            <div class="details_r_t">
-                <div class="details_r_b">
-                    <ul>
-                        <li>
-                            <h1>发起人信息</h1>
-                        </li>
-                        <li>
-                            <strong>发起人：</strong>$!creator.realName
-                        </li>
-                        <li>
-                            <strong>性别：</strong>$!creator.sexEnum.name
-                        </li>
-                        <li>
-                            <strong>年龄段：</strong>$!creator.birthYearEnum.name
-                        </li>
-                        <li>
-                            <strong>职业：</strong>$!creator.career
-                        </li>
-                        
-                        #if ($showContactInfo)
-                        <li>
-                            <strong>手机：</strong>$!creator.phone
-                        </li>
-                        <li>
-                            <strong>QQ号：</strong>$!creator.qq
-                        </li>
-                        <li>
-                            <strong>邮箱：</strong>$!creator.email
-                        </li>
-			                        
-			            #else
-			           		<li>登陆即可查看车主的联系方式 
-			           		<input class="login_btn" id="J_login_for_view" type="button" value="登陆查看" name="login" tabindex="3"/></li>
-			           		
-			           		
-							<script type="text/javascript">
-								$(document).ready(function(){
-									$('#J_login_for_view').bind("click", function() {
-										#set($redirectUrl = "$snowModule.setTarget('/together/orderDetail').add('orderId', $order.id)")
-										location.href="$snowModule.setTarget('login').add('redirectUrl', $redirectUrl)";
-									});
-								});
-							</script>
-			            #end
-                        
-                    </ul>
-                </div>
-            </div>
-        </div>
+	<ul>
+		<li>
+			<h1>发起人信息</h1>
+		</li>
+		<li>
+			<strong>发起人：</strong>$!creator.realName
+		</li>
+		<li>
+			<strong>性别：</strong>$!creator.sexEnum.name
+		</li>
+		<li>
+			<strong>年龄段：</strong>$!creator.birthYearEnum.name
+		</li>
+		<li>
+			<strong>职业：</strong>$!creator.career
+		</li>
+		
+		#if ($showContactInfo)
+		<li>
+			<strong>手机：</strong>$!creator.phone
+		</li>
+		<li>
+			<strong>QQ号：</strong>$!creator.qq
+		</li>
+		<li>
+			<strong>邮箱：</strong>$!creator.email
+		</li>
+					
+		#else
+			<li>登陆即可查看车主的联系方式 
+			<input class="login_btn" id="J_login_for_view" type="button" value="登陆查看" name="login" tabindex="3"/></li>
+			
+			
+			<script type="text/javascript">
+				$(document).ready(function(){
+					$('#J_login_for_view').bind("click", function() {
+						#set($redirectUrl = "$snowModule.setTarget('/together/orderDetail').add('orderId', $order.id)")
+						location.href="$snowModule.setTarget('login').add('redirectUrl', $redirectUrl)";
+					});
+				});
+			</script>
+		#end
+		
+	</ul>
+</div>
