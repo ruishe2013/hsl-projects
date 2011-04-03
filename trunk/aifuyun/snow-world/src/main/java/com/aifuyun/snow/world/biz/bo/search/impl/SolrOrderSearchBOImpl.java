@@ -14,8 +14,9 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.params.SolrParams;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.aifuyun.snow.world.biz.BizException;
 import com.aifuyun.snow.world.biz.bo.search.OrderSearchBO;
 import com.aifuyun.snow.world.biz.bo.search.SearchOrderDO;
 import com.aifuyun.snow.world.biz.query.search.FieldOrder;
@@ -25,6 +26,8 @@ import com.aifuyun.snow.world.biz.query.search.SortField;
 import com.zjuh.sweet.lang.DateUtil;
 
 public class SolrOrderSearchBOImpl implements OrderSearchBO {
+	
+	private static final Logger log = LoggerFactory.getLogger(SolrOrderSearchBOImpl.class);
 
 	private static final String DUMP_DATE_FMT = "yyyyMMddHHmmss";
 	
@@ -51,7 +54,8 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 			orderResult.setResult(orders);
 			return orderResult;
 		} catch (SolrServerException e) {
-			throw new BizException(e);
+			log.error("ËÑË÷Ê§°Ü", e);
+			return new SearchResult<SearchOrderDO>();
 		}
 	}
 	

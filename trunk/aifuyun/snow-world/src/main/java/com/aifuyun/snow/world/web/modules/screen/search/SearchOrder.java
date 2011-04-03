@@ -41,8 +41,11 @@ public class SearchOrder extends BaseScreen {
 		Result result = orderSearchAO.searchOrder(searchOrderQuery);
 		
 		Long numFound = (Long)result.getModels().get("numFound");
-		
-		searchOrderQuery.setTotalResultCount(numFound.intValue());
+		if (numFound == null) {
+			searchOrderQuery.setTotalResultCount(0);
+		} else {
+			searchOrderQuery.setTotalResultCount(numFound.intValue());
+		}
 		
 		if (result.isSuccess()) {
 			this.result2Context(result, templateContext, "orders");
