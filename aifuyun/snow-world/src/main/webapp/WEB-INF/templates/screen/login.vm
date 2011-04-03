@@ -2,9 +2,9 @@
 
 #macro(errorMessageLogin, $str)
 	#if( "$!str" != "")
-		<div class="tip_txt">
-			<img src="$imgServer/ico_tip.gif" width="16" height="16" border="0" align="absmiddle" />${str}
-		</div> 
+		 <div style="clear:both; margin:5px 0 0 55px; width:200px;" class="error-tip">
+            ${str}
+        </div>
 	#end
 #end
 
@@ -19,23 +19,21 @@
 				<input type="hidden" name="actionTarget" value="login_action.htm" />
 				<input type="hidden" name="actionEvent" value="login" />
             	<div class="field">
-            		<span style="font-size:14px;">用户名：</span>
-            		<input type="text" class="login_input" name="$form.fields.username.name" value="$!form.fields.username.value"/>
+            		<span style="font-size:14px;">用户名：</span><input type="text" class="input_230" name="$form.fields.username.name" value="$!form.fields.username.value"/>
             	</div>
 				#errorMessageLogin($!form.fields.username.message)
 				
+				
                 <div class="field">
-                	<span style="font-size:14px;">密&nbsp;&nbsp;码：</span>
-                	<input type="password" class="login_input" name="$form.fields.password.name" value="$!form.fields.password.value" />
+                	<span style="font-size:14px;">密&nbsp;&nbsp;码：</span><input type="password" class="input_230" name="$form.fields.password.name" value="$!form.fields.password.value" />
                 </div>
                 #errorMessageLogin($!form.fields.password.message)
                 
-                ##<div class="safe"><input type="checkbox" onclick="addLoginStationing('checkbox')" class="checked"/>记住登录状态      <span class="help_g"><a href="#">查看帮助</a></span></div> 
                 
                 #errorMessageLogin($!csrfmessage)
 				#errorMessageLogin($!resultmessage.message)  
                 <div class="safe">
-	                <button type="submit" class="but_login" onMouseDown="this.className='but_login'" onmouseover="this.className='but_login_h'" onmouseup="this.className='but_login_h'"  onMouseOut="this.className='but_login'"></button>
+	                <button type="submit" class="but_login" ></button>
 	                <a href="#">忘记密码</a>
                 </div>
             </form>
