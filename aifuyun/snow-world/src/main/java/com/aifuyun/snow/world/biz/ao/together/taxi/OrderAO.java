@@ -66,7 +66,7 @@ public interface OrderAO {
 	 * @param orderDO
 	 * @return
 	 */
-	Result createTaxiOrder(OrderDO orderDO);
+	Result createOrder(OrderDO orderDO);
 	
 	/**
 	 * 创建者信息
@@ -104,6 +104,6 @@ public interface OrderAO {
 	 */
 	Result viewMyOrders(UserOrderQuery userOrderQuery);
 	
-	Result viewCreateTaxiOrder();
+	Result viewCreateOrder(int type);
 	
 }

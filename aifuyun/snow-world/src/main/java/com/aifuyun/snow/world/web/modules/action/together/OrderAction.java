@@ -155,12 +155,12 @@ public class OrderAction extends BaseAction {
 		sendRedirectUrl(urlModule.render());
 	}
 	
-	@DefaultTarget("together/createTaxiOrder")
-	public void doCreateTaxiOrder(RunData rundata, TemplateContext templateContext) {
-		if (!checkCsrf(templateContext, "createTaxiOrder")) {
+	@DefaultTarget("together/createOrder")
+	public void doCreateOrder(RunData rundata, TemplateContext templateContext) {
+		if (!checkCsrf(templateContext, "createOrder")) {
 			return;
 		}
-		final Form form = rundata.getForm("together.createTaxiOrder");
+		final Form form = rundata.getForm("together.createOrder");
 		if (!form.validate()) {
 			return;
 		}
@@ -193,7 +193,7 @@ public class OrderAction extends BaseAction {
 		orderDO.setArriveCityId(orderDO.getCityId());
 		orderDO.setArriveCity(orderDO.getFromCity());
 		
-		Result result = orderAO.createTaxiOrder(orderDO);
+		Result result = orderAO.createOrder(orderDO);
 		if (result.isSuccess()) {
 			long orderId = (Long)result.getModels().get("orderId");
 			sendToPersonalInfoPage(orderId);			

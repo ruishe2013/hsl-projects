@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="GB18030"?>
 <forms>
 	
-	<form name="together.createTaxiOrder">
+	<form name="together.createOrder">
+		<field name="type">
+			<validator type="required" message="请选择拼车类型!" />
+			<validator type="enums" message="请选择正确的拼车类型!" >
+				<param name="values" value="1,2" />
+			</validator>
+		</field>
 		<field name="fromCity">
 			<validator type="required" message="出发城市不能为空!" />
 			<validator type="string" message="出发城市名称长度不能超过20个字符!" >
 				<param name="min" value="1" />
 				<param name="max" value="20" />
-			</validator>
-		</field>
-		<field name="cityId">
-			<validator type="required" message="出发城市cityId不能为空!" />
-			<validator type="int" message="出发城市cityId不能为空!" >
-				<param name="min" value="0" />
 			</validator>
 		</field>
 		<field name="fromAddr">

@@ -46,4 +46,9 @@ public class CityDAOIbatis extends BaseIbatisDAO implements CityDAO {
 		getSqlMapClientTemplate().update("CityDAO.delete", id);
 	}
 
+	@Override
+	public CityDO queryByName(String name) {
+		return (CityDO)getSqlMapClientTemplate().queryForObject("CityDAO.queryByName", name);
+	}
+
 }

@@ -178,16 +178,16 @@ public class OrderAOTests extends SnowWorldTest {
 		Assert.assertEquals("12345!!", userInDb.getPhone());
 	}
 	
-	public void testCreateTaxiOrder() throws ParseException {
+	public void testCreateOrder() throws ParseException {
 		// Î´µÇÂ½µÄÇé¿ö
 		this.setLogout();
 		OrderDO orgObject = createNormalTogetherOrderDO();
-		Result result = orderAO.createTaxiOrder(orgObject);
+		Result result = orderAO.createOrder(orgObject);
 		Assert.assertFalse(result.isSuccess());
 		Assert.assertEquals(CommonResultCodes.USER_NOT_LOGIN, result.getResultCode());
 		
 		setLogin(999, "test_demo_user");
-		result = orderAO.createTaxiOrder(createNormalTogetherOrderDO());
+		result = orderAO.createOrder(createNormalTogetherOrderDO());
 		Assert.assertTrue(result.isSuccess());
 		long orderId = (Long)result.getModels().get("orderId");
 		Assert.assertTrue(orderId > 0L);

@@ -6,6 +6,8 @@ import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 
 public interface CityDAO {
 
+	CityDO queryByName(String name);
+	
 	/**
 	 * 创建城市
 	 * @param cityDO

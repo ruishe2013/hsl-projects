@@ -75,7 +75,7 @@ create table sw_area_city (
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
 create index ind_city_prov_id on sw_area_city(province_id, deleted, seq_num);
-
+create index ind_city_name on sw_area_city(name, deleted);
 
 
 DROP TABLE IF EXISTS sw_area_city_ip;
