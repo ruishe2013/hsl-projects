@@ -50,9 +50,9 @@
     
 <script type="text/javascript">	
 					var speed = 4000;		
-					var pics='$imgServer/Focus_pic/1.jpg|$imgServer/Focus_pic/2.jpg';	
+					var pics='$imgServer/Focus_pic/4-3-1.jpg|$imgServer/Focus_pic/4-3-2.jpg';	
 					var mylinks='http://www.yiliangche.com/|http://www.yiliangche.com/';
-					var texts='世乒赛-王皓横扫王励勤首度称王|世乒赛女单决赛 张怡宁4-2郭跃夺冠';
+					var texts='绿色出行，同上一两车|绿色出行，同上一两车';
 					var sohuFlash2 = new sohuFlash("$flashServer/focus0414a.swf","flashcontent01","630","275","8","#ffffff");
 
 sohuFlash2.addParam("quality", "medium");
@@ -84,7 +84,7 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 	    <td>发车时间</td>                         
 	    <td>预计到达时间</td>
 	    <td>发起人</td>
-	    <td>加入拼车</td>
+	    <td>操作</td>
 	  </tr>
 	#set($index=0)
 	#foreach($order in $recentOrders)
