@@ -47,10 +47,6 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 		Result result = new ResultSupport(false);
 		try {
 			OrderTypeEnum selectedOrderType = OrderTypeEnum.valueOf(type);
-			if (selectedOrderType == null) {
-				// Ä¬ÈÏÑ¡ÔñË³·á³µ
-				selectedOrderType = OrderTypeEnum.TAXI;
-			}
 			
 			CityDO city = getSelectedCity(0);
 			if (city != null) {

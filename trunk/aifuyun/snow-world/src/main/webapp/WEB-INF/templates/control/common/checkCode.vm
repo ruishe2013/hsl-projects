@@ -1,4 +1,4 @@
-<img id="checkCodeImg" src="$!validatorUrl" class="$!imgClass" />
+<img id="checkCodeImg" align="absmiddle" border="0" src="$!validatorUrl" class="$!imgClass" />
 <a href="javascript:changeCheckCode();">看不清，换一张</a>
 <script>
 	function changeCheckCode() {

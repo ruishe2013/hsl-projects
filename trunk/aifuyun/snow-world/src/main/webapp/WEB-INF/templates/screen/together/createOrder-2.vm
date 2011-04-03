@@ -2,9 +2,9 @@
 
 #macro(errorMessageCreateOrder, $str)
 	#if( "$!str" != "")
-		<p class="color_gray error-tip">
+		<div style="clear:both; margin:5px 0 0 100px; width:180px;" class="error-tip">
 			$str
-		</p>
+		</div>
 	#end
 #end
 
@@ -35,56 +35,18 @@
                     <label><em>*</em> 拼车类型：</label>
                     
                     #set($selectOrderType = $!form.fields.type.value)
-                    #if (!$!selectOrderType || "$!selectOrderType" == "0")
-                    	 #set($selectOrderType = $!selectedOrderType.value)
+                    #if ("$!selectOrderType" == "")
+                    	 #set($selectOrderType =$!selectedOrderType.value)
                     #end
                     
-                     <div class="reg_info_li_box">
-                     	#foreach($orderType in $orderTypes)
-	                        <input name="$!form.fields.type.name" type="radio" value="$!orderType.value" style="border:none" #if("$!selectOrderType" == "$!orderType.value") checked #end />$!orderType.name
-                        #end
-                        
-                        #errorMessageCreateOrder($!form.fields.type.message)
-                    </div>
-                     
-                </li>
-                
-                #*
-                ## TODO
-                <li>
-                	<label><em>*</em> 发起人身份：</label>
                     <div class="reg_info_li_box">
-                        <input name="sf" type="radio" style="border:none" value=0 checked/>我是车主
-                        <input name="sf" type="radio" style="border:none" value=1 />我是乘客
-                    </div>
+	                    <select name="$!form.fields.type.name" >
+	                    	#foreach($orderType in $orderTypes)
+		                        <option value="$!orderType.value" #if("$!selectOrderType" == "$!orderType.value") selected #end>$orderType.name</option>
+	                        #end
+	                     </select>
+                     </div>
                 </li>
-	        	
-	        	 <li>
-                    <label><em>*</em> 车牌号：</label>
-                    <div class="reg_info_li_box">
-                            <input name="" type="text" class="input_95" value="浙A25255" />
-                             <p class="color_gray attention">
-                                	填写此项可以确定您信息的真实性，更方便你找到理想车友。
-                            </p>
-                   </div>
-                 </li>
-                 
-	        	*#
-	        	
-	        	
-	        	 <li>
-		            <label for="inp_name"><em>*</em> 承载人数：</label>
-		            <div class="reg_info_li_box">
-		            	<p>
-		            		<input class="input_95" type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value"/>
-		            	</p>
-		            	#errorMessageCreateOrder($!form.fields.totalSeats.message)
-		            	<p class="color_gray attention">
-                                   	 承载人数已包含发起人。(人/辆)
-                        </p>
-		            </div>
-	            </li>
-	        	
 	        	
 	            <li>
 		            <label for="inp_name"><em>*</em> 城市：</label>
@@ -93,8 +55,8 @@
 			            	<input type="text" class="input_95" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
 			           		<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'cityId').add('onName', 'fromCity')" target="_blank">更换城市...</a>
 			            </p>
-			             #errorMessageCreateOrder($!form.fields.fromCity.message)
 		            </div>
+		            #errorMessageCreateOrder($!form.fields.fromCity.message)
 	            </li>
 	            
 	            <li>
@@ -103,30 +65,34 @@
 		            <p>
 		           		<input class="input_400" type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value" />
 		            </p>
-		            #errorMessageCreateOrder($!form.fields.fromAddr.message)
 		            </div>
+		             #errorMessageCreateOrder($!form.fields.fromAddr.message)
 	            </li>
 	            
 	            <li>
 		            <label for="inp_name"><em>*</em> 目的地：</label>
 		            <div class="reg_info_li_box">
-		            	<p>
-		            		<input class="input_400" type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value" />
-		            	</p>
-		            	#errorMessageCreateOrder($!form.fields.arriveAddr.message)
+		            	<p><input class="input_400" type="text" id="$!form.fields.arriveAddr.name" name="$!form.fields.arriveAddr.name" value="$!form.fields.arriveAddr.value" /></p>
 		            </div>
-		            
+		            #errorMessageCreateOrder($!form.fields.arriveAddr.message)
+	            </li>
+	            
+                <li>
+		            <label for="inp_name"><em>*</em> 座位：</label>
+		            <div class="reg_info_li_box">
+		            	<p>
+		            		<input class="input_95" type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value"/>
+		            	</p>
+		            </div>
+		            #errorMessageCreateOrder($!form.fields.totalSeats.message)
 	            </li>
 	            
 	            <li>
 		            <label for="inp_name">途径：</label>
 		            <div class="reg_info_li_box">
-		            	<p style="width:100%">
-                            	<textarea name="$!form.fields.approach.name" class="textarea400">$!form.fields.approach.value</textarea>
-                         </p>
-		            	#errorMessageCreateOrder($!form.fields.approach.message)
+		            	<p><input class="input_400" type="text" id="$!form.fields.approach.name" name="$!form.fields.approach.name" value="$!form.fields.approach.value"/></p>
 		            </div>
-		            
+		            #errorMessageCreateOrder($!form.fields.approach.message)
 	            </li>
 	            
 	            <li>
@@ -141,8 +107,8 @@
 						<p>
 							<input type="text" readonly="readonly" class="input_95 date-pick" name="$!form.fields.fromTimeDate.name" value="$!fromDate" /> 
 		                </p>
-		                 #errorMessageCreateOrder($!form.fields.fromTimeDate.message)
 		                </div>
+		                #errorMessageCreateOrder($!form.fields.fromTimeDate.message)
 		            </li>
 	            
 	            
@@ -176,9 +142,9 @@
 				                </select>
 					                
 			                </p>
-			                #errorMessageCreateOrder($!form.fields.fromTimeHour.message)
-							#errorMessageCreateOrder($!form.fields.fromTimeMinute.message)
 		                </div>
+						#errorMessageCreateOrder($!form.fields.fromTimeHour.message)
+						#errorMessageCreateOrder($!form.fields.fromTimeMinute.message)
 		            </li>
 	                
 	                <li>
@@ -205,14 +171,9 @@
 									#end
 				                </select>
 			                </p>
-			                 #errorMessageCreateOrder($!form.fields.arriveTimeHour.message)
-							 #errorMessageCreateOrder($!form.fields.arriveTimeMinute.message)
-			                </p>
-                            <p class="color_gray attention">
-                            	该项可选填，填写预计到达时间可以明确地将您的需求告诉乘客，避免因时间的误差而引起的争论。如果遇到特殊情况除外(堵车等…)
-                            </p>
 		                </div>
-		               
+		                #errorMessageCreateOrder($!form.fields.arriveTimeHour.message)
+						#errorMessageCreateOrder($!form.fields.arriveTimeMinute.message)
 	                </li>
 	                
 	                
@@ -222,22 +183,21 @@
 			            	<p>
 			            		<textarea cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!{form.fields.description.value}</textarea>
 			            	</p>
-			            	#errorMessageCreateOrder($!form.fields.description.message)
+			            	
 		            	</div>
-		            	
+		            	#errorMessageCreateOrder($!form.fields.description.message)
 	            	</li> 
 	            	
-	                <li>
-	                	<label for="inp_name"><em>*</em> 验证码：</label>
+	                <li><label for="inp_name"> 验证码：</label>
 		            	<div class="reg_info_li_box">
-			            	<p>
-			            		<input class="input_95" type="text" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value="" />
-			            		$control.setTemplate('common/checkCode.vm')
-			            	</p>
-			            	#errorMessageCreateOrder($!form.fields.checkCode.message)
+		            	<p>
+		            		<input class="reg_input_out" type="text" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value=""
+		            	</p>
 		            	</div>
-		            	
+		            	$control.setTemplate('common/checkCode.vm')
+		            	#errorMessageCreateOrder($!form.fields.checkCode.message)
 	            	</li>
+	            	
 	            	
 	                <li>
 	                	#errorMessageCreateOrder($!csrfmessage)
