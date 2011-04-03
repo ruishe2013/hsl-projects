@@ -29,7 +29,7 @@
 	        <td>$!orderUser.email</td>
 	         #if($isCreatorSelf) 
 		    	#if ($order.status != 20)
-	        		<td><a href="#" class="bnt_tg fl" style="margin:5px 0 5px 15px;">ÒÆ³ý</a></td>
+	        		<td><a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'removeUserFromOrder').add('id', $orderUser.id)" class="bnt_tg fl confirm_btn" style="margin:5px 0 5px 15px;">ÒÆ³ý</a></td>
 	        	#end
 	        #end
 	    </tr>
