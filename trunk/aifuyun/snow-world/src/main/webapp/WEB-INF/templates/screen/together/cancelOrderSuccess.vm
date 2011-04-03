@@ -1,1 +1,5 @@
-取消拼车成功！
+<div class="create_box" style="margin-bottom: 15px;margin-top:30px">
+	<div class="create_suc">
+		<span class="fl font_14_b col_g">取消拼车成功！</span>
+	</div>
+</div>

@@ -19,11 +19,11 @@
 		        	#if ($isCreatorSelf)
 		            	<li>
 		            		<div class="details-state_box">
-			                    <span class="fl">
-			                        	你是发起人，你可以取消拼车
+                            	<span class="fr ml10">
+			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'cancelOrder').add('orderId', $order.id)" class="but_cancelcar fr">取消拼车</a>
 			                    </span>
-			                    <span class="fl ml10">
-			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'cancelOrder').add('orderId', $order.id)" class="but_cancelcar fr confirm_btn">取消拼车</a>
+			                    <span class="fr">
+			                        	你是发起人，你可以
 			                    </span>
 			                    <div class="cl"></div>
 			                </div>
@@ -31,24 +31,22 @@
 		                #if ($showConfirmOrderBtn)
 		                <li>
 		                	<div class="details-state_box">
-			                    <span class="fl">
-			                          	已经有人加入，你可以确认拼车
+                            	<span class="fr ml10">
+									<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmTogetherOrder').add('orderId', $order.id)" class="but_qrpc fr">确认拼车</a>
 			                    </span>
-			                    <span class="fl ml10">
-									<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmTogetherOrder').add('orderId', $order.id)" class="but_qrpc fr confirm_btn">确认拼车</a>
-			                    </span>
+                                <span class="fr">您创建的拼车已经有人加入，是否要 </span>
 			                    <div class="cl"></div>
-			                </div>
+		                  </div>
 						#end
 						</li>
 					#elseif ($hasBeenJoin)
 						<li>
 		            		<div class="details-state_box">
-			                    <span class="fl">
-			                        	你已经加入该拼车，你可以退出拼车
+                            	<span class="fr ml10">
+			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcpc fr">退出拼车</a>
 			                    </span>
-			                    <span class="fl ml10">
-			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcpc fr confirm_btn">退出拼车</a>
+			                    <span class="fr">
+			                        	你已经加入该拼车，你可以
 			                    </span>
 			                    <div class="cl"></div>
 			                </div>
@@ -56,11 +54,11 @@
 					#elseif ("$!userJoinStatusValue" == "0") 
 						<li>
 		            		<div class="details-state_box">
-			                    <span class="fl">
-			                        	你的申请还在等发起人确认，请耐心等待；或者你可以退出申请
+                            	<span class="fr ml10">
+			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcsq fr">退出申请</a>
 			                    </span>
-			                    <span class="fl ml10">
-			                    	  <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'exitOrder').add('id', $joinedOrderUser.id)" class="but_tcsq fr confirm_btn">退出申请</a>
+			                    <span class="fr">
+			                        	你的申请还在等发起人确认，请耐心等待；或者你可以
 			                    </span>
 			                    <div class="cl"></div>
 			                </div>
@@ -68,11 +66,11 @@
 					#elseif ($!leftSeatCount <= 0)
 						<li>
 		            		<div class="details-state_box">
-			                    <span class="fl">
-			                        	对不起，该拼车的位置已经满了，推荐你
+                            	<span class="fr ml10">
+			                    	 <a href="#" class="but_carbg dis">去别拼车单看看</a>
 			                    </span>
-			                    <span class="fl ml10">
-			                    	 <a href="#">去别拼车单看看</a>
+			                    <span class="fr">
+			                        	对不起，该拼车的位置已经满了，推荐你
 			                    </span>
 			                    <div class="cl"></div>
 			                </div>
@@ -80,12 +78,13 @@
 					#else
 						<li>
 		            		<div class="details-state_box">
-			                    <span class="fl">
-			                        	
-			                    </span>
-			                    <span class="fl ml10">
+                            	<span class="fr ml10">
 			                    	<a href="$snowModule.setTarget('together/personalInfo').add('orderId', $order.id).add('join', 'true')" class="but_addcar fr">加入拼车</a>
+                                </span>
+			                    <span class="fr">
+			                        该拼车还有位置，您可以
 			                    </span>
+			                    
 			                    <div class="cl"></div>
 			                </div>
 		                </li>
@@ -101,12 +100,12 @@
         <div class="hr_6"></div>
     
     	#if ("$!order.status" == "20")
-    		<div class="details-state_box">
-                <span class="fl">
-                    	该拼车单已经完成。
-                </span>
-                <div class="cl"></div>
+        <div style="padding:0 20px 20px;">
+            <div class="tip_box">
+                <strong class="col_g">dd</strong>
+                恭喜您，该拼车单已经完成。
             </div>
+        </div>
     	
     	#else
 	        <div class="r_c_box">
@@ -128,15 +127,5 @@
         
         
     </div><!--content end-->
-</div></div><!--content end-->
-
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('.confirm_btn').bind('click', function() {
-			if (confirm('此操作后不能恢复，确认要这么做吗？')) {
-				return true;
-			}
-			return false;
-		});
-	});
-</script>
+</div>
+</div><!--content end-->
