@@ -6,7 +6,7 @@ package com.aifuyun.snow.world.dal.dataobject.enums;
  */
 public enum OrderTypeEnum {
 	
-	TAXI(1, "拼的"),
+	TAXI(1, "拼出租车"),
 	SFC(2, "顺风车")
 	;
 	

@@ -41,10 +41,18 @@
 				<param name="format" value="yyyy-MM-dd" />
 			</validator>
 		</field>
-		<field name="fromTimeTime">
-			<validator type="required" message="出发时间不能为空!" />
-			<validator type="date" message="出发时间的格式必须是HH:mm!" >
-				<param name="format" value="HH:mm" />
+		<field name="fromTimeHour">
+			<validator type="required" message="出发时间(小时)不能为空!" />
+			<validator type="int" message="出发时间(小时)必须在0~23之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="23" />
+			</validator>
+		</field>
+		<field name="fromTimeMinute">
+			<validator type="required" message="出发时间(分钟)不能为空!" />
+			<validator type="int" message="出发时间(分钟)必须在0~59之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="59" />
 			</validator>
 		</field>
 		<field name="arriveTimeDate">
@@ -52,9 +60,16 @@
 				<param name="format" value="yyyy-MM-dd" />
 			</validator>
 		</field>
-		<field name="arriveTimeTime">
-			<validator type="date" message="到达时间的格式必须是HH:mm!" >
-				<param name="format" value="HH:mm" />
+		<field name="arriveTimeHour">
+			<validator type="int" message="预计到达时间(小时)必须在0~23之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="23" />
+			</validator>
+		</field>
+		<field name="arriveTimeMinute">
+			<validator type="int" message="预计到达时间(分钟)必须在0~59之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="59" />
 			</validator>
 		</field>
 		<field name="totalSeats">

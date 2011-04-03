@@ -1,6 +1,7 @@
 package com.aifuyun.snow.world.biz.ao.together.taxi.impl;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
@@ -24,6 +25,7 @@ import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
 import com.zjuh.sweet.lang.CollectionUtil;
+import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.lang.StringUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
@@ -38,6 +40,7 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	
 	private OrderUserBO orderUserBO;
 	
+	private int defaultCreateTimeDelay = 3600 * 2; // 两个小时
 	
 	@Override
 	public Result viewCreateOrder(int type) {
@@ -63,6 +66,14 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			}
 			
 			
+			Date defaultCreateDate = DateUtil.addSecond(new Date(), defaultCreateTimeDelay);
+			
+			int fromMinute = SnowUtil.getRecentMinute(defaultCreateDate, 5);
+			int fromHour = DateUtil.getHour(defaultCreateDate);
+			
+			result.getModels().put("fromMinute", fromMinute);
+			result.getModels().put("fromHour", fromHour);
+			result.getModels().put("defaultCreateDate", defaultCreateDate);
 			result.getModels().put("orderTypes", OrderTypeEnum.values());
 			result.getModels().put("selectedOrderType", selectedOrderType);
 			
@@ -838,6 +849,14 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 
 	public void setOrderUserBO(OrderUserBO orderUserBO) {
 		this.orderUserBO = orderUserBO;
+	}
+
+	public int getDefaultCreateTimeDelay() {
+		return defaultCreateTimeDelay;
+	}
+
+	public void setDefaultCreateTimeDelay(int defaultCreateTimeDelay) {
+		this.defaultCreateTimeDelay = defaultCreateTimeDelay;
 	}
 
 }

@@ -23,8 +23,6 @@ public class OrderAction extends BaseAction {
 	
 	private static final String DATE_FMT = "yyyy-MM-dd";
 
-	private static final String TIME_FMT = "HH:mm";
-	
 	private OrderAO orderAO;
 	
 	@DefaultTarget("together/orderDetail")
@@ -168,16 +166,20 @@ public class OrderAction extends BaseAction {
 		form.apply(orderDO);
 		
 		Date fromTimeDate = rundata.getQueryString().getDate("fromTimeDate", DATE_FMT);
-		Date fromTimeTime = rundata.getQueryString().getDate("fromTimeTime", TIME_FMT);
 		Date arriveTimeDate = rundata.getQueryString().getDate("arriveTimeDate", DATE_FMT);
-		Date arriveTimeTime = rundata.getQueryString().getDate("arriveTimeTime", TIME_FMT);
 		
-		Date fromTime = DateTimeUtil.componentDateAndTime(fromTimeDate, fromTimeTime);
+		int fromHour =  rundata.getQueryString().getInt("fromTimeHour");
+		int fromMinute =  rundata.getQueryString().getInt("fromTimeMinute");
+		
+		int arriveHour =  rundata.getQueryString().getInt("arriveHour", -1);
+		int arriveMinute =  rundata.getQueryString().getInt("arriveMinute", 0);
+		
+		Date fromTime = DateTimeUtil.componentDateAndTime(fromTimeDate, fromHour, fromMinute, 0);
 		
 		Date arriveTime = null;
 		if (arriveTimeDate != null) {
-			if (arriveTimeTime != null) {
-				arriveTime = DateTimeUtil.componentDateAndTime(arriveTimeDate, arriveTimeTime);
+			if (arriveHour != -1) {
+				arriveTime = DateTimeUtil.componentDateAndTime(arriveTimeDate, arriveHour, arriveMinute, 0);
 			} else {
 				arriveTime = arriveTimeDate;
 			}

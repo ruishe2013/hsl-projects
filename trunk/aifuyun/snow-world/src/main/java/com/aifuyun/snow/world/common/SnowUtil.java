@@ -1,12 +1,38 @@
 package com.aifuyun.snow.world.common;
 
+import java.util.Date;
+
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.SexEnum;
 import com.aifuyun.snow.world.dal.dataobject.misc.UserInfoHolder;
 import com.zjuh.sweet.author.LoginContext;
+import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.lang.StringUtil;
 
 public class SnowUtil {
+	
+	/**
+	 * 获取最近的时间的分钟时
+	 * 
+	 * @param date
+	 * @param minuteMode
+	 * @return
+	 */
+	public static int getRecentMinute(Date date, int minuteMode) {
+		if (minuteMode <= 0) {
+			return 0;
+		}
+		int minute = DateUtil.getMinute(date);
+		return (minute / minuteMode ) * minuteMode;
+	}
+	
+	public static int getRecentHour(Date date, int hourMode) {
+		if (hourMode <= 0) {
+			return 0;
+		}
+		int minute = DateUtil.getHour(date);
+		return (minute / hourMode ) * hourMode;
+	}
 
 	public static String getLoginUsername() {
 		return LoginContext.getUsername();

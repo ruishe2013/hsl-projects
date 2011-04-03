@@ -54,6 +54,21 @@ public class DateTimeUtil {
 		return cal.getTime();
 	}
 	
+	public static Date componentDateAndTime(Date datePart, int hour, int minute, int second) {
+		Calendar calDatePart = toCalendar(datePart);
+		
+		Calendar cal = Calendar.getInstance();
+		cal.set(Calendar.MILLISECOND, 0);
+		cal.set(Calendar.YEAR, calDatePart.get(Calendar.YEAR));
+		cal.set(Calendar.MONTH, calDatePart.get(Calendar.MONTH));
+		cal.set(Calendar.DAY_OF_MONTH, calDatePart.get(Calendar.DAY_OF_MONTH));
+		
+		cal.set(Calendar.HOUR_OF_DAY, hour);
+		cal.set(Calendar.MINUTE, minute);
+		cal.set(Calendar.SECOND, second);
+		return cal.getTime();
+	}
+	
 	public static Date parseDate(String input) throws ParseException {
 		return parseDate(input, FULL_DATE_FMT);
 	}
