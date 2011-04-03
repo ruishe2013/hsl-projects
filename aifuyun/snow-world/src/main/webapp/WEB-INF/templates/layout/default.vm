@@ -4,14 +4,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
 	<title>绿色出行， 同上一辆车！ 一辆车拼车网 ，全国最大的拼车网</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-	<meta name="description" content="一辆车拼车网，全国最大的拼车网，提供拼的士，城际拼车，长途拼车，上下班拼车等拼车服务！" />
-	<meta name="keywords" content="拼车,一辆车,绿色出行,低碳,便捷,同城拼车,城际拼车,打的,拼的,汽油,汽车,节能,可持续" />
+	<meta name="description" content="一辆车拼车网，全国最大的拼车网，提供拼的士，顺风车，上下班拼车等拼车服务！" />
+	<meta name="keywords" content="拼车,一辆车,绿色出行,顺风车,低碳,便捷,同城拼车,城际拼车,打的,拼的,汽油,汽车,节能,可持续" />
 	<link rel="shortcut icon" href="$imgServer/favicon.ico" type="image/x-icon" /> 
-	<link type="text/css" href="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick.css?t=20110323.css" rel="stylesheet" />
+	<link type="text/css" href="$cssServer/datePicker.css?t=20110323.css" rel="stylesheet" />
 	<link  type="text/css" href="$cssServer/main.css?t=20110331.css" rel="stylesheet"/>
 	<script type="text/javascript" src="${jsServer}/jquery/jquery-1.5.1.min.js?t=20110323.js"></script>
-	<script type="text/javascript" src="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick.min.js?t=20110323.js"></script>
-	<script type="text/javascript" src="${jsServer}/jquery/jquery.datepick.package-4.0.3/jquery.datepick-zh-CN.js?t=20110323.js"></script>
+	<script type="text/javascript" src="${jsServer}/jquery/jquery-date.js?t=20110323.js"></script>
+	<script type="text/javascript" src="${jsServer}/jquery/jquery-datePicker.js?t=20110323.js"></script>
 	<script type="text/javascript" src="$jsServer/sohuflash_1.js"></script>
 </head>
 

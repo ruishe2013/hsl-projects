@@ -7,6 +7,24 @@
     </h1>
 </li>
 <li>
+    <strong>拼车类型：</strong>$!order.togetherTypeEnum.name
+</li>
+#if ("$!order.togetherTypeEnum.value" == "2")
+## 顺风车发起人类型 
+	
+	<li>
+	    <strong>发起人是否提供车：</strong>$order.creatorCarOwnerTypeEnum.name
+	</li>
+	
+	#if ("$!order.creatorCarOwnerType" == "1")
+	## 显示车牌号
+		<li>
+		    <strong>车牌号：</strong>$!order.carNo
+		</li>
+	#end
+	
+#end
+<li>
     <strong>出发时间：</strong>$!dateUtil.formatFullDate($order.fromTime)
 </li>  
 <li>

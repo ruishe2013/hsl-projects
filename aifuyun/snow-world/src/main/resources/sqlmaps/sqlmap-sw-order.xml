@@ -6,37 +6,43 @@
 	<typeAlias type="com.aifuyun.snow.world.biz.query.OrderQuery" alias="orderQuery" />
 
 	<resultMap id="orderMapping" class="order">
-		<result property="cityId" column="city_id"/>
 		<result property="gmtModified" column="gmt_modified"/>
-		<result property="fromAddr" column="from_addr"/>
-		<result property="gmtCreate" column="gmt_create"/>
-		<result property="creatorUsername" column="creator_username"/>
-		<result property="creatorId" column="creator_id"/>
-		<result property="fromTime" column="from_time"/>
-		<result property="type" column="type"/>
-		<result property="id" column="id"/>
-		<result property="totalSeats" column="total_seats"/>
-		<result property="arriveTime" column="arrive_time"/>
-		<result property="description" column="description"/>
-		<result property="fromCity" column="from_city"/>
-		<result property="arriveCity" column="arrive_city"/>
-		<result property="arriveAddr" column="arrive_addr"/>
-		<result property="status" column="status"/>
-		<result property="approach" column="approach"/>
-		<result property="arriveCityId" column="arrive_city_id"/>
-		
+	<result property="fromAddr" column="from_addr"/>
+	<result property="creatorCarOwnerType" column="creator_car_owner_type"/>
+	<result property="gmtCreate" column="gmt_create"/>
+	<result property="creatorUsername" column="creator_username"/>
+	<result property="status" column="status"/>
+	<result property="cityId" column="city_id"/>
+	<result property="creatorId" column="creator_id"/>
+	<result property="fromTime" column="from_time"/>
+	<result property="type" column="type"/>
+	<result property="id" column="id"/>
+	<result property="totalSeats" column="total_seats"/>
+	<result property="carNo" column="car_no"/>
+	<result property="arriveTime" column="arrive_time"/>
+	<result property="description" column="description"/>
+	<result property="approach" column="approach"/>
+	<result property="arriveCityId" column="arrive_city_id"/>
+	<result property="fromCity" column="from_city"/>
+	<result property="arriveCity" column="arrive_city"/>
+	<result property="arriveAddr" column="arrive_addr"/>		
 	</resultMap>
 
 	<sql id="order-full-columns">
-		t.city_id, t.gmt_modified, t.from_addr, t.gmt_create, t.creator_username, 
-			t.creator_id, t.from_time, t.type, t.id, t.total_seats,
-		 t.arrive_time, t.description, t.from_city, t.arrive_city, t.arrive_addr, t.status, t.approach, t.arrive_city_id
+		t.gmt_modified, t.from_addr, t.gmt_create, t.creator_username, t.status,
+		 t.city_id, t.creator_id, t.from_time, t.type, t.creator_car_owner_type, t.id,
+		  t.total_seats, t.car_no, t.arrive_time, t.description, t.approach,
+		   t.arrive_city_id, t.from_city, t.arrive_city, t.arrive_addr
 	</sql>
 
 	<insert id="create" parameterClass="order">
 		<![CDATA[
-			insert into sw_order(gmt_modified, from_addr, gmt_create, creator_username, creator_id, from_time, type, total_seats, arrive_time, description, from_city, arrive_city, arrive_addr, status, city_id, approach, arrive_city_id) 
-				values (now(), #fromAddr#, now(), #creatorUsername#, #creatorId#, #fromTime#, #type#, #totalSeats#, #arriveTime#, #description#, #fromCity#, #arriveCity#, #arriveAddr#, #status#, #cityId#, #approach#, #arriveCityId#)
+			insert into sw_order(gmt_modified, from_addr, gmt_create, creator_username, status, city_id,
+			 creator_id, from_time, type, creator_car_owner_type, total_seats, car_no, arrive_time, 
+			 description, approach, arrive_city_id, from_city, arrive_city, arrive_addr) 
+			values (now(), #fromAddr#, now(), #creatorUsername#, #status#, #cityId#, 
+			#creatorId#, #fromTime#, #type#, #creatorCarOwnerType#, #totalSeats#, #carNo#, #arriveTime#,
+			 #description#, #approach#, #arriveCityId#, #fromCity#, #arriveCity#, #arriveAddr#)
 		]]>
 		<selectKey resultClass="long" keyProperty="id">
 			SELECT LAST_INSERT_ID();
@@ -83,22 +89,24 @@
 		<![CDATA[
 			update sw_order set 
 				gmt_modified= now(),
-				city_id = #cityId#,
 				from_addr= #fromAddr#,
 				gmt_create= #gmtCreate#,
 				creator_username= #creatorUsername#,
+				status= #status#,
+				city_id= #cityId#,
 				creator_id= #creatorId#,
 				from_time= #fromTime#,
 				type= #type#,
+				creator_car_owner_type= #creatorCarOwnerType#,
 				total_seats= #totalSeats#,
+				car_no= #carNo#,
 				arrive_time= #arriveTime#,
 				description= #description#,
+				approach= #approach#,
+				arrive_city_id= #arriveCityId#,
 				from_city= #fromCity#,
 				arrive_city= #arriveCity#,
-				arrive_addr= #arriveAddr#,
-				approach = #approach#,
-				arrive_city_id = #arriveCityId#,
-				status = #status#
+				arrive_addr= #arriveAddr#
 			where id = #id#
 		]]>
 	</update>

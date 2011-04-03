@@ -110,6 +110,8 @@ create table sw_order (
 	status int default 0 not null,
 	type tinyint default 0 not null,
 	total_seats int default 0 not null,
+	creator_car_owner_type tinyint default 0 not null,
+	car_no varchar(30),
 	deleted tinyint default 0 not null,
 	gmt_create datetime not null,
 	gmt_modified datetime not null

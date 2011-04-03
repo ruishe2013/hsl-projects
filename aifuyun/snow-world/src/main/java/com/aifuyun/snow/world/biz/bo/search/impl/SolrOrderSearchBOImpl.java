@@ -76,6 +76,8 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 		orderDO.setTotalSeats(simpleSolrDocument.getIntValue("totalSeats"));
 		orderDO.setGmtCreate(dumpTime2Date(simpleSolrDocument,"gmtCreate"));
 		orderDO.setCreatorRealName(simpleSolrDocument.getStringValue("creatorRealName"));
+		orderDO.setCreatorCarOwnerType(simpleSolrDocument.getIntValue("creatorCarOwnerType"));
+		orderDO.setCarNo(simpleSolrDocument.getStringValue("carNo"));
 		return orderDO;
 	}
 	

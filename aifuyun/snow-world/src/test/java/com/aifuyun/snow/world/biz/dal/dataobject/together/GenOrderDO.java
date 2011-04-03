@@ -10,6 +10,7 @@ public class GenOrderDO extends TestCase {
 	public void testGen() {
 		IbatisGenUtil.setTablePrefix("sw_");
 		IbatisGenUtil.genToConsole(OrderDO.class);
+		
 	}
 
 }
