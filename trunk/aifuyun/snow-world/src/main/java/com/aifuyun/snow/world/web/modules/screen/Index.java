@@ -9,8 +9,6 @@ public class Index extends BaseScreen {
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		// TODO
-		
-		this.sendRedirect("snowModule", "taxiIndex");
 	}
 
 }
