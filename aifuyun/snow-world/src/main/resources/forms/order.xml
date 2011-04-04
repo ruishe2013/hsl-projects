@@ -8,7 +8,6 @@
 				<param name="values" value="1,2" />
 			</validator>
 		</field>
-		
 		<field name="creatorCarOwnerType">
 			<validator type="dependencyRequired" message="请选择发起人身份!" >
 				<param name="dependencyField" value="type"></param>
@@ -18,7 +17,6 @@
 				<param name="values" value="1,2" />
 			</validator>
 		</field>
-		
 		<field name="carNo">
 			<validator type="dependencyRequired" message="请输入车牌号!" >
 				<param name="dependencyField" value="creatorCarOwnerType"></param>
@@ -28,8 +26,6 @@
 				<param name="max" value="14" />
 			</validator>
 		</field>
-		
-		
 		<field name="fromCity">
 			<validator type="required" message="出发城市不能为空!" />
 			<validator type="string" message="出发城市名称长度不能超过20个字符!" >
@@ -39,16 +35,23 @@
 		</field>
 		<field name="fromAddr">
 			<validator type="required" message="出发地不能为空!" />
-			<validator type="string" message="出发地名称长度不能超过20个字符!" >
+			<validator type="string" message="出发地名称长度不能超过50个字符!" >
+				<param name="min" value="1" />
+				<param name="max" value="50" />
+			</validator>
+		</field>
+		<field name="arriveCity">
+			<validator type="required" message="目的城市不能为空!" />
+			<validator type="string" message="目的城市长度不能超过20个字符!" >
 				<param name="min" value="1" />
 				<param name="max" value="20" />
 			</validator>
 		</field>
 		<field name="arriveAddr">
 			<validator type="required" message="到达地不能为空!" />
-			<validator type="string" message="目的地地名称长度不能超过20个字符!" >
+			<validator type="string" message="目的地地名称长度不能超过50个字符!" >
 				<param name="min" value="1" />
-				<param name="max" value="20" />
+				<param name="max" value="50" />
 			</validator>
 		</field>
 		<field name="approach">

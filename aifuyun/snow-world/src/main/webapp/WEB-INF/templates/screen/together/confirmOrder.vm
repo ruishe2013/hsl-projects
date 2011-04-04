@@ -34,8 +34,8 @@
                     <td colspan="6">$!order.approach </td>
                 </tr>
                 <tr>
-                	<td class="tr">空闲座位：</td>
-                    <td colspan="6">$!order.totalSeats <span class="col_gray"> 人/辆 空闲座位是出去后指您的座位可使用数</span></td>
+                	<td class="tr">承载人数：</td>
+                    <td colspan="6">$!order.totalSeats <span class="col_gray"> (承载人数包括你自己)  </span></td>
                 </tr>
                 <tr>
                 	<td class="tr">描述：</td>

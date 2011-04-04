@@ -90,7 +90,7 @@
 	                </li>
                 </div>
 	        	
-	        	 <li>
+	        	<li>
 		            <label for="inp_name"><em>*</em> 承载人数：</label>
 		            <div class="reg_info_li_box">
 		            	<p>
@@ -98,14 +98,13 @@
 		            	</p>
 		            	#errorMessageCreateOrder($!form.fields.totalSeats.message)
 		            	<p class="color_gray attention">
-                                   	 承载人数已包含发起人。(人/辆)
+                                   	 承载人数已包含已包括你自己。
                         </p>
 		            </div>
 	            </li>
 	        	
-	        	
 	            <li>
-		            <label for="inp_name"><em>*</em> 城市：</label>
+		            <label for="inp_name"><em>*</em> 出发城市：</label>
 		            <div class="reg_info_li_box">
 			            <p>
 			            	<input type="text" class="input_95" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
@@ -122,6 +121,18 @@
 		           		<input class="input_400" type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value" />
 		            </p>
 		            #errorMessageCreateOrder($!form.fields.fromAddr.message)
+		            </div>
+	            </li>
+	            
+	            
+	            <li>
+		            <label for="inp_name"><em>*</em> 目的城市：</label>
+		            <div class="reg_info_li_box">
+			            <p>
+			            	<input type="text" class="input_95" id="$!form.fields.arriveCity.name" name="$!form.fields.arriveCity.name" value="$!form.fields.arriveCity.value" />
+			           		<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'cityId').add('onName', 'arriveCity')" target="_blank">更换城市...</a>
+			            </p>
+			             #errorMessageCreateOrder($!form.fields.arriveCity.message)
 		            </div>
 	            </li>
 	            
