@@ -11,10 +11,11 @@
 
 <div id="cArea"><!--content-2 begin-->
 <div class="cbox">
-	<div class="create_cutbread">
-    	<div class="create_cb_car"></div>
-        <div class="create_cb_info_y"></div>
-        <div class="create_cb_suc_y"></div>
+		<div class="create_cutbread">
+	     	<div class="create_cb_car"></div>
+	        <div class="create_cb_info_y"></div>
+	        <div class="create_cb_suc_g_y"></div>
+	    </div>   
     </div>
     <Div style="height:1px; background:#ccc; width:100%; overflow:hidden"></Div>
     <div class="reg_l_box"><!--left begin-->
@@ -37,7 +38,7 @@
 	            <div class="reg_info_li_box">
 	            <p>
 	            	<input name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end type="radio" style="border:none"/> 先生
-					<input name="$!form.fields.sex.name"  value="2" #if("$!form.fields.sex.value" == "2") checked #end  type="radio" style="border:none" checked="checked"/> 女士</p>
+					<input name="$!form.fields.sex.name"  value="2" #if("$!form.fields.sex.value" == "2") checked #end  type="radio" style="border:none"/> 女士</p>
 	            </div>
 	            #errorMessagePersonalInfo($!form.fields.sex.message)
             </li>
