@@ -28,7 +28,11 @@
 	        <ul>
 	        	<li>
                     <label><em>*</em> ·¢ÆðÈË£º</label>
-                    <span class="fl color_gray">$!snowUtil.loginUsername</span>
+                    <span class="fl color_gray">
+                    <div class="reg_info_li_box">
+                    	$!snowUtil.loginUsername
+                    </div>
+                    </span>
                 </li>
                 
                 <li>
