@@ -13,6 +13,10 @@
 		<serverURI>${validator.server.url}</serverURI>
 	</content-uri>
 	
+	<content-uri name="serviceServer">
+		<serverURI>http://service.yiliangche.com/</serverURI>
+	</content-uri>
+	
 	<content-uri name="cssServer" extends="staticServer">
 		<path>css</path>
 	</content-uri>
