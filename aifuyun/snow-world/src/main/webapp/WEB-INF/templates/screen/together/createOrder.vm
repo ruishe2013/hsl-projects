@@ -75,7 +75,9 @@
 		        	<li id="J_car_no" #if(!$showCarNo) style="display:none" #end>
 	                    <label><em>*</em> 车牌号：</label>
 	                    <div class="reg_info_li_box">
-                            <input name="$!form.fields.carNo.name" type="text" class="input_95" value="$!form.fields.carNo.value" />
+	                    	<p>
+                            	<input name="$!form.fields.carNo.name" type="text" class="input_95" value="$!form.fields.carNo.value" />
+                            </p>
                             #errorMessageCreateOrder($!form.fields.carNo.message)
                             <p class="color_gray attention">
                                 	填写此项可以确定您信息的真实性，更方便你找到理想车友。
