@@ -828,6 +828,13 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			if (fromCityDO != null) {
 				orderDO.setCityId(fromCityDO.getId());
 			}
+			
+			// 目标城市id
+			CityDO arriveCityDO = this.cityBO.queryByName(orderDO.getArriveCity());
+			if (arriveCityDO != null) {
+				orderDO.setArriveCityId(arriveCityDO.getId());
+			}
+			
 			long orderId = orderBO.createOrder(orderDO);
 			
 			result.getModels().put("orderId", orderId);			

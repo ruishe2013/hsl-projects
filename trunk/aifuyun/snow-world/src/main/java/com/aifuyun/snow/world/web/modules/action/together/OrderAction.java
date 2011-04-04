@@ -189,10 +189,6 @@ public class OrderAction extends BaseAction {
 		orderDO.setFromTime(fromTime);
 		orderDO.setArriveTime(arriveTime);
 		
-		// 目的城市和出发城市是同一个
-		orderDO.setArriveCityId(orderDO.getCityId());
-		orderDO.setArriveCity(orderDO.getFromCity());
-		
 		Result result = orderAO.createOrder(orderDO);
 		if (result.isSuccess()) {
 			long orderId = (Long)result.getModels().get("orderId");
