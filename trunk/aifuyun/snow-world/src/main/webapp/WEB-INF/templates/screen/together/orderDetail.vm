@@ -102,8 +102,7 @@
     	#if ("$!order.status" == "20")
         <div style="padding:0 20px 20px;">
             <div class="tip_box">
-                <strong class="col_g">dd</strong>
-                恭喜您，该拼车单已经完成。
+             		  该拼车单已经完成。
             </div>
         </div>
     	
