@@ -20,7 +20,7 @@
 	<div class="reg_l_box"><!--left begin-->
 
         <div class="reg_info">
-        <form action="" method="post" >
+        <form action="" method="post" id="J_create_order_form">
 	        <input type="hidden" name="createOrder" value="$tokenUtil.token('createOrder')" />
 			<input type="hidden" name="actionTarget" value="together/orderAction" />
 			<input type="hidden" name="actionEvent" value="createOrder" />
@@ -39,38 +39,50 @@
                     	 #set($selectOrderType = $!selectedOrderType.value)
                     #end
                     
-                     <div class="reg_info_li_box">
+                    <div class="reg_info_li_box">
                      	#foreach($orderType in $orderTypes)
-	                        <input name="$!form.fields.type.name" type="radio" value="$!orderType.value" style="border:none" #if("$!selectOrderType" == "$!orderType.value") checked #end />$!orderType.name
+	                        <input class="order_type_selector" name="$!form.fields.type.name" type="radio" value="$!orderType.value" style="border:none"
+	                         #if("$!selectOrderType" == "$!orderType.value") checked #end />$!orderType.name
                         #end
                         
                         #errorMessageCreateOrder($!form.fields.type.message)
                     </div>
                      
                 </li>
-                
-                #*
-                ## TODO
-                <li>
-                	<label><em>*</em> 发起人身份：</label>
-                    <div class="reg_info_li_box">
-                        <input name="sf" type="radio" style="border:none" value=0 checked/>我是车主
-                        <input name="sf" type="radio" style="border:none" value=1 />我是乘客
-                    </div>
-                </li>
-	        	
-	        	 <li>
-                    <label><em>*</em> 车牌号：</label>
-                    <div class="reg_info_li_box">
-                            <input name="" type="text" class="input_95" value="浙A25255" />
-                             <p class="color_gray attention">
+               
+               #set($showCreatorType = true)
+               #if("$!selectOrderType" == "1") 
+               		 #set($showCreatorType = false)
+			   #end
+			   
+			   <div id="J_creator_type" #if(!$showCreatorType) style="display:none" #end >
+	               ## 如果是拼的士，则不显示
+	               <li 
+	                	<label><em>*</em> 发起人身份：</label>
+	                    <div class="reg_info_li_box">
+	                        <input class="creator_car_owner_type_selector" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="1" #if ("$!form.fields.creatorCarOwnerType.value" == "1") checked #end />我是车主
+	                        <input class="creator_car_owner_type_selector" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="2" #if ("$!form.fields.creatorCarOwnerType.value" == "2") checked #end />我是乘客
+	                     #errorMessageCreateOrder($!form.fields.creatorCarOwnerType.message)
+	                    </div>
+	                </li>
+	                
+	                
+	                #set($showCarNo = false)
+	                #if ($showCreatorType && "$!form.fields.creatorCarOwnerType.value" == "1")
+	                	 #set($showCarNo = true)
+	                #end
+	               
+		        	<li id="J_car_no" #if(!$showCarNo) style="display:none" #end>
+	                    <label><em>*</em> 车牌号：</label>
+	                    <div class="reg_info_li_box">
+                            <input name="$!form.fields.carNo.name" type="text" class="input_95" value="$!form.fields.carNo.value" />
+                            #errorMessageCreateOrder($!form.fields.carNo.message)
+                            <p class="color_gray attention">
                                 	填写此项可以确定您信息的真实性，更方便你找到理想车友。
                             </p>
-                   </div>
-                 </li>
-                 
-	        	*#
-	        	
+	                   </div>
+	                </li>
+                </div>
 	        	
 	        	 <li>
 		            <label for="inp_name"><em>*</em> 承载人数：</label>
@@ -231,7 +243,7 @@
 	                	<label for="inp_name"><em>*</em> 验证码：</label>
 		            	<div class="reg_info_li_box">
 			            	<p>
-			            		<input class="input_95" type="text" id="$!form.fields.checkCode.name" name="$form.fields.checkCode.name" value="" />
+			            		<input class="input_95" type="text" id="$!form.fields.checkCode.name" maxlength="4" name="$form.fields.checkCode.name" value="" />
 			            		$control.setTemplate('common/checkCode.vm')
 			            	</p>
 			            	#errorMessageCreateOrder($!form.fields.checkCode.message)
@@ -265,5 +277,33 @@
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.date-pick').datePicker({clickInput:true});
+		
+		$('.order_type_selector').bind('click', function() {
+			var val = this.value;
+			if (val == "1") {
+				// taxi
+				$('#J_creator_type').attr('disabled', 'disabled');
+				$('#J_creator_type').css('display', 'none');
+			} else if(val == "2") {
+				// shunfengche
+				$('#J_creator_type').css('display', 'block');
+				$('#J_creator_type').attr('disabled', false);
+			}
+		});
+		
+		
+		$('.creator_car_owner_type_selector').bind('click', function() {
+			var val = this.value;
+			if (val == "1") {
+				// car onwer
+				$('#J_car_no').attr('disabled', 'disabled');
+				$('#J_car_no').css('display', 'block');
+			} else if(val == "2") {
+				// has no car
+				$('#J_car_no').css('display', 'none');
+				$('#J_car_no').attr('disabled', false);
+			}
+		});
+		
 	});
 </script>

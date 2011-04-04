@@ -8,6 +8,28 @@
 				<param name="values" value="1,2" />
 			</validator>
 		</field>
+		
+		<field name="creatorCarOwnerType">
+			<validator type="dependencyRequired" message="请选择发起人身份!" >
+				<param name="dependencyField" value="type"></param>
+				<param name="dependencyValues" value="2"></param>
+			</validator>
+			<validator type="enums" message="请选择是否有车!" >
+				<param name="values" value="1,2" />
+			</validator>
+		</field>
+		
+		<field name="carNo">
+			<validator type="dependencyRequired" message="请输入车牌号!" >
+				<param name="dependencyField" value="creatorCarOwnerType"></param>
+				<param name="dependencyValues" value="1"></param>
+			</validator>
+			<validator type="string" message="车牌号不能超过14个字符!" >
+				<param name="max" value="14" />
+			</validator>
+		</field>
+		
+		
 		<field name="fromCity">
 			<validator type="required" message="出发城市不能为空!" />
 			<validator type="string" message="出发城市名称长度不能超过20个字符!" >
