@@ -26,7 +26,7 @@
 			<input type="hidden" name="orderId" value="$order.id" />
         <ul>
             <li>
-	            <label for="$!form.fields.realName.name"><em>*</em> 联系人：</label>
+	            <div class="info-title"><em>*</em> 联系人：</div>
 	            <div class="reg_info_li_box">
 		            <p><input class="reg_input_out" maxlength="10" type="text" id="$!form.fields.realName.name" name="$!form.fields.realName.name" value="$!form.fields.realName.value" /></p>
 	            </div>
@@ -34,7 +34,7 @@
             </li>
             
             <li>
-            	<label for="inp_name"><em>*</em> 性别：</label>
+            	<div class="info-title"><em>*</em> 性别：</div>
 	            <div class="reg_info_li_box">
 	            <p>
 	            	<input name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end type="radio" style="border:none"/> 先生
@@ -44,7 +44,7 @@
             </li>
             
             <li>
-	            <label for="$!form.fields.birthYear.name"><em>*</em> 出生年代：</label>
+	            <div class="info-title"><em>*</em> 出生年代：</div>
 	            <div class="reg_info_li_box">
 		            <p>
 			            <select size="1" id="$!form.fields.birthYear.name" name="$!form.fields.birthYear.name">
@@ -61,7 +61,7 @@
             </li>
             
             <li>
-	            <label for="$!form.fields.phone.name"><em>*</em> 手机号：</label>
+	            <div class="info-title"><em>*</em> 手机号：</div>
 	            <div class="reg_info_li_box">
 		            <p><input class="reg_input_out" maxlength="11" type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value"/></p>
 	            </div>
@@ -69,7 +69,8 @@
             </li>
             
             
-            <li><label for="inp_name"><em>*</em> 职业：</label>
+            <li>
+            	<div class="info-title"><em>*</em> 职业：</div>
 	            <div class="reg_info_li_box">
 					<p>
 						<select id="$!form.fields.career.name" name="$!form.fields.career.name" value="$!form.fields.career.value">
@@ -84,14 +85,16 @@
             </li>
                 
             
-           <li><label for="$!form.fields.qq.name"><em></em> qq：</label>
+           <li>
+           		<div class="info-title"><em></em> qq：</div>
             	<div class="reg_info_li_box">
 					<p><input class="reg_input_out" maxlength="12" type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value"/></p>
                 </div>
                 #errorMessagePersonalInfo($!form.fields.qq.message)
            </li>
             
-            <li><label for="inp_name">&nbsp;&nbsp;</label>
+            <li>
+            	<div class="info-title">&nbsp;&nbsp;</div>
             	<div class="reg_info_li_box">
             	<p><input type="checkbox" style="border:none" id="saveToUserInfo" name="saveToUserInfo" value="true" #if ($!isUserInfoEmpty) checked #end /> 同时更新我的个人资料 </p></div>
             </li>
