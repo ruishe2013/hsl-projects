@@ -16,7 +16,7 @@
 	        <div class="create_cb_info_y"></div>
 	        <div class="create_cb_suc_g_y"></div>
 	    </div>   
-    </div>
+    
     <Div style="height:1px; background:#ccc; width:100%; overflow:hidden"></Div>
     <div class="reg_l_box"><!--left begin-->
         <div class="reg_info">
@@ -30,9 +30,10 @@
                 	<em>*</em> 联系人：
                 </div>
 	            <div class="reg_info_li_box">
-		            <p><input class="input_150" maxlength="10" type="text" id="$!form.fields.realName.name" name="$!form.fields.realName.name" value="$!form.fields.realName.value" /></p>
+		            <p>
+                    	<input class="input_150" maxlength="10" type="text" id="$!form.fields.realName.name" name="$!form.fields.realName.name" value="$!form.fields.realName.value" /> #errorMessagePersonalInfo($!form.fields.realName.message)
+                    </p>
 	            </div>
-	            #errorMessagePersonalInfo($!form.fields.realName.message)
             </li>
             
             <li>
@@ -42,14 +43,17 @@
 	            <div class="reg_info_li_box">
 	            <p>
                 	<label for="$!form.fields.sex.name">
-	            	<input name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end type="radio" style="border:none"/> 先生
+	            		<input name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end type="radio" style="border:none"/>
+                        先生
                     </label>
                     <label for="$!form.fields.sex.name">
-					<input name="$!form.fields.sex.name"  value="2" #if("$!form.fields.sex.value" == "2") checked #end  type="radio" style="border:none"/> 女士
+						<input name="$!form.fields.sex.name"  value="2" #if("$!form.fields.sex.value" == "2") checked #end  type="radio" style="border:none"/>
+                        女士
                     </label>
+                    #errorMessagePersonalInfo($!form.fields.sex.message)
                     </p>
 	            </div>
-	            #errorMessagePersonalInfo($!form.fields.sex.message)
+	            
             </li>
             
             <li>
@@ -66,9 +70,9 @@
 							<option value="$!year.value" #if("$!selectedYear" == "$!year.value") selected #end >$!year.name</option>
 						#end
 			            </select>
+                        #errorMessagePersonalInfo($!form.fields.birthYear.message)
 		            </p>
 	            </div>
-	            #errorMessagePersonalInfo($!form.fields.birthYear.message)
             </li>
             
             <li>
@@ -76,9 +80,12 @@
                 	<em>*</em> 手机号：
                 </div>
 	            <div class="reg_info_li_box">
-		            <p><input class="input_150" maxlength="11" type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value"/></p>
+		            <p>
+                        <input class="input_150" maxlength="11" type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value"/>
+                        #errorMessagePersonalInfo($!form.fields.career.message)
+                    </p>
 	            </div>
-	            #errorMessagePersonalInfo($!form.fields.career.message)
+	            
             </li>
             
             
@@ -94,9 +101,9 @@
 		                    <option value="工程师">工程师</option>
 		                    <option value="按摩师">按摩师</option>
 		                </select>
+                        #errorMessagePersonalInfo($!form.fields.career.message)
 	           		</p>
 	            </div>
-	            #errorMessagePersonalInfo($!form.fields.career.message)
             </li>
                 
             
@@ -105,9 +112,10 @@
                		qq：
                </div>
             	<div class="reg_info_li_box">
-					<p><input class="input_150" maxlength="12" type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value"/></p>
+					<p>
+                    <input class="input_150" maxlength="12" type="text" id="$!form.fields.qq.name" name="$!form.fields.qq.name" value="$!form.fields.qq.value"/>#errorMessagePersonalInfo($!form.fields.qq.message)
+                    </p>
                 </div>
-                #errorMessagePersonalInfo($!form.fields.qq.message)
            </li>
             
             <li>
@@ -122,7 +130,7 @@
             <li style="padding-left:105px">
 	            #errorMessagePersonalInfo($!csrfmessage)
 				#errorMessagePersonalInfo($!resultmessage.message)
-                <p><INPUT class="but_g_bg font_14_b" type="submit" value="提 交">
+                <p><INPUT class="but_g_bg font_14_b" type="submit" value="提 交"></p>
             </li> 
             
          </ul>
@@ -133,7 +141,7 @@
     	</div><!--right end-->
     </div>
     
-	<div class="cl"></div>
+	
 </div>
-
+<div class="cl"></div>
 </div><!--content-2 end-->
