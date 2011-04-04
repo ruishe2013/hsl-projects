@@ -50,9 +50,9 @@
                      
                 </li>
                
-               #set($showCreatorType = true)
-               #if("$!selectOrderType" == "1") 
-               		 #set($showCreatorType = false)
+               #set($showCreatorType = false)
+               #if("$!selectOrderType" == "2") 
+               		 #set($showCreatorType = true)
 			   #end
 			   
 			   <div id="J_creator_type" #if(!$showCreatorType) style="display:none" #end >
