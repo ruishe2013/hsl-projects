@@ -128,7 +128,7 @@
 		            <div class="reg_info_li_box">
 			            <p>
 			            	<input type="text" class="input_95" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
-			           		<a href="#" id="change_from_city">更换城市...</a>
+			           		<a href="#" id="change_from_city">选择城市...</a>
 			            </p>
 			             #errorMessageCreateOrder($!form.fields.fromCity.message)
 		            </div>
@@ -154,7 +154,7 @@
 		            <div class="reg_info_li_box">
 			            <p>
 			            	<input type="text" class="input_95" id="$!form.fields.arriveCity.name" name="$!form.fields.arriveCity.name" value="$!form.fields.arriveCity.value" />
-			           		<a href="#" id="change_arrive_city">更换城市...</a>
+			           		<a href="#" id="change_arrive_city">选择城市...</a>
 			            </p>
 			             #errorMessageCreateOrder($!form.fields.arriveCity.message)
 		            </div>
@@ -391,7 +391,7 @@
 			}
 		});
 		
-		window.target_city_input_id = null;
+		window.target_city_input_id = "";
 		
 		$('#change_arrive_city').click(function(){
 			window.target_city_input_id = "$!form.fields.arriveCity.name";
