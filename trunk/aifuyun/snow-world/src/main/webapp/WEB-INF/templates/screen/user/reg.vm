@@ -75,7 +75,7 @@
 	            	</div>
 	            	<div class="reg_info_li_box">
 		            	<p>
-		            	<input id="$!form.fields.checkCode.name" class="reg_input_out" name="$form.fields.checkCode.name" value="$!form.fields.checkCode.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
+		            	<input id="$!form.fields.checkCode.name" maxlength="4" class="reg_input_out" name="$form.fields.checkCode.name" value="$!form.fields.checkCode.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
 		            	#errorRegMessage($!form.fields.checkCode.message)
 		            	</p>
 		            	 <p class="color_gray attention">请输入下图中的4个字符。</p>
