@@ -10,11 +10,11 @@
         <div class="pers_box">
         	<ul>
             	<li>
-                    <img src="images/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
+                    <img src="$imgServer/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
                     <a href="$snowModule.setTarget('user/myTogethers').add('type', 1)">我创建的拼车信息</a>
                 </li>
                 <li>
-                    <img src="images/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
+                    <img src="$imgServer/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
                     <a href="$snowModule.setTarget('user/myTogethers').add('type', 2)">我参加的拼车信息</a>
                 </li>
             </ul>
@@ -25,11 +25,11 @@
         <div class="pers_box">
         	<ul>
             	<li>
-                <img src="images/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
+                <img src="$imgServer/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
                 <a href="#">基本信息</a>
                 </li>
                 <li>
-                    <img src="images/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
+                    <img src="$imgServer/ico_b.gif" align="absbottom"; width="12" height="12" border="0" />
                     <a href="#">车辆档案</a>
                 </li>
             </ul>
