@@ -17,7 +17,9 @@
 			<input type="hidden" name="regUser" value="$tokenUtil.token('regUser')" />
             <ul>
 	            <li>
-		            <label for="$!form.fields.username.name"><em>*</em> 用户名：</label>
+		            <div class="info-title">
+		            	<em>*</em> 用户名：
+		            </div>
 		            <div class="reg_info_li_box">
 			            <p>
 			           		<input id="$!form.fields.username.name" class="reg_input_out" name="$!form.fields.username.name" value="$!form.fields.username.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
@@ -28,7 +30,9 @@
 	            </li>
 	            
 	            <li>
-		            <label for="$!form.fields.password.name"><em>*</em> 密码：</label>
+		           <div class="info-title">
+		           	<em>*</em> 密码：
+		           </div>
 		            <div class="reg_info_li_box">
 		            <p>
 		            <input id="$!form.fields.password.name" class="reg_input_out" name="$!form.fields.password.name" value="$!form.fields.password.value"  type="password" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
@@ -38,7 +42,9 @@
 	            </li>
 	            
 	            <li>
-		            <label for="$!form.fields.confirmPassword.name"><em>*</em> 确认密码：</label>
+		            <div class="info-title">
+		            	<em>*</em> 确认密码：
+		            </div>
 		            <div class="reg_info_li_box">
 			            <p>
 			            <input id="$!form.fields.confirmPassword.name" class="reg_input_out" name="$!form.fields.confirmPassword.name" value="$!form.fields.confirmPassword.value" type="password" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
@@ -49,7 +55,9 @@
 	            </li>
 	            
 	            <li>
-	            	<label for="$!form.fields.email.name"><em>*</em> 电子邮箱：</label>
+	            	<div class="info-title">
+	            		<em>*</em> 电子邮箱：
+	            	</div>
 	            	<div class="reg_info_li_box">
 		            	<p>
 		            	<input id="$!form.fields.email.name" class="reg_input_out" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
@@ -60,7 +68,9 @@
 	            </li>
 	            
 	            <li>
-	            	<label for="$!form.fields.checkCode.name"><em>*</em> 验证码：</label>
+	            	<div class="info-title">
+	            		<em>*</em> 验证码：
+	            	</div>
 	            	<div class="reg_info_li_box">
 		            	<p>
 		            	<input id="$!form.fields.checkCode.name" class="reg_input_out" name="$form.fields.checkCode.name" value="$!form.fields.checkCode.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
