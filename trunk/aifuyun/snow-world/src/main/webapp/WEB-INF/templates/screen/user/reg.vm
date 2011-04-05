@@ -1,6 +1,8 @@
-#macro(errorMessage, $str)
+#macro(errorRegMessage, $str)
 	#if( "$!str" != "")
-		<span id="result"><img src="$imgServer/ico_tip.gif" align="absmiddle" border="0" />${str}</span>
+		<p class="color_gray error-tip">
+			$str
+		</p>
 	#end
 #end
 
@@ -23,9 +25,9 @@
 		            <div class="reg_info_li_box">
 			            <p>
 			           		<input id="$!form.fields.username.name" class="reg_input_out" name="$!form.fields.username.name" value="$!form.fields.username.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
-			            	#errorMessage($!form.fields.username.message)
+			            	#errorRegMessage($!form.fields.username.message)
 			            </p>
-			            <p>用户名长度在3到20个字符之间，(可以是中文汉字，英文字母，数字和下划线)。</p>
+			             <p class="color_gray attention">用户名长度在3到20个字符之间，(可以是中文汉字，英文字母，数字和下划线)。</p>
 		            </div>
 	            </li>
 	            
@@ -36,8 +38,8 @@
 		            <div class="reg_info_li_box">
 		            <p>
 		            <input id="$!form.fields.password.name" class="reg_input_out" name="$!form.fields.password.name" value="$!form.fields.password.value"  type="password" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
-					#errorMessage($!form.fields.password.message)
-		            <p>密码长度6～20位，字母区分大小写。</p>
+					#errorRegMessage($!form.fields.password.message)
+		             <p class="color_gray attention">密码长度6～20位，字母区分大小写。</p>
 		            </div>
 	            </li>
 	            
@@ -48,9 +50,9 @@
 		            <div class="reg_info_li_box">
 			            <p>
 			            <input id="$!form.fields.confirmPassword.name" class="reg_input_out" name="$!form.fields.confirmPassword.name" value="$!form.fields.confirmPassword.value" type="password" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
-			            #errorMessage($!form.fields.confirmPassword.message)
+			            #errorRegMessage($!form.fields.confirmPassword.message)
 			            </p>
-			            <p>请再输一便刚才输入的密码。</p>
+			             <p class="color_gray attention">请再输一便刚才输入的密码。</p>
 		            </div>
 	            </li>
 	            
@@ -61,9 +63,9 @@
 	            	<div class="reg_info_li_box">
 		            	<p>
 		            	<input id="$!form.fields.email.name" class="reg_input_out" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
-		            	#errorMessage($!form.fields.email.message)
+		            	#errorRegMessage($!form.fields.email.message)
 		            	</p>
-		            	<p>请输入您的电子邮箱以便我们方便联系。</p>
+		            	 <p class="color_gray attention">请输入您的电子邮箱以便我们方便联系。</p>
 	            	</div>
 	            </li>
 	            
@@ -74,9 +76,9 @@
 	            	<div class="reg_info_li_box">
 		            	<p>
 		            	<input id="$!form.fields.checkCode.name" class="reg_input_out" name="$form.fields.checkCode.name" value="$!form.fields.checkCode.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
-		            	#errorMessage($!form.fields.checkCode.message)
+		            	#errorRegMessage($!form.fields.checkCode.message)
 		            	</p>
-		            	<p>请输入下图中的4个字符。</p>
+		            	 <p class="color_gray attention">请输入下图中的4个字符。</p>
 		            	<p>
 		            	$control.setTemplate('common/checkCode.vm')
 		            	</p>
@@ -85,8 +87,10 @@
 	            
 	            <li>
 		            <div class="reg_info_li_box">
-		            #errorMessage($!csrfmessage)
-					#errorMessage($!resultmessage.message)
+		            	<p>
+			            #errorRegMessage($!csrfmessage)
+						#errorRegMessage($!resultmessage.message)
+						</p>
 					</div>
             	</li>
 	            
