@@ -10,6 +10,8 @@ public interface CityAO {
 	 */
 	Result querySelectedCity();
 	
+	Result queryHotCityList();
+	
 	Result queryAllProviceAndCities();
 	
 	Result switchCity(int cityId);
