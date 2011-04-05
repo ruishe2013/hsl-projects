@@ -8,8 +8,11 @@
 	#end
 #end
 
+
 <div id="cArea"><!--content-2 begin-->
 <div class="cbox">
+
+	
 	<div class="create_cutbread">
     	<div class="create_cb_car"></div>
         <div class="create_cb_info_g_y"></div>
@@ -125,7 +128,7 @@
 		            <div class="reg_info_li_box">
 			            <p>
 			            	<input type="text" class="input_95" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
-			           		<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'cityId').add('onName', 'fromCity')" target="_blank">更换城市...</a>
+			           		<a href="#" id="change_from_city">更换城市...</a>
 			            </p>
 			             #errorMessageCreateOrder($!form.fields.fromCity.message)
 		            </div>
@@ -151,7 +154,7 @@
 		            <div class="reg_info_li_box">
 			            <p>
 			            	<input type="text" class="input_95" id="$!form.fields.arriveCity.name" name="$!form.fields.arriveCity.name" value="$!form.fields.arriveCity.value" />
-			           		<a href="$snowModule.setTarget('city/cityList').add('isSwitch','true').add('onId', 'cityId').add('onName', 'arriveCity')" target="_blank">更换城市...</a>
+			           		<a href="#" id="change_arrive_city">更换城市...</a>
 			            </p>
 			             #errorMessageCreateOrder($!form.fields.arriveCity.message)
 		            </div>
@@ -324,6 +327,17 @@
 
 </div><!--content-2 end-->
 
+
+<div id="choose_city_dialog" title="选择城市">
+	<p>
+		$control.setTemplate('area/hotCitiesList.vm')
+	</p>
+</div>
+
+
+<link type="text/css" href="${jsServer}/jquery/css/ui-lightness/jquery-ui-1.8.11.custom.css" rel="stylesheet" />	
+<script type="text/javascript" src="${jsServer}/jquery/jquery-ui-1.8.11.custom.min.js"></script>
+
 <script type="text/javascript">
 	$(document).ready(function(){
 		$('.date-pick').datePicker({clickInput:true});
@@ -366,5 +380,29 @@
 			}
 		});
 		
+		$('#choose_city_dialog').dialog({
+			autoOpen: false,
+			width: 600,
+			modal: true,
+			buttons: {
+				"取消": function() { 
+					$(this).dialog("close"); 
+				} 
+			}
+		});
+		
+		window.target_city_input_id = null;
+		
+		$('#change_arrive_city').click(function(){
+			window.target_city_input_id = "$!form.fields.arriveCity.name";
+			$('#choose_city_dialog').dialog('open');
+			return false;
+		});
+		
+		$('#change_from_city').click(function(){
+			window.target_city_input_id = "$!form.fields.fromCity.name";
+			$('#choose_city_dialog').dialog('open');
+			return false;
+		});
 	});
 </script>

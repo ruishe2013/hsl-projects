@@ -107,6 +107,18 @@ public class CityAOImpl extends BaseAO implements CityAO {
 		}
 		return result;
 	}
+	
+	public Result queryHotCityList() {
+		Result result = new ResultSupport(false);
+		try {
+			List<CityDO> hotCities = getHotCities();
+			result.getModels().put("hotCities", hotCities);	
+			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("查询热梦选择的城市错误", e);
+		}
+		return result;
+	}
 
 
 	@Override
