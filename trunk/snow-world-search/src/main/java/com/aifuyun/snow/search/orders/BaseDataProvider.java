@@ -117,12 +117,31 @@ public abstract class BaseDataProvider implements DataProvider {
 			ret.put("creatorRealName", rs.getString("real_name"));
 			ret.put("creatorCarOwnerType", rs.getString("creator_car_owner_type"));
 			ret.put("carNo", rs.getString("car_no"));
+
+			ret.put("fromAddrText", createFromAddrText(ret));
+			ret.put("arriveAddrText", createArriveAddrText(ret));
 		} catch (Exception e) {
 			log.error("≤È—Ø ß∞‹", e);
 		}
 		return ret;
 	}
 
+	private String createFromAddrText(Map<String, String> fields) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(fields.get("fromCity"));
+		sb.append(fields.get("fromAddr"));
+		sb.append(fields.get("approach"));
+		return sb.toString();
+	}
+	
+	private String createArriveAddrText(Map<String, String> fields) {
+		StringBuilder sb = new StringBuilder();
+		sb.append(fields.get("arriveCity"));
+		sb.append(fields.get("arriveAddr"));
+		sb.append(fields.get("approach"));
+		return sb.toString();
+	}
+	
 
 	private String genSql() {
 		String sql = "select t.id, t.city_id, t.gmt_modified, t.from_addr, t.gmt_create, t.creator_username, t.deleted,"+

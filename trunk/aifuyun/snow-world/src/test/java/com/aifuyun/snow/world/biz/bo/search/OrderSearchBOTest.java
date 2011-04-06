@@ -22,7 +22,8 @@ public class OrderSearchBOTest extends BaseTest {
 
 	public void testSearch() {
 		SearchQuery query = new SearchQuery();
-		String q = buildSearchQuery();
+//		String q = buildSearchQuery();
+		String q = "arriveAddrText:北京人声鼎沸史蒂夫";
 		System.out.println(q);
 		query.setQ(q);
 		
@@ -39,9 +40,7 @@ public class OrderSearchBOTest extends BaseTest {
 	
 	private String buildSearchQuery() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(" +fromTime:[").append(DateUtil.formatDate(new Date(), "yyyyMMddHHmmss"));
-		sb.append(" TO ").append(DateUtil.formatDate(DateUtil.addDay(new Date(), 100), "yyyyMMddHHmmss"));
-		sb.append("]");
+		
 		String ret = sb.toString();
 		if (StringUtil.isEmpty(ret)) {
 			return "*:*";
