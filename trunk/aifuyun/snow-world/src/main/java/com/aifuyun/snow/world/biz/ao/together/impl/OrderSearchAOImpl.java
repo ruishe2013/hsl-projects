@@ -1,5 +1,6 @@
 package com.aifuyun.snow.world.biz.ao.together.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hsqldb.lib.StringUtil;
@@ -15,6 +16,7 @@ import com.aifuyun.snow.world.biz.query.search.SearchResult;
 import com.aifuyun.snow.world.biz.query.search.SortField;
 import com.aifuyun.snow.world.common.SearchUtil;
 import com.zjuh.sweet.lang.CollectionUtil;
+import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
 
@@ -33,7 +35,7 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 			searchQuery.setStartRow(searchOrderQuery.getStartRow());
 			
 			// 按出发时间倒序排
-			SortField sf = new SortField("fromTime", FieldOrder.DESC);
+			SortField sf = new SortField("fromTime", FieldOrder.ASC);
 			searchQuery.setSortFields(CollectionUtil.asList(sf));
 			
 			SearchResult<SearchOrderDO> searchResult = orderSearchBO.queryOrders(searchQuery);
@@ -48,6 +50,19 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 		return result;
 	}
 
+	/**
+	 * 只能搜索到当前1个小时前和1年内的数据
+	 * @param sb
+	 */
+	private void filterFromDate(StringBuilder sb) {
+		// 出发时间已经过了1小时候的数据就搜索不出来了
+		Date searchDate = DateUtil.addSecond(new Date(), -3600);
+		sb.append(" +fromTime:[").append(DateUtil.formatDate(searchDate, "yyyyMMddHHmmss"));
+		sb.append(" TO ").append(DateUtil.formatDate(DateUtil.addDay(new Date(), 365), "yyyyMMddHHmmss"));
+		sb.append("]");
+		
+	}
+	
 	private String buildSearchQuery(SearchOrderQuery searchOrderQuery) {
 		StringBuilder sb = new StringBuilder();
 		String arriveAddr = searchOrderQuery.getArriveAddr();
@@ -68,6 +83,9 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 		if (!StringUtil.isEmpty(fromAddr)) {
 			sb.append(" +fromAddrText:").append(SearchUtil.filter(fromAddr));
 		}
+		
+		// 过滤起始时间
+		filterFromDate(sb);
 		
 		long fromTime = searchOrderQuery.getFromTime();
 		if (fromTime > 0L) {
