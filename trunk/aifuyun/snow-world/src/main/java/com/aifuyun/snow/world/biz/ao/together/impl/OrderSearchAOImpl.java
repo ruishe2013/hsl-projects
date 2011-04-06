@@ -9,9 +9,12 @@ import com.aifuyun.snow.world.biz.ao.together.OrderSearchAO;
 import com.aifuyun.snow.world.biz.bo.search.OrderSearchBO;
 import com.aifuyun.snow.world.biz.bo.search.SearchOrderDO;
 import com.aifuyun.snow.world.biz.query.SearchOrderQuery;
+import com.aifuyun.snow.world.biz.query.search.FieldOrder;
 import com.aifuyun.snow.world.biz.query.search.SearchQuery;
 import com.aifuyun.snow.world.biz.query.search.SearchResult;
+import com.aifuyun.snow.world.biz.query.search.SortField;
 import com.aifuyun.snow.world.common.SearchUtil;
+import com.zjuh.sweet.lang.CollectionUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
 
@@ -28,6 +31,11 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 			searchQuery.setQ(q);
 			searchQuery.setRows(searchOrderQuery.getPageSize());
 			searchQuery.setStartRow(searchOrderQuery.getStartRow());
+			
+			// 按出发时间倒序排
+			SortField sf = new SortField("fromTime", FieldOrder.DESC);
+			searchQuery.setSortFields(CollectionUtil.asList(sf));
+			
 			SearchResult<SearchOrderDO> searchResult = orderSearchBO.queryOrders(searchQuery);
 			long numFound = searchResult.getNumFound();
 			List<SearchOrderDO> orders = searchResult.getResult();

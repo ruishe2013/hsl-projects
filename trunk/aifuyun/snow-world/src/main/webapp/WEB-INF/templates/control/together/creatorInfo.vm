@@ -30,16 +30,6 @@
 		#else
 			<li>登陆即可查看车主的联系方式 
 			<input class="login_btn" id="J_login_for_view" type="button" value="登陆查看" name="login" tabindex="3"/></li>
-			
-			
-			<script type="text/javascript">
-				$(document).ready(function(){
-					$('#J_login_for_view').bind("click", function() {
-						#set($redirectUrl = "$snowModule.setTarget('/together/orderDetail').add('orderId', $order.id)")
-						location.href="$snowModule.setTarget('login').add('redirectUrl', $redirectUrl)";
-					});
-				});
-			</script>
 		#end
 		
 	</ul>
