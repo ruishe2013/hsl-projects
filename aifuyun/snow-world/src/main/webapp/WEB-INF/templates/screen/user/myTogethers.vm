@@ -1,6 +1,6 @@
 <div id="cArea">
   <div class="cutbread">
-    	当前位置：<a href="index.html">一辆车首页</a> >> 用户中心 >> 修改资料 
+    	当前位置：<a href="$snowModule.setTarget('index')">一辆车首页</a> >> 用户中心 >> 修改资料 
     </div>
     
     $control.setTemplate('user/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)

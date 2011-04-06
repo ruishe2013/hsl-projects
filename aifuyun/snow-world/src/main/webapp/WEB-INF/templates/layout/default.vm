@@ -16,12 +16,12 @@
 
 <body>
 <div id="header"><!--top begin-->
-<div class="logo"><a href="index.html" title="绿色出行，同上一辆车">一辆车</a></div>
+<div class="logo"><a href="$snowModule.setTarget('index')" title="绿色出行，同上一辆车">一辆车</a></div>
 	$control.setTemplate('common/citySelected.vm')
 </div>
 
 <div class="top_r">
-<p><a href="#">帮助中心</a> | <a href="#">收藏本站</a></p>
+<p><a href="#">帮助中心</a></p>
 $control.setTemplate('common/userInfo.vm')
 </div>
 
