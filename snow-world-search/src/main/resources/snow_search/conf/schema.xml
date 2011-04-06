@@ -78,13 +78,4 @@
 	<defaultSearchField>arriveAddrText</defaultSearchField>
 	<solrQueryParser defaultOperator="OR" />
 
-
-	<copyField source="fromCity" dest="fromAddrText"/>
-	<copyField source="fromAddr" dest="fromAddrText"/>
-	<copyField source="approach" dest="fromAddrText"/>
-	
-	<copyField source="arriveCity" dest="arriveAddrText"/>
-	<copyField source="arriveAddr" dest="arriveAddrText"/>
-	<copyField source="approach" dest="arriveAddrText"/>
-
 </schema>
