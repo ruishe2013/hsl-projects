@@ -201,115 +201,122 @@
 		        </li>
 	            
 	            
-	           		<li>
-		            	<div class="info-title"><em>*</em> 出发时间：</div>
-		            	#set($selectedHour = $form.fields.fromTimeHour.value)
-		            	#if ("$!selectedHour" == "")
-		            		#set($selectedHour = $fromHour)
-		            	#end
-		            	
-		            	#set($selectedMinute = $form.fields.fromTimeMinute.value)
-		            	#if ("$!selectedMinute" == "")
-		            		#set($selectedMinute = $fromMinute)
-		            	#end
-		            	
-			            <div class="reg_info_li_box">
-							<p>
-								#set($hours = [0 .. 23])
-								<select name="$!form.fields.fromTimeHour.name">
-									#foreach ($hour in $hours)
-										<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
-									#end
-				                </select>
-								
-				                #set($minuteIndice = [0 .. 11])
-				                <select name="$!form.fields.fromTimeMinute.name">
-				                	#foreach($minuteIndex in $minuteIndice)
-				                		#set($minute = $minuteIndex * 5)
-										<option value="$minute" #if("$!selectedMinute" == "$!minute") selected #end>$minute分</option>
-									#end
-				                </select>
-					                
-			                </p>
-			                #errorMessageCreateOrder($!form.fields.fromTimeHour.message)
-							#errorMessageCreateOrder($!form.fields.fromTimeMinute.message)
-		                </div>
-		            </li>
-	                
-	                <li>
-	                	<div class="info-title">
-                        	预计到达时间：
-                        </div>
-	                	#set($arriveSelectedHour = $form.fields.arriveTimeHour.value)
-		            	#set($arriveSelectedMinute = $form.fields.arriveTimeMinute.value)
-	                	
-		            	<div class="reg_info_li_box">
-							<p>
-								#set($hours = [0 .. 23])
-								<select name="$form.fields.arriveTimeHour.name">
-									<option></option>
-									#foreach ($hour in $hours)
-										<option value="$hour" #if ("$!arriveSelectedHour" == "$!hour") selected #end>$hour时</option>
-									#end
-				                </select>
-								
-				                #set($minuteIndice = [0 .. 11])
-				                <select name="$form.fields.arriveTimeMinute.name">
-				                	 <option></option>
-				                	#foreach($minuteIndex in $minuteIndice)
-				                		#set($minute = $minuteIndex * 5)
-										<option value="$minute" #if("$!arriveSelectedMinute" == "$!minute") selected #end>$minute分</option>
-									#end
-				                </select>
-			                </p>
-			                 #errorMessageCreateOrder($!form.fields.arriveTimeHour.message)
-							 #errorMessageCreateOrder($!form.fields.arriveTimeMinute.message)
-			                </p>
-                            <p class="color_gray attention">
-                            	该项可选填，填写预计到达时间可以明确地将您的需求告诉乘客，避免因时间的误差而引起的争论。
-                            </p>
-		                </div>
-		               
-	                </li>
-	                
-	                
-	                <li>
-		                <div class="info-title">
-                        	描述：
-                        </div>
-		            	<div class="reg_info_li_box">
-			            	<p>
-			            		<textarea cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!{form.fields.description.value}</textarea>
-			            	</p>
-			            	#errorMessageCreateOrder($!form.fields.description.message)
-		            	</div>
-		            	
-	            	</li> 
+	           	<li>
+	            	<div class="info-title"><em>*</em> 出发时间：</div>
+	            	#set($selectedHour = $form.fields.fromTimeHour.value)
+	            	#if ("$!selectedHour" == "")
+	            		#set($selectedHour = $fromHour)
+	            	#end
 	            	
-	                <li>
-	                	<div class="info-title">
-                        	<em>*</em> 验证码：
-                        </div>
-		            	<div class="reg_info_li_box">
-			            	<p>
-			            		<input class="input_95" type="text" id="$!form.fields.checkCode.name" maxlength="4" name="$form.fields.checkCode.name" value="" />
-			            		$control.setTemplate('common/checkCode.vm')
-			            	</p>
-			            	#errorMessageCreateOrder($!form.fields.checkCode.message)
-		            	</div>
-		            	
-	            	</li>
+	            	#set($selectedMinute = $form.fields.fromTimeMinute.value)
+	            	#if ("$!selectedMinute" == "")
+	            		#set($selectedMinute = $fromMinute)
+	            	#end
 	            	
-	                <li>
-	                	#errorMessageCreateOrder($!csrfmessage)
-						#errorMessageCreateOrder($!resultmessage.message)
-						
-						<div class="info-title">&nbsp;</div>
-	                	<button id="xxxx" type="submit" class="but_cjpc" value="提交"></button>
-	                </li> 
+		            <div class="reg_info_li_box">
+						<p>
+							#set($hours = [0 .. 23])
+							<select name="$!form.fields.fromTimeHour.name">
+								#foreach ($hour in $hours)
+									<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
+								#end
+			                </select>
+							
+			                #set($minuteIndice = [0 .. 11])
+			                <select name="$!form.fields.fromTimeMinute.name">
+			                	#foreach($minuteIndex in $minuteIndice)
+			                		#set($minute = $minuteIndex * 5)
+									<option value="$minute" #if("$!selectedMinute" == "$!minute") selected #end>$minute分</option>
+								#end
+			                </select>
+				            
+				            <a id="show_set_arriveTime_link" href="#">设置预计到达时间</a>
+		                </p>
+		                #errorMessageCreateOrder($!form.fields.fromTimeHour.message)
+						#errorMessageCreateOrder($!form.fields.fromTimeMinute.message)
+	                </div>
+	            </li>
+                
+                
+                #set($arriveSelectedHour = $form.fields.arriveTimeHour.value)
+	            #set($arriveSelectedMinute = $form.fields.arriveTimeMinute.value)
 	            
+	            #if ("$!arriveSelectedHour" != "" || "$!arriveSelectedMinute" != "")
+	            	#set($showArriveTime = true)
+	            #else
+	            	#set($showArriveTime = false)
+	            #end
 	            
-	         </ul>
+                <li id="J_arriveTime" #if (!$!showArriveTime) style="display:none" #end>
+                	<div class="info-title">
+                    	预计到达时间：
+                    </div>
+	            	<div class="reg_info_li_box">
+						<p>
+							#set($hours = [0 .. 23])
+							<select name="$form.fields.arriveTimeHour.name">
+								<option></option>
+								#foreach ($hour in $hours)
+									<option value="$hour" #if ("$!arriveSelectedHour" == "$!hour") selected #end>$hour时</option>
+								#end
+			                </select>
+							
+			                #set($minuteIndice = [0 .. 11])
+			                <select name="$form.fields.arriveTimeMinute.name">
+			                	 <option></option>
+			                	#foreach($minuteIndex in $minuteIndice)
+			                		#set($minute = $minuteIndex * 5)
+									<option value="$minute" #if("$!arriveSelectedMinute" == "$!minute") selected #end>$minute分</option>
+								#end
+			                </select>
+		                </p>
+		                 #errorMessageCreateOrder($!form.fields.arriveTimeHour.message)
+						 #errorMessageCreateOrder($!form.fields.arriveTimeMinute.message)
+		                </p>
+                        <p class="color_gray attention">
+                        	该项可选填，填写预计到达时间可以明确地将您的需求告诉乘客，避免因时间的误差而引起的争论。
+                        </p>
+	                </div>
+	               
+                </li>
+                
+                
+                <li>
+	                <div class="info-title">
+                    	描述：
+                    </div>
+	            	<div class="reg_info_li_box">
+		            	<p>
+		            		<textarea cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!{form.fields.description.value}</textarea>
+		            	</p>
+		            	#errorMessageCreateOrder($!form.fields.description.message)
+	            	</div>
+	            	
+            	</li> 
+            	
+                <li>
+                	<div class="info-title">
+                    	<em>*</em> 验证码：
+                    </div>
+	            	<div class="reg_info_li_box">
+		            	<p>
+		            		<input class="input_95" type="text" id="$!form.fields.checkCode.name" maxlength="4" name="$form.fields.checkCode.name" value="" />
+		            		$control.setTemplate('common/checkCode.vm')
+		            	</p>
+		            	#errorMessageCreateOrder($!form.fields.checkCode.message)
+	            	</div>
+	            	
+            	</li>
+            	
+                <li>
+                	#errorMessageCreateOrder($!csrfmessage)
+					#errorMessageCreateOrder($!resultmessage.message)
+					
+					<div class="info-title">&nbsp;</div>
+                	<button id="xxxx" type="submit" class="but_cjpc" value="提交"></button>
+                </li> 
+	            
+	       </ul>
         </form>
         </div>
 
@@ -399,6 +406,15 @@
 		$('#change_from_city').click(function(){
 			window.target_city_input_id = "$!form.fields.fromCity.name";
 			$('#choose_city_dialog').dialog('open');
+			return false;
+		});
+		
+		$('#show_set_arriveTime_link').bind('click', function() {
+			if ( $('#J_arriveTime').css('display') == 'none') {
+				$('#J_arriveTime').css('display', 'block');
+			} else {
+				$('#J_arriveTime').css('display', 'none');
+			}
 			return false;
 		});
 	});
