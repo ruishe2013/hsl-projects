@@ -11,8 +11,6 @@
 
 <div id="cArea"><!--content-2 begin-->
 <div class="cbox">
-
-	
 	<div class="create_cutbread">
     	<div class="create_cb_car"></div>
         <div class="create_cb_info_g_y"></div>
@@ -67,7 +65,6 @@
                		 #set($showCreatorType = true)
 			   #end
 			   
-			   
                ## 如果是拼的士，则不显示
                <li id="J_creator_type" #if(!$showCreatorType) style="display:none" #end >
                 	<div class="info-title">
@@ -83,7 +80,6 @@
                      #errorMessageCreateOrder($!form.fields.creatorCarOwnerType.message)
                     </div>
                 </li>
-                
                 
                 #set($showCarNo = false)
                 #if ($showCreatorType && "$!form.fields.creatorCarOwnerType.value" == "1")
@@ -346,12 +342,13 @@
 			var val = this.value;
 			if (val == "1") {
 				// taxi
-				$('#J_creator_type').attr('disabled', 'disabled');
 				$('#J_creator_type').css('display', 'none');
+				$('#J_creator_type').attr('disabled', 'disabled');
 				
 				// hide car no
 				$('#J_car_no').css('display', 'none');
-				$('#J_car_no').attr('disabled', false);
+				$('#J_car_no').attr('disabled', 'disabled');
+				
 			} else if(val == "2") {
 				// shunfengche
 				$('#J_creator_type').css('display', 'block');
