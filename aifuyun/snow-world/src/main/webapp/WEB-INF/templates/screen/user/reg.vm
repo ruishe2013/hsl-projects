@@ -13,7 +13,7 @@
 	<div class="reg_l_box"><!--left begin-->
     	<div class="reg_title"><h1 title="用户注册">用户注册</h1></div>
         <div class="reg_info">
-        <form action="" method="post">
+        <form id="J_reg_form" action="" method="post">
         	<input type="hidden" name="actionEvent" value="regUser" /> 
 			<input type="hidden" name="actionTarget" value="userFacadeAction" />
 			<input type="hidden" name="regUser" value="$tokenUtil.token('regUser')" />
@@ -95,13 +95,13 @@
             	</li>
 	            
 	            <li style="padding-left:20px;">
-	            <p><input name="checkAgreement" type="checkbox" value="1" checked="checked" /> 我接受并同一辆车网站 用户服务条款</p>
+	            <p><input id="J_checkAgreement" name="checkAgreement" type="checkbox" value="1" checked="checked" /><label for="J_checkAgreement">我接受一辆车网站用户服务条款</label></p>
 	            </li>
             <li style="padding-left:20px;">
             <p><textarea id=agree_txt style=" font:12px; width:480px; line-height:25px; color:#666; height:110px;" 
             readOnly>$control.setTemplate('misc/agreement.vm')</textarea></p>
             </li> 
-            <li><button type="submit" class="but_submit" value="注册"></button></li>
+            <li><button id="J_submit_button" type="submit" class="but_submit" value="注册"></button></li>
             </ul>
          </form>
         </div>
@@ -114,3 +114,16 @@
     <div class="clear"></div>
 </div>
 </div><!--content-2 end-->
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#J_reg_form').bind('submit', function(){
+				if($('#J_checkAgreement').attr('checked')) {
+					return true;
+				} else {
+					alert('只有接受一辆车网站用户服务条款才可以注册！');
+					return false;
+				}
+			});
+	});
+</script>
