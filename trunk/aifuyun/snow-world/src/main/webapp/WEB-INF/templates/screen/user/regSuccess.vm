@@ -1,9 +1,8 @@
 <div id="cArea"><!--content-2 begin-->
 	<div class="cbox">
 		<div class="tip_box" style="height:30px; line-height:30px; padding:20px; margin:20px;">
-			<span class="fl dis">恭喜，您已经完成注册，现在就可以登录体验我们的拼车服务。</span>
-			<a href="$snowModule.setTarget('login')" class=" but_bg_g fl ml10">登录</a></span>
-			<input name="" type="submit" value=""  class="but_cjpc-y fl ml10"/>
+			<span class="fl dis">恭喜，您已经完成注册，现在就可以体验我们的拼车服务。</span>
+			<a href="$snowModule.setTarget('together/createOrder')" class="but_cjpc-y fl ml10">发起拼车</a>
 		</div>
 		<div class="hr_10"></div>
 	</div>
