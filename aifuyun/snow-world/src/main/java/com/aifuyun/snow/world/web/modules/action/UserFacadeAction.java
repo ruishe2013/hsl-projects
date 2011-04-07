@@ -1,5 +1,6 @@
 package com.aifuyun.snow.world.web.modules.action;
 
+import com.aifuyun.snow.world.biz.ao.user.LoginAO;
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
 import com.aifuyun.snow.world.web.common.base.BaseAction;
@@ -13,6 +14,8 @@ public class UserFacadeAction extends BaseAction {
 
 	private UserAO userAO;
 	
+	private LoginAO loginAO;
+	
 	@DefaultTarget("user/reg")
 	public void doRegUser(RunData rundata, TemplateContext templateContext) {
 		if (!checkCsrf(templateContext, "regUser")) {
@@ -25,16 +28,30 @@ public class UserFacadeAction extends BaseAction {
 		
 		BaseUserDO baseUserDO = new BaseUserDO();
 		form.apply(baseUserDO);
+		String username = baseUserDO.getUsername();
+		String password = baseUserDO.getPassword();
 		Result result = userAO.registerUser(baseUserDO);
 		if (result.isSuccess()) {
+			this.handleLogin(username, password);
 			this.sendRedirect("snowModule", "user/regSuccess");
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
 	}
+	
+	private void handleLogin(String username, String password) {
+		BaseUserDO user = new BaseUserDO();
+		user.setUsername(username);
+		user.setPassword(password);
+		loginAO.handleLogin(user);
+	}
 
 	public void setUserAO(UserAO userAO) {
 		this.userAO = userAO;
+	}
+
+	public void setLoginAO(LoginAO loginAO) {
+		this.loginAO = loginAO;
 	}
 	
 }
