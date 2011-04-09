@@ -20,14 +20,16 @@
 				<span class="col_g">$!{order.arriveCity}$!{order.arriveAddr}</span>
 			 </h1>
 			 <div class="fr Fast-tool">
-				 2011-04-07<!--创建时间-->
-				 <a href="#" class="text_drakgreen">修改</a> | 
-				 <a href="#" class="text_drakgreen">删除</a>
+				创建时间: $!dateUtil.formatFullDate($order.gmtCreate)
+				## <a href="#" class="text_drakgreen">修改</a> | 
+				## <a href="#" class="text_drakgreen">删除</a>
 			 </div>
 		 </div>
         
         
         #set($leftSeatCount = $order.totalSeats - $joinersCount)
+        
+        #set($isSfcAndPassenger = $order.isSfcAndPassenger())
         
         <div class="details_l">
 		    <ul>
@@ -57,6 +59,17 @@
 		                  </div>
 						#end
 						</li>
+					#elseif ($isSfcAndPassenger)
+						<li>
+		            		<div class="details-state_box">
+                            	<span class="fr ml10">
+			                    </span>
+			                    <span class="fr">
+			                        	该顺风车是由乘客发起，无法加入。
+			                    </span>
+			                    <div class="cl"></div>
+			                </div>
+		                </li>
 					#elseif ($hasBeenJoin)
 						<li>
 		            		<div class="details-state_box">
@@ -118,11 +131,11 @@
         <div class="hr_6"></div>
     
     	#if ("$!order.status" == "20")
-        <div style="padding:0 20px 20px;">
-            <div class="tip_box">
-             		  该拼车单已经完成。
-            </div>
-        </div>
+	        <div style="padding:0 20px 20px;">
+	            <div class="tip_box">
+	             		  该拼车单已经完成。
+	            </div>
+	        </div>
     	
     	#else
 	        <div class="r_c_box">

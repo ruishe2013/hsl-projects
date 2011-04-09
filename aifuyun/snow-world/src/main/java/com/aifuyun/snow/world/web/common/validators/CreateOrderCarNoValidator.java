@@ -21,7 +21,7 @@ public class CreateOrderCarNoValidator implements Validator {
 	static {
 		validatorOrderTypes.add(String.valueOf(OrderTypeEnum.SFC.getValue()));
 		
-		validatorCreatorCarOwnerTypes.add(String.valueOf(CarOwnerTypeEnum.HAS_CAR.getValue()));
+		validatorCreatorCarOwnerTypes.add(String.valueOf(CarOwnerTypeEnum.CAR_OWNER.getValue()));
 	}
 	
 	@Override
