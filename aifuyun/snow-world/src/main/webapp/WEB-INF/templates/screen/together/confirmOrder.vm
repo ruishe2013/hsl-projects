@@ -1,4 +1,4 @@
-<div id="cArea"><!--content-2 begin-->
+<div id="cArea"><!--content begin-->
 <div class="cbox">
 	<div class="create_cutbread">
     	<div class="create_cb_car"></div>
@@ -7,79 +7,92 @@
     </div>
     
     <div class="create_box">
-    	<div class="create_suc"><span class="fl font_14_b col_g">您发起的拼车信息如下，请确认后点击右下角的按钮提交！</span>
+    	<div class="create_suc">
+            <span class="fl font_14_b col_g">
+                您发起的拼车信息如下，请确认后点击右下角的按钮提交！
+            </span>
+            <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmOrder').add('orderId', $order.id)" >
+                	<span class="but_bg"><strong>确认提交</strong></span>
+                </a>
     	</div>
    		<div class="cl"></div>
-    <div class="r_c_box">
-        	<table border="0" cellpadding="0" cellspacing="0" width="100%">
-            	<tr>
-                	<td colspan="7" class="tl"><strong>$!creator.username 发布的拼车信息。</strong></td>
-                </tr>
-                <tr>
-                	<td width="76" class="tr">出发地：</td>
-                    <td width="90">$!{order.fromCity}</td>
-                    <td width="185">$!{order.fromAddr}</td>
-                    <td width="100" class="tr">目的地：</td>
-                    <td width="90">$!{order.arriveCity} </td>
-                    <td width="174">$!{order.arriveAddr}</td>
-                </tr>
-                <tr>
-                	<td class="tr">出发时间：</td>
-                    <td colspan="2">$!dateUtil.formatFullDate($order.fromTime)</td>
-                    <td class="tr">预计到达的时间：</td>
-                    <td colspan="2">$!dateUtil.formatFullDate($order.arriveTime)</td>
-                </tr>
-                <tr>
-                	<td class="tr">途 径：</td>
-                    <td colspan="6">$!order.approach </td>
-                </tr>
-                <tr>
-                	<td class="tr">承载人数：</td>
-                    <td colspan="6">$!order.totalSeats <span class="col_gray"> (承载人数包括你自己)  </span></td>
-                </tr>
-                <tr>
-                	<td class="tr">描述：</td>
-                    <td colspan="6" style="line-height:22px;">$!order.description </td>
-                </tr>
-            </table>
-            <div class="hr_6"></div>
-             <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                <tr>
-                	<td colspan="4"><strong>发起人信息：</strong></td>
-                </tr>
-                <tr align="center">
-                	<td width="10%" class="tr">姓名：</td>
-                    <td width="22%">$!creator.realName </td>
-                    <td width="10%" class="tr">性别：</td>
-                    <td width="22%">$!creator.sexEnum.name </td>
-                    <td width="10%" class="tr">年龄段：</td>
-                    <td width="26%">$!creator.birthYearEnum.name</td>
-                </tr>
-                <tr align="center">
-                    <td class="tr">职业：</td>
-                    <td>$!creator.career</td>
-                    <td class="tr">手机：</td>
-                    <td>$!creator.phone</td>
-                    <td class="tr">QQ号：</td>
-                    <td>$!creator.qq</td>
-                </tr>
-                <tr>
-                	<td class="tr">邮箱：</td>
-                    <td colspan="5">
-                    
-                    <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmOrder').add('orderId', $order.id)" 
-                    style="color:#FFF; "><span class="but_bg" style="float:right; margin:5px;">确认提交</span></a>
-                   
-                    $!creator.email
-                    </td>
-                </tr>
-                
-            </table>
+    		<div class="r_c_box">
+			
+				<table border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td colspan="7" class="tl col_gray">
+							<a href="#" class="fr text_drakgreen">修改信息</a>
+							<strong>$!creator.username 发布的拼车信息。</strong>
+						</td>
+					</tr>
+					<tr>
+						<td width="76" class="tr col_gray">出发地：</td>
+						<td width="90">$!{order.fromCity}</td>
+						<td width="185">$!{order.fromAddr}</td>
+						<td width="100" class="tr col_gray">目的地：</td>
+						<td width="90">$!{order.arriveCity} </td>
+						<td width="174">$!{order.arriveAddr}</td>
+					</tr>
+					<tr>
+						<td class="tr col_gray">出发时间：</td>
+						<td colspan="2">$!dateUtil.formatFullDate($order.fromTime)</td>
+						<td class="tr col_gray">预计到达的时间：</td>
+						<td colspan="2">$!dateUtil.formatFullDate($order.arriveTime)</td>
+					</tr>
+					<tr>
+						<td class="tr col_gray">途 径：</td>
+						<td colspan="6">$!order.approach </td>
+					</tr>
+					<tr>
+						<td class="tr col_gray">承载人数：</td>
+						<td colspan="6">
+							$!order.totalSeats 
+						</td>
+					</tr>
+					<tr>
+						<td class="tr col_gray">描述：</td>
+						<td colspan="6" style="line-height:22px;">$!order.description </td>
+					</tr>
+				</table>
+				<div class="hr_6"></div>
+				 <table border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td colspan="6" class="tl col_gray">
+							<a href="#" class="fr text_drakgreen">修改信息</a>
+							<strong>发起人信息：</strong>
+						</td>
+					</tr>
+					<tr align="center">
+						<td width="10%" class="tr col_gray">姓名：</td>
+						<td width="22%">$!creator.realName </td>
+						<td width="10%" class="tr col_gray">性别：</td>
+						<td width="22%">$!creator.sexEnum.name </td>
+						<td width="10%" class="tr col_gray">年龄段：</td>
+						<td width="26%">$!creator.birthYearEnum.name</td>
+					</tr>
+					<tr align="center">
+						<td class="tr col_gray">职业：</td>
+						<td>$!creator.career</td>
+						<td class="tr col_gray">手机：</td>
+						<td>$!creator.phone</td>
+						<td class="tr col_gray">QQ号：</td>
+						<td>$!creator.qq</td>
+					</tr>
+					<tr>
+						<td class="tr col_gray">邮箱：</td>
+						<td colspan="5">
+						$!creator.email
+						</td>
+					</tr>             
+				</table>
+				<div style="text-align:center;margin:5px;">
+					<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmOrder').add('orderId', $order.id)" >
+						<span class="but_bg"><strong>确认提交</strong></span>
+					</a>
+				</div>
             
-            </div>
+         </div>
     </div>
-    
-    <div class=" hr_10"></div>
+    <div class="hr_10"></div>
 </div>
-
-</div><!--content-2 end-->
+</div><!--content end-->
