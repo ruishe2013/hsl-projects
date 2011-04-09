@@ -16,9 +16,6 @@
 	$renderMessage
 </div>
 <div id="errorPage-error-guider">
-	#if("$!backUrl" != "")
-		<a href="$backUrl">返回之前访问的页面</a>
-	#end
 	<a href="$snowModule.setTarget('index.vm')">返回首页</a>
 </div>
 
