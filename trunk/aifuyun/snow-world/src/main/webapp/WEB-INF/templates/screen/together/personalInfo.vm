@@ -43,13 +43,13 @@
                 </div>
 	            <div class="reg_info_li_box">
 	            <p>
-                	<label for="$!form.fields.sex.name">
-	            		<input name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end type="radio" style="border:none"/>
-                        先生
+                	<label for="$!{form.fields.sex.name}-1">
+	            		<input id="$!{form.fields.sex.name}-1" name="$!form.fields.sex.name" value="1" #if("$!form.fields.sex.value" == "1") checked #end type="radio" style="border:none"/>
+                        	先生
                     </label>
-                    <label for="$!form.fields.sex.name">
-						<input name="$!form.fields.sex.name"  value="2" #if("$!form.fields.sex.value" == "2") checked #end  type="radio" style="border:none"/>
-                        女士
+                    <label for="$!{form.fields.sex.name}-2">
+						<input id="$!{form.fields.sex.name}-2"  name="$!form.fields.sex.name"  value="2" #if("$!form.fields.sex.value" == "2") checked #end  type="radio" style="border:none"/>
+                       	 女士
                     </label>
                     </p>
 					 #errorMessagePersonalInfo($!form.fields.sex.message)
@@ -123,8 +123,10 @@
             <li>
             	<div class="reg_info_li_box" style="padding-left:105px">
                     <p>
-                    	<input type="checkbox" style="border:none" id="saveToUserInfo" name="saveToUserInfo" value="true" #if ($!isUserInfoEmpty) checked #end />
-                        同时更新我的个人资料 
+                    	<label for="saveToUserInfo">
+                    		<input type="checkbox" style="border:none" id="saveToUserInfo" name="saveToUserInfo" value="true" #if ($!isUserInfoEmpty) checked #end />
+                        	同时更新我的个人资料 
+                        </label>
                     </p>
                 </div>
             </li>

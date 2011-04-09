@@ -71,7 +71,7 @@ public class OrderDO extends BaseDO {
 	private Date arriveTime;
 	
 	/**
-	 * 总用座位数
+	 * 空余座位数
 	 */
 	private int totalSeats;
 	
