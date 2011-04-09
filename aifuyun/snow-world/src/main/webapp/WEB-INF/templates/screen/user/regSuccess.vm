@@ -1,9 +1,13 @@
-<div id="cArea"><!--content-2 begin-->
+<div id="cArea"><!--content begin-->
 	<div class="cbox">
-		<div class="tip_box" style="height:30px; line-height:30px; padding:20px; margin:20px;">
-			<span class="fl dis">恭喜，您已经完成注册，现在就可以体验我们的拼车服务。</span>
-			<a href="$snowModule.setTarget('together/createOrder')" class="but_cjpc-y fl ml10">发起拼车</a>
+		<div class="create_box font_14_b col_gray"  style="margin-bottom: 15px;margin-top:30px">
+            	<img src="$imgServer/Symbol_Check.png" border="0" height="90" width="100" class="fl"/>
+                <div class="fl" style="padding:30px 10px;">
+                    恭喜您已经完成注册，现在就可以体验拼车服务。
+                <a href="$snowModule.setTarget('together/createOrder')" class="text_drakgreen">[创建拼车]</a>
+                <a href="$snowModule.setTarget('index')" class="text_drakgreen">[返回首页]</a>
+                </div>
 		</div>
 		<div class="hr_10"></div>
 	</div>
-</div><!--content-2 end-->
+</div><!--content end-->

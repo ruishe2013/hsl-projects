@@ -10,6 +10,21 @@
 
 <div class="cbox">
     <div class="details_box"><!--details_box begin-->
+	
+		<div class="details-title">
+			<img src="$imgServer/car.png" width="60" height="40" border="0" align="absmiddle" class="fl"/>
+			 <h1>
+				[$!order.togetherTypeEnum.name]
+				<span class="col_g">$!{order.fromCity}$!{order.fromAddr}</span>
+				&rarr;
+				<span class="col_g">$!{order.arriveCity}$!{order.arriveAddr}</span>
+			 </h1>
+			 <div class="fr Fast-tool">
+				 2011-04-07<!--创建时间-->
+				 <a href="#" class="text_drakgreen">修改</a> | 
+				 <a href="#" class="text_drakgreen">删除</a>
+			 </div>
+		 </div>
         
         <div class="details_l">
 		    <ul>
@@ -145,5 +160,4 @@
 		});
 	});
 	
-	</script>
 </script>

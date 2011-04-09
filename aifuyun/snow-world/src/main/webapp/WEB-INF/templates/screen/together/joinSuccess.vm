@@ -1,16 +1,12 @@
-<div id="cArea"><!--content-2 begin-->
+<div id="cArea"><!--content begin-->
 	<div class="cbox">
-		<div class="details_box">
-			<div style="padding:0 20px 20px;">
-		        <div class="tip_box">
-		           	 恭喜您，已经加入该拼车，请等待车主确认。
-		        </div>
-		        
-		        <div>
-		        	  <a href="$snowModule.setTarget('index')" class=" but_bg fl"><strong>返回首页</strong></a>
-		        </div>
-		        
-		    </div>
-		</div>
+        <div class="create_box font_14_b col_gray" style="margin-bottom: 15px;margin-top:30px">
+            <img src="$imgServer/Symbol_Check.png" border="0" height="90" width="100" class="fl"/>
+            <div class="fl" style="padding:30px 10px;">
+            恭喜您，您已经成功加入该拼车，请耐心等待车主确认。
+            <a href="$snowModule.setTarget('together/orderDetail').addQueryData('orderId', $rundata.queryString.getLong('orderId'))" class="text_drakgreen">[查看刚刚加入的拼车]</a>
+            <a href="$snowModule.setTarget('index')" class="text_drakgreen">[返回首页]</a>
+            </div>
+        </div>
 	</div>
-</div>
+</div><!--content end-->

@@ -1,8 +1,11 @@
-<div id="cArea"><!--content-2 begin-->
-	<div class="cbox">
-		<div style="margin:0 auto; width: 500px;">
-			<div style="">留言成功！非常感谢您的建议。</div>
-			<div><a href="$snowModule.setTarget('index')">点击这里回首页</a></div>
-		</div>
-	</div>
-</div>
+<div id="cArea"><!--content begin-->
+	<div class="cbox"><!--cbox begin-->
+        <div class="create_box font_14_b col_gray" style="margin-bottom: 15px;margin-top:30px">
+            <img src="images/Symbol_Check.png" border="0" height="90" width="100" class="fl"/>
+            <div class="fl" style="padding:30px 10px;">
+            留言成功！非常感谢您的建议。
+            <a href="$snowModule.setTarget('index')" class="text_drakgreen">[回首页]</a>
+            </div>
+        </div>
+	</div><!--cbox end-->
+</div><!--content end-->

@@ -1,5 +1,18 @@
-<div class="create_box" style="margin-bottom: 15px;margin-top:30px">
-	<div class="create_suc">
-		<span class="fl font_14_b col_g">取消拼车成功！</span>
+<div id="cArea"><!--content begin-->
+	<div class="cbox">
+        <div class="create_box font_14_b col_gray" style="margin-bottom: 15px;margin-top:30px">
+            <img src="$imgServer/Symbol_Check.png" border="0" height="90" width="100" class="fl"/>
+            <div class="fl" style="padding:30px 10px;">
+           取消拼车成功！
+            
+            <a href="$snowModule.setTarget('index')" class="text_drakgreen">
+				[返回首页]
+			</a>
+            <a href="$snowModule.setTarget('together/createOrder')" class="text_drakgreen">
+				[创建拼车]
+			</a>
+            </div>
+        </div>
+
 	</div>
-</div>
+</div><!--content end-->

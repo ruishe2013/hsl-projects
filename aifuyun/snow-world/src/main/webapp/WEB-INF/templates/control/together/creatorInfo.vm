@@ -1,9 +1,6 @@
 <div class="details_r">
 	<ul>
 		<li>
-			<h1>发起人信息</h1>
-		</li>
-		<li>
 			<strong>发起人：</strong>$!creator.realName
 		</li>
 		<li>
@@ -31,6 +28,29 @@
 			<li>登陆即可查看车主的联系方式 
 			<input class="login_btn" id="J_login_for_view" type="button" value="登陆查看" name="login" tabindex="3"/></li>
 		#end
-		
 	</ul>
-</div>
+	<div class="share">
+		<p class="col_gray">联系时请说在一辆车网站上看到的信息</p>
+			<a href="#">
+				<img src="$imgServer/button_tsina.png" title="分享到新浪微博"/>
+			</a>
+			<a href="#">
+				<img src="$imgServer/button_qzone.png" title="分享到QQ空间"/>
+			</a>
+			<a href="#">
+				<img src="$imgServer/button_tqq.png" title="分享到QQ微博"/>
+			</a>
+			<a href="#">
+				<img src="$imgServer/button_renren.png" title="分享到人人网"/>
+			</a>
+			<a href="#">
+				<img src="$imgServer/button_kaixin001.png" title="分享到开心网"/>
+			</a>
+			<a href="#">
+				<img src="$imgServer/button_copy.png"  title="复制并分享给好友"/>
+			</a>
+			<a href="#">
+				<img src="$imgServer/button_email.png"  title="发到我的邮件信箱里"/>
+			</a>
+		</div>
+	</div>

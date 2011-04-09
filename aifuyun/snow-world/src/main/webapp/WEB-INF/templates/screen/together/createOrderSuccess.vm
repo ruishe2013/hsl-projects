@@ -1,4 +1,4 @@
-<div id="cArea"><!--content-2 begin-->
+<div id="cArea"><!--content begin-->
 <div class="cbox">
 	<div class="create_cutbread">
     	<div class="create_cb_car"></div>
@@ -6,13 +6,14 @@
         <div class="create_cb_suc_y"></div>
     </div>
     
-    <div class="create_box" style="margin-bottom: 15px;">
-    	<div class="create_suc" ><span class="fl font_14_b col_g">恭喜您，发起拼车成功已经创建完成！</span>
-    		<a href="$snowModule.setTarget('index')" class=" but_bg fl"><strong>返回首页</strong></a>
-    	</div>
+    <div class="create_box font_14_b col_gray" style="margin-bottom: 15px;margin-top:30px">
+        <img src="$imgServer/Symbol_Check.png" border="0" height="90" width="100" class="fl"/>
+        <div class="fl" style="padding:30px 10px;">
+        恭喜您，发起拼车成功已经创建完成！
+		<a href="$snowModule.setTarget('together/orderDetail').addQueryData('orderId', $rundata.queryString.getLong('orderId'))" class="text_drakgreen">[查看刚刚创建的拼车]</a>
+        <a href="$snowModule.setTarget('index')" class="text_drakgreen">[返回首页]</a>
+        
+        </div>
     </div>
-    
-    <div class="clear"></div>
 </div>
-
-</div><!--content-2 end-->
+</div><!--content end-->

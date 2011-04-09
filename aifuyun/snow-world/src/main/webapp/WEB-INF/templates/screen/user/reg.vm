@@ -8,12 +8,12 @@
 
 #set($form = $formFactory.createForm("user.registerUser"))
 
-<div id="cArea"><!--content-2 begin-->
-<div class="cbox">
+<div id="cArea"><!--content begin-->
+<div class="cbox"><!--cbox begin-->
 	<div class="reg_l_box"><!--left begin-->
     	<div class="reg_title"><h1 title="用户注册">用户注册</h1></div>
         <div class="reg_info">
-        <form id="J_reg_form" action="" method="post">
+        <form action="" method="post">
         	<input type="hidden" name="actionEvent" value="regUser" /> 
 			<input type="hidden" name="actionTarget" value="userFacadeAction" />
 			<input type="hidden" name="regUser" value="$tokenUtil.token('regUser')" />
@@ -24,10 +24,12 @@
 		            </div>
 		            <div class="reg_info_li_box">
 			            <p>
-			           		<input id="$!form.fields.username.name" class="reg_input_out" name="$!form.fields.username.name" value="$!form.fields.username.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
-			            	#errorRegMessage($!form.fields.username.message)
+			           		<input id="$!form.fields.username.name" class="input_150" name="$!form.fields.username.name" value="$!form.fields.username.value" type="text" />
 			            </p>
-			             <p class="color_gray attention">用户名长度在3到20个字符之间，(可以是中文汉字，英文字母，数字和下划线)。</p>
+                        #errorRegMessage($!form.fields.username.message)
+			             <p class="color_gray attention">
+                         用户名长度在3到20个字符之间，(可以是中文汉字，英文字母，数字和下划线)。
+                         </p>
 		            </div>
 	            </li>
 	            
@@ -37,7 +39,7 @@
 		           </div>
 		            <div class="reg_info_li_box">
 		            <p>
-		            <input id="$!form.fields.password.name" class="reg_input_out" name="$!form.fields.password.name" value="$!form.fields.password.value"  type="password" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
+		            <input id="$!form.fields.password.name" class="input_150" name="$!form.fields.password.name" value="$!form.fields.password.value"  type="password"/></p>
 					#errorRegMessage($!form.fields.password.message)
 		             <p class="color_gray attention">密码长度6～20位，字母区分大小写。</p>
 		            </div>
@@ -49,9 +51,9 @@
 		            </div>
 		            <div class="reg_info_li_box">
 			            <p>
-			            <input id="$!form.fields.confirmPassword.name" class="reg_input_out" name="$!form.fields.confirmPassword.name" value="$!form.fields.confirmPassword.value" type="password" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
-			            #errorRegMessage($!form.fields.confirmPassword.message)
+			            <input id="$!form.fields.confirmPassword.name" class="input_150" name="$!form.fields.confirmPassword.name" value="$!form.fields.confirmPassword.value" type="password" />
 			            </p>
+                         #errorRegMessage($!form.fields.confirmPassword.message)
 			             <p class="color_gray attention">请再输一便刚才输入的密码。</p>
 		            </div>
 	            </li>
@@ -62,58 +64,54 @@
 	            	</div>
 	            	<div class="reg_info_li_box">
 		            	<p>
-		            	<input id="$!form.fields.email.name" class="reg_input_out" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
-		            	#errorRegMessage($!form.fields.email.message)
+		            	<input id="$!form.fields.email.name" class="input_150" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text"/>
 		            	</p>
+                        #errorRegMessage($!form.fields.email.message)
 		            	 <p class="color_gray attention">请输入您的电子邮箱以便我们方便联系。</p>
 	            	</div>
 	            </li>
-	            
-	            <li>
+                <li style="padding-left:100px;">
+                    <p>
+                      <input name="checkAgreement" type="checkbox" value="1" checked="checked" style="border:none"/>
+                      我接受并同一辆车网站 用户服务条款
+                    </p>
+                    <p>
+                        <textarea id=agree_txt style=" font:12px; width:480px; line-height:25px; color:#666; height:110px;" readOnly>$control.setTemplate('misc/agreement.vm')</textarea>
+                    </p>
+                </li> 
+                <li>
 	            	<div class="info-title">
 	            		<em>*</em> 验证码：
 	            	</div>
 	            	<div class="reg_info_li_box">
 		            	<p>
-		            	<input id="$!form.fields.checkCode.name" maxlength="4" class="reg_input_out" name="$form.fields.checkCode.name" value="$!form.fields.checkCode.value" type="text" onfocus="this.className='reg_input_on';this.onmouseout=''" onblur="this.className='reg_input_off';this.onmouseout=function(){this.className='reg_input_out'};" onmousemove="this.className='reg_input_move'" onmouseout="this.className='reg_input_out'" />
-		            	#errorRegMessage($!form.fields.checkCode.message)
+		            	<input id="$!form.fields.checkCode.name" maxlength="4" class="input_150" name="$form.fields.checkCode.name" value="$!form.fields.checkCode.value" type="text" />
+                        $control.setTemplate('common/checkCode.vm')
 		            	</p>
-		            	 <p class="color_gray attention">请输入下图中的4个字符。</p>
-		            	<p>
-		            	$control.setTemplate('common/checkCode.vm')
-		            	</p>
+                        #errorRegMessage($!form.fields.checkCode.message)
+		            	 <p class="color_gray attention">
+                         	请输入图中的4个字符。
+                         </p>
+		            	
 	            	</div>
 	            </li>
-	            
-	            <li>
-		            <div class="reg_info_li_box">
-		            	<p>
-			            #errorRegMessage($!csrfmessage)
-						#errorRegMessage($!resultmessage.message)
-						</p>
-					</div>
-            	</li>
-	            
-	            <li style="padding-left:20px;">
-	            <p><input id="J_checkAgreement" name="checkAgreement" type="checkbox" value="1" checked="checked" /><label for="J_checkAgreement">我接受一辆车网站用户服务条款</label></p>
-	            </li>
-            <li style="padding-left:20px;">
-            <p><textarea id=agree_txt style=" font:12px; width:480px; line-height:25px; color:#666; height:110px;" 
-            readOnly>$control.setTemplate('misc/agreement.vm')</textarea></p>
-            </li> 
-            <li><button id="J_submit_button" type="submit" class="but_submit" value="注册"></button></li>
+                <li style="padding:5px 70px;">
+                	#errorRegMessage($!csrfmessage)
+					#errorRegMessage($!resultmessage.message)
+                    <input type="submit" class="but_submit fr" value="">
+                </li>
             </ul>
          </form>
         </div>
 
     </div><!--left end-->
 
-  <div class="reg_r_box">
+  	<div class="reg_r_box">
      <p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;花费你一分钟来进行注册，您就可以享用一辆车网站更多的功能！如果您已经注册过，请直接登录，并注意维护您的个人信息以便我们保持联系。如果您有任何问题，欢迎随时致电我们。</p>
     </div>
-    <div class="clear"></div>
-</div>
-</div><!--content-2 end-->
+    <div class="cl"></div>
+</div><!--cbox end-->
+</div><!--content end-->
 
 <script type="text/javascript">
 	$(document).ready(function() {
