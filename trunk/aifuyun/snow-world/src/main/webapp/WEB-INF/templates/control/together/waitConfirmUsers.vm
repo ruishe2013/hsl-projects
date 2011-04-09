@@ -12,8 +12,7 @@
         <td>QQºÅ</td>
         <td>ÓÊÏä</td>
         <td>×´Ì¬</td>
-        <td>Í¨¹ý</td>
-        <td>ÒÆ³ý</td>
+        <td>²Ù×÷</td>
     </tr>
     #foreach($orderUser in $waitConfirmJoiners)
 	    <tr align="center">
@@ -25,8 +24,12 @@
 		    <td>$!orderUser.qq</td>
 		    <td>$!orderUser.email</td>
 	        <td>Î´ÉóºË</td>
-	        <td><a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('id', $orderUser.id).add('agree', 'true')" class="bnt_tg fl confirm_btn">Í¨¹ý</a> </td>
-	        <td><a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('id', $orderUser.id).add('agree', 'false')" class="bnt_tg fl confirm_btn">ÒÆ³ý</a></td>
+	        <td>
+			<p style="width:90px; display:block; margin:0 auto">
+				<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('id', $orderUser.id).add('agree', 'true')" class="bnt_tg fl">Í¨¹ý</a>
+				<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmUserJoin').add('id', $orderUser.id).add('agree', 'false')" class="bnt_tg fl">ÒÆ³ý</a>
+			</p>
+			</td>
 	    </tr>
     #end
 </table>

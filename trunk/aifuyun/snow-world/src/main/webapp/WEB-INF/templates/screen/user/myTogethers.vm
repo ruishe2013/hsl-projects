@@ -1,13 +1,11 @@
 <div id="cArea">
-  <div class="cutbread">
-    	当前位置：<a href="$snowModule.setTarget('index')">一辆车首页</a> >> 用户中心 >> 修改资料 
-    </div>
+  <div class="hr_10"></div>
     
     $control.setTemplate('user/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)
     
     <div class="content">
     	<div class="content-inner">
-            <div class="pwrap"><!--账号信息-->
+            <div class="pwrap"><!--pwrap-->
             	<div class="phead attendcar-ico">
                 	<h1>
                 	#if ($rundata.queryString.getString('type') == "2")
@@ -18,21 +16,12 @@
                 	</h1>
                 </div>
                 <div class="pbody">
-                
-                    <!--状态1
-                	<p style="margin-left:10px;">
-                        <span style="float:left; line-height:32px">
-                        	我还没有完成车辆档案，暂时还不能创建拼车,我先完成车辆信息添加。
-                        </span>
-                        <a href="#" class="but_tjcl fl">添加车辆</a>
-                    </p>
-                    -->
                     #if ($!orders.empty )
                     	<p style="margin-left:10px;">
                     			#if ($rundata.queryString.getString('type') == "2")
 	                        		我还没有参加任何拼车。
 			                	#else
-			                	  <span style="float:left; line-height:32px">
+			                	  <span class="col_gray fl">
 			                        	我还没有创建拼车。
 			                        </span>
 			                        <a href="$snowModule.setTarget('together/createOrder')" class="but_cjpc_h dis fl">创建拼车</a>
@@ -46,14 +35,20 @@
 		                            <span class="create_time">$!dateUtil.formatFullDate($order.gmtCreate)</span>
 		                        </h1>
 		                        <div class="cl">
-		                            <div class="fl">出发时间：$!dateUtil.formatFullDate($order.fromTime)</div>
-		                            <div class="fl ml10">预计到达时间：$!dateUtil.formatFullDate($order.arriveTime)</div>
-		                            <div class="fl ml10">参加人数/总座位数：0/4</div>
+		                            <div class="fl col_gray">
+                                    出发时间：$!dateUtil.formatFullDate($order.fromTime)
+                                    </div>
+		                            <div class="fl ml10 col_gray">
+                                    预计到达时间：$!dateUtil.formatFullDate($order.arriveTime)
+                                    </div>
+		                            <div class="fl ml10 col_gray">
+                                    参加人数/总座位数：0/4
+                                    </div>
 		                        </div>
-		                        <div style="height:35px; line-height:35px; clear:both">
-		                            <div class="dis fl">状态：$!order.orderStatusEnum.name</div>
-		                            <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_g_bg dis fl ml10">
-		                            	<strong style="font-size:14px; color:#FFF;">查看详情</strong>
+		                        <div class="cl col_gray">
+                                    状态：$!order.orderStatusEnum.name
+		                            <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="text_drakgreen">
+                                    	<strong>查看详情</strong>
 		                            </a>
 		                        </div>
 		                    </ul>
@@ -63,11 +58,10 @@
                     $control.setTemplate('common/pagination.vm').add('query', $userOrderQuery).add('pageFacerName', 'myTogethersPageFacer')
                     
                 </div>
-            </div><!--账号信息 end-->
+            </div><!--pwrap end-->
             
     	</div>
     </div>
     
 </div>
-
 <div class="hr_6"></div>

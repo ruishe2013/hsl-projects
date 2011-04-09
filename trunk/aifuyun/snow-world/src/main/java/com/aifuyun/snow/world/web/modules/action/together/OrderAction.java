@@ -104,7 +104,7 @@ public class OrderAction extends BaseAction {
 		Result result = orderAO.joinOrder(orderUserDO, orderId, saveToUserInfo);
 		if (result.isSuccess()) {
 			// 加入成功
-			this.sendRedirect("snowModule", "together/joinSuccess");
+			sendToJoinSuccessPage(orderId);
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
@@ -115,7 +115,7 @@ public class OrderAction extends BaseAction {
 		long orderId = rundata.getQueryString().getLong("orderId");
 		Result result = orderAO.confirmFinishOrder(orderId);
 		if (result.isSuccess()) {
-			this.sendRedirect("snowModule", "together/createOrderSuccess");
+			sendToCreateSuccessPage(orderId);
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
@@ -138,6 +138,20 @@ public class OrderAction extends BaseAction {
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
+	}
+	
+	private void sendToJoinSuccessPage(long orderId) {
+		URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
+		URLModule urlModule = urlModuleContainer.setTarget("together/joinSuccess");
+		urlModule.add("orderId", orderId);
+		sendRedirectUrl(urlModule.render());
+	}
+	
+	private void sendToCreateSuccessPage(long orderId) {
+		URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
+		URLModule urlModule = urlModuleContainer.setTarget("together/createOrderSuccess");
+		urlModule.add("orderId", orderId);
+		sendRedirectUrl(urlModule.render());
 	}
 	
 	private void sendToConfirmPage(long orderId) {

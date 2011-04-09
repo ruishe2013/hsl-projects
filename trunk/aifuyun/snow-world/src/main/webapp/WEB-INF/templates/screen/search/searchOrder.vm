@@ -2,59 +2,65 @@
 
 <div class="index_search">
     <form action="" method="get">
-	        出发地： <input class="input_95" name="fromAddr" type="text" value="$!rundata.getQueryString().getString("fromAddr")"/>
-	        目的地：<input class="input_95" name="arriveAddr" type="text" value="$!rundata.getQueryString().getString("arriveAddr")"/> 
-	        出发日期：<input class="input_95 date-pick" name="fromTime" type="text" value="$!rundata.getQueryString().getString("fromTime")"/> 
+	        出发地： <input class="input_150" name="fromAddr" type="text" value="$!rundata.getQueryString().getString("fromAddr")"/>
+	        目的地：<input class="input_150" name="arriveAddr" type="text" value="$!rundata.getQueryString().getString("arriveAddr")"/> 
+	        出发日期：<input class="input_150 date-pick" name="fromTime" type="text" value="$!rundata.getQueryString().getString("fromTime")"/> 
 	   <button type="submit" class="but_search" value="提交"></button>
     </form>
     <span>共找到  $!{numFound} 条记录</span> 
 </div>
 <div class="list_box"><!--列表 begin-->
-    <ul>
-    	#foreach($order in $orders)
-	        <li>
-	            <h1>
-	            	<div class="but_ckxq">
-	                	<a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class=" col_g" target="_blank">查看详情...</a>
-	                </div>
-	                <img src="$imgServer/car_1.png" width="55" height="30" border="0" align="absmiddle"/>
-	                <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" target="_blank">
-	                	从 <span class="col_g"> $!{order.fromCity} $!{order.fromAddr}</span>
-	                	到<span class="col_g"> $!{order.arriveCity} $!{order.arriveAddr}</span></a>
-	            </h1>
-	            <div class="hr_2"></div>
-	            <p>
-	                <span class="color_gray">发起人：</span> $!{order.creatorRealName} &nbsp;&nbsp;&nbsp;&nbsp;
-	                <span class="color_gray">总座位数：</span> $!{order.totalSeats} &nbsp;&nbsp;&nbsp;&nbsp;
-	                <span class="color_gray">出发时间：</span> $!dateUtil.formatFullDate($!order.fromTime)
-	            </p>
-	            <p>
-	                <span class="color_gray">拼车类型：</span> $!{order.togetherTypeEnum.name}
-	            </p>
-	            
-	            #if ($!order.type == "2")
-	            	<p>
-		                <span class="color_gray">发起人是否提供车</span> $!{order.creatorCarOwnerTypeEnum.name}
+	#if(!$!orders || $!orders.size() == 0)
+		<div class="create_box font_14_b col_gray" style="margin-bottom: 15px;margin-top:30px">
+			<img src="$imgServer/emblem.png" border="0" height="90" width="100" class="fl"/>
+			<div class="fl" style="padding:30px 10px;">
+				抱歉，您要查找的内容不存在，您可以重新搜索。
+				<a href="$snowModule.setTarget('index')" class="text_drakgreen">[返回首页]</a>
+			</div>
+		</div>
+	#else
+	    <ul>
+	    	#foreach($order in $orders)
+		        <li>
+		            <h1>
+		            	<div class="but_ckxq">
+		                	<a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="col_g">查看详情...</a>
+		                </div>
+		                <img src="$imgServer/car_1.png" width="55" height="30" border="0" align="absmiddle"/>
+		                <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" target="_blank">
+		                	从 <span class="col_g"> $!{order.fromCity} $!{order.fromAddr}</span>
+		                	到<span class="col_g"> $!{order.arriveCity} $!{order.arriveAddr}</span></a>
+		            </h1>
+		            <div class="hr_2"></div>
+		            <p>
+		                <span class="color_gray">发起人：</span> $!{order.creatorRealName} &nbsp;&nbsp;&nbsp;&nbsp;
+		                <span class="color_gray">总座位数：</span> $!{order.totalSeats} &nbsp;&nbsp;&nbsp;&nbsp;
+		                <span class="color_gray">出发时间：</span> $!dateUtil.formatFullDate($!order.fromTime)
 		            </p>
-	            #end
-	            
-	            <p>
-	                <span class="color_gray">途径：</span> $!{order.approach}
-	            </p>
-	            <p>
-	                <span class="color_gray">备注：</span> $!{order.description}
-	            </p>
-	
-	        </li>
-        #end
-        
-    </ul>
-    
-    <div class="page">
-    	
-    	$control.setTemplate('common/searchPagination.vm').add('query', $searchOrderQuery).add('pageFacerName', 'orderSearchPageFacer')
-    
-    </div>
+		            <p>
+		                <span class="color_gray">拼车类型：</span> $!{order.togetherTypeEnum.name}
+		            </p>
+		            
+		            #if ($!order.type == "2")
+		            	<p>
+			                <span class="color_gray">发起人是否提供车</span> $!{order.creatorCarOwnerTypeEnum.name}
+			            </p>
+		            #end
+		            
+		            <p>
+		                <span class="color_gray">途径：</span> $!{order.approach}
+		            </p>
+		            <p>
+		                <span class="color_gray">备注：</span> $!{order.description}
+		            </p>
+		
+		        </li>
+	        #end
+	    </ul>
+	    <div class="page">
+	    	$control.setTemplate('common/searchPagination.vm').add('query', $searchOrderQuery).add('pageFacerName', 'orderSearchPageFacer')
+	    </div>
+    #end
 </div><!--列表 end-->
 
 </div><!--content end-->

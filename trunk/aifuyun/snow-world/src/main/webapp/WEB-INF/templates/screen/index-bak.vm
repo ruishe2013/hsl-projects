@@ -18,19 +18,18 @@
     <center><br clear="all" />
     <div class="index-logo">
     	<a href="$snowModule.setTarget('index')">
-        	<img src="$imgServer/logo_03.png" width="338" height="49" title="一辆车" border="0"/>
+        	<img src="$imgServer/logo_03.png" width="338" height="49" title=一辆车 border="0"/>
         </a>
     </div>
     <div class="searcharea">
     	<form action="$snowModule.setTarget('search/searchOrder')" method="get">
-        	<div class="input-box" style="line-height:35px;">
-				<div class="fl col_w">从</div>
+        	<div class="input-box">
                 <div class="search_l fl"></div>
                 <div class="search_bg fl">
                 	<input class="input-search" value="" name="fromAddr"  >
                 </div>
                 <div class="search_r fl"></div>
-				<div class="fl col_w ml10">到</div>
+            
                 <div class="search_l fl ml10"></div>
                 <div class="search_bg fl">
                 	<input class="input-search" value="" name="arriveAddr" >

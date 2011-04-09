@@ -1,15 +1,4 @@
-<li>
-    <h1>
-    	<img src="$imgServer/car.png" width="71" height="48" border="0" align="absmiddle" />
-       	 【拼的士】
-       	 <span class="col_g">$!{order.fromCity}$!{order.fromAddr} </span>
-       	 &rarr;
-       	 <span class="col_g">$!{order.arriveCity}$!{order.arriveAddr} </span>
-    </h1>
-</li>
-<li>
-    <strong>拼车类型：</strong>$!order.togetherTypeEnum.name
-</li>
+
 #if ("$!order.togetherTypeEnum.value" == "2")
 ## 顺风车发起人类型 
 	
@@ -40,12 +29,15 @@
 <li>
     <span class="col_gray">途径：</span>$!order.approach
 </li> 
-<li>
-    <span class="col_gray">描述：</span><span style="line-height:20px;">$!{order.description}</span>
+<li style="line-height:20px;">
+    <div class="col_gray fl">备注：</div>
+	<div class=" fl">
+		$!{order.description}
+	</div>
 </li>
 <li>
     <div class="details_tip">
         提示:请确保您发布信息无误，拼车前请务必了解对方身份；为了您的安全，请认真阅读
-        <a href="#" >《拼车注意事项》</a>
+        <a href="#" class="font_12_b text_drakgreen">《拼车注意事项》</a>
     </div>
 </li>      
