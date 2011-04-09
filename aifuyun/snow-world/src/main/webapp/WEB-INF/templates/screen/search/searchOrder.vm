@@ -14,8 +14,8 @@
 		<div class="create_box font_14_b col_gray" style="margin-bottom: 15px;margin-top:30px">
 			<img src="$imgServer/emblem.png" border="0" height="90" width="100" class="fl"/>
 			<div class="fl" style="padding:30px 10px;">
-				抱歉，您要查找的内容不存在，您可以重新搜索。
-				<a href="$snowModule.setTarget('index')" class="text_drakgreen">[返回首页]</a>
+				抱歉，未找到相关拼车。
+				<a href="$snowModule.setTarget('together/createOrder')" class="text_drakgreen">[创建拼车]</a>
 			</div>
 		</div>
 	#else
