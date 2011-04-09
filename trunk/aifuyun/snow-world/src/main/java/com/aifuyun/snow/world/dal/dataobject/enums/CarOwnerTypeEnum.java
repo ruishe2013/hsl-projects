@@ -3,8 +3,8 @@ package com.aifuyun.snow.world.dal.dataobject.enums;
 public enum CarOwnerTypeEnum {
 	
 	
-	HAS_CAR(1, "有车"),
-	NO_CAR(2, "无车")
+	CAR_OWNER(1, "车主"),
+	PASSENGER(2, "乘客")
 	;
 	
 	private CarOwnerTypeEnum(int value, String name) {

@@ -831,7 +831,6 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			final String username = this.getLoginUsername();
 			orderDO.setCreatorId(userId);
 			orderDO.setCreatorUsername(username);
-			orderDO.setType(OrderTypeEnum.TAXI.getValue());
 			
 			// 出发城市id
 			CityDO fromCityDO = this.cityBO.queryByName(orderDO.getFromCity());

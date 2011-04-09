@@ -49,13 +49,13 @@ public class CreateOrderSeatsValidator implements Validator {
 			}
 			String creatorCarOwnerTypeValue = StringUtil.toString(creatorCarOwnerTypeField.getValue());
 			int creatorCarOwnerTypeInt = ConvertUtil.toInt(creatorCarOwnerTypeValue, 0);
-			if (creatorCarOwnerTypeInt == CarOwnerTypeEnum.HAS_CAR.getValue()) {
+			if (creatorCarOwnerTypeInt == CarOwnerTypeEnum.CAR_OWNER.getValue()) {
 				// 车主需要验证座位数
 				if (StringUtil.isEmpty(StringUtil.trimToEmpty(value))) {
 					return false;
 				}
 				return true;
-			} else if (creatorCarOwnerTypeInt == CarOwnerTypeEnum.NO_CAR.getValue()) {
+			} else if (creatorCarOwnerTypeInt == CarOwnerTypeEnum.PASSENGER.getValue()) {
 				// 乘客不需要验证座位数
 				return true;
 			}

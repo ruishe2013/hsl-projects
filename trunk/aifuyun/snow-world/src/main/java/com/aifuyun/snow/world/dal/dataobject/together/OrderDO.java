@@ -141,6 +141,16 @@ public class OrderDO extends BaseDO {
 		return OrderTypeEnum.valueOf(type);
 	}
 	
+	public boolean isSfcAndPassenger() {
+		if (type != OrderTypeEnum.SFC.getValue()) {
+			return false;
+		}
+		if (creatorCarOwnerType != CarOwnerTypeEnum.PASSENGER.getValue()) {
+			return false;
+		}
+		return true;
+	}
+	
 	public int getType() {
 		return type;
 	}

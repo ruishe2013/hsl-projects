@@ -3,7 +3,7 @@
 ## 顺风车发起人类型 
 	
 	<li>
-	    <span class="col_gray">发起人是否提供车：</span>$order.creatorCarOwnerTypeEnum.name
+	    <span class="col_gray">发起人类型：</span>$order.creatorCarOwnerTypeEnum.name
 	</li>
 	
 	#if ("$!order.creatorCarOwnerType" == "1")
