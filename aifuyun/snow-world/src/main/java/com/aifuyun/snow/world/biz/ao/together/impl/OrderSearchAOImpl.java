@@ -92,6 +92,10 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 			sb.append(" +fromTime_ymd:").append(fromTime);
 		}
 		
+		// ¹ýÂËÒÑÉ¾³ýµÄ
+		sb.append(" +deleted:0");
+		
+		
 		String ret = sb.toString();
 		if (StringUtil.isEmpty(ret)) {
 			return "*:*";
