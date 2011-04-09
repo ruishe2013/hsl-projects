@@ -18,12 +18,17 @@
 			</validator>
 		</field>
 		<field name="carNo">
-			<validator type="dependencyRequired" message="请输入车牌号!" >
-				<param name="dependencyField" value="creatorCarOwnerType"></param>
-				<param name="dependencyValues" value="1"></param>
+			<validator type="com.aifuyun.snow.world.web.common.validators.CreateOrderCarNoValidator" message="请输入车牌号!" >
 			</validator>
 			<validator type="string" message="车牌号不能超过14个字符!" >
 				<param name="max" value="14" />
+			</validator>
+		</field>
+		<field name="totalSeats">
+			<validator type="com.aifuyun.snow.world.web.common.validators.CreateOrderSeatsValidator" message="空余座位数不能为空!" >
+			</validator>
+			<validator type="int" message="空余座位数必须是正整数!" >
+				<param name="min" value="1" />
 			</validator>
 		</field>
 		<field name="fromCity">
@@ -95,12 +100,6 @@
 			<validator type="int" message="预计到达时间(分钟)必须在0~59之间!" >
 				<param name="min" value="0" />
 				<param name="max" value="59" />
-			</validator>
-		</field>
-		<field name="totalSeats">
-			<validator type="required" message="总座位数不能为空!" />
-			<validator type="int" message="总座位数必须是正整数!" >
-				<param name="min" value="1" />
 			</validator>
 		</field>
 		<field name="description">

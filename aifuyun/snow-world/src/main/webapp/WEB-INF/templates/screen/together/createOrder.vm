@@ -8,7 +8,6 @@
 	#end
 #end
 
-
 <div id="cArea"><!--content-2 begin-->
 <div class="cbox">
 	<div class="create_cutbread">
@@ -48,6 +47,25 @@
                     	 #set($selectOrderType = $!selectedOrderType.value)
                     #end
                     
+                    #if ("$!selectOrderType" == "1")
+						## 出租车
+						#set($showSeats = true)
+						#set($showCreatorType = false)
+						#set($showCarNo = false)
+					#elseif ("$!selectOrderType" == "2")
+						## 顺风车
+						#set($showCreatorType = true)
+						#if ("$!form.fields.creatorCarOwnerType.value" == "1")
+							## 发起人是车主
+							#set($showCarNo = true)
+							#set($showSeats = true)
+						#elseif ("$!form.fields.creatorCarOwnerType.value" == "2")
+							## 发起人是乘客
+							#set($showCarNo = false)
+							#set($showSeats = false)
+						#end
+					#end
+                    
                     <div class="reg_info_li_box">
                      	#foreach($orderType in $orderTypes)
                         	<label for="$!{form.fields.type.name}-$!{orderType.value}">
@@ -59,27 +77,22 @@
                         #errorMessageCreateOrder($!form.fields.type.message)
                     </div>
                 </li>
-               
-               #set($showCreatorType = false)
-                #set($showCarNo = false)
-               #if("$!selectOrderType" == "2") 
-               		 #set($showCreatorType = true)
-               		  #set($showCarNo = true)
-			   #end
-			   
-               ## 如果是拼的士，则不显示
+                
                <li id="J_creator_type" #if(!$showCreatorType) style="display:none" #end >
                 	<div class="info-title">
                     	<em>*</em> 发起人身份：
                     </div>
                     <div class="reg_info_li_box">
                     	<label for="$!{form.fields.creatorCarOwnerType.name}-1">
-                        	<input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-1" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="1" checked />我是车主
+                        	<input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-1" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="1" #if ("$!form.fields.creatorCarOwnerType.value" == "1") checked #end />我是车主
+                        </label>
+                        <label for="$!{form.fields.creatorCarOwnerType.name}-2">
+                        <input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-2" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="2" #if ("$!form.fields.creatorCarOwnerType.value" == "2") checked #end />我是乘客
                         </label>
                      #errorMessageCreateOrder($!form.fields.creatorCarOwnerType.message)
                     </div>
                 </li>
-               
+                
 	        	<li id="J_car_no" #if(!$showCarNo) style="display:none" #end>
                     <div class="info-title">
                     	<em>*</em> 车牌号：
@@ -95,10 +108,9 @@
                    </div>
                 </li>
                 
-	        	
-	        	<li>
+	        	<li id="J_totalSeats" #if(!$showSeats) style="display:none" #end>
 		            <div class="info-title">
-                    	<em>*</em> 承载人数：
+                    	<em>*</em> 空余座位数：
                     </div>
 		            <div class="reg_info_li_box">
 		            	<p>
@@ -339,39 +351,51 @@
 	$(document).ready(function(){
 		$('.date-pick').datePicker({clickInput:true});
 		
+		function setVisible(el, yes) {
+			if (yes) {
+				$(el).css('display', 'block');
+				$(el).attr('disabled', false);
+			} else {
+				$(el).css('display', 'none');
+				$(el).attr('disabled', 'disabled');
+			}
+		}
+		
 		$('.order_type_selector').bind('click', function() {
+			setVisible('#J_totalSeats', true);
+		
 			var val = this.value;
 			if (val == "1") {
 				// taxi
-				$('#J_creator_type').css('display', 'none');
-				$('#J_creator_type').attr('disabled', 'disabled');
-				
+				setVisible('#J_creator_type', false);
 				// hide car no
-				$('#J_car_no').css('display', 'none');
-				$('#J_car_no').attr('disabled', 'disabled');
-				
+				setVisible('#J_car_no', false);
 			} else if(val == "2") {
 				// shunfengche
-				$('#J_creator_type').css('display', 'block');
-				$('#J_creator_type').attr('disabled', false);
+				setVisible('#J_creator_type', true);
 				
-				// show carNO
-				$('#J_car_no').attr('disabled', 'disabled');
-				$('#J_car_no').css('display', 'block');
+				var checkedVal = $('input[name=creatorCarOwnerType]:checked').val();
+				if (checkedVal == "1") {
+					// show carNO
+					setVisible('#J_car_no', true);
+				} else if (checkedVal == "2") {
+					// hide seat
+					setVisible('#J_totalSeats', false);
+				}
 			}
 		});
 		
-		
 		$('.creator_car_owner_type_selector').bind('click', function() {
+			setVisible('#J_totalSeats', true);
+			
 			var val = this.value;
 			if (val == "1") {
 				// car onwer
-				$('#J_car_no').attr('disabled', 'disabled');
-				$('#J_car_no').css('display', 'block');
+				setVisible('#J_car_no', true);
 			} else if(val == "2") {
 				// has no car
-				$('#J_car_no').css('display', 'none');
-				$('#J_car_no').attr('disabled', false);
+				setVisible('#J_car_no', false);
+				setVisible('#J_totalSeats', false);
 			}
 		});
 		

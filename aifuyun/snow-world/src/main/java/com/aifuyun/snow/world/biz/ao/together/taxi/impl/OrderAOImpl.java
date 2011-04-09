@@ -56,8 +56,8 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				order.setFromCity(city.getName());
 				order.setArriveCity(city.getName());
 				
-				// 座位数暂时设置为4个
-				order.setTotalSeats(4);		
+				// 座位数暂时设置为3个
+				order.setTotalSeats(3);		
 				result.getModels().put("order", order);
 			}
 			

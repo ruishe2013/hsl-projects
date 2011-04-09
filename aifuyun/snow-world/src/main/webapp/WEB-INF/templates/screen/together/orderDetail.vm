@@ -26,6 +26,9 @@
 			 </div>
 		 </div>
         
+        
+        #set($leftSeatCount = $order.totalSeats - $joinersCount)
+        
         <div class="details_l">
 		    <ul>
 		        $control.setTemplate('together/orderInfo.vm').addAttribute('order', $order).addAttribute('joinersCount', $joinersCount).addAttribute('dateUtil', $dateUtil)
