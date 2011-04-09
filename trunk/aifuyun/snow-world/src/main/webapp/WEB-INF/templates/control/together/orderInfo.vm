@@ -23,8 +23,9 @@
     </span>
 </li>
 <li>
-    <span class="col_gray">参加人数/总座位数：</span> $!joinersCount/$!order.totalSeats
-    <span class="color_gray">人 </span>
+	#set($leftSeatCount = $order.totalSeats - $joinersCount)
+    <span class="col_gray">已参加人数/空余座位数：</span> $!joinersCount/$!leftSeatCount
+    <span class="color_gray"> </span>
 </li> 
 <li>
     <span class="col_gray">途径：</span>$!order.approach

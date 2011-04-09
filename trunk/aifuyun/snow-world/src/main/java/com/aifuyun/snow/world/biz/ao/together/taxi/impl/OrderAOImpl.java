@@ -302,6 +302,16 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				return result;
 			}
 			
+			List<OrderUserDO> confirmedJoiners = this.orderUserBO.queryOrderJoinersByStatus(orderId, OrderUserStatusEnum.CONFIRM_PASSED.getValue());
+			// 剩余座位数
+			int leftSeatCount = order.getTotalSeats() - confirmedJoiners.size();
+			
+			if (leftSeatCount <= 0) {
+				// 剩余座位数不够
+				result.setResultCode(OrderResultCodes.ORDER_SEAT_IS_FULL);
+				return result;
+			}
+			
 			if (!canConfirmJoin(orderId, userId, result)) {
 				return result;
 			}

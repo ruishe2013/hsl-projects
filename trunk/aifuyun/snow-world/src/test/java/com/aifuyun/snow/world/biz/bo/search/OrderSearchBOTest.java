@@ -3,8 +3,6 @@ package com.aifuyun.snow.world.biz.bo.search;
 
 
 
-import java.util.Date;
-
 import org.hsqldb.lib.StringUtil;
 
 import com.aifuyun.snow.world.biz.query.search.FieldOrder;
@@ -13,7 +11,6 @@ import com.aifuyun.snow.world.biz.query.search.SearchResult;
 import com.aifuyun.snow.world.biz.query.search.SortField;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.zjuh.sweet.lang.CollectionUtil;
-import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.test.BaseTest;
 
 public class OrderSearchBOTest extends BaseTest {
@@ -38,7 +35,7 @@ public class OrderSearchBOTest extends BaseTest {
 		
 	}
 	
-	private String buildSearchQuery() {
+	String buildSearchQuery() {
 		StringBuilder sb = new StringBuilder();
 		
 		String ret = sb.toString();
