@@ -30,10 +30,7 @@ $control.setTemplate('common/userInfo.vm')
     <div class="fl nav_c">
     	#set($currentPage = "$!current_screen_module.target")
         <ul>
-        <li><a href="$snowModule.setTarget('/index')" #if($currentPage == "/index") class="on" #end>首 页</a></li>
-     ##  <li><a href="$snowModule.setTarget('/taxi-index')" #if($currentPage == "/taxi-index") class="on" #end>拼的士</a></li>
-     ##   <li><a href="$snowModule.setTarget('/inter-city-index')" #if($currentPage == "/inter-city-index") class="on" #end>顺风车</a></li>
-     ##  <li><a href="$snowModule.setTarget('/rush-hour-index')" #if($currentPage == "/rush-hour-index") class="on" #end>上下班拼车</a></li>
+        	<li><a href="$snowModule.setTarget('/index')" #if($currentPage == "/index") class="on" #end>首 页</a></li>
         </ul>
       <div class="fr but_cjpc-s"><a href="$snowModule.setTarget('together/createOrder')">创建拼车</a></div>
     </div>
