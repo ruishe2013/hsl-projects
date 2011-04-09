@@ -52,7 +52,7 @@
 					var speed = 4000;		
 					var pics='$imgServer/Focus_pic/4-3-1.jpg|$imgServer/Focus_pic/4-3-2.jpg';	
 					var mylinks='http://www.yiliangche.com/|http://www.yiliangche.com/';
-					var texts='绿色出行，同上一两车|绿色出行，同上一两车';
+					var texts='绿色出行，同上一辆车|绿色出行，同上一辆车';
 					var sohuFlash2 = new sohuFlash("$flashServer/focus0414a.swf","flashcontent01","630","275","8","#ffffff");
 
 sohuFlash2.addParam("quality", "medium");

@@ -118,7 +118,7 @@
 		            	</p>
 		            	#errorMessageCreateOrder($!form.fields.totalSeats.message)
 		            	<p class="color_gray attention">
-                                   	 承载人数已包含已包括你自己。
+                                   	空余座位数不包括你自己。
                         </p>
 		            </div>
 	            </li>
