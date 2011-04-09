@@ -73,6 +73,9 @@
 			            </select>
 		            </p>
 					#errorMessagePersonalInfo($!form.fields.birthYear.message)
+					<p class="color_gray attention">
+                        	同龄人之间有更多共同语言，更容易拼车成功。
+                    </p>
 	            </div>
             </li>
             
@@ -102,6 +105,9 @@
 							#end
 		                </select>
 	           		</p>
+	           		<p class="color_gray attention">
+                        	提供您的职业信息会给其他拼客更多信任感。
+                    </p>
 					#errorMessagePersonalInfo($!form.fields.career.message)
 	            </div>
             </li>
@@ -141,7 +147,7 @@
         </div></div>
 		
         <div class="reg_r_box"><!--right begin-->
-			<p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;花费你一分钟来进行注册，您就可以享用一辆车网站更多的功能！如果您已经注册过，请直接登录，并注意维护您的个人信息以便我们保持联系。如果您有任何问题，欢迎随时致电我们。</p>
+			<p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;欢迎来到一辆车拼车网！</p>
     	</div><!--right end-->
     </div>
     

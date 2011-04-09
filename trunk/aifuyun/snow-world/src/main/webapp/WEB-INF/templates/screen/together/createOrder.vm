@@ -103,7 +103,7 @@
                         </p>
                         #errorMessageCreateOrder($!form.fields.carNo.message)
                         <p class="color_gray attention">
-                            	填写此项可以确定您信息的真实性，更方便你找到理想车友。
+                            		如实填写车牌号，拼客才会对相信您的拼车信息，方便您快速完成拼车体验
                         </p>
                    </div>
                 </li>
@@ -118,7 +118,7 @@
 		            	</p>
 		            	#errorMessageCreateOrder($!form.fields.totalSeats.message)
 		            	<p class="color_gray attention">
-                                   	空余座位数不包括你自己。
+                             	空余座位数不包括您自己。
                         </p>
 		            </div>
 	            </li>
@@ -279,9 +279,6 @@
 		                 #errorMessageCreateOrder($!form.fields.arriveTimeHour.message)
 						 #errorMessageCreateOrder($!form.fields.arriveTimeMinute.message)
 		                </p>
-                        <p class="color_gray attention">
-                        	该项可选填，填写预计到达时间可以明确地将您的需求告诉乘客，避免因时间的误差而引起的争论。
-                        </p>
 	                </div>
 	               
                 </li>
@@ -329,7 +326,7 @@
     </div><!--left end-->
 
   <div class="reg_r_box"><!--right begin-->
-     <p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;花费你一分钟来进行注册，您就可以享用一辆车网站更多的功能！如果您已经注册过，请直接登录，并注意维护您的个人信息以便我们保持联系。如果您有任何问题，欢迎随时致电我们。</p>
+     <p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;欢迎来到一辆车拼车网！</p>
   </div><!--right end-->
   <div class="clear"></div>
 </div>
@@ -431,6 +428,14 @@
 				$('#J_arriveTime').css('display', 'none');
 			}
 			return false;
+		});
+		
+		$('#J_moreCityLink').bind('click', function() {
+			var url = "$snowModule.setTarget('city/cityList').add('isSwitch', true)";
+			url += "&onName=" + window.target_city_input_id;
+			window.open(url);
+			$('#choose_city_dialog').dialog("close");
+			
 		});
 	});
 </script>

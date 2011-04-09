@@ -10,7 +10,7 @@
 <div style="clear: both"></div>
 
 <div style="text-align: right; padding-right: 12px;">
-	<a href="#">更多城市...</a>
+	<a id="J_moreCityLink" href="#">更多城市...</a>
 </div>
 
 <script type="text/javascript">
@@ -18,4 +18,5 @@
 		$('#'+window.target_city_input_id).val(cityName);
 		$('#choose_city_dialog').dialog('close');
 	}
+	
 </script>
