@@ -29,28 +29,17 @@
 			<input class="login_btn" id="J_login_for_view" type="button" value="登陆查看" name="login" tabindex="3"/></li>
 		#end
 	</ul>
-	<div class="share">
-		<p class="col_gray">联系时请说在一辆车网站上看到的信息</p>
-			<a href="#">
-				<img src="$imgServer/button_tsina.png" title="分享到新浪微博"/>
-			</a>
-			<a href="#">
-				<img src="$imgServer/button_qzone.png" title="分享到QQ空间"/>
-			</a>
-			<a href="#">
-				<img src="$imgServer/button_tqq.png" title="分享到QQ微博"/>
-			</a>
-			<a href="#">
-				<img src="$imgServer/button_renren.png" title="分享到人人网"/>
-			</a>
-			<a href="#">
-				<img src="$imgServer/button_kaixin001.png" title="分享到开心网"/>
-			</a>
-			<a href="#">
-				<img src="$imgServer/button_copy.png"  title="复制并分享给好友"/>
-			</a>
-			<a href="#">
-				<img src="$imgServer/button_email.png"  title="发到我的邮件信箱里"/>
-			</a>
-		</div>
+	
+        <!-- 分享功能 JiaThis Button BEGIN -->
+        <div id="jiathis_style_32x32">
+        	<!-- <a class="jiathis_button_qzone"></a> 有问题 -->
+        	<a class="jiathis_button_tsina"></a>
+        	<a class="jiathis_button_tqq"></a>
+        	<a class="jiathis_button_kaixin001"></a>
+        	<a class="jiathis_button_renren"></a>
+        </div>
+        
+		<script type="text/javascript" src="http://v1.jiathis.com/code/jia.js" charset="utf-8"></script>
+        <!-- JiaThis Button END -->
+
 	</div>

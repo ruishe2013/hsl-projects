@@ -26,9 +26,7 @@
 			 </div>
 		 </div>
         
-        
         #set($leftSeatCount = $order.totalSeats - $joinersCount)
-        
         #set($isSfcAndPassenger = $order.isSfcAndPassenger())
         
         <div class="details_l">

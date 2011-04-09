@@ -31,7 +31,7 @@
 	                	#foreach($order in $orders)
 		                	<ul>
 		                        <h1 style="border-bottom:#ccc 1px dashed; height:25px;">
-		                            <a href="#" class="fl"><strong>从 $!{order.fromCity}$!{order.fromAddr} 拼车到  $!{order.arriveCity}$!{order.arriveAddr} </strong></a>
+		                            <a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="fl"><strong>从 $!{order.fromCity}$!{order.fromAddr} 拼车到  $!{order.arriveCity}$!{order.arriveAddr} </strong></a>
 		                            <span class="create_time">$!dateUtil.formatFullDate($order.gmtCreate)</span>
 		                        </h1>
 		                        <div class="cl">

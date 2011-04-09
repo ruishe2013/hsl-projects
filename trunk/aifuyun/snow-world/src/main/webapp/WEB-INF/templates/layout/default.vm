@@ -2,7 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=gbk" />
-	<title>绿色出行， 同上一辆车！ 一辆车拼车网 ，全国最大的拼车网</title>
+	<title>
+	#if("$!title" == "")
+		绿色出行， 同上一辆车！ 一辆车拼车网 ，全国最大的拼车网
+	#else	
+		$title
+	#end
+	</title>
 	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 	<meta name="description" content="一辆车拼车网，全国最大的拼车网，提供拼的士，顺风车，上下班拼车等拼车服务！" />
 	<meta name="keywords" content="拼车,一辆车,绿色出行,顺风车,低碳,便捷,同城拼车,城际拼车,打的,拼的,汽油,汽车,节能,可持续" />
@@ -21,7 +27,7 @@
 </div>
 
 <div class="top_r">
-<p><a href="#">帮助中心</a></p>
+<p><a href="#">帮助中心 $title</a></p>
 $control.setTemplate('common/userInfo.vm')
 </div>
 
