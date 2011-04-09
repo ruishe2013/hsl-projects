@@ -38,7 +38,7 @@
                 <div class="fl" style="width:72px; overflow: hidden;">
                 	<input type=submit value="" class="button_search">
                 </div>
-                <div class="fl ml10">
+                <div class="fl ml10" style="line-height:15px;">
                 	<br />
                     <a href="#">°ïÖú</a>
                 </div> 

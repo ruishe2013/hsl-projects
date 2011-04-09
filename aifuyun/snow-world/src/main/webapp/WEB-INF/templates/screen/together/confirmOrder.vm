@@ -9,10 +9,10 @@
     <div class="create_box">
     	<div class="create_suc">
             <span class="fl font_14_b col_g">
-                您发起的拼车信息如下，请确认后点击右下角的按钮提交！
+                您发起的拼车信息如下，确认后请点击按钮提交！
             </span>
             <a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmOrder').add('orderId', $order.id)" >
-                	<span class="but_bg"><strong>确认提交</strong></span>
+                	<span class="but_bg fl"><strong>确认提交</strong></span>
                 </a>
     	</div>
    		<div class="cl"></div>
@@ -85,9 +85,9 @@
 						</td>
 					</tr>             
 				</table>
-				<div style="text-align:center;margin:5px;">
+				<div style="margin:5px;">
 					<a href="$snowModule.setTarget('t').add('actionTarget', 'together/orderAction').add('actionEvent', 'confirmOrder').add('orderId', $order.id)" >
-						<span class="but_bg"><strong>确认提交</strong></span>
+						<span class="but_bg" style="margin:0 auto;"><strong>确认提交</strong></span>
 					</a>
 				</div>
             
@@ -95,4 +95,3 @@
     </div>
     <div class="hr_10"></div>
 </div>
-</div><!--content end-->
