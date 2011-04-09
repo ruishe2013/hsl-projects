@@ -1,50 +1,109 @@
-<div id="sub-nav"><!--index-top-->
-        <ul class="fl ml10">
-            <li><a href="$snowModule.setTarget('/index')"  class="on">首 页</a></li>
-	        <li><a href="$snowModule.setTarget('/taxi-index')" >拼的士</a></li>
-	        <li><a href="$snowModule.setTarget('/inter-city-index')">顺风车</a></li>
-	        <li><a href="$snowModule.setTarget('/rush-hour-index')" >上下班拼车</a></li>
-        </ul>
-        <div class="fr mr10">
-        	 <a href="$snowModule.setTarget('together/createOrder')" class="dis fr but_cjpc-y" style="margin-top:5px">
-            	创建拼车
-            </a>
-            <span class=" mr10 dis fr">
-              $control.setTemplate('common/userInfo.vm')
-        	</span>
+
+<div id="cArea"><!--content-1 begin-->
+    <div class="search_box"><!--search begin-->
+    	<div class="search_t"></div>
+        <div class="search_form">
+
+        	<form action="$snowModule.setTarget('search/searchOrder')" method="get" name="search">
+                <ul>
+                <li>
+                <label for="inp_name">城市：</label>
+				<p>
+				<input class="input_95" name="fromCity" value="$!{selectedCity.name}" type="text"/>        
+                <a href="$snowModule.setTarget('city/cityList')" >切换城市</a>
+                </p>
+                </li>
+
+                <li>
+                <label for="inp_name">地点：</label>
+				<p>
+				<input class="input_95" name="fromAddr" type="text" /> 
+				到
+				<input class="input_95" name="arriveAddr" type="text"/>
+				</li>
+                
+                <li>
+                <label for="inp_name">日期：</label>
+				<p>
+				<input type="text" class="input_95 date-pick"  name="fromTime_None" value="$!dateUtil.formatDate($defaultSearchDate, 'yyyy-MM-dd')" />
+                </p>
+                </li>
+                
+                <li>
+                <div style="display: block;">
+                	<div class="search_tip">
+                		<span style="display:none">
+                			<img src="$imgServer/ico_tip.gif" align="absmiddle" border="0" />
+                		</span>
+                	</div>
+                </div>
+                <button type="submit" class="but_search fr"></button>
+                </li>
+                
+                
+                </ul>
+            </form>
         </div>
-    </div><!--index-top end-->
+        <div class="search_b"></div>
+    </div><!--search end-->
+    <div class="Focus_pic"  id="flashcontent01"><!--Focus_pic begin-->
     
-    <center><br clear="all" />
-    <div class="index-logo">
-    	<a href="$snowModule.setTarget('index')">
-        	<img src="$imgServer/logo_03.png" width="338" height="49" title="一辆车" border="0"/>
-        </a>
+<script type="text/javascript">	
+					var speed = 4000;		
+					var pics='$imgServer/Focus_pic/4-3-1.jpg|$imgServer/Focus_pic/4-3-2.jpg';	
+					var mylinks='http://www.yiliangche.com/|http://www.yiliangche.com/';
+					var texts='绿色出行，同上一两车|绿色出行，同上一两车';
+					var sohuFlash2 = new sohuFlash("$flashServer/focus0414a.swf","flashcontent01","630","275","8","#ffffff");
+
+sohuFlash2.addParam("quality", "medium");
+sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",speed);
+						sohuFlash2.addVariable("p",pics);	
+						sohuFlash2.addVariable("l",mylinks);
+						sohuFlash2.addVariable("icon",texts);
+						sohuFlash2.write("flashcontent01");
+					</script>
+    </div><!--Focus_pic begin-->
+</div><!--content-1 end-->
+
+<div class="hr_6"></div>
+<div id="cArea"><!--content-2 begin-->
+<div class="newcar_t">
+    <div class="newcar_title">最新拼车</div>
+	    <div class="but_release">
+	    </div>
     </div>
-    <div class="searcharea">
-    	<form action="$snowModule.setTarget('search/searchOrder')" method="get">
-        	<div class="input-box" style="line-height:35px;">
-				<div class="fl col_w">从</div>
-                <div class="search_l fl"></div>
-                <div class="search_bg fl">
-                	<input class="input-search" value="" name="fromAddr"  >
-                </div>
-                <div class="search_r fl"></div>
-				<div class="fl col_w ml10">到</div>
-                <div class="search_l fl ml10"></div>
-                <div class="search_bg fl">
-                	<input class="input-search" value="" name="arriveAddr" >
-                </div>
-                <div class="fl" style="width:72px; overflow: hidden;">
-                	<input type=submit value="" class="button_search">
-                </div>
-                <div class="fl ml10" style="line-height:15px;">
-                	<br />
-                    <a href="#">帮助</a>
-                </div> 
-            </div>
-            
-        </form>
-    </div>
-    </center>
-    <div style="height:110px; clear:both;"></div>
+	<div class="newcar_c">
+	<table width="100%" cellpadding="0" cellspacing="0">
+	  <tr class="font_12_b bgc_dy">
+	    <td>类型</td>
+	    <td>出发地</td>
+	    <td>目的地</td>
+	    <td>发车时间</td>                         
+	    <td>发起人</td>
+	    <td>操作</td>
+	  </tr>
+	#set($index=0)
+	#foreach($order in $recentOrders)
+		<tr #if( $index % 2 !=0 )class="bgc_dg" #end>
+			<td>$!order.togetherTypeEnum.name</td>
+		    <td>$!order.fromCity $!order.fromAddr</td>
+		    <td>$!order.arriveCity $!order.arriveAddr</td>
+		    <td>$!dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm')</td>
+		    <td>$!order.creatorUsername</td>
+		    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_pcbg">查看详情</a></td>
+		</tr>
+		#set($index= $index + 1)
+	#end
+</table>
+
+</div>
+<!--
+<div class="newcar_b"><div class="newcar_b_bg"></div></div>
+-->
+</div><!--content-2 end-->
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('.date-pick').datePicker({clickInput:true});
+	});
+</script>
