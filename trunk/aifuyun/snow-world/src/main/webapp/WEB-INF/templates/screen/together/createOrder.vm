@@ -61,8 +61,10 @@
                 </li>
                
                #set($showCreatorType = false)
+                #set($showCarNo = false)
                #if("$!selectOrderType" == "2") 
                		 #set($showCreatorType = true)
+               		  #set($showCarNo = true)
 			   #end
 			   
                ## 如果是拼的士，则不显示
@@ -72,19 +74,11 @@
                     </div>
                     <div class="reg_info_li_box">
                     	<label for="$!{form.fields.creatorCarOwnerType.name}-1">
-                        	<input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-1" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="1" #if ("$!form.fields.creatorCarOwnerType.value" == "1") checked #end />我是车主
-                        </label>
-                        <label for="$!{form.fields.creatorCarOwnerType.name}-2">
-                        <input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-2" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="2" #if ("$!form.fields.creatorCarOwnerType.value" == "2") checked #end />我是乘客
+                        	<input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-1" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="1" checked />我是车主
                         </label>
                      #errorMessageCreateOrder($!form.fields.creatorCarOwnerType.message)
                     </div>
                 </li>
-                
-                #set($showCarNo = false)
-                #if ($showCreatorType && "$!form.fields.creatorCarOwnerType.value" == "1")
-                	 #set($showCarNo = true)
-                #end
                
 	        	<li id="J_car_no" #if(!$showCarNo) style="display:none" #end>
                     <div class="info-title">
@@ -362,11 +356,8 @@
 				$('#J_creator_type').attr('disabled', false);
 				
 				// show carNO
-				var checkedVal = $('input[name=creatorCarOwnerType]:checked').val();
-				if (checkedVal == "1") {
-					$('#J_car_no').attr('disabled', 'disabled');
-					$('#J_car_no').css('display', 'block');
-				}
+				$('#J_car_no').attr('disabled', 'disabled');
+				$('#J_car_no').css('display', 'block');
 			}
 		});
 		
