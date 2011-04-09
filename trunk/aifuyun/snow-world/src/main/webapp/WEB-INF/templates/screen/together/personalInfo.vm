@@ -96,11 +96,10 @@
                 </div>
 	            <div class="reg_info_li_box">
 					<p>
-						<select id="$!form.fields.career.name" name="$!form.fields.career.name" value="$!form.fields.career.value">
-							<option value="老师">老师</option>
-		                    <option value="律师">律师</option>
-		                    <option value="工程师">工程师</option>
-		                    <option value="按摩师">按摩师</option>
+						<select id="$!form.fields.career.name" name="$!form.fields.career.name">
+							#foreach($career in $careers)
+								<option value="$!career.name" #if( "$!form.fields.career.value" == "$!career.name" ) selected #end>$!career.name</option>
+							#end
 		                </select>
 	           		</p>
 					#errorMessagePersonalInfo($!form.fields.career.message)
