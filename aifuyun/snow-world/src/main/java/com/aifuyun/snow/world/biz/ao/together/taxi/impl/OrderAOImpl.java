@@ -16,6 +16,7 @@ import com.aifuyun.snow.world.common.SnowUtil;
 import com.aifuyun.snow.world.common.cache.CacheContants;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.CareerTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderUserRoleEnum;
@@ -633,10 +634,14 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			
 			BirthYearEnum[] years = BirthYearEnum.values();
 			
+			
+			CareerTypeEnum[] careers = CareerTypeEnum.values();
+			
 			result.getModels().put("actionEvent", actionEvent);
 			result.getModels().put("creatorExist", creatorExist);
 			result.getModels().put("isUserInfoEmpty", isUserInfoEmpty);
 			result.getModels().put("years", years);
+			result.getModels().put("careers", careers);
 			result.getModels().put("selectedYear", selectedYear);
 			result.getModels().put("orderUser", orderUserDO);
 			result.getModels().put("order", order);
