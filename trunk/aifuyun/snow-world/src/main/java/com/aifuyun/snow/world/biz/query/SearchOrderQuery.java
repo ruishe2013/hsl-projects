@@ -6,13 +6,15 @@ public class SearchOrderQuery extends Query {
 
 	private static final long serialVersionUID = -7077576553399209873L;
 
-	String fromCity;
+	private String fromCity;
 	
-	String fromAddr;
+	private String fromAddr;
 	
-	String arriveCity;
+	private String arriveCity;
 	
-	String arriveAddr;
+	private String arriveAddr;
+	
+	private boolean ignoreStartFromTime = false;
 	
 	private long fromTime;
 	
@@ -64,6 +66,14 @@ public class SearchOrderQuery extends Query {
 
 	public void setArriveCity(String arriveCity) {
 		this.arriveCity = arriveCity;
+	}
+
+	public boolean isIgnoreStartFromTime() {
+		return ignoreStartFromTime;
+	}
+
+	public void setIgnoreStartFromTime(boolean ignoreStartFromTime) {
+		this.ignoreStartFromTime = ignoreStartFromTime;
 	}
 
 }
