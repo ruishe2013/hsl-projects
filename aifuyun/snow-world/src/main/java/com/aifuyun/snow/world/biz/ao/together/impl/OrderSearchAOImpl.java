@@ -84,15 +84,16 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 			sb.append(" +fromAddrText:").append(SearchUtil.filter(fromAddr));
 		}
 		
-		// 过滤起始时间
-		filterFromDate(sb);
-		
 		if (!searchOrderQuery.isIgnoreStartFromTime()) {
-			long fromTime = searchOrderQuery.getFromTime();
-			if (fromTime > 0L) {
-				sb.append(" +fromTime_ymd:").append(fromTime);
-			}
+			// 过滤起始时间
+			filterFromDate(sb);
 		}
+		
+		long fromTime = searchOrderQuery.getFromTime();
+		if (fromTime > 0L) {
+			sb.append(" +fromTime_ymd:").append(fromTime);
+		}
+		
 		
 		// 过滤已删除的
 		sb.append(" +deleted:0");
