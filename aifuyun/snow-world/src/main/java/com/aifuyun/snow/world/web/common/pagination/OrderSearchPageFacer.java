@@ -49,6 +49,11 @@ public class OrderSearchPageFacer implements PageFacer {
 			urlModule.addQueryData("arriveTime", DateTimeUtil.long2Date(arriveTime));
 		}
 		
+		
+		boolean ignoreStartFromTime = query.isIgnoreStartFromTime();
+		if (ignoreStartFromTime) {
+			urlModule.addQueryData("ignoreStartFromTime", ignoreStartFromTime);
+		}
 		return urlModule;
 	}
 	

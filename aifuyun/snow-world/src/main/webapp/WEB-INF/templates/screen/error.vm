@@ -12,10 +12,14 @@
 	#set($renderMessage = $!message)
 #end
 
-<div id="errorPage-error-message">
-	$renderMessage
-</div>
-<div id="errorPage-error-guider">
-	<a href="$snowModule.setTarget('index.vm')">返回首页</a>
-</div>
-
+<div id="cArea"><!--content begin-->
+	<div class="cbox"><!--cbox begin-->
+		<div class="create_box font_14_b col_gray" style="margin-bottom: 15px;margin-top:30px">
+            	<img src="$imgServer/emblem.png" border="0" height="90" width="100" class="fl"/>
+                <div class="fl" style="padding:30px 10px;">
+                	$!renderMessage
+                    <a href="$snowModule.setTarget('index')" class="text_drakgreen">[返回首页]</a>
+                </div>
+		</div>
+	</div><!--cbox end-->
+</div><!--content end-->
