@@ -1,0 +1,504 @@
+use snow-world;
+truncate table sw_area_province;
+
+
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified, seq_num)values(2, '直辖市', 'zhixiashi', now(), now(), 12);
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(28, '新疆', 'xinjiang', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(5, '广东', 'guangdong', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(30, '浙江', 'zhejiang', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(6, '广西','guangxi',  now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(18, '内蒙古','neimenggu',  now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(19, '宁夏','ningxia',  now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(16, '江西', 'jingxi', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(7, '贵州', 'guizhou', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(1, '安徽', 'anhui', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(23, '陕西', 'shanxi', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(17, '辽宁', 'ningxia', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(22, '山西', 'shanxi', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(20, '青海', 'qinghai', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(25, '四川', 'sichuan', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(15, '江苏', 'jiangsu', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(9, '河北', 'hebei', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(27, '西藏', 'xizang', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(3, '福建','fujian',  now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(14, '吉林', 'jilin', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(29, '云南', 'yunnan', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(12, '湖北','hubei',  now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(8, '海南','hainan',  now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(13, '湖南','hunan',  now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(4, '甘肃','gansu',  now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(10, '河南', 'henan', now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(21, '山东','shandong',  now(), now());
+insert into sw_area_province (id, name, pinyin, gmt_create, gmt_modified)values(11, '黑龙江','heidongjiang',  now(), now());
+
+truncate table sw_area_city;
+
+##---直辖市
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(1, '北京','bj', 400, 2, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(2, '上海','shanghai', 360, 2, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(3, '天津','tianjin', 295, 2, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(4, '重庆','chongqing', 245, 2, now(), now());
+
+
+
+##---浙江
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(88, '杭州','hangzhou', 350, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(89, '宁波','ningbo', 29, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(90, '温州','wenzhou', 28, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(91, '嘉兴','jiaxing', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(92, '湖州','huzhou', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(93, '绍兴','shaoxing', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(94, '金华','jinhua', 26, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(95, '衢州','zhou', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(96, '舟山','zhoushan', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(97, '台州','taizh', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(98, '丽水','lishui', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(349, '慈溪','', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(350, '乐清','', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(351, '瑞安','', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(352, '海宁','', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(353, '诸暨','', 0, 30, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(354, '义乌','', 27, 30, now(), now());
+
+
+##---广东
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(249, '广州','guangzhou', 330, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(251, '深圳','shenzhen', 340, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(255, '珠海','zhuhai', 310, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(257, '汕头','shantou', 27, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(259, '东莞','dongguan', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(261, '中山','zhongshan', 26, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(262, '佛山','foshan', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(263, '韶关','shaoguan', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(265, '江门','jiangmen', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(267, '湛江','zhanjiang', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(270, '茂名','maoming', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(272, '肇庆','zhaoqing', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(275, '惠州','huizhou', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(276, '梅州','meizhou', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(277, '汕尾','shanwei', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(279, '河源','heyuan', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(282, '阳江','yangjiang', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(284, '清远','qingyuan', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(286, '潮州','chaozhou', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(289, '揭阳','jieyang', 0, 5, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(291, '云浮','yunfu', 0, 5, now(), now());
+
+
+##---江苏
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(75, '南京','nanjing', 300, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(76, '镇江','zhenjiang', 0, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(77, '苏州','suzhou', 27, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(78, '南通','nantong', 0, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(79, '扬州','yangzhou', 0, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(80, '盐城','yancheng', 0, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(81, '徐州','xuzhou', 0, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(82, '连云港','lianyungang', 25, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(83, '常州','changzhou', 0, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(84, '无锡','wuxi', 26, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(85, '宿迁','suqian', 0, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(86, '泰州','taizhou', 0, 15, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(87, '淮安','huaian', 0, 15, now(), now());
+
+
+##---山东
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(136, '济南','jinan', 190, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(137, '青岛','qingdao', 29, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(138, '淄博','zibo', 28, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(139, '枣庄','zaozhuang', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(140, '东营','dongying', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(141, '烟台','yantai', 27, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(142, '潍坊','weifang', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(143, '济宁','jining', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(144, '泰安','taian', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(145, '威海','weihai', 26, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(146, '日照','rizhao', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(147, '莱芜','laiwu', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(148, '临沂','linyi', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(149, '德州','dezhou', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(150, '聊城','liaocheng', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(151, '滨州','binzhou', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(152, '菏泽','heze', 0, 21, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(400, '荷泽','', 0, 21, now(), now());
+
+
+##---青海
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(191, '西宁','xining', 0, 20, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(192, '海东','haidong', 0, 20, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(193, '海南','hainan', 0, 20, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(194, '海北','haibei', 0, 20, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(195, '玉树','yushu', 0, 20, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(197, '果洛','guoluo', 0, 20, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(199, '海西','haixi', 0, 20, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(356, '黄南','', 0, 20, now(), now());
+
+
+##---山西
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(16, '太原','taiyuan', 180, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(17, '大同','datong', 29, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(18, '阳泉','yangquan', 0, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(19, '长治','changzhi', 0, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(20, '晋城','jincheng', 0, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(21, '朔州','shuozhou', 0, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(22, '吕梁','lvliang', 0, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(23, '忻州','xinzhou', 0, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(24, '晋中','jinzhong', 0, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(25, '临汾','linfen', 0, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(26, '运城','yuncheng', 0, 22, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(358, '忻洲','', 0, 22, now(), now());
+
+
+##---陕西
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(243, '西安','xian', 320, 23, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(245, '宝鸡','baoji', 29, 23, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(248, '咸阳','xianyang', 28, 23, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(250, '铜川','tongchuan', 0, 23, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(252, '渭南','weinan', 0, 23, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(253, '延安','yanan', 0, 23, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(254, '榆林','yulin', 0, 23, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(256, '汉中','hanzhong', 0, 23, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(258, '安康','ankang', 0, 23, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(260, '商洛','shangluo', 0, 23, now(), now());
+
+
+##---四川
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(305, '成都','chengdu', 325, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(307, '绵阳','mianyang', 29, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(308, '德阳','deyang', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(317, '自贡','zigong', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(318, '攀枝花','panzhihua', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(319, '广元','guangyuan', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(320, '内江','neijiang', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(321, '遂宁','suining', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(322, '乐山','leshan', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(323, '巴中','bazhong', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(324, '资阳','ziyang', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(325, '南充','nanchong', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(326, '宜宾','yibin', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(327, '泸州','luzhou', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(328, '广安','guangan', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(329, '达州','dazhou', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(330, '雅安','yaan', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(331, '眉山','meishan', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(332, '甘孜','ganzi', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(333, '凉山','liangshan', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(334, '阿坝','aba', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(361, '西昌','', 0, 25, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(366, '泸洲','', 0, 25, now(), now());
+
+
+##---安徽
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(99, '合肥','hefei', 295, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(100, '芜湖','wuhu', 29, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(101, '蚌埠','bangbu', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(102, '马鞍山','maanshan', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(103, '淮北','huaibei', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(104, '铜陵','tongling', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(105, '安庆','anqing', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(106, '黄山','huangshan', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(107, '滁州','chuzhou', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(108, '宿州','ahsz', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(109, '池州','chizhou', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(110, '淮南','huainan', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(111, '巢湖','chaohu', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(112, '阜阳','fuyang', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(113, '六安','liuan', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(114, '宣城','xuancheng', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(115, '亳州','haozhou', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(370, '滁洲','', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(374, '毫州','', 0, 1, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(390, '抚湖','', 0, 1, now(), now());
+
+
+##---西藏
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(264, '拉萨','lasa', 30, 27, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(266, '日喀则','rikaze', 29, 27, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(268, '山南','shannan', 0, 27, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(269, '林芝','linzhi', 0, 27, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(271, '昌都','changdu', 0, 27, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(273, '阿里','ali', 0, 27, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(274, '那曲','naqu', 0, 27, now(), now());
+
+
+##---新疆
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(153, '乌鲁木齐','wulumuqi', 30, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(156, '石河子','shihezi', 29, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(157, '阿拉尔','alaer', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(159, '图木舒克','tumushuke', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(166, '五家渠','wujiaqu', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(168, '塔城','tacheng', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(170, '阿勒泰','aletai', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(172, '克拉玛依','kelamayi', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(173, '伊犁','yili', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(174, '巴音郭勒','bayinguole', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(176, '昌吉','changji', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(177, '克孜勒苏柯尔克孜','kezilesukeerkezi', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(179, '博尔塔拉','boertala', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(181, '吐鲁番','tulufan', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(183, '哈密','hami', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(185, '喀什','kashi', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(187, '和田','hetian', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(189, '阿克苏','akesu', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(373, '哈密地区','', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(396, '巴音郭楞蒙古自治州','', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(397, '巴音郭楞自治州尉犁县','', 0, 28, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(399, '玛纳斯县','', 0, 28, now(), now());
+
+
+
+##---云南
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(278, '昆明','kunming', 215, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(280, '大理','dali', 29, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(281, '曲靖','qujing', 28, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(283, '玉溪','yuxi', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(285, '楚雄','chuxiong', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(335, '红河','honghe', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(336, '文山','wenshan', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(337, '思芧','simao', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(338, '西双版纳','xishuangbanna', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(339, '保山','baoshan', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(340, '德宏','dehong', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(341, '丽江','lijiang', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(342, '怒江','nujiang', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(343, '迪庆','diqing', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(344, '临沧','lincang', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(367, '昭通','', 0, 29, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(368, '思茅','', 0, 29, now(), now());
+
+
+
+
+##---宁夏
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(202, '银川','yinchuan', 30, 19, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(204, '石嘴山','shizuishan', 0, 19, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(206, '吴忠','wuzhong', 0, 19, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(207, '固原','guyuan', 0, 19, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(209, '中卫','zhongwei', 0, 19, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(393, '龙吧','', 0, 19, now(), now());
+
+
+##---内蒙古
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(27, '呼和浩特','huhehaote', 30, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(28, '包头','baotou', 29, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(29, '乌海','wuhai', 28, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(30, '赤峰','chifeng', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(31, '呼伦贝尔市','hulunbeiershi', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(32, '阿拉善盟','alashanmeng', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(33, '鄂尔多斯市','eerduosishi', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(34, '兴安盟','xinganmeng', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(38, '通辽市','tongliaoshi', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(345, '巴彦淖尔市','', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(346, '牙克石市','', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(347, '海拉尔市','', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(357, '网通呼和浩特','', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(360, '阿拉善左旗','', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(371, '呼和浩特市','', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(376, '突泉县','', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(394, '乌兰察布市','', 0, 18, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(406, '集宁市','', 0, 18, now(), now());
+
+
+
+##---辽宁
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(39, '沈阳','shenyang', 30, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(40, '大连','dalian', 29, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(41, '鞍山','anshan', 28, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(42, '抚顺','fushun', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(43, '本溪','benxi', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(44, '丹东','dandong', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(45, '锦州','jinzhou', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(46, '营口','yingkou', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(47, '阜新','fuxin', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(48, '辽阳','liaoyang', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(49, '盘锦','panjin', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(50, '铁岭','tieling', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(51, '朝阳','chaoyang', 0, 17, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(52, '葫芦岛','huludao', 0, 17, now(), now());
+
+
+##---福建
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(116, '福州','fjfuzhou', 280, 3, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(117, '厦门','xiamen', 270, 3, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(118, '莆田','putian', 28, 3, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(119, '三明','sanming', 0, 3, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(120, '泉州','quanzhou', 0, 3, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(121, '漳州','zhangzhou', 0, 3, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(122, '南平','nanping', 0, 3, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(123, '龙岩','longyan', 0, 3, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(124, '宁德','ningde', 0, 3, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(355, '武夷山','', 0, 3, now(), now());
+
+
+
+##---甘肃
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(213, '兰州','lanzhou', 30, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(215, '嘉峪关','jiayuguan', 29, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(217, '金昌','jinchang', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(219, '白银','baiyin', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(220, '天水','tianshui', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(222, '酒泉','jiuquan', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(224, '张掖','zhangye', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(227, '武威','wuwei', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(229, '定西','dingxi', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(230, '陇南','longnan', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(232, '平凉','pingliang', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(234, '庆阳','qingyang', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(236, '临夏','linxia', 0, 4, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(240, '甘南','gannan', 0, 4, now(), now());
+
+
+##---广西
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(294, '南宁','nanning', 30, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(296, '柳州','liuzhou', 29, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(298, '桂林','guilin', 28, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(300, '梧州','wuzhou', 27, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(302, '北海','beihai', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(303, '防城港','fangchenggang', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(304, '钦州','qinzhou', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(306, '贵港','guigang', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(309, '玉林','gxyulin', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(310, '贺州','hezhou', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(311, '百色','baise', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(313, '河池','hechi', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(314, '祟左','suizuo', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(315, '来宾','laibin', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(362, '钦洲','', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(379, '铁通','', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(381, '横县','', 0, 6, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(401, '融水','', 0, 6, now(), now());
+
+
+##---贵州
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(287, '贵阳','guiyang', 30, 7, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(288, '六盘水','liupanshui', 29, 7, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(290, '遵义','zunyi', 28, 7, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(292, '安顺','anshun', 27, 7, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(293, '铜仁','tongren', 0, 7, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(295, '黔西南','qianxinan', 0, 7, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(297, '毕节','bijie', 0, 7, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(299, '黔东南','qiandongnan', 0, 7, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(301, '黔南','qiannan', 0, 7, now(), now());
+
+
+##---海南
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(312, '海口','haikou', 200, 8, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(316, '三亚','sanya', 0, 8, now(), now());
+
+
+##---河北
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(5, '石家庄','shijiazhuang', 276, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(6, '邯郸','handan', 29, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(7, '邢台','xingtai', 28, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(8, '保定','baoding', 27, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(9, '张家口','zhangjiakou', 26, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(10, '承德','chengde', 0, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(11, '廊坊','langfang', 0, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(12, '唐山','tangshan', 0, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(13, '秦皇岛','qinhuangdao', 0, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(14, '沧州','cangzhou', 0, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(15, '衡水','hengshui', 0, 9, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(369, '昌州','', 0, 9, now(), now());
+
+
+##---河南
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(154, '郑州','zhengzhou', 30, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(155, '开封','kaifeng', 29, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(158, '洛阳','luoyang', 28, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(160, '平顶山','pingdingshan', 27, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(161, '安阳','anyang', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(162, '鹤壁','hebi', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(163, '新乡','xinxiang', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(164, '焦作','jiaozuo', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(165, '濮阳','puyang', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(167, '许昌','xuchang', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(169, '漯河','luohe', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(171, '三门峡','sanmenxia', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(175, '南阳','nanyang', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(178, '商丘','shangqiu', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(180, '信阳','xinyang', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(182, '周口','zhoukou', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(184, '驻马店','zhumadian', 0, 10, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(186, '济源','jiyuan', 0, 10, now(), now());
+
+
+##---黑龙江
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(62, '哈尔滨','haerbin', 275, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(63, '齐齐哈尔','qiqihaer', 29, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(64, '牡丹江','mudanjiang', 28, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(65, '佳木斯','jiamusi', 27, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(66, '大庆','daqing', 26, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(67, '绥化','suihua', 0, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(68, '鹤岗','hegang', 0, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(69, '鸡西','jixi', 0, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(70, '黑河','heihe', 0, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(71, '双鸭山','shuangyashan', 0, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(72, '伊春','yichun', 0, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(73, '七台河','qitaihe', 0, 11, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(74, '大兴安岭','daxinganling', 0, 11, now(), now());
+
+
+##---湖北
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(188, '武汉','wuhan', 280, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(190, '宜昌','yichang', 29, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(196, '荆州','jingzhou', 28, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(198, '襄樊','xiangfan', 27, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(200, '黄石','huangshi', 27, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(201, '荆门','jingmen', 26, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(203, '黄冈','huanggang', 25, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(205, '十堰','shiyan', 24, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(208, '恩施','enshi', 23, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(210, '潜江','qianjiang', 22, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(211, '天门','tianmen', 21, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(212, '神龙架林区','shenlongjialinqu', 20, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(214, '仙桃','xiantao', 19, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(216, '随州','suizhou', 18, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(218, '咸宁','xianning', 17, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(221, '孝感','xiaogan', 16, 12, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(223, '鄂州','ezhou', 15, 12, now(), now());
+
+
+##---湖南
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(225, '长沙','changsha', 270, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(226, '常德','changde', 29, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(228, '株洲','zhuzhou', 28, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(231, '湘潭','xiangtan', 27, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(233, '衡阳','hengyang', 26, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(235, '岳阳','yueyang', 26, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(237, '邵阳','shaoyang', 0, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(238, '益阳','yiyang', 0, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(239, '娄底','loudi', 0, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(241, '怀化','huaihua', 0, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(242, '郴州','chenzhou', 0, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(244, '永州','yongzhou', 0, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(246, '湘西','xiangxi', 0, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(247, '张家界','zhangjiajie', 0, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(348, '吉首','', 0, 13, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(375, '株州','', 0, 13, now(), now());
+
+
+##---吉林
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(53, '长春','changchun', 30, 14, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(55, '四平','siping', 29, 14, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(56, '辽源','liaoyuan', 28, 14, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(57, '通化','tonghua', 27, 14, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(58, '白山','baishan', 0, 14, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(59, '松原','songyuan', 0, 14, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(60, '白城','baicheng', 0, 14, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(61, '延边','yanbian', 0, 14, now(), now());
+
+
+##---江西
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(125, '南昌','nanchang', 200, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(126, '景德镇','jingdezhen', 29, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(127, '九江','jiujiang', 28, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(128, '鹰潭','yingtan', 27, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(129, '萍乡','pingxiang', 26, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(130, '新余','xinyu', 0, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(131, '赣州','ganzhou', 0, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(132, '吉安','jian', 0, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(133, '宜春','jxyichun', 0, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(134, '抚州','fuzhou', 0, 16, now(), now());
+insert into sw_area_city (id, name, pinyin, seq_num, province_id, gmt_create, gmt_modified)values(135, '上饶','shangrao', 0, 16, now(), now());
+
+
+
