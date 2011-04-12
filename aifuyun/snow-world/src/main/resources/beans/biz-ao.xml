@@ -4,7 +4,18 @@
      "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 	
-	<bean id="userAO" class="com.aifuyun.snow.world.biz.ao.user.impl.UserAOImpl"></bean>
+	<bean id="userAO" class="com.aifuyun.snow.world.biz.ao.user.impl.UserAOImpl">
+		<property name="verifyMailTitle">
+			<value>一辆车拼车网——邮件身份认证</value>
+		</property>
+		<property name="verifyMailContent">
+			<value>
+			<![CDATA[
+				请点击<a href="$clickUrl" target="_blank">$clickUrl</a>继续完成认证
+			]]>
+			</value>
+		</property>
+	</bean>
 	<bean id="loginAO" class="com.aifuyun.snow.world.biz.ao.user.impl.LoginAOImpl"></bean>
 	<bean id="orderAO" class="com.aifuyun.snow.world.biz.ao.together.taxi.impl.OrderAOImpl"></bean>
 	<bean id="cityAO" class="com.aifuyun.snow.world.biz.ao.area.impl.CityAOImpl"></bean>

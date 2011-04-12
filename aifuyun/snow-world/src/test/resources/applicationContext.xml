@@ -10,6 +10,6 @@
 	<import resource="beans/persistence.xml" />
 	<import resource="beans/biz-config-services.xml" />
 	<import resource="beans/jdbc-datasource.xml" />
-	
+	<import resource="beans/biz-mail.xml" />
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"></bean>
 </beans>

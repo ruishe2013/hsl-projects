@@ -12,5 +12,6 @@
 	<import resource="beans/${datasource.config.file}" />
 	<import resource="beans/biz-captcha.xml" />
 	<import resource="beans/biz-cache.xml" />
+	<import resource="beans/biz-mail.xml" />
 	
 </beans>

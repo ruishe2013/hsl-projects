@@ -1,7 +1,7 @@
 <div class="details_r">
 	<ul>
 		<li>
-			<strong>发起人：</strong>$!creator.realName
+			<strong>联系人：</strong>$!creator.realName
 		</li>
 		<li>
 			<strong>性别：</strong>$!creator.sexEnum.name

@@ -1,6 +1,9 @@
 package com.aifuyun.snow.world.dal.dataobject.user;
 
+import java.util.List;
+
 import com.aifuyun.snow.world.dal.dataobject.enums.UserStatusEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.VerifyTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.misc.AbstractUserInfoHolder;
 
 public class BaseUserDO extends AbstractUserInfoHolder {
@@ -31,6 +34,13 @@ public class BaseUserDO extends AbstractUserInfoHolder {
 	 * 状态
 	 */
 	private int status = UserStatusEnum.NORMAL.getValue();
+	
+	/**
+	 * 身份认证状态，按位表示，如果没有认证过，则为0
+	 * 已通过认证的
+	 * @see VerifyTypeEnum
+	 */
+	private int verifyStatus = 0;
 
 	public long getId() {
 		return id;
@@ -74,6 +84,18 @@ public class BaseUserDO extends AbstractUserInfoHolder {
 
 	public void setRegisterIp(String registerIp) {
 		this.registerIp = registerIp;
+	}
+
+	public List<VerifyTypeEnum> getVerifyTypes() {
+		return VerifyTypeEnum.valuesFrom(verifyStatus);
+	}
+	
+	public int getVerifyStatus() {
+		return verifyStatus;
+	}
+
+	public void setVerifyStatus(int verifyStatus) {
+		this.verifyStatus = verifyStatus;
 	}
 
 }
