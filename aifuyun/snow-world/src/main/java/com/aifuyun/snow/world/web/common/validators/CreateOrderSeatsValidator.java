@@ -60,6 +60,12 @@ public class CreateOrderSeatsValidator implements Validator {
 				return true;
 			}
 			
+		} else if(orderTypeInt == OrderTypeEnum.WORK.getValue()) {
+			// 如果是上下班拼车，不能为空
+			if (StringUtil.isEmpty(StringUtil.trimToEmpty(value))) {
+				return false;
+			}
+			return true;
 		}
 		// 其他情况
 		return true;

@@ -212,6 +212,59 @@ public class OrderAction extends BaseAction {
 		}
 	}
 	
+	
+	@DefaultTarget("together/createOrderWork")
+	public void doCreateOrderWork(RunData rundata, TemplateContext templateContext) {
+		if (!checkCsrf(templateContext, "createOrderWork")) {
+			return;
+		}
+		final Form form = rundata.getForm("together.createOrderWork");
+		if (!form.validate()) {
+			return;
+		}
+		OrderDO orderDO = new OrderDO();
+		form.apply(orderDO);
+		
+		Date fromTimeDate = new Date();
+		orderDO.setFromTime(fromTimeDate);
+		orderDO.setArriveTime(fromTimeDate);
+		
+		orderDO.setArriveCity(orderDO.getFromCity());
+		orderDO.setArriveAddr(rundata.getQueryString().getString("companyAddr"));
+		/*Date fromTimeDate = rundata.getQueryString().getDate("fromTimeDate", DATE_FMT);
+		
+		int fromHour =  rundata.getQueryString().getInt("fromTimeHour");
+		int fromMinute =  rundata.getQueryString().getInt("fromTimeMinute");
+		
+		int arriveHour =  rundata.getQueryString().getInt("arriveTimeHour", -1);
+		int arriveMinute =  rundata.getQueryString().getInt("arriveTimeMinute", 0);
+		
+		Date fromTime = DateTimeUtil.componentDateAndTime(fromTimeDate, fromHour, fromMinute, 0);
+		
+		Date arriveTime = null;
+		if (arriveHour != -1) {
+			Date arriveTimeDate = fromTimeDate;
+			if (arriveHour < fromHour) {
+				// 如果到达时间比出发时间迟，默认作为第二天处理
+				arriveTimeDate = DateUtil.addDay(fromTimeDate, 1);
+			}
+			arriveTime = DateTimeUtil.componentDateAndTime(arriveTimeDate, arriveHour, arriveMinute, 0);
+		}
+		
+		orderDO.setFromTime(fromTime);
+		orderDO.setArriveTime(arriveTime);
+		*/
+		
+		Result result = orderAO.createOrder(orderDO);
+		if (result.isSuccess()) {
+			long orderId = (Long)result.getModels().get("orderId");
+			sendToPersonalInfoPage(orderId);			
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
+	}
+	
+	
 	private void sendToPersonalInfoPage(long orderId) {
 		URLModuleContainer urlModuleContainer = getURLModuleContainer("snowModule");
 		URLModule urlModule = urlModuleContainer.setTarget("together/personalInfo");
