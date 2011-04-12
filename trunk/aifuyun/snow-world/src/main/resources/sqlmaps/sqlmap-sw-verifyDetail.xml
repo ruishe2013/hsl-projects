@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="VerifyDetailDAO">
+
+	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.user.VerifyDetailDO" alias="verifyDetail" />
+
+	<resultMap id="VerifyDetailMapping" class="verifyDetail">
+		<result property="gmtModified" column="gmt_modified"/>
+		<result property="id" column="id"/>
+		<result property="detail" column="detail"/>
+		<result property="gmtCreate" column="gmt_create"/>
+		<result property="userId" column="user_id"/>
+		<result property="type" column="type"/>
+		<result property="approach" column="approach"/>
+	</resultMap>
+
+	<sql id="verifyDetail-full-columns">
+		t.gmt_modified, t.id, t.detail, t.gmt_create, t.user_id, t.type, t.approach
+	</sql>
+
+	<insert id="create" parameterClass="verifyDetail">
+		<![CDATA[
+			insert into sw_verify_detail(gmt_modified, detail, gmt_create, user_id, type, approach) 
+			values (now(), #detail#, now(), #userId#, #type#, #approach#)
+		]]>
+	</insert>
+	
+	<select id="queryById" resultMap="VerifyDetailMapping" parameterClass="long">
+		select
+			<include refid="verifyDetail-full-columns"/>
+		from
+			sw_verify_detail t
+		where
+			t.deleted = 0 and t.id = #value#
+	</select>
+	
+	<select id="queryByUserId" resultMap="VerifyDetailMapping" parameterClass="long">
+		select
+			<include refid="verifyDetail-full-columns"/>
+		from
+			sw_verify_detail t
+		where
+			t.deleted = 0 and t.user_id = #value#
+	</select>
+	
+	<select id="queryByUserIdAndType" resultMap="VerifyDetailMapping" parameterClass="map">
+		select
+			<include refid="verifyDetail-full-columns"/>
+		from
+			sw_verify_detail t
+		where
+			t.deleted = 0 and t.user_id = #userId# and t.type = #type#
+		limit 1
+	</select>
+	
+	<update id="delete" parameterClass="long">
+		update sw_verify_detail t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
+	</update>
+	
+	<update id="deleteByUserId" parameterClass="long">
+		update sw_verify_detail t set t.deleted = 1, t.gmt_modified = NOW() where t.user_id = #value#
+	</update>
+	
+	<update id="update" parameterClass="extUser">
+		<![CDATA[
+			update sw_verify_detail set 
+				gmt_modified= now(),
+				detail= #detail#,
+				gmt_create= #gmtCreate#,
+				user_id= #userId#,
+				approach = #approach#,
+				type= #type#
+			where id = #id# and deleted = 0
+		]]>
+	</update>
+
+</sqlMap>

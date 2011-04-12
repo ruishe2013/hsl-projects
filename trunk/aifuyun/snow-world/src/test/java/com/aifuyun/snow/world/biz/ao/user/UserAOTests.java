@@ -8,6 +8,7 @@ import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.SexEnum;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
+import com.zjuh.sweet.author.LoginContext;
 import com.zjuh.sweet.result.Result;
 
 public class UserAOTests extends SnowWorldTest {
@@ -100,5 +101,13 @@ public class UserAOTests extends SnowWorldTest {
 		Assert.assertFalse(result.isSuccess());
 		Assert.assertEquals(UserResultCodes.SENSITIVITY_USER, result.getResultCode());
 	}
+	
+	
+	public void testSendCorpVerifyMail() {
+		LoginContext.setUser(2, "foo");
+		Result result = userAO.sendCorpVerifyMail("54025853@qq.com");
+		Assert.assertTrue(result.isSuccess());
+	}
+	
 	
 }

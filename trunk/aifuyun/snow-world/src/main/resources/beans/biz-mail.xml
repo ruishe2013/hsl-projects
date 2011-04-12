@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE beans PUBLIC
+    "-//SPRING//DTD BEAN//EN"
+     "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans default-autowire="byName">
+	
+	<bean id="mailService" class="com.aifuyun.snow.world.biz.bo.mail.impl.MailServiceImpl">
+		<property name="fromMail" value="${service.mail.from.email}"></property>
+		<property name="fromMailName" value="一辆车拼车网"></property>
+		<property name="host" value="${service.mail.from.host}"></property>
+	</bean>
+	
+</beans>
