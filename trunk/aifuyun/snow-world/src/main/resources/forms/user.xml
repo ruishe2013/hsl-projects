@@ -54,7 +54,7 @@
 		</field>
 		<field name="username">
 			<validator type="required" message="用户名不能为空!" />
-			<validator type="string" message="用户名长度不能超过20个字符!" >
+			<validator type="string" message="用户名长度必须在3~20个字符之间!" >
 				<param name="min" value="3" />
 				<param name="max" value="20" />
 			</validator>
