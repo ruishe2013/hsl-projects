@@ -104,6 +104,22 @@ public class OrderDO extends BaseDO {
 	 * 车牌号
 	 */
 	private String carNo;
+	
+	/**
+	 * 上班周期
+	 */
+	private String fromWeek;
+	
+	/**
+	 * 下班出发时间
+	 */
+	private Date atferWorkfromTime;
+	
+	/**
+	 * 下班（预计）达到时间
+	 */
+	private Date atferWorkArriveTime;
+	
 
 	public String getCarNo() {
 		return carNo;
@@ -269,6 +285,30 @@ public class OrderDO extends BaseDO {
 
 	public void setApproach(String approach) {
 		this.approach = approach;
+	}
+	
+	public String getFromWeek() {
+		return fromWeek;
+	}
+
+	public void setFromWeek(String fromWeek) {
+		this.fromWeek = fromWeek;
+	}
+
+	public Date getAtferWorkfromTime() {
+		return atferWorkfromTime;
+	}
+
+	public void setAtferWorkfromTime(Date atferWorkfromTime) {
+		this.atferWorkfromTime = atferWorkfromTime;
+	}
+
+	public Date getAtferWorkArriveTime() {
+		return atferWorkArriveTime;
+	}
+
+	public void setAtferWorkArriveTime(Date atferWorkArriveTime) {
+		this.atferWorkArriveTime = atferWorkArriveTime;
 	}
 
 }

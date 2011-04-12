@@ -116,6 +116,116 @@
 		</field>
 	</form>
 	
+	<form name="together.createOrderWork">
+		<field name="type">
+			<validator type="required" message="请选择拼车类型!" />
+		</field>
+		<field name="carNo">
+			<validator type="com.aifuyun.snow.world.web.common.validators.CreateOrderCarNoValidator" message="请输入车牌号!" >
+			</validator>
+			<validator type="string" message="车牌号不能超过14个字符!" >
+				<param name="max" value="14" />
+			</validator>
+		</field>
+		<field name="totalSeats">
+			<validator type="com.aifuyun.snow.world.web.common.validators.CreateOrderSeatsValidator" message="空余座位数不能为空!" >
+			</validator>
+			<validator type="int" message="空余座位数必须是正整数!" >
+				<param name="min" value="1" />
+			</validator>
+		</field>
+		<field name="fromCity">
+			<validator type="required" message="出发城市不能为空!" />
+			<validator type="string" message="出发城市名称长度不能超过20个字符!" >
+				<param name="min" value="1" />
+				<param name="max" value="20" />
+			</validator>
+		</field>
+		<field name="fromAddr">
+			<validator type="required" message="出发地不能为空!" />
+			<validator type="string" message="出发地名称长度不能超过50个字符!" >
+				<param name="min" value="1" />
+				<param name="max" value="50" />
+			</validator>
+		</field>
+		<field name="companyAddr">
+			<validator type="required" message="公司地址不能为空!" />
+			<validator type="string" message="公司地址长度不能超过50个字符!" >
+				<param name="min" value="1" />
+				<param name="max" value="50" />
+			</validator>
+		</field>
+		<field name="approach">
+			<validator type="string" message="请把途径控制在100个字符之内!" >
+				<param name="min" value="0" />
+				<param name="max" value="100" />
+			</validator>
+		</field>
+		<field name="fromTimeWeek">
+			<validator type="required" message="出发日期不能为空!" />
+		</field>
+		<field name="fromTimeHour">
+			<validator type="required" message="出发时间(小时)不能为空!" />
+			<validator type="int" message="出发时间(小时)必须在0~23之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="23" />
+			</validator>
+		</field>
+		<field name="fromTimeMinute">
+			<validator type="required" message="出发时间(分钟)不能为空!" />
+			<validator type="int" message="出发时间(分钟)必须在0~59之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="59" />
+			</validator>
+		</field>
+		<field name="arriveTimeHour">
+			<validator type="int" message="上班到达时间(小时)必须在0~23之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="23" />
+			</validator>
+		</field>
+		<field name="arriveTimeMinute">
+			<validator type="int" message="上班到达时间(分钟)必须在0~59之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="59" />
+			</validator>
+		</field>
+		<field name="afterWorkFromTimeHour">
+			<validator type="int" message="下班时间(小时)必须在0~23之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="23" />
+			</validator>
+		</field>
+		<field name="afterWorkFromTimeMinute">
+			<validator type="int" message="下班时间(分钟)必须在0~59之间!" >
+				<param name="min" value="0" />
+				<param name="max" value="59" />
+			</validator>
+		</field>
+		<field name="afterWorkArriveTimeHour">
+			<validator type="int" message="下班到达时间(小时)必须在0~23之间!" >
+			</validator>
+		</field>
+		<field name="afterWorkArriveTimeMinute">
+			<validator type="int" message="下班到达时间(分钟)必须在0~59之间!" >
+			</validator>
+		</field>
+		
+		<field name="description">
+			<validator type="string" message="请把描述控制在500个字符之内!">
+				<param name="min" value="0" />
+				<param name="max" value="500" />
+			</validator>
+		</field>
+		<field name="checkCode">
+			<validator type="required" message="验证码不能为空!" />
+			<validator type="com.aifuyun.snow.world.web.common.validators.CheckCodeValidator" 
+						message="验证码错误!" >
+			</validator>
+		</field>
+	</form>
+	
+	
 	<form name="together.personalInfo">
 		<field name="realName">
 			<validator type="required" message="真实姓名不能为空!" />
