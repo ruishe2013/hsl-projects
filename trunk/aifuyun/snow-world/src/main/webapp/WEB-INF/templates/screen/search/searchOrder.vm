@@ -46,12 +46,15 @@
 			                <span class="color_gray">发起人是否提供车</span> $!{order.creatorCarOwnerTypeEnum.name}
 			            </p>
 		            #end
-		            
 		            <p>
 		                <span class="color_gray">途径：</span> $!{order.approach}
 		            </p>
+		            
 		            <p>
 		                <span class="color_gray">备注：</span> $!{order.description}
+		            </p>
+		            <p>
+		                <span class="color_gray">最后修改时间：</span> $!dateUtil.formatFullDate($!order.gmtModified)
 		            </p>
 		
 		        </li>

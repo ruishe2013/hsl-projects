@@ -11,7 +11,8 @@
 		<property name="verifyMailContent">
 			<value>
 			<![CDATA[
-				请点击<a href="$clickUrl" target="_blank">$clickUrl</a>继续完成认证
+				<div>请点击<a href="$clickUrl" target="_blank">$clickUrl</a>继续完成认证，如果不能点击，请复制此到浏览器访问，谢谢 !</div>
+				<div style="text-align:right;">一辆车拼车网</div>
 			]]>
 			</value>
 		</property>

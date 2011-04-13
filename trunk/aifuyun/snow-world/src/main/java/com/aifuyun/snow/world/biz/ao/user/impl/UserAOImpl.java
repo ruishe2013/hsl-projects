@@ -1,5 +1,8 @@
 package com.aifuyun.snow.world.biz.ao.user.impl;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.user.OnwerCorpMailParam;
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
@@ -33,6 +36,8 @@ public class UserAOImpl extends BaseAO implements UserAO {
 	
 	private SecretValueBO secretValueBO;
 	
+	private ExecutorService executorService = Executors.newFixedThreadPool(10);
+	
 	@Override
 	public Result viewCorpVerifyMailPage() {
 		Result result = new ResultSupport(false);
@@ -57,17 +62,26 @@ public class UserAOImpl extends BaseAO implements UserAO {
 	}
 
 	@Override
-	public Result sendCorpVerifyMail(String corpEmail) {
+	public Result sendCorpVerifyMail(final String corpEmail) {
 		Result result = new ResultSupport(false);
 		try {
-			long userId = this.getLoginUserId();
+			final long userId = this.getLoginUserId();
 			if (userId <= 0L) {
 				result.setResultCode(CommonResultCodes.USER_NOT_LOGIN);
 				return result;
 			}
+			final String username = this.getLoginUsername();
 			long timestamp = System.currentTimeMillis();
-			String content = makeCorpVerifyMailContent(userId, corpEmail, timestamp);
-			mailService.sendMail(corpEmail, verifyMailTitle, content);
+			final String content = makeCorpVerifyMailContent(userId, corpEmail, timestamp);
+			
+			executorService.submit(new Runnable() {
+				
+				@Override
+				public void run() {
+					mailService.sendMail(corpEmail, verifyMailTitle, content);
+					log.warn("发送认证邮件成功: userId:" + userId + ", username:" + username + ",email:" + corpEmail);
+				}
+			});
 			
 			result.setSuccess(true);
 		} catch (Exception e) {
