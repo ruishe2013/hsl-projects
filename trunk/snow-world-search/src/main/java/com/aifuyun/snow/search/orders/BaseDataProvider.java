@@ -112,6 +112,7 @@ public abstract class BaseDataProvider implements DataProvider {
 			ret.put("status", rs.getString("status"));
 			ret.put("type", rs.getString("type"));
 			ret.put("gmtCreate", fmtDateFull(rs.getTimestamp("gmt_create")));
+			ret.put("gmtModified", fmtDateFull(rs.getTimestamp("gmt_modified")));
 			ret.put("deleted", rs.getString("deleted"));
 			ret.put("totalSeats", rs.getString("total_seats"));
 			ret.put("creatorRealName", rs.getString("real_name"));
