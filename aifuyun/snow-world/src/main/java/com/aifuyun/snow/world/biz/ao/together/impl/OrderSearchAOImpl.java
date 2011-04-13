@@ -35,7 +35,7 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 			searchQuery.setStartRow(searchOrderQuery.getStartRow());
 			
 			// 按出发时间倒序排
-			SortField sf = new SortField("fromTime", FieldOrder.ASC);
+			SortField sf = new SortField("gmtModified", FieldOrder.DESC);
 			searchQuery.setSortFields(CollectionUtil.asList(sf));
 			
 			SearchResult<SearchOrderDO> searchResult = orderSearchBO.queryOrders(searchQuery);
@@ -54,7 +54,7 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 	 * 只能搜索到当前1个小时前和1年内的数据
 	 * @param sb
 	 */
-	private void filterFromDate(StringBuilder sb) {
+	void filterFromDate(StringBuilder sb) {
 		// 出发时间已经过了1小时候的数据就搜索不出来了
 		Date searchDate = DateUtil.addSecond(new Date(), -3600);
 		sb.append(" +fromTime:[").append(DateUtil.formatDate(searchDate, "yyyyMMddHHmmss"));
@@ -83,11 +83,12 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 		if (!StringUtil.isEmpty(fromAddr)) {
 			sb.append(" +fromAddrText:").append(SearchUtil.filter(fromAddr));
 		}
-		
+	/*	
+	 * 已经按最后修改时间倒排了，不需要这个
 		if (!searchOrderQuery.isIgnoreStartFromTime()) {
 			// 过滤起始时间
 			filterFromDate(sb);
-		}
+		}*/
 		
 		long fromTime = searchOrderQuery.getFromTime();
 		if (fromTime > 0L) {

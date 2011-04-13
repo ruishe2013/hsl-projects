@@ -24,12 +24,12 @@ public class OrderSearchBOTest extends BaseTest {
 		System.out.println(q);
 		query.setQ(q);
 		
-		SortField sf = new SortField("fromTime", FieldOrder.DESC);
+		SortField sf = new SortField("gmtModified", FieldOrder.DESC);
 		query.setSortFields(CollectionUtil.asList(sf));
 		SearchResult<SearchOrderDO> result = orderSearchBO.queryOrders(query);
 		for (OrderDO order : result.getResult()) {
 			System.out.println(order.getId() + ", " + order.getFromCity() + ", " + order.getArriveAddr() 
-					+ " gmt_create:" + order.getGmtCreate() + ", create_order_time:" + order.getFromTime());
+					+ " gmt_create:" + order.getGmtCreate() + ", create_order_time:" + order.getFromTime() + ", gmt_modified:" + order.getGmtModified());
 		} 
 		
 		
