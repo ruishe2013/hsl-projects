@@ -69,6 +69,7 @@
 		<field name="fromTime" type="tlong" indexed="true" stored="true" multiValued="false" />
 		<field name="arriveTime" type="tlong" indexed="true" stored="true" multiValued="false" />
 		<field name="gmtCreate" type="tlong" indexed="false" stored="true" multiValued="false" />
+		<field name="gmtModified" type="tlong" indexed="true" stored="true" multiValued="false" />
 
 		<field name="fromAddrText" type="string_sd" indexed="true" stored="false" multiValued="true" />
 		<field name="arriveAddrText" type="string_sd" indexed="true" stored="false" multiValued="true" />
