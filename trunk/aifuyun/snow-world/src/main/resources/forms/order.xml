@@ -148,6 +148,13 @@
 				<param name="max" value="50" />
 			</validator>
 		</field>
+		<field name="arriveCity">
+			<validator type="required" message="目的城市不能为空!" />
+			<validator type="string" message="目的城市长度不能超过20个字符!" >
+				<param name="min" value="1" />
+				<param name="max" value="20" />
+			</validator>
+		</field>
 		<field name="companyAddr">
 			<validator type="required" message="公司地址不能为空!" />
 			<validator type="string" message="公司地址长度不能超过50个字符!" >
@@ -202,15 +209,6 @@
 				<param name="max" value="59" />
 			</validator>
 		</field>
-		<field name="afterWorkArriveTimeHour">
-			<validator type="int" message="下班到达时间(小时)必须在0~23之间!" >
-			</validator>
-		</field>
-		<field name="afterWorkArriveTimeMinute">
-			<validator type="int" message="下班到达时间(分钟)必须在0~59之间!" >
-			</validator>
-		</field>
-		
 		<field name="description">
 			<validator type="string" message="请把描述控制在500个字符之内!">
 				<param name="min" value="0" />
