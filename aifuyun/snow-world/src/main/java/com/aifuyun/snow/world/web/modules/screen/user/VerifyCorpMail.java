@@ -24,10 +24,11 @@ public class VerifyCorpMail extends BaseScreen {
 		onwerCorpMailParam.setToken(token);
 		onwerCorpMailParam.setUserId(userId);
 		
+		rundata.setTarget("user/verifyCorpMailSuccess.vm");
+		
 		Result result = userAO.handleCorpVerifyMail(onwerCorpMailParam);
 		if (result.isSuccess()) {
 			this.sendRedirect("snowModule", "user/verifyCorpMailSuccess");
-			//this.result2Context(result, templateContext);
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
