@@ -3,6 +3,7 @@ package com.aifuyun.snow.world.dal.dataobject.together;
 
 import java.util.Date;
 
+import com.aifuyun.snow.world.common.SnowConstants;
 import com.aifuyun.snow.world.dal.dataobject.BaseDO;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
@@ -113,14 +114,22 @@ public class OrderDO extends BaseDO {
 	/**
 	 * 下班出发时间
 	 */
-	private Date atferWorkfromTime;
+	private Date afterWorkFromTime;
 	
-	/**
-	 * 下班（预计）达到时间
-	 */
-	private Date atferWorkArriveTime;
 	
-
+	public void setFromWeekByArray(String[] fromWeekArray) {
+		this.fromWeek = "";
+		if (fromWeekArray != null && fromWeekArray.length > 0) {
+			for (int i = 0; i < fromWeekArray.length; i++) {
+				if (i != fromWeekArray.length - 1) {
+					this.fromWeek += fromWeekArray[i] + SnowConstants.SPIIT;
+					continue;
+				}
+				this.fromWeek += fromWeekArray[i];
+			}
+		}
+	}
+	
 	public String getCarNo() {
 		return carNo;
 	}
@@ -291,24 +300,17 @@ public class OrderDO extends BaseDO {
 		return fromWeek;
 	}
 
+	public Date getAfterWorkFromTime() {
+		return afterWorkFromTime;
+	}
+
+	public void setAfterWorkFromTime(Date afterWorkFromTime) {
+		this.afterWorkFromTime = afterWorkFromTime;
+	}
+
 	public void setFromWeek(String fromWeek) {
 		this.fromWeek = fromWeek;
 	}
 
-	public Date getAtferWorkfromTime() {
-		return atferWorkfromTime;
-	}
-
-	public void setAtferWorkfromTime(Date atferWorkfromTime) {
-		this.atferWorkfromTime = atferWorkfromTime;
-	}
-
-	public Date getAtferWorkArriveTime() {
-		return atferWorkArriveTime;
-	}
-
-	public void setAtferWorkArriveTime(Date atferWorkArriveTime) {
-		this.atferWorkArriveTime = atferWorkArriveTime;
-	}
 
 }

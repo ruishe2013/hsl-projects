@@ -225,12 +225,35 @@ public class OrderAction extends BaseAction {
 		OrderDO orderDO = new OrderDO();
 		form.apply(orderDO);
 		
-		Date fromTimeDate = new Date();
-		orderDO.setFromTime(fromTimeDate);
-		orderDO.setArriveTime(fromTimeDate);
-		
-		orderDO.setArriveCity(orderDO.getFromCity());
 		orderDO.setArriveAddr(rundata.getQueryString().getString("companyAddr"));
+		String[] fromTimeWeek = rundata.getQueryString().getStrings("fromTimeWeek");
+		orderDO.setFromWeekByArray(fromTimeWeek);
+		
+		Date now = new Date();
+		// 上班出发时间
+		int fromTimeHour =  rundata.getQueryString().getInt("fromTimeHour");
+		int fromTimeMinute =  rundata.getQueryString().getInt("fromTimeMinute");
+		Date fromTime = DateTimeUtil.componentDateAndTime(now, fromTimeHour, fromTimeMinute, 0);
+		
+		// 上班到达时间
+		int arriveTimeHour =  rundata.getQueryString().getInt("arriveTimeHour");
+		int arriveTimeMinute =  rundata.getQueryString().getInt("arriveTimeMinute");
+		Date arriveTime = DateTimeUtil.componentDateAndTime(now, arriveTimeHour, arriveTimeMinute, 0);
+		
+		// 下班出发时间
+		int afterWorkFromTimeHour =  rundata.getQueryString().getInt("afterWorkFromTimeHour");
+		int afterWorkFromTimeMinute =  rundata.getQueryString().getInt("afterWorkFromTimeMinute");
+		Date afterWork = DateTimeUtil.componentDateAndTime(now, afterWorkFromTimeHour, afterWorkFromTimeMinute, 0);
+		
+		orderDO.setFromTime(fromTime);
+		orderDO.setArriveTime(arriveTime);
+		orderDO.setAfterWorkFromTime(afterWork);
+		
+		
+		
+		// System.out.println(fromTimeWeek);
+		
+		
 		/*Date fromTimeDate = rundata.getQueryString().getDate("fromTimeDate", DATE_FMT);
 		
 		int fromHour =  rundata.getQueryString().getInt("fromTimeHour");

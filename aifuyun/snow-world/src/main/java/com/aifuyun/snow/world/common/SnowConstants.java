@@ -6,4 +6,5 @@ public interface SnowConstants {
 	
 	int DEFAULT_SEELECT_YEAR = BirthYearEnum.YEAR_80S.getValue();
 
+	char SPIIT = ',';
 }
