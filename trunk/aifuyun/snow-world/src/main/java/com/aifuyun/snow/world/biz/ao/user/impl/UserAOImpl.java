@@ -192,7 +192,7 @@ public class UserAOImpl extends BaseAO implements UserAO {
 			result.getModels().put("userLogined", userLogined);
 			result.setSuccess(true);
 		} catch (Exception e) {
-			log.error("修改个人信息失败", e);
+			log.error("邮件认证失败", e);
 		}
 		return result;
 	}
