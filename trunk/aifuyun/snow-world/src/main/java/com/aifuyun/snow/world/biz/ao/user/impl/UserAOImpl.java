@@ -189,6 +189,10 @@ public class UserAOImpl extends BaseAO implements UserAO {
 			
 			saveVerifyDetail(onwerCorpMailParam);
 			
+			if (log.isWarnEnabled()) {
+				log.warn("认证成功:userId:" + userId);
+			}
+			
 			result.getModels().put("userLogined", userLogined);
 			result.setSuccess(true);
 		} catch (Exception e) {
