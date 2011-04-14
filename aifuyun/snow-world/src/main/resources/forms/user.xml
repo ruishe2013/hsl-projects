@@ -86,4 +86,14 @@
 		</field>
 	</form>
 	
+	
+	<form name="user.sendCorpVerifyMail">
+		<field name="email">
+			<validator type="required" message="Email不能为空!" />
+			<validator type="email" message="请输入正确的Email!" >
+				<param name="max" value="100" />
+			</validator>
+		</field>
+	</form>
+	
 </forms>

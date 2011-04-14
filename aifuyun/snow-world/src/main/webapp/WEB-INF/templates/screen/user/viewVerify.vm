@@ -1,0 +1,40 @@
+#macro(errorVerifyMessage, $str)
+	#if( "$!str" != "")
+		<p class="color_gray error-tip">
+			$str
+		</p>
+	#end
+#end
+
+#set($form = $formFactory.createForm("user.sendCorpVerifyMail"))
+
+#if ($!oldVerifyDetail)
+<div>
+	你已经认证过，认证信息：[$!{oldVerifyDetail.verifyTypeEnum.name}] $!oldVerifyDetail.detail，
+	你可以重新认证：
+</div>
+#end
+
+<div>
+	<form method="post">
+		<input type="hidden" name="actionTarget" value="user/userAction" />
+		<input type="hidden" name="actionEvent" value="sendCorpVerifyMail" /> 
+		<ul>
+			<li>
+				 <p class="color_gray attention">
+		            	我们将通过你email所在的单位来认证，
+                     	我们会发送一份认证邮件到你的单位的email，你通过点击邮件中的链接完成认证。
+                 </p>
+	            <div class="reg_info_li_box">
+		           	<em>*</em> 所在单位email：
+					<input id="$!form.fields.email.name" class="input_150" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text" />
+                    #errorVerifyMessage($!form.fields.email.message)
+                    
+                    #errorVerifyMessage($!resultmessage.message)
+                	<input type="submit" value="发送" />
+            	</div>
+            </li>
+		</ul>
+	</form>	
+</div>
+	
