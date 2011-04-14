@@ -20,9 +20,6 @@
 		<li>
 			<strong>QQ号：</strong>$!creator.qq
 		</li>
-		<li>
-			<strong>邮箱：</strong>$!creator.email
-		</li>
 					
 		#else
 			<li>登陆即可查看车主的联系方式 
