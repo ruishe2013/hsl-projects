@@ -20,4 +20,8 @@ public class UserResultCodes extends ResultCode {
 	
 	public static final ResultCode SENSITIVITY_USER = ResultCode.create();
 	
+	public static final ResultCode VERIFY_EXPIRE = ResultCode.create();
+	
+	public static final ResultCode VERIFY_INVALID_TOKEN = ResultCode.create();
+	
 }

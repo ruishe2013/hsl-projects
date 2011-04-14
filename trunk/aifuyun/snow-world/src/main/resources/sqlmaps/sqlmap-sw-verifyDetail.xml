@@ -61,7 +61,7 @@
 		update sw_verify_detail t set t.deleted = 1, t.gmt_modified = NOW() where t.user_id = #value#
 	</update>
 	
-	<update id="update" parameterClass="extUser">
+	<update id="update" parameterClass="verifyDetail">
 		<![CDATA[
 			update sw_verify_detail set 
 				gmt_modified= now(),

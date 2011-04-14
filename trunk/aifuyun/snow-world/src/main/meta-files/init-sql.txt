@@ -53,8 +53,8 @@ create table sw_ext_user (
 
 DROP TABLE IF EXISTS sw_verify_detail;
 create table sw_verify_detail (
-	id bigint not null primary key,
-	username varchar(60) not null,
+	id bigint not null primary key auto_increment,
+	user_id bigint not null,
 	type int default 0 not null,
 	detail varchar(255),
 	approach varchar(100),
@@ -62,7 +62,6 @@ create table sw_verify_detail (
 	gmt_create datetime not null,
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
-
 
 
 DROP TABLE IF EXISTS sw_area_province;

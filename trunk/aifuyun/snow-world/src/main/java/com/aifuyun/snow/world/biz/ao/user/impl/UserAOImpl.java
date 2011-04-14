@@ -1,7 +1,15 @@
 package com.aifuyun.snow.world.biz.ao.user.impl;
 
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.util.Map;
+import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import org.apache.velocity.VelocityContext;
+import org.apache.velocity.app.Velocity;
 
 import com.aifuyun.snow.world.biz.ao.BaseAO;
 import com.aifuyun.snow.world.biz.ao.user.OnwerCorpMailParam;
@@ -11,6 +19,7 @@ import com.aifuyun.snow.world.biz.bo.misc.SecretValueBO;
 import com.aifuyun.snow.world.biz.bo.user.VerifyDetailBO;
 import com.aifuyun.snow.world.biz.resultcodes.CommonResultCodes;
 import com.aifuyun.snow.world.biz.resultcodes.UserResultCodes;
+import com.aifuyun.snow.world.common.ClassInputStreamUtil;
 import com.aifuyun.snow.world.common.SnowUtil;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.VerifyTypeEnum;
@@ -20,6 +29,8 @@ import com.zjuh.splist.core.SplistContext;
 import com.zjuh.splist.core.module.URLModule;
 import com.zjuh.splist.core.module.URLModuleContainer;
 import com.zjuh.sweet.codec.MD5;
+import com.zjuh.sweet.lang.CollectionUtil;
+import com.zjuh.sweet.lang.StringUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
 import com.zjuh.sweet.result.ResultTypeEnum;
@@ -32,11 +43,13 @@ public class UserAOImpl extends BaseAO implements UserAO {
 	
 	private String verifyMailTitle;
 	
-	private String verifyMailContent;
+	private String verifyMailContentTemplate;
 	
 	private SecretValueBO secretValueBO;
 	
 	private ExecutorService executorService = Executors.newFixedThreadPool(10);
+	
+	private static final long VERIFY_EXPIRE_TIME = 2 * 24 * 3600 * 1000; // 默认为2天
 	
 	@Override
 	public Result viewCorpVerifyMailPage() {
@@ -72,7 +85,9 @@ public class UserAOImpl extends BaseAO implements UserAO {
 			}
 			final String username = this.getLoginUsername();
 			long timestamp = System.currentTimeMillis();
-			final String content = makeCorpVerifyMailContent(userId, corpEmail, timestamp);
+			final String content = makeCorpVerifyMailContent(userId, username, corpEmail, timestamp);
+			
+			// TODO 最多一天只能认证3次
 			
 			executorService.submit(new Runnable() {
 				
@@ -90,10 +105,32 @@ public class UserAOImpl extends BaseAO implements UserAO {
 		return result;
 	}
 
-	private String makeCorpVerifyMailContent(long userId, String email, long timestamp) {
+	private String makeCorpVerifyMailContent(long userId, String username, String email, long timestamp) {
 		String token = makeVerifyMailToken(userId, email, timestamp);
 		String clickUrl = makeVerifyMailClickUrl(userId, email, timestamp, token);
-		return verifyMailContent.replaceAll("$clickUrl", clickUrl);
+		Map<String, Object> context = CollectionUtil.newHashMap();
+		context.put("clickUrl", clickUrl);
+		context.put("username", username);
+		return renderTemplate(context, verifyMailContentTemplate);
+		
+	}
+	
+	private String renderTemplate(Map<String, Object> context, String templatePath) {
+		try {
+			Properties prop = new Properties();
+			prop.setProperty(Velocity.ENCODING_DEFAULT, "gbk");
+			prop.setProperty(Velocity.INPUT_ENCODING, "gbk");
+			prop.setProperty(Velocity.OUTPUT_ENCODING, "gbk");
+			Velocity.init(prop);
+			
+			VelocityContext velocityContext = new VelocityContext(context);
+			StringWriter writer = new StringWriter();
+			Reader reader = new InputStreamReader(ClassInputStreamUtil.getInputStream(templatePath), "gbk");
+			Velocity.evaluate(velocityContext, writer, "inner_render.log", reader);
+			return writer.toString();
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
 	}
 	
 	private String makeVerifyMailClickUrl(long userId, String email, long timestamp, String token) {
@@ -120,8 +157,69 @@ public class UserAOImpl extends BaseAO implements UserAO {
 	
 	@Override
 	public Result handleCorpVerifyMail(OnwerCorpMailParam onwerCorpMailParam) {
-		// TODO Auto-generated method stub
-		return null;
+		Result result = new ResultSupport(false);
+		try {
+			boolean userLogined = this.isUserLogin();
+			
+			long ts = onwerCorpMailParam.getTimestamp();
+			long nowTs = System.currentTimeMillis();
+			long deltaTs = nowTs - ts;
+			if (deltaTs > VERIFY_EXPIRE_TIME) {
+				result.setResultCode(UserResultCodes.VERIFY_EXPIRE);
+				return result;
+			}
+			
+			final long userId = onwerCorpMailParam.getUserId();
+			
+			String token2 = makeVerifyMailToken(userId, onwerCorpMailParam.getEmail(), onwerCorpMailParam.getTimestamp());
+			if (!StringUtil.equals(onwerCorpMailParam.getToken(), token2)) {
+				result.setResultCode(UserResultCodes.VERIFY_INVALID_TOKEN);
+				return result;
+			}
+			
+			BaseUserDO user = userBO.queryById(userId);
+			if (user == null) {
+				result.setResultCode(UserResultCodes.USER_NOT_EXIST);
+				return result;
+			}
+			
+			// 认证成功
+			user.setVerifyStatus(user.getVerifyStatus() | VerifyTypeEnum.OWNER_CORP_EMAIL.getValue());
+			userBO.update(user);
+			
+			saveVerifyDetail(onwerCorpMailParam);
+			
+			result.getModels().put("userLogined", userLogined);
+			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("修改个人信息失败", e);
+		}
+		return result;
+	}
+	
+	private String getCorpName(String email) {
+		// TODO 公司邮箱获取公司
+		return "test";
+	}
+	
+	private void saveVerifyDetail(OnwerCorpMailParam onwerCorpMailParam) {
+		VerifyDetailDO verifyDetailDO = this.verifyDetailBO.queryByUserIdAndType(onwerCorpMailParam.getUserId(), VerifyTypeEnum.OWNER_CORP_EMAIL.getValue());
+		if (verifyDetailDO == null) {
+			// create
+			verifyDetailDO = new VerifyDetailDO();
+			verifyDetailDO.setApproach(onwerCorpMailParam.getEmail());
+			verifyDetailDO.setDetail(getCorpName(onwerCorpMailParam.getEmail()));
+			verifyDetailDO.setType(VerifyTypeEnum.OWNER_CORP_EMAIL.getValue());
+			verifyDetailDO.setUserId(onwerCorpMailParam.getUserId());
+			
+			verifyDetailBO.create(verifyDetailDO);
+			
+		} else {
+			verifyDetailDO.setApproach(onwerCorpMailParam.getEmail());
+			verifyDetailDO.setDetail(getCorpName(onwerCorpMailParam.getEmail()));
+			
+			verifyDetailBO.update(verifyDetailDO);
+		}
 	}
 
 	@Override
@@ -252,13 +350,12 @@ public class UserAOImpl extends BaseAO implements UserAO {
 		this.verifyMailTitle = verifyMailTitle;
 	}
 
-	public void setVerifyMailContent(String verifyMailContent) {
-		this.verifyMailContent = verifyMailContent;
-	}
-
 	public void setSecretValueBO(SecretValueBO secretValueBO) {
 		this.secretValueBO = secretValueBO;
 	}
 
+	public void setVerifyMailContentTemplate(String verifyMailContentTemplate) {
+		this.verifyMailContentTemplate = verifyMailContentTemplate;
+	}
 
 }

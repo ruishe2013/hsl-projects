@@ -1,6 +1,7 @@
 package com.aifuyun.snow.world.biz.bo.mail.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.mail.Message.RecipientType;
 import javax.mail.internet.InternetAddress;
@@ -12,6 +13,7 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import com.aifuyun.snow.world.biz.bo.mail.MailService;
 import com.aifuyun.snow.world.biz.bo.misc.SecretValueBO;
+import com.zjuh.sweet.lang.CollectionUtil;
 
 public class MailServiceImpl implements MailService, InitializingBean {
 
@@ -39,6 +41,15 @@ public class MailServiceImpl implements MailService, InitializingBean {
 	
 	@Override
 	public void sendMail(String toMail, String subject, String content) {
+		List<String> toMails = CollectionUtil.newArrayList();
+		toMails.add(toMail);
+		sendMail(toMails, subject, content);
+	}
+	
+	public void sendMail(List<String> toMails, String subject, String content) {
+		if (toMails == null || toMails.isEmpty()) {
+			return;
+		}
 		try {
 			MimeMessage mimeMessage = javaMailSender.createMimeMessage();
 			
@@ -46,7 +57,9 @@ public class MailServiceImpl implements MailService, InitializingBean {
 			mimeMessage.setSender(new InternetAddress(fromMail, fromMailName));
 			mimeMessage.setSentDate(new Date());
 			mimeMessage.setText(content, "gbk", "html");
-			mimeMessage.addRecipient(RecipientType.TO, new InternetAddress(toMail));
+			for (String toMail : toMails) {
+				mimeMessage.addRecipient(RecipientType.TO, new InternetAddress(toMail));
+			}
 			javaMailSender.send(mimeMessage);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
