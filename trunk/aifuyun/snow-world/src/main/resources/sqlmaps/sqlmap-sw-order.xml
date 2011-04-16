@@ -26,23 +26,25 @@
 	<result property="fromCity" column="from_city"/>
 	<result property="arriveCity" column="arrive_city"/>
 	<result property="arriveAddr" column="arrive_addr"/>		
+	<result property="fromWeek" column="from_week" />		
+	<result property="afterWorkFromTime" column="after_work_from_time"/>		
 	</resultMap>
 
 	<sql id="order-full-columns">
 		t.gmt_modified, t.from_addr, t.gmt_create, t.creator_username, t.status,
 		 t.city_id, t.creator_id, t.from_time, t.type, t.creator_car_owner_type, t.id,
 		  t.total_seats, t.car_no, t.arrive_time, t.description, t.approach,
-		   t.arrive_city_id, t.from_city, t.arrive_city, t.arrive_addr
+		   t.arrive_city_id, t.from_city, t.arrive_city, t.arrive_addr, t.from_week, t.after_work_from_time
 	</sql>
 
 	<insert id="create" parameterClass="order">
 		<![CDATA[
 			insert into sw_order(gmt_modified, from_addr, gmt_create, creator_username, status, city_id,
 			 creator_id, from_time, type, creator_car_owner_type, total_seats, car_no, arrive_time, 
-			 description, approach, arrive_city_id, from_city, arrive_city, arrive_addr) 
+			 description, approach, arrive_city_id, from_city, arrive_city, arrive_addr, from_week, after_work_from_time) 
 			values (now(), #fromAddr#, now(), #creatorUsername#, #status#, #cityId#, 
 			#creatorId#, #fromTime#, #type#, #creatorCarOwnerType#, #totalSeats#, #carNo#, #arriveTime#,
-			 #description#, #approach#, #arriveCityId#, #fromCity#, #arriveCity#, #arriveAddr#)
+			 #description#, #approach#, #arriveCityId#, #fromCity#, #arriveCity#, #arriveAddr#, #fromWeek#, #afterWorkFromTime#)
 		]]>
 		<selectKey resultClass="long" keyProperty="id">
 			SELECT LAST_INSERT_ID();
@@ -106,7 +108,9 @@
 				arrive_city_id= #arriveCityId#,
 				from_city= #fromCity#,
 				arrive_city= #arriveCity#,
-				arrive_addr= #arriveAddr#
+				arrive_addr= #arriveAddr#,
+				from_week=  #fromWeek#, 
+				after_work_from_time= #afterWorkFromTime#
 			where id = #id#
 		]]>
 	</update>
