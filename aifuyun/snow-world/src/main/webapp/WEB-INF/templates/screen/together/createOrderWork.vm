@@ -144,7 +144,7 @@
 	            
 	            <li>
 	            	<div class="info-title">
-                    	<em>*</em> 出发日期：
+                    	<em>*</em> 有效日期：
                     </div>
 	            	
 	            	#set($fromTimeWeek = $form.fields.fromTimeWeek.values)
@@ -157,7 +157,7 @@
 						<input class="" type="checkbox" id="5$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="5" #showChecked($fromTimeWeek 5)/>星期五
 						<input class="" type="checkbox" id="6$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="6" #showChecked($fromTimeWeek 6)/>星期六
 						<input class="" type="checkbox" id="7$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="7" #showChecked($fromTimeWeek 7)/>星期日
-						<input class="" type="checkbox" id="checkedAllFromTimeWork" name="checkedAllFromTimeWork" />全选/取消全选
+						<!--  <input class="" type="checkbox" id="checkedAllFromTimeWork" name="checkedAllFromTimeWork" />全选/取消全选 -->
 		            </p>
 		            #errorMessageCreateOrder($!form.fields.fromTimeWeek.message)
 		            </div>
@@ -339,8 +339,12 @@
 	#if($values)
 		#foreach($temp in $values)
 			#if("$temp" == "$value")
-				checked
+				checked 
 			#end	
+		#end
+	#else
+		#if("$value" == "1" || "$value" == "2" || "$value" == "3" || "$value" == "4" || "$value" == "5")
+			 checked 
 		#end	
 	#end	
 #end	

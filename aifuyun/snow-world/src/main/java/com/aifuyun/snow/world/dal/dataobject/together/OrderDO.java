@@ -176,6 +176,10 @@ public class OrderDO extends BaseDO {
 		return true;
 	}
 	
+	public boolean isWork() {
+		return type == OrderTypeEnum.WORK.getValue();
+	}
+	
 	public int getType() {
 		return type;
 	}

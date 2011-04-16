@@ -16,12 +16,31 @@
 #end
 <li>
     <span style="width:48%" class="fl dis">
-        <span class="col_gray">出发时间：</span>$!dateUtil.formatFullDate($order.fromTime)
+		#if($order.isWork())
+			<span class="col_gray">上班时间：</span>$!dateUtil.formatDateHMS($order.fromTime)
+		#else	
+			<span class="col_gray">出发时间：</span>$!dateUtil.formatFullDate($order.fromTime)
+		#end	
     </span>
     <span style="width:48%" class="fl dis">
-        <span class="col_gray">预计到达时间：</span>$!dateUtil.formatFullDate($order.arriveTime)
+		#if($order.isWork())
+			<span class="col_gray">上班到达时间：</span>$!dateUtil.formatDateHMS($order.arriveTime)
+		#else
+			<span class="col_gray">预计到达时间：</span>$!dateUtil.formatFullDate($order.arriveTime)
+		#end	
     </span>
 </li>
+#if($order.isWork())
+	<li>
+        <span class="col_gray">下班时间：</span>date在处理中1
+        <span class="color_gray"> </span>
+    </li> 
+     
+    <li>
+        <span class="col_gray">有效日期：</span>date在处理中2
+        <span class="color_gray"> </span>
+    </li> 
+#end	
 <li>
 	#set($leftSeatCount = $order.totalSeats - $joinersCount)
     <span class="col_gray">已参加人数/空余座位数：</span> $!joinersCount/$!leftSeatCount
