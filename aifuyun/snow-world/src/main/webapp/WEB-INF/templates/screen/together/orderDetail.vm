@@ -31,7 +31,7 @@
         
         <div class="details_l">
 		    <ul>
-		        $control.setTemplate('together/orderInfo.vm').addAttribute('order', $order).addAttribute('joinersCount', $joinersCount).addAttribute('dateUtil', $dateUtil)
+		        $control.setTemplate('together/orderInfo.vm').addAttribute('order', $order).addAttribute('joinersCount', $joinersCount).addAttribute('dateUtil', $dateUtil).addAttribute('fromWeekFormat', $fromWeekFormat)
 		         
 		        #if ("$!order.status" != "20" )
 		        	#if ($isCreatorSelf)
