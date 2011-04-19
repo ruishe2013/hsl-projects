@@ -4,7 +4,8 @@
      "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 	
-	<bean id="userAO" class="com.aifuyun.snow.world.biz.ao.user.impl.UserAOImpl">
+	<bean id="userAO" class="com.aifuyun.snow.world.biz.ao.user.impl.UserAOImpl"></bean>
+	<bean id="profileAO" class="com.aifuyun.snow.world.biz.ao.user.impl.ProfileAOImpl">
 		<property name="verifyMailTitle">
 			<value>一辆车拼车网——邮件身份认证</value>
 		</property>

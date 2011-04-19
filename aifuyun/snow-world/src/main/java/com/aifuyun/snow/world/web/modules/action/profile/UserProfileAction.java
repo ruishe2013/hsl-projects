@@ -1,6 +1,6 @@
 package com.aifuyun.snow.world.web.modules.action.profile;
 
-import com.aifuyun.snow.world.biz.ao.user.UserAO;
+import com.aifuyun.snow.world.biz.ao.user.ProfileAO;
 import com.aifuyun.snow.world.web.common.base.BaseAction;
 import com.zjuh.splist.core.annotation.DefaultTarget;
 import com.zjuh.splist.core.form.Form;
@@ -11,7 +11,7 @@ import com.zjuh.sweet.result.Result;
 
 public class UserProfileAction extends BaseAction {
 	
-	private UserAO userAO;
+	private ProfileAO profileAO;
 	
 	@DefaultTarget("profile/viewVerify")
 	public void doSendCorpVerifyMail(RunData rundata, TemplateContext templateContext) {
@@ -20,16 +20,16 @@ public class UserProfileAction extends BaseAction {
 			return;
 		}
 		String email = StringUtil.toString(form.getFields().get("email").getValue());
-		Result result = userAO.sendCorpVerifyMail(email);
+		Result result = profileAO.sendCorpVerifyMail(email);
 		if (result.isSuccess()) {
 			this.sendRedirect("snowModule", "profile/sendMailSuccess");
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
 	}
-	
-	public void setUserAO(UserAO userAO) {
-		this.userAO = userAO;
-	}
 
+	public void setProfileAO(ProfileAO profileAO) {
+		this.profileAO = profileAO;
+	}
+	
 }

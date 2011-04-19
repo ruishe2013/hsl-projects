@@ -76,4 +76,15 @@ public class SnowUtil {
 		return str1.compareTo(str2);
 	}
 	
+	public static String getMailHost(String email) {
+		if (StringUtil.isEmpty(email)) {
+			return email;
+		}
+		int pos = email.indexOf('@');
+		if (pos < 0) {
+			return null;
+		}
+		return email.substring(pos + 1);
+	}
+	
 }

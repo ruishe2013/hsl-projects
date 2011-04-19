@@ -170,3 +170,17 @@ create table sw_leave_word (
 	gmt_create datetime not null,
 	gmt_modified datetime not null
 ) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+
+DROP TABLE IF EXISTS sw_corp_mail;
+create table sw_corp_mail (
+	id int primary key auto_increment,
+	corp_name varchar(80) not null,
+	mail_host varchar(60)  not null,
+	contact varchar(100),
+	comments varchar(512),
+	deleted tinyint default 0 not null,
+	gmt_create datetime not null,
+	gmt_modified datetime not null
+) ENGINE=INNODB DEFAULT CHARSET=GBK COLLATE=gbk_bin COMMENT='Database privileges';
+create index ind_corp_mail_host on sw_corp_mail(mail_host, deleted);
+
