@@ -1,4 +1,4 @@
-package com.aifuyun.snow.world.web.modules.screen.user;
+package com.aifuyun.snow.world.web.modules.screen.profile;
 
 import com.aifuyun.snow.world.biz.ao.together.taxi.OrderAO;
 import com.aifuyun.snow.world.biz.query.UserOrderQuery;

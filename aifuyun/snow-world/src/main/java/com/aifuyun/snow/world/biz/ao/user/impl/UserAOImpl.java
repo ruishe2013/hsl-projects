@@ -89,6 +89,8 @@ public class UserAOImpl extends BaseAO implements UserAO {
 			
 			// TODO 最多一天只能认证3次
 			
+			// TODO 验证邮件是否是有效的公司邮箱
+			
 			executorService.submit(new Runnable() {
 				
 				@Override
@@ -135,7 +137,7 @@ public class UserAOImpl extends BaseAO implements UserAO {
 	
 	private String makeVerifyMailClickUrl(long userId, String email, long timestamp, String token) {
 		URLModuleContainer urlModuleContainer = SplistContext.getSplistComponent().getUrlModuleContainers().get("snowModule");
-		URLModule um = urlModuleContainer.setTarget("user/verifyCorpMail");
+		URLModule um = urlModuleContainer.setTarget("profile/verifyCorpMail");
 		um.add("token", token).add("userId", userId).add("email", email).add("ts", timestamp);
 		return um.render();
 	}

@@ -1,7 +1,7 @@
 <div id="cArea">
   <div class="hr_10"></div>
     
-    $control.setTemplate('user/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)
+    $control.setTemplate('profile/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)
     
     <div class="content">
     	<div class="content-inner">

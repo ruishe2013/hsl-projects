@@ -11,7 +11,7 @@ public class MyTogethersPageFacer implements PageFacer {
 	@Override
 	public URLModule gotoPage(int page) {
 		URLModuleContainer container = SplistContext.getSplistComponent().getUrlModuleContainers().get("snowModule");
-		URLModule urlModule = container.setTarget("user/myTogethers");
+		URLModule urlModule = container.setTarget("profile/myTogethers");
 		TemplateContext templateContext = SplistContext.getTemplateContext();
 		UserOrderQuery query = (UserOrderQuery)templateContext.get("query");
 		urlModule.addQueryData("page", page);

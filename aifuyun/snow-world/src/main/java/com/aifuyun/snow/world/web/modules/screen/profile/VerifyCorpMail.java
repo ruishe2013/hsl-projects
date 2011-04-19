@@ -1,4 +1,4 @@
-package com.aifuyun.snow.world.web.modules.screen.user;
+package com.aifuyun.snow.world.web.modules.screen.profile;
 
 import com.aifuyun.snow.world.biz.ao.user.OnwerCorpMailParam;
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
@@ -24,11 +24,11 @@ public class VerifyCorpMail extends BaseScreen {
 		onwerCorpMailParam.setToken(token);
 		onwerCorpMailParam.setUserId(userId);
 		
-		rundata.setTarget("user/verifyCorpMailSuccess.vm");
+		rundata.setTarget("profile/verifyCorpMailSuccess.vm");
 		
 		Result result = userAO.handleCorpVerifyMail(onwerCorpMailParam);
 		if (result.isSuccess()) {
-			this.sendRedirect("snowModule", "user/verifyCorpMailSuccess");
+			this.sendRedirect("snowModule", "profile/verifyCorpMailSuccess");
 		} else {
 			this.handleError(result, rundata, templateContext);
 		}
