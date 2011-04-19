@@ -20,6 +20,7 @@ public class CreateOrderCarNoValidator implements Validator {
 	
 	static {
 		validatorOrderTypes.add(String.valueOf(OrderTypeEnum.SFC.getValue()));
+		validatorOrderTypes.add(String.valueOf(OrderTypeEnum.WORK.getValue()));
 		
 		validatorCreatorCarOwnerTypes.add(String.valueOf(CarOwnerTypeEnum.CAR_OWNER.getValue()));
 	}

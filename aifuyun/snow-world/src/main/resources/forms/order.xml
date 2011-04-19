@@ -120,6 +120,15 @@
 		<field name="type">
 			<validator type="required" message="请选择拼车类型!" />
 		</field>
+		<field name="creatorCarOwnerType">
+			<validator type="dependencyRequired" message="请选择发起人身份!" >
+				<param name="dependencyField" value="type"></param>
+				<param name="dependencyValues" value="2"></param>
+			</validator>
+			<validator type="enums" message="请选择是否有车!" >
+				<param name="values" value="1,2" />
+			</validator>
+		</field>
 		<field name="carNo">
 			<validator type="com.aifuyun.snow.world.web.common.validators.CreateOrderCarNoValidator" message="请输入车牌号!" >
 			</validator>

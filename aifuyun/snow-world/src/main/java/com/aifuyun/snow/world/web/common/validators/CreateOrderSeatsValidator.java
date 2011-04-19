@@ -25,6 +25,7 @@ public class CreateOrderSeatsValidator implements Validator {
 	
 	protected boolean check(Form form, String name, String value) {
 		Map<String, Field> fields = form.getFields();
+		Field creatorCarOwnerTypeField = fields.get("creatorCarOwnerType");
 		
 		// 拼车类型
 		Field orderTypeField = fields.get("type");
@@ -43,12 +44,7 @@ public class CreateOrderSeatsValidator implements Validator {
 			return true;
 		} else if (orderTypeInt == OrderTypeEnum.SFC.getValue()) {
 			// 如果是顺风车
-			Field creatorCarOwnerTypeField = fields.get("creatorCarOwnerType");
-			if (creatorCarOwnerTypeField == null) {
-				throw new SplistException("field 'creatorCarOwnerType' not exist!");
-			}
-			String creatorCarOwnerTypeValue = StringUtil.toString(creatorCarOwnerTypeField.getValue());
-			int creatorCarOwnerTypeInt = ConvertUtil.toInt(creatorCarOwnerTypeValue, 0);
+			int creatorCarOwnerTypeInt = getCreateCarOwnerTypeInt(creatorCarOwnerTypeField);
 			if (creatorCarOwnerTypeInt == CarOwnerTypeEnum.CAR_OWNER.getValue()) {
 				// 车主需要验证座位数
 				if (StringUtil.isEmpty(StringUtil.trimToEmpty(value))) {
@@ -61,7 +57,13 @@ public class CreateOrderSeatsValidator implements Validator {
 			}
 			
 		} else if(orderTypeInt == OrderTypeEnum.WORK.getValue()) {
-			// 如果是上下班拼车，不能为空
+			// 如果是上下班拼车
+			
+			int creatorCarOwnerTypeInt = getCreateCarOwnerTypeInt(creatorCarOwnerTypeField);
+			if (creatorCarOwnerTypeInt == CarOwnerTypeEnum.PASSENGER.getValue()) {
+				// 乘客不需要验证座位数
+				return true;
+			}	
 			if (StringUtil.isEmpty(StringUtil.trimToEmpty(value))) {
 				return false;
 			}
@@ -69,6 +71,15 @@ public class CreateOrderSeatsValidator implements Validator {
 		}
 		// 其他情况
 		return true;
+	}
+
+	private int getCreateCarOwnerTypeInt(Field creatorCarOwnerTypeField) {
+		if (creatorCarOwnerTypeField == null) {
+			throw new SplistException("field 'creatorCarOwnerType' not exist!");
+		}
+		String creatorCarOwnerTypeValue = StringUtil.toString(creatorCarOwnerTypeField.getValue());
+		int creatorCarOwnerTypeInt = ConvertUtil.toInt(creatorCarOwnerTypeValue, 0);
+		return creatorCarOwnerTypeInt;
 	}
 
 }

@@ -47,6 +47,21 @@
                     </div>
                 </li>
 				
+				<li id="J_creator_type">
+                	<div class="info-title">
+                    	<em>*</em> 发起人身份：
+                    </div>
+                    <div class="reg_info_li_box">
+                    	<label for="$!{form.fields.creatorCarOwnerType.name}-1">
+                        	<input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-1" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="1" #if ("$!form.fields.creatorCarOwnerType.value" == "1") checked #end />我是车主
+                        </label>
+                        <label for="$!{form.fields.creatorCarOwnerType.name}-2">
+                        <input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-2" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="2" #if ("$!form.fields.creatorCarOwnerType.value" == "2") checked #end />我是乘客
+                        </label>
+                     #errorMessageCreateOrder($!form.fields.creatorCarOwnerType.message)
+                    </div>
+                </li>
+				
 	        	<li id="J_car_no">
                     <div class="info-title">
                     	<em>*</em> 车牌号：
