@@ -14,5 +14,6 @@
 	<sqlMap resource="sqlmaps/sqlmap-sw-extUser.xml" />
 	<sqlMap resource="sqlmaps/sqlmap-sw-feedback-leaveWord.xml" />
 	<sqlMap resource="sqlmaps/sqlmap-sw-verifyDetail.xml" />
+	<sqlMap resource="sqlmaps/sqlmap-sw-corp-mail.xml" />
 
 </sqlMapConfig>

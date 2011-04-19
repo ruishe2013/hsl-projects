@@ -23,5 +23,9 @@ public class UserResultCodes extends ResultCode {
 	public static final ResultCode VERIFY_EXPIRE = ResultCode.create();
 	
 	public static final ResultCode VERIFY_INVALID_TOKEN = ResultCode.create();
+
+	public static final ResultCode INVALID_EMAIL = ResultCode.create();
+
+	public static final ResultCode UNKNOWN_COPR_EMAIL = ResultCode.create();
 	
 }

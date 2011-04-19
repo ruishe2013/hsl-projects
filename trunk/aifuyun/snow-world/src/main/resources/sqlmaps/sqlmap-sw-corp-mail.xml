@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="CorpMailDAO">
+
+	<typeAlias type="com.aifuyun.snow.world.dal.dataobject.corp.CorpMailDO" alias="corpMail" />
+
+	<resultMap id="corpMailMapping" class="corpMail">
+		<result property="gmtModified" column="gmt_modified"/>
+		<result property="id" column="id"/>
+		<result property="corpName" column="corp_name"/>
+		<result property="gmtCreate" column="gmt_create"/>
+		<result property="contact" column="contact"/>
+		<result property="mailHost" column="mail_host"/>
+		<result property="comments" column="comments"/>
+	</resultMap>
+
+	<sql id="corpMail-full-columns">
+		t.gmt_modified, t.id, t.corp_name, t.gmt_create, t.contact, t.mail_host, t.comments
+	</sql>
+
+	<insert id="create" parameterClass="corpMail">
+		<![CDATA[
+			insert into sw_corp_mail(gmt_modified, corp_name, gmt_create, contact, mail_host, comments) 
+				values (now(), #corpName#, now(), #contact#, #mailHost#, #comments#)
+		]]>
+		<selectKey resultClass="int" keyProperty="id">
+			SELECT LAST_INSERT_ID();
+	   </selectKey>
+	</insert>
+	
+	<select id="queryById" resultMap="corpMailMapping" parameterClass="int">
+		select
+			<include refid="corpMail-full-columns"/>
+		from
+			sw_corp_mail t
+		where
+			t.deleted = 0 and t.id = #value#
+	</select>
+	
+	<select id="queryByCorpName" resultMap="corpMailMapping" parameterClass="string">
+		select
+			<include refid="corpMail-full-columns"/>
+		from
+			sw_corp_mail t
+		where
+			t.deleted = 0 and t.corp_name = #value#
+	</select>
+	
+	<select id="queryByMailHost" resultMap="corpMailMapping" parameterClass="string">
+		select
+			<include refid="corpMail-full-columns"/>
+		from
+			sw_corp_mail t
+		where
+			t.deleted = 0 and t.mail_host = #value#
+		limit 1
+	</select>
+	
+	<update id="delete" parameterClass="int">
+		update sw_corp_mail t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
+	</update>
+	
+	<update id="update" parameterClass="corpMail">
+		<![CDATA[
+			update sw_corp_mail set 
+				gmt_modified= now(),
+				corp_name= #corpName#,
+				gmt_create= #gmtCreate#,
+				contact= #contact#,
+				comments = #comments#,
+				mail_host= #mailHost#
+			where id = #id#
+		]]>
+	</update>
+
+</sqlMap>

@@ -31,24 +31,4 @@ public interface UserAO {
 	 */
 	Result modifyPersonalInfo(BaseUserDO inputBaseUser);
 	
-	/**
-	 * 查看公司邮件认证页
-	 * @return
-	 */
-	Result viewCorpVerifyMailPage();
-	
-	/**
-	 * 发送公司认证邮件
-	 * @param corpEmail
-	 * @return
-	 */
-	Result sendCorpVerifyMail(String corpEmail);
-	
-	/**
-	 * 公司邮件认证
-	 * @param onwerCorpMailParam
-	 * @return
-	 */
-	Result handleCorpVerifyMail(OnwerCorpMailParam onwerCorpMailParam);
-	
 }

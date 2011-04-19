@@ -1,7 +1,7 @@
 package com.aifuyun.snow.world.web.modules.screen.profile;
 
 import com.aifuyun.snow.world.biz.ao.user.OnwerCorpMailParam;
-import com.aifuyun.snow.world.biz.ao.user.UserAO;
+import com.aifuyun.snow.world.biz.ao.user.ProfileAO;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
@@ -9,7 +9,7 @@ import com.zjuh.sweet.result.Result;
 
 public class VerifyCorpMail extends BaseScreen {
 
-	private UserAO userAO;
+	private ProfileAO profileAO;
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
@@ -26,7 +26,7 @@ public class VerifyCorpMail extends BaseScreen {
 		
 		rundata.setTarget("profile/verifyCorpMailSuccess.vm");
 		
-		Result result = userAO.handleCorpVerifyMail(onwerCorpMailParam);
+		Result result = profileAO.handleCorpVerifyMail(onwerCorpMailParam);
 		if (result.isSuccess()) {
 			this.sendRedirect("snowModule", "profile/verifyCorpMailSuccess");
 		} else {
@@ -34,8 +34,8 @@ public class VerifyCorpMail extends BaseScreen {
 		}
 	}
 
-	public void setUserAO(UserAO userAO) {
-		this.userAO = userAO;
+	public void setProfileAO(ProfileAO profileAO) {
+		this.profileAO = profileAO;
 	}
 
 }
