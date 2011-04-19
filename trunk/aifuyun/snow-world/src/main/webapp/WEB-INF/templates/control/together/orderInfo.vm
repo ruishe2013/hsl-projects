@@ -17,14 +17,14 @@
 <li>
     <span style="width:48%" class="fl dis">
 		#if($order.isWork())
-			<span class="col_gray">上班时间：</span>$!dateUtil.formatDateHMS($order.fromTime)
+			<span class="col_gray">上班时间：</span>$!dateUtil.formatDate($order.fromTime, "HH:mm:ss")
 		#else	
 			<span class="col_gray">出发时间：</span>$!dateUtil.formatFullDate($order.fromTime)
 		#end	
     </span>
     <span style="width:48%" class="fl dis">
 		#if($order.isWork())
-			<span class="col_gray">上班到达时间：</span>$!dateUtil.formatDateHMS($order.arriveTime)
+			<span class="col_gray">上班到达时间：</span>$!dateUtil.formatDate($order.arriveTime, "HH:mm:ss")
 		#else
 			<span class="col_gray">预计到达时间：</span>$!dateUtil.formatFullDate($order.arriveTime)
 		#end	
@@ -32,13 +32,12 @@
 </li>
 #if($order.isWork())
 	<li>
-        <span class="col_gray">下班时间：</span>date在处理中1
-        <span class="color_gray"> </span>
-    </li> 
-     
-    <li>
-        <span class="col_gray">有效日期：</span>date在处理中2
-        <span class="color_gray"> </span>
+        <span  style="width:48%" class="fl dis">
+			<span class="col_gray">下班时间：</span>$!dateUtil.formatDate($order.afterWorkFromTime, "HH:mm:ss")  
+        </span>	
+         <span  style="width:48%" class="fl dis">
+			<span class="col_gray">有效日期：</span>$!fromWeekFormat
+         </span>	
     </li> 
 #end	
 <li>
@@ -61,3 +60,7 @@
         <a href="#" class="font_12_b text_drakgreen">《拼车注意事项》</a>
     </div>
 </li>      
+
+#macro(showWeek $fromWeek)
+	星期$fromWeek
+#end
