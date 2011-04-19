@@ -1,4 +1,4 @@
-package com.aifuyun.snow.world.web.modules.screen.user;
+package com.aifuyun.snow.world.web.modules.screen.profile;
 
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;

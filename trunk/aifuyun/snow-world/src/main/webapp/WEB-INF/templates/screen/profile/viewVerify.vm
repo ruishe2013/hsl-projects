@@ -15,9 +15,10 @@
 </div>
 #end
 
+
 <div>
 	<form method="post">
-		<input type="hidden" name="actionTarget" value="user/userAction" />
+		<input type="hidden" name="actionTarget" value="profile/userProfileAction" />
 		<input type="hidden" name="actionEvent" value="sendCorpVerifyMail" /> 
 		<ul>
 			<li>

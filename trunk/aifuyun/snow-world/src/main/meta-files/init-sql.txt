@@ -126,6 +126,8 @@ create table sw_order (
 	total_seats int default 0 not null,
 	creator_car_owner_type tinyint default 0 not null,
 	car_no varchar(30),
+	from_week varchar(20),
+	after_work_from_time datetime,
 	deleted tinyint default 0 not null,
 	gmt_create datetime not null,
 	gmt_modified datetime not null
