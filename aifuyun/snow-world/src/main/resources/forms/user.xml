@@ -27,9 +27,9 @@
 			</validator>
 		</field>
 		<field name="phone">
-			<validator type="required" message="请输入手机号码!" />
-			<validator type="regex" message="请输入正确的手机号码(正确的手机为11位数字)!" >
-				<param name="regex" value="1\d{10}" />
+			<validator type="required" message="请输入联系电话!" />
+			<validator type="regex" message="请输入正确联系电话!" >
+				<param name="regex" value="\d{6,13}" />
 			</validator>
 		</field>
 		<field name="career">

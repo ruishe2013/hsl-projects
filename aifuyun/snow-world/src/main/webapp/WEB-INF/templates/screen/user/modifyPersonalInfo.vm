@@ -39,8 +39,8 @@
 	#errorMessage($!form.fields.birthYear.message)
 	
 	<div class="input-item">
-		<label for="$!form.fields.phone.name">*手机号码：</label>
-		<input type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value" />
+		<label for="$!form.fields.phone.name">*联系电话：</label>
+		<input type="text" id="$!form.fields.phone.name" maxlength="13" name="$!form.fields.phone.name" value="$!form.fields.phone.value" />
 	</div>
 	#errorMessage($!form.fields.phone.message)
 	
