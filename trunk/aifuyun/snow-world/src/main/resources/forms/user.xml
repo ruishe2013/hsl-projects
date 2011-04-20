@@ -68,7 +68,7 @@
 		</field>
 		<field name="confirmPassword">
 			<validator type="required" message="确认密码不能为空!" />
-			<validator type="compare" message="请确认和刚才的密码输入一致!" >
+			<validator type="compare" message="两次输入的密码好像不一致哦!" >
 				<param name="compareField" value="password" />
 			</validator>
 		</field>
@@ -86,12 +86,33 @@
 		</field>
 	</form>
 	
-	
 	<form name="user.sendCorpVerifyMail">
 		<field name="email">
 			<validator type="required" message="Email不能为空!" />
 			<validator type="email" message="请输入正确的Email!" >
 				<param name="max" value="100" />
+			</validator>
+		</field>
+	</form>
+	
+	<form name="user.changePwd">
+		<field name="oldPassword">
+			<validator type="required" message="请输入旧密码!" />
+			<validator type="string" message="请输入旧密码!" >
+				<param name="min" value="1" />
+			</validator>
+		</field>
+		<field name="password">
+			<validator type="required" message="新密码不能为空!" />
+			<validator type="string" message="新密码的长度必须在6~20个字符之间!" >
+				<param name="min" value="6" />
+				<param name="max" value="20" />
+			</validator>
+		</field>
+		<field name="confirmPassword">
+			<validator type="required" message="确认新密码不能为空!" />
+			<validator type="compare" message="两次输入的密码好像不一致哦!" >
+				<param name="compareField" value="password" />
 			</validator>
 		</field>
 	</form>

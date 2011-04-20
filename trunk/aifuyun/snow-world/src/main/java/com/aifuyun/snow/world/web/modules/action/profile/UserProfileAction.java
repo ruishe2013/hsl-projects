@@ -28,6 +28,23 @@ public class UserProfileAction extends BaseAction {
 		}
 	}
 
+	@DefaultTarget("profile/changePwd")
+	public void doChangePwd(RunData rundata, TemplateContext templateContext) {
+		final Form form = rundata.getForm("user.changePwd");
+		if (!form.validate()) {
+			return;
+		}
+		String oldPassword = StringUtil.toString(form.getFields().get("oldPassword").getValue());
+		String password = StringUtil.toString(form.getFields().get("password").getValue());
+		
+		Result result = profileAO.changePassword(oldPassword, password);
+		if (result.isSuccess()) {
+			this.sendRedirect("snowModule", "profile/changePwdSuccess");
+		} else {
+			this.handleError(result, rundata, templateContext);
+		}
+	}
+	
 	public void setProfileAO(ProfileAO profileAO) {
 		this.profileAO = profileAO;
 	}
