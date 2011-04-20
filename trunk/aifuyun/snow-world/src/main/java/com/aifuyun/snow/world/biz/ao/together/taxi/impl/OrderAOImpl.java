@@ -16,6 +16,7 @@ import com.aifuyun.snow.world.common.SnowUtil;
 import com.aifuyun.snow.world.common.cache.CacheContants;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.CarTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.CareerTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
@@ -68,10 +69,13 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			int fromMinute = SnowUtil.getRecentMinute(defaultCreateDate, 5);
 			int fromHour = DateUtil.getHour(defaultCreateDate);
 			
+			
+			
 			result.getModels().put("fromMinute", fromMinute);
 			result.getModels().put("fromHour", fromHour);
 			result.getModels().put("defaultCreateDate", defaultCreateDate);
 			result.getModels().put("orderTypes", OrderTypeEnum.values());
+			result.getModels().put("carTypes", CarTypeEnum.values());
 			result.getModels().put("selectedOrderType", selectedOrderType);
 			
 			result.setSuccess(true);

@@ -52,16 +52,19 @@
 						#set($showSeats = true)
 						#set($showCreatorType = false)
 						#set($showCarNo = false)
+						#set($showCarType = false)
 					#elseif ("$!selectOrderType" == "2")
 						## 顺风车
 						#set($showCreatorType = true)
 						#if ("$!form.fields.creatorCarOwnerType.value" == "1")
 							## 发起人是车主
 							#set($showCarNo = true)
+							#set($showCarType = true)
 							#set($showSeats = true)
 						#elseif ("$!form.fields.creatorCarOwnerType.value" == "2")
 							## 发起人是乘客
 							#set($showCarNo = false)
+							#set($showCarType = false)
 							#set($showSeats = false)
 						#end
 					#end
@@ -70,12 +73,12 @@
                         
                         <label for="$!{form.fields.type.name}-1">
 	                        <input id="$!{form.fields.type.name}-1" class="order_type_selector" name="$!form.fields.type.name" type="radio" value="1" style="border:none"
-	                         #if("$!selectOrderType" == "1") checked #end /> 拼出租车
+	                         #if("$!selectOrderType" == "1") checked #end />拼出租车
 	                    </label>
 	                    
 	                    <label for="$!{form.fields.type.name}-2">
 	                        <input id="$!{form.fields.type.name}-2" class="order_type_selector" name="$!form.fields.type.name" type="radio" value="2" style="border:none"
-	                         #if("$!selectOrderType" == "2") checked #end /> 顺风车
+	                         #if("$!selectOrderType" == "2") checked #end />顺风车
 	                    </label>
                             
                         #errorMessageCreateOrder($!form.fields.type.message)
@@ -97,9 +100,23 @@
                     </div>
                 </li>
                 
-	        	<li id="J_car_no" #if(!$showCarNo) style="display:none" #end>
+	        	<li id="J_car_type" #if(!$showCarType) style="display:none" #end>
+                   <div class="info-title"><em>*</em> 汽车类型：</div>
+                   <div class="reg_info_li_box">
+                    	<p>
+                    		<select name="$!form.fields.carType.name" id="$!form.fields.carType.name">
+                    		#foreach($carType in $carTypes)
+                    			<option value="$!carType.value" #if("$!form.fields.carType.value" == "$!carType.value") selected #end >$!carType.name</option>
+                    		#end
+                    		</select>
+                        </p>
+                        #errorMessageCreateOrder($!form.fields.carType.message)
+                   </div>
+                </li>
+                
+               <li id="J_car_no" #if(!$showCarNo) style="display:none" #end>
                     <div class="info-title">
-                    	<em>*</em> 车牌号：
+                    	<em></em> 车牌号：
                     </div>
                     <div class="reg_info_li_box">
                     	<p>
@@ -107,10 +124,11 @@
                         </p>
                         #errorMessageCreateOrder($!form.fields.carNo.message)
                         <p class="color_gray attention">
-                            		如实填写车牌号，拼客才会对相信您的拼车信息，方便您快速完成拼车体验
+                            	车牌号后（也可以不填），拼客会更加相信您的拼车信息，方便您快速完成拼车体验。
                         </p>
                    </div>
                 </li>
+                
                 
 	        	<li id="J_totalSeats" #if(!$showSeats) style="display:none" #end>
 		            <div class="info-title">
@@ -152,7 +170,6 @@
 		            </div>
 	            </li>
 	            
-	            
 	            <li>
 		            <div class="info-title">
                     	<em>*</em> 目的城市：
@@ -189,7 +206,6 @@
                          </p>
 		            	#errorMessageCreateOrder($!form.fields.approach.message)
 		            </div>
-		            
 	            </li>
 	            
 	            <li>
@@ -209,7 +225,6 @@
 		                 #errorMessageCreateOrder($!form.fields.fromTimeDate.message)
 		            </div>
 		        </li>
-	            
 	            
 	           	<li>
 	            	<div class="info-title"><em>*</em> 出发时间：</div>
@@ -371,6 +386,7 @@
 				setVisible('#J_creator_type', false);
 				// hide car no
 				setVisible('#J_car_no', false);
+				setVisible('#J_car_type', false);
 			} else if(val == "2") {
 				// shunfengche
 				setVisible('#J_creator_type', true);
@@ -379,6 +395,7 @@
 				if (checkedVal == "1") {
 					// show carNO
 					setVisible('#J_car_no', true);
+					setVisible('#J_car_type', true);
 				} else if (checkedVal == "2") {
 					// hide seat
 					setVisible('#J_totalSeats', false);
@@ -393,9 +410,11 @@
 			if (val == "1") {
 				// car onwer
 				setVisible('#J_car_no', true);
+				setVisible('#J_car_type', true);
 			} else if(val == "2") {
 				// has no car
 				setVisible('#J_car_no', false);
+				setVisible('#J_car_type', false);
 				setVisible('#J_totalSeats', false);
 			}
 		});
