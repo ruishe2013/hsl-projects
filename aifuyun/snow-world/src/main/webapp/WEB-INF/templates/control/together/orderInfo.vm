@@ -9,6 +9,9 @@
 	#if ("$!order.creatorCarOwnerType" == "1")
 	## 显示车牌号
 		<li>
+		    <span class="col_gray">汽车类型：</span>$!order.carTypeEnum.name
+		</li>
+		<li>
 		    <span class="col_gray">车牌号：</span>$!order.carNo
 		</li>
 	#end
