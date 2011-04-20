@@ -1,0 +1,54 @@
+#set($form = $formFactory.createForm("user.changePwd"))
+
+#macro(errorMessageChangPwd, $str)
+	#if( "$!str" != "")
+		<p class="color_gray error-tip">
+			$str
+		</p>
+	#end
+#end
+
+<div id="cArea">
+  <div class="hr_10"></div>
+    
+    $control.setTemplate('profile/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)
+    
+    <div class="content">
+    	<div class="content-inner">
+			
+			<form method="post">
+				<input type="hidden" name="actionTarget" value="profile/userProfileAction" />
+				<input type="hidden" name="actionEvent" value="changePwd" />
+				<div>
+					<p>
+						<label><em>*</em>原密码 </label>
+						<input type="password" name="$!{form.fields.oldPassword.name}"/>
+					</p>
+					#errorMessageChangPwd($!form.fields.oldPassword.message)
+				</div>		
+				<div>
+					<p>
+						<label><em>*</em>新密码</label>
+						<input type="password" name="$!{form.fields.password.name}"/>
+					</p>
+					#errorMessageChangPwd($!form.fields.password.message)
+				</div>				
+				<div>
+					<p>
+						<label><em>*</em>确认新密码</label>
+						<input type="password" name="$!{form.fields.confirmPassword.name}"/>
+					</p>
+					#errorMessageChangPwd($!form.fields.confirmPassword.message)
+				</div>	
+				
+				<div>
+					#errorMessageChangPwd($!csrfmessage)
+					#errorMessageChangPwd($!resultmessage.message)
+					<input type="submit" value="修改密码" />
+				</div>	
+			</form>
+    	</div>
+    </div>
+    
+</div>
+<div class="hr_6"></div>

@@ -55,6 +55,39 @@ public class ProfileAOImpl extends BaseAO implements ProfileAO {
 	private CorpMailBO corpMailBO;
 	
 	@Override
+	public Result changePassword(String oldPassword, String password) {
+		Result result = new ResultSupport(false);
+		try {
+			long userId = this.getLoginUserId();
+			if (userId <= 0L) {
+				result.setResultCode(CommonResultCodes.USER_NOT_LOGIN);
+				return result;
+			}
+			BaseUserDO baseUserDO = this.userBO.queryById(userId);
+			if (baseUserDO == null) {
+				result.setResultCode(UserResultCodes.USER_NOT_EXIST);
+				return result;
+			}
+			String encryptOldPassword = this.userBO.encryptPassword(oldPassword);
+			if (!StringUtil.equals(baseUserDO.getPassword(), encryptOldPassword)) {
+				result.setResultCode(UserResultCodes.PASSWORD_INCORRET);
+				result.setResultTypeEnum(ResultTypeEnum.CURRENT_TARGET);
+				return result;
+			}
+			
+			String newEncryptPassword = this.userBO.encryptPassword(password);
+			baseUserDO.setPassword(newEncryptPassword);
+			
+			userBO.update(baseUserDO);
+			
+			result.setSuccess(true);
+		} catch (Exception e) {
+			log.error("ÐÞ¸ÄÃÜÂëÊ§°Ü", e);
+		}
+		return result;
+	}
+
+	@Override
 	public Result viewCorpVerifyMailPage() {
 		Result result = new ResultSupport(false);
 		try {

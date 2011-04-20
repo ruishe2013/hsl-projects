@@ -23,5 +23,13 @@ public interface ProfileAO {
 	 * @return
 	 */
 	Result handleCorpVerifyMail(OnwerCorpMailParam onwerCorpMailParam);
+	
+	/**
+	 * ĞŞ¸ÄÃÜÂë
+	 * @param oldPassword
+	 * @param password
+	 * @return
+	 */
+	Result changePassword(String oldPassword, String password);
 
 }

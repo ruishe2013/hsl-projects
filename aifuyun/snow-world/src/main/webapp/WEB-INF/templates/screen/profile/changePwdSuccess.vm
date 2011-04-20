@@ -1,0 +1,14 @@
+
+<div id="cArea">
+  <div class="hr_10"></div>
+    
+    $control.setTemplate('profile/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)
+    
+    <div class="content">
+    	<div class="content-inner">
+			ĞŞ¸ÄÃÜÂë³É¹¦¡£
+    	</div>
+    </div>
+    
+</div>
+<div class="hr_6"></div>
