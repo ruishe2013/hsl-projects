@@ -81,13 +81,13 @@
             
             <li>
 	            <div class="info-title">
-                	<em>*</em> 手机号：
+                	<em>*</em> 联系电话：
                 </div>
 	            <div class="reg_info_li_box">
 		            <p>
-                        <input class="input_150" maxlength="11" type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value"/>
+                        <input class="input_150" maxlength="13" type="text" id="$!form.fields.phone.name" name="$!form.fields.phone.name" value="$!form.fields.phone.value"/>
                     </p>
-					 #errorMessagePersonalInfo($!form.fields.career.message)
+					 #errorMessagePersonalInfo($!form.fields.phone.message)
 	            </div>
 	            
             </li>
