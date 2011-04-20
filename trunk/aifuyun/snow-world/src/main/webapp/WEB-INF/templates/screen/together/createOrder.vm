@@ -67,13 +67,17 @@
 					#end
                     
                     <div class="reg_info_li_box">
-                     	#foreach($orderType in $orderTypes)
-                        	<label for="$!{form.fields.type.name}-$!{orderType.value}">
-	                        <input id="$!{form.fields.type.name}-$!{orderType.value}" class="order_type_selector" name="$!form.fields.type.name" type="radio" value="$!orderType.value" style="border:none"
-	                         #if("$!selectOrderType" == "$!orderType.value") checked #end />$!orderType.name
-                            </label>
-                        #end
                         
+                        <label for="$!{form.fields.type.name}-1">
+	                        <input id="$!{form.fields.type.name}-1" class="order_type_selector" name="$!form.fields.type.name" type="radio" value="1" style="border:none"
+	                         #if("$!selectOrderType" == "1") checked #end /> 拼出租车
+	                    </label>
+	                    
+	                    <label for="$!{form.fields.type.name}-2">
+	                        <input id="$!{form.fields.type.name}-2" class="order_type_selector" name="$!form.fields.type.name" type="radio" value="2" style="border:none"
+	                         #if("$!selectOrderType" == "2") checked #end /> 顺风车
+	                    </label>
+                            
                         #errorMessageCreateOrder($!form.fields.type.message)
                     </div>
                 </li>
