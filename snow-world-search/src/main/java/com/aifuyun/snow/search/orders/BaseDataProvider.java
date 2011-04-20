@@ -118,6 +118,10 @@ public abstract class BaseDataProvider implements DataProvider {
 			ret.put("creatorRealName", rs.getString("real_name"));
 			ret.put("creatorCarOwnerType", rs.getString("creator_car_owner_type"));
 			ret.put("carNo", rs.getString("car_no"));
+			
+			ret.put("fromWeek", rs.getString("from_week"));
+			ret.put("carType", rs.getString("car_type"));
+			ret.put("afterWorkFromTime", fmtDateFull(rs.getTimestamp("after_work_from_time")));
 
 			ret.put("fromAddrText", createFromAddrText(ret));
 			ret.put("arriveAddrText", createArriveAddrText(ret));
@@ -148,7 +152,7 @@ public abstract class BaseDataProvider implements DataProvider {
 		String sql = "select t.id, t.city_id, t.gmt_modified, t.from_addr, t.gmt_create, t.creator_username, t.deleted,"+
 			"t.creator_id, t.from_time, t.type, t.id, t.total_seats," +
 		 "t.arrive_time, t.description, t.from_city, t.arrive_city, t.arrive_addr, t.creator_car_owner_type, t.car_no, " +
-		 "t.status, t.approach, t.arrive_city_id, u.real_name from sw_order t, sw_order_user u " +
+		 "t.status, t.approach, t.arrive_city_id, t.from_week, t.car_type, t.after_work_from_time, u.real_name from sw_order t, sw_order_user u " +
 		 " where t.id = u.order_id and t.creator_id = u.user_id and u.deleted = 0 ";
 		String condition = getSqlCondition();
 		if (StringUtil.isEmpty(condition)) {
