@@ -1,1 +1,19 @@
-发送成功！
+
+<div id="cArea">
+  <div class="hr_10"></div>
+    
+    $control.setTemplate('profile/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)
+    
+    <div class="content">
+    	<div class="content-inner">
+			<div class="phead password-ico">
+                	<h1>发送成功</h1>
+                </div>
+                <div class="pbody">
+                	<div class="tip_box">认证邮件已经发送，请收取邮件完成认证。</div>
+				</div>
+    	</div>
+    </div>
+    
+</div>
+<div class="hr_6"></div>

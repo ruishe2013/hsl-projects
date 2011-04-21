@@ -8,34 +8,52 @@
 
 #set($form = $formFactory.createForm("user.sendCorpVerifyMail"))
 
-#if ($!oldVerifyDetail)
-<div>
-	你已经认证过，认证信息：[$!{oldVerifyDetail.verifyTypeEnum.name}] $!oldVerifyDetail.detail，
-	你可以重新认证：
-</div>
-#end
 
-
-<div>
-	<form method="post">
-		<input type="hidden" name="actionTarget" value="profile/userProfileAction" />
-		<input type="hidden" name="actionEvent" value="sendCorpVerifyMail" /> 
-		<ul>
-			<li>
-				 <p class="color_gray attention">
-		            	我们将通过你email所在的单位来认证，
-                     	我们会发送一份认证邮件到你的单位的email，你通过点击邮件中的链接完成认证。
-                 </p>
-	            <div class="reg_info_li_box">
-		           	<em>*</em> 所在单位email：
-					<input id="$!form.fields.email.name" class="input_150" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text" />
-                    #errorVerifyMessage($!form.fields.email.message)
-                    
-                    #errorVerifyMessage($!resultmessage.message)
-                	<input type="submit" value="发送" />
-            	</div>
-            </li>
-		</ul>
-	</form>	
+<div id="cArea">
+  <div class="hr_10"></div>
+    $control.setTemplate('profile/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)
+    
+    <div class="content"><!--content-->
+    	<div class="content-inner">
+            <div class="pwrap"><!--账号信息-->
+            	<div class="phead company-ico">
+                	<h1>公司确认</h1>
+                </div>
+                <div class="pbody">
+					#if ($!oldVerifyDetail)
+					<div style="margin:0 10px;">
+						你已经认证过，认证信息：[$!{oldVerifyDetail.verifyTypeEnum.name}] $!oldVerifyDetail.detail，
+						你可以重新认证：
+					</div>
+					#end
+                    <div class="password">
+						<p class="color_gray attention">
+							我们将通过你email所在的单位来认证，
+							我们会发送一份认证邮件到你的单位的email，你通过点击邮件中的链接完成认证。
+                 		</p>
+                    	<form  method="post">
+						<input type="hidden" name="actionTarget" value="profile/userProfileAction" />
+						<input type="hidden" name="actionEvent" value="sendCorpVerifyMail" /> 
+                        	<ul id="need">
+                        	<li>
+                                <label for=password><span class="col_r">*</span> 公司邮箱：</label>
+                                <input id="$!form.fields.email.name" class="input_150" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text" />
+								#errorVerifyMessage($!form.fields.email.message)
+								
+								#errorVerifyMessage($!resultmessage.message)
+                            </li>
+                            <li style="line-height:35px;margin: 5px 0 0 40px;" >
+                            	<input class="but_g_bg font_14_b" type=submit value=确认修改 />
+                            </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class=" hr_10"></div>
+                </div>
+            </div><!--账号信息 end-->
+            
+            
+    	</div>
+    </div><!--content end-->
+    
 </div>
-	
