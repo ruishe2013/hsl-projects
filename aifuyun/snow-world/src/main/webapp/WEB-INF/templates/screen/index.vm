@@ -47,21 +47,7 @@
         <div class="search_b"></div>
     </div><!--search end-->
     <div class="Focus_pic"  id="flashcontent01"><!--Focus_pic begin-->
-    
-<script type="text/javascript">	
-					var speed = 4000;		
-					var pics='$imgServer/Focus_pic/4-3-1.jpg|$imgServer/Focus_pic/4-3-2.jpg';	
-					var mylinks='http://www.yiliangche.com/|http://www.yiliangche.com/';
-					var texts='绿色出行，同上一辆车|绿色出行，同上一辆车';
-					var sohuFlash2 = new sohuFlash("$flashServer/focus0414a.swf","flashcontent01","630","275","8","#ffffff");
-
-sohuFlash2.addParam("quality", "medium");
-sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",speed);
-						sohuFlash2.addVariable("p",pics);	
-						sohuFlash2.addVariable("l",mylinks);
-						sohuFlash2.addVariable("icon",texts);
-						sohuFlash2.write("flashcontent01");
-					</script>
+    <img src="$imgServer/Focus_pic/4-3-1.jpg" border="0" />
     </div><!--Focus_pic begin-->
 </div><!--content-1 end-->
 
@@ -69,7 +55,8 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 <div id="cArea"><!--content-2 begin-->
 <div class="newcar_t">
     <div class="newcar_title">最新拼车</div>
-	    <div class="but_release">
+	    <div class="but_release" style="text-align:right; line-height:35px;>
+			<a href="#"><span class="col_g mr10">已经有500人发起拼车 更多</span></a>
 	    </div>
     </div>
 	<div class="newcar_c">
@@ -79,7 +66,6 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 	    <td>出发地</td>
 	    <td>目的地</td>
 	    <td>发车时间</td>                         
-	    <td>发起人</td>
 	    <td>操作</td>
 	  </tr>
 	#set($index=0)
@@ -89,7 +75,6 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 		    <td>$!order.fromCity $!order.fromAddr</td>
 		    <td>$!order.arriveCity $!order.arriveAddr</td>
 		    <td>$!dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm')</td>
-		    <td>$!order.creatorUsername</td>
 		    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_pcbg">查看详情</a></td>
 		</tr>
 		#set($index= $index + 1)
@@ -97,9 +82,7 @@ sohuFlash2.addParam("wmode", "opaque");						sohuFlash2.addVariable("speed",spee
 </table>
 
 </div>
-<!--
-<div class="newcar_b"><div class="newcar_b_bg"></div></div>
--->
+
 </div><!--content-2 end-->
 
 <script type="text/javascript">

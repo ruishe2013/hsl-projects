@@ -12,43 +12,49 @@
   <div class="hr_10"></div>
     
     $control.setTemplate('profile/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)
-    
-    <div class="content">
+	
+	
+	<div class="content"><!--content end-->
     	<div class="content-inner">
-			
-			<form method="post">
-				<input type="hidden" name="actionTarget" value="profile/userProfileAction" />
-				<input type="hidden" name="actionEvent" value="changePwd" />
-				<div>
-					<p>
-						<label><em>*</em>原密码 </label>
-						<input type="password" name="$!{form.fields.oldPassword.name}"/>
-					</p>
-					#errorMessageChangPwd($!form.fields.oldPassword.message)
-				</div>		
-				<div>
-					<p>
-						<label><em>*</em>新密码</label>
-						<input type="password" name="$!{form.fields.password.name}"/>
-					</p>
-					#errorMessageChangPwd($!form.fields.password.message)
-				</div>				
-				<div>
-					<p>
-						<label><em>*</em>确认新密码</label>
-						<input type="password" name="$!{form.fields.confirmPassword.name}"/>
-					</p>
-					#errorMessageChangPwd($!form.fields.confirmPassword.message)
-				</div>	
-				
-				<div>
-					#errorMessageChangPwd($!csrfmessage)
-					#errorMessageChangPwd($!resultmessage.message)
-					<input type="submit" value="修改密码" />
-				</div>	
-			</form>
+            <div class="pwrap"><!--pwrap-->
+            	<div class="phead password-ico">
+                	<h1>修改密码</h1>
+                </div>
+                <div class="pbody">
+                    <div class="password">
+                    	<form method="post">
+						<input type="hidden" name="actionTarget" value="profile/userProfileAction" />
+						<input type="hidden" name="actionEvent" value="changePwd" />
+                        	<ul id="need">
+                        	<li>
+                                <label for=password><span class="col_r">*</span> 旧&nbsp;&nbsp;密&nbsp;&nbsp;码：</label>
+								<input type="password" name="$!{form.fields.oldPassword.name}" class="input_95"/>
+                                #errorMessageChangPwd($!form.fields.oldPassword.message)
+                            </li>
+                            <li>
+                                <label for=newpasswd><span class="col_r">*</span> 新&nbsp;&nbsp;密&nbsp;&nbsp;码：</label>
+                                <input class="input_95"  type="password" name="$!{form.fields.password.name}"/>
+                                #errorMessageChangPwd($!form.fields.password.message)
+                            </li>
+                            <li>
+                                <label for=newpasswd2><span class="col_r">*</span> 确认新密码：</label>
+								<input type="password" name="$!{form.fields.confirmPassword.name}" class="input_95" />
+								#errorMessageChangPwd($!form.fields.confirmPassword.message)
+                            </li>
+                            <li style="line-height:35px">
+								#errorMessageChangPwd($!csrfmessage)
+								#errorMessageChangPwd($!resultmessage.message)
+                            	<INPUT class="but_g_bg font_14_b" type=submit value=修改密码 name=changepassword>
+                            </li>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class=" hr_10"></div>
+                </div>
+            </div><!--pwrap end-->
+            
     	</div>
-    </div>
-    
+    </div><!--content end-->
+
 </div>
 <div class="hr_6"></div>
