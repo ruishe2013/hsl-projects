@@ -14,13 +14,14 @@ public class CreateOrder extends BaseScreen {
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
-		int orderType = rundata.getQueryString().getInt("orderType");
+		int orderType = rundata.getQueryString().getInt("orderType",1);
 		Result result = orderAO.viewCreateOrder(orderType);
 		if (result.isSuccess()) {
 			final Form form = rundata.getForm("together.createOrder");
 			OrderDO order = (OrderDO)result.getModels().get("order");
 			
 			this.result2Context(result, templateContext);
+			templateContext.put("orderType", orderType);
 			
 			if (!form.isHeldValues()) {
 				form.holdValues(order);

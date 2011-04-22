@@ -124,6 +124,9 @@
 	<form name="together.createOrderWork">
 		<field name="type">
 			<validator type="required" message="请选择拼车类型!" />
+			<validator type="enums" message="请选择正确的拼车类型!" >
+				<param name="values" value="3" />
+			</validator>
 		</field>
 		<field name="creatorCarOwnerType">
 			<validator type="dependencyRequired" message="请选择发起人身份!" >
