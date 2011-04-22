@@ -11,11 +11,10 @@
 </div>
 
 
-
 <script type="text/javascript">
 	$('.switch_city_link').bind('click', function(){
 		var url = "$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity')";
-		url = url + "&cityId=" + $('.switch_city_link').attr('cityId');
+		url = url + "&cityId=" + this.getAttribute('cityId');
 		location.href=url;
 		return false;
 	});
