@@ -17,17 +17,7 @@
     </div>
     <Div style="height:1px; background:#ccc; width:100%; overflow:hidden"></Div>
 
-	#set($selectOrderType = $!orderType)
-	<div class="reg_box fl">
-		<div id="tabs" class="ui-tabs ui-widget ui-widget-content">
-			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
-				<li class="ui-state-default ui-corner-top  #if("$selectOrderType" == "1") ui-tabs-selected ui-state-active #end "><a href="$snowModule.setTarget('together/createOrder')?orderType=1">拼出租车</a></li>
-				<li class="ui-state-default ui-corner-top  #if("$selectOrderType" == "2") ui-tabs-selected ui-state-active #end "><a href="$snowModule.setTarget('together/createOrder')?orderType=2">顺风车</a></li>
-				<li class="ui-state-default ui-corner-top"><a href="$snowModule.setTarget('together/createOrderWork')">上下班拼车</a></li>
-			</ul>
-			
-			<div id="tabs-1" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
-				
+
                 	<div class="reg_l_box"><!--left begin-->
                 
                         <div class="reg_info">
@@ -354,10 +344,6 @@
                         </div>
                 
                     </div><!--left end-->
-			</div> <!-- end tabs-1 -->	
-		</div>	 <!-- end tabs -->
-	</div>
-	
   <div class="reg_r_box"><!--right begin-->
      <p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;欢迎来到一辆车拼车网！</p>
   </div><!--right end-->
