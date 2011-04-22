@@ -17,332 +17,348 @@
     </div>
     <Div style="height:1px; background:#ccc; width:100%; overflow:hidden"></Div>
 
-	<div class="reg_l_box"><!--left begin-->
-
-        <div class="reg_info">
-        <form  id="J_create_order_form" action="" method="post">
-	        <input type="hidden" name="createOrderWork" value="$tokenUtil.token('createOrderWork')" />
-			<input type="hidden" name="actionTarget" value="together/orderAction" />
-			<input type="hidden" name="actionEvent" value="createOrderWork" />
+	
+	<div class="reg_box fl">
+		<div id="tabs" class="ui-tabs ui-widget ui-widget-content">
+			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+				<li class="ui-state-default ui-corner-top "><a href="$snowModule.setTarget('together/createOrder')?orderType=1">拼出租车</a></li>
+				<li class="ui-state-default ui-corner-top"><a href="$snowModule.setTarget('together/createOrder')?orderType=2">顺风车</a></li>
+				<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active" ><a href="$snowModule.setTarget('together/createOrderWork')">上下班拼车</a></li>
+			</ul>
 			
-			#set($showCarNo = true)
-			#set($showSeats = true)
-			#if ("$!form.fields.creatorCarOwnerType.value" == "2")
-				## 发起人是乘客
-				#set($showCarNo = false)
-				#set($showSeats = false)
-			#end
-			
-	        <ul>
-	        	<li>
-                    <div class="info-title">
-                    	<em>*</em> 发起人：
-                    </div>
-                    <span class="fl color_gray">
-                    <div class="reg_info_li_box">
-                    	$!snowUtil.loginUsername
-                    </div>
-                    </span>
-                </li>
+			<div id="tabs-3" class="ui-tabs-panel ui-widget-content ui-corner-bottom">
 				
-				<li style="display:none">
-                    <div class="info-title">
-                    	<em>*</em> 拼车类型：
+            	<div class="reg_l_box"><!--left begin-->
+            
+                    <div class="reg_info">
+                    <form  id="J_create_order_form" action="" method="post">
+            	        <input type="hidden" name="createOrderWork" value="$tokenUtil.token('createOrderWork')" />
+            			<input type="hidden" name="actionTarget" value="together/orderAction" />
+            			<input type="hidden" name="actionEvent" value="createOrderWork" />
+            			
+            			#set($showCarNo = true)
+            			#set($showSeats = true)
+            			#if ("$!form.fields.creatorCarOwnerType.value" == "2")
+            				## 发起人是乘客
+            				#set($showCarNo = false)
+            				#set($showSeats = false)
+            			#end
+            			
+            	        <ul>
+            	        	<li>
+                                <div class="info-title">
+                                	<em>*</em> 发起人：
+                                </div>
+                                <span class="fl color_gray">
+                                <div class="reg_info_li_box">
+                                	$!snowUtil.loginUsername
+                                </div>
+                                </span>
+                            </li>
+            				
+            				<li style="display:none">
+                                <div class="info-title">
+                                	<em>*</em> 拼车类型：
+                                </div>
+                                
+                                <div class="reg_info_li_box">
+                                 	<input  class="order_type_selector" name="$!form.fields.type.name" type="radio" value="3" checked />
+                                </div>
+                            </li>
+            				
+            				<li id="J_creator_type">
+                            	<div class="info-title">
+                                	<em>*</em> 发起人身份：
+                                </div>
+                                <div class="reg_info_li_box">
+                                	<label for="$!{form.fields.creatorCarOwnerType.name}-1">
+                                    	<input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-1" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="1" #if ("$!form.fields.creatorCarOwnerType.value" == "1") checked #end />我是车主
+                                    </label>
+                                    <label for="$!{form.fields.creatorCarOwnerType.name}-2">
+                                    <input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-2" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="2" #if ("$!form.fields.creatorCarOwnerType.value" == "2") checked #end />我是乘客
+                                    </label>
+                                 #errorMessageCreateOrder($!form.fields.creatorCarOwnerType.message)
+                                </div>
+                            </li>
+            				
+            	        	<li id="J_car_no" #if(!$showCarNo) style="display:none" #end>
+                                <div class="info-title">
+                                	<em>*</em> 车牌号：
+                                </div>
+                                <div class="reg_info_li_box">
+                                	<p>
+                                    	<input name="$!form.fields.carNo.name" type="text" class="input_95" value="$!form.fields.carNo.value" />
+                                    </p>
+                                    #errorMessageCreateOrder($!form.fields.carNo.message)
+                                    <p class="color_gray attention">
+                                        		如实填写车牌号，拼客才会对相信您的拼车信息，方便您快速完成拼车体验
+                                    </p>
+                               </div>
+                            </li>
+                            
+            	        	<li id="J_totalSeats" #if(!$showSeats) style="display:none" #end>
+            		            <div class="info-title">
+                                	<em>*</em> 空余座位数：
+                                </div>
+            		            <div class="reg_info_li_box">
+            		            	<p>
+            		            		<input class="input_95" type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value"/>
+            		            	</p>
+            		            	#errorMessageCreateOrder($!form.fields.totalSeats.message)
+            		            	<p class="color_gray attention">
+                                         	空余座位数不包括您自己。
+                                    </p>
+            		            </div>
+            	            </li>
+            	        	
+            	            <li>
+            		            <div class="info-title">
+                                	<em>*</em> 出发城市：
+                                </div>
+            		            <div class="reg_info_li_box">
+            			            <p>
+            			            	<input type="text" class="input_95" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
+            			           		<a href="#" id="change_from_city">选择城市...</a>
+            			            </p>
+            			             #errorMessageCreateOrder($!form.fields.fromCity.message)
+            		            </div>
+            	            </li>
+            	            
+            	            <li>
+            		            <div class="info-title">
+                                	<em>*</em> 出发地：
+                                </div>
+            		            <div class="reg_info_li_box">
+            		            <p>
+            		           		<input class="input_400" type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value" />
+            		            </p>
+            		            #errorMessageCreateOrder($!form.fields.fromAddr.message)
+            		            </div>
+            	            </li>
+            	            
+            				<li>
+            		            <div class="info-title">
+                                	<em>*</em> 目的城市：
+                                </div>
+            		            <div class="reg_info_li_box">
+            			            <p>
+            			            	<input type="text" class="input_95" id="$!form.fields.arriveCity.name" name="$!form.fields.arriveCity.name" value="$!form.fields.arriveCity.value" />
+            			           		<a href="#" id="change_arrive_city">选择城市...</a>
+            			            </p>
+            			             #errorMessageCreateOrder($!form.fields.arriveCity.message)
+            		            </div>
+            	            </li>
+            				
+            				
+            				
+            	            <li>
+            		            <div class="info-title">
+                                	<em>*</em> 公司地址：
+                                </div>
+            		            <div class="reg_info_li_box">
+            			        <p>
+            		           		<input class="input_400" type="text" id="$!form.fields.companyAddr.name" name="$!form.fields.companyAddr.name" value="$!form.fields.companyAddr.value" />
+            		            </p>
+            		            #errorMessageCreateOrder($!form.fields.companyAddr.message)
+            		            </div>
+            	            </li>
+            	            
+            	            <li>
+            		            <div class="info-title">
+                                	途径：
+                                </div>
+            		            <div class="reg_info_li_box">
+            		            	<p style="width:100%">
+                                        	<textarea name="$!form.fields.approach.name" class="textarea400">$!form.fields.approach.value</textarea>
+                                     </p>
+            		            	#errorMessageCreateOrder($!form.fields.approach.message)
+            		            </div>
+            		            
+            	            </li>
+            	            
+            	            <li>
+            	            	<div class="info-title">
+                                	<em>*</em> 有效日期：
+                                </div>
+            	            	
+            	            	#set($fromTimeWeek = $form.fields.fromTimeWeek.values)
+            					<div class="reg_info_li_box">
+            			        <p>
+            		           		<input class="" type="checkbox" id="1$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="1" #showChecked($fromTimeWeek 1)/>星期一
+            						<input class="" type="checkbox" id="2$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="2" #showChecked($fromTimeWeek 2)/>星期二
+            						<input class="" type="checkbox" id="3$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="3" #showChecked($fromTimeWeek 3)/>星期三
+            						<input class="" type="checkbox" id="4$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="4" #showChecked($fromTimeWeek 4)/>星期四
+            						<input class="" type="checkbox" id="5$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="5" #showChecked($fromTimeWeek 5)/>星期五
+            						<input class="" type="checkbox" id="6$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="6" #showChecked($fromTimeWeek 6)/>星期六
+            						<input class="" type="checkbox" id="7$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="7" #showChecked($fromTimeWeek 7)/>星期日
+            						<!--  <input class="" type="checkbox" id="checkedAllFromTimeWork" name="checkedAllFromTimeWork" />全选/取消全选 -->
+            		            </p>
+            		            #errorMessageCreateOrder($!form.fields.fromTimeWeek.message)
+            		            </div>
+            					
+            	            	<!--
+            					#if ("$!fromDate" == "")
+            	            		#set($fromDate = $!dateUtil.formatDate($defaultCreateDate, 'yyyy-MM-dd'))
+            	            	#end
+            	            	
+            		            <div class="reg_info_li_box">
+            						<p>
+            							<input type="text" readonly="readonly" class="input_95 date-pick" name="$!form.fields.fromTimeDate.name" value="$!fromDate" /> 
+            		                </p>
+            		                 #errorMessageCreateOrder($!form.fields.fromTimeDate.message)
+            		            </div>
+            					-->
+            		        </li>
+            	            
+            	            
+            	           	<li>
+            	            	<div class="info-title"><em>*</em> 出发时间：</div>
+            	            	#set($selectedHour = $form.fields.fromTimeHour.value)
+            	            	#if ("$!selectedHour" == "")
+            	            		#set($selectedHour = $fromHour)
+            	            	#end
+            	            	
+            	            	#set($selectedMinute = $form.fields.fromTimeMinute.value)
+            	            	#if ("$!selectedMinute" == "")
+            	            		#set($selectedMinute = $fromMinute)
+            	            	#end
+            	            	
+            		            <div class="reg_info_li_box">
+            						<p>
+            							#set($hours = [0 .. 23])
+            							<select name="$!form.fields.fromTimeHour.name">
+            								#foreach ($hour in $hours)
+            									<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
+            								#end
+            			                </select>
+            							
+            			                #set($minuteIndice = [0 .. 11])
+            			                <select name="$!form.fields.fromTimeMinute.name">
+            			                	#foreach($minuteIndex in $minuteIndice)
+            			                		#set($minute = $minuteIndex * 5)
+            									<option value="$minute" #if("$!selectedMinute" == "$!minute") selected #end>$minute分</option>
+            								#end
+            			                </select>
+            		                </p>
+            		                #errorMessageCreateOrder($!form.fields.fromTimeHour.message)
+            						#errorMessageCreateOrder($!form.fields.fromTimeMinute.message)
+            	                </div>
+            	            </li>
+                            
+                            
+                            #set($arriveSelectedHour = $form.fields.arriveTimeHour.value)
+            	            #set($arriveSelectedMinute = $form.fields.arriveTimeMinute.value)
+            	            
+            	            
+                            <li id="J_arriveTime">
+                            	<div class="info-title">
+                                	<em>*</em>上班到达时间：
+                                </div>
+            	            	<div class="reg_info_li_box">
+            						<p>
+            							#set($hours = [0 .. 23])
+            							<select name="$form.fields.arriveTimeHour.name">
+            								<option value="-1"></option>
+            								#foreach ($hour in $hours)
+            									<option value="$hour" #if ("$!arriveSelectedHour" == "$!hour") selected #end>$hour时</option>
+            								#end
+            			                </select>
+            							
+            			                #set($minuteIndice = [0 .. 11])
+            			                <select name="$form.fields.arriveTimeMinute.name">
+            			                	 <option value="-1"></option>
+            			                	#foreach($minuteIndex in $minuteIndice)
+            			                		#set($minute = $minuteIndex * 5)
+            									<option value="$minute" #if("$!arriveSelectedMinute" == "$!minute") selected #end>$minute分</option>
+            								#end
+            			                </select>
+            		                </p>
+            		                 #errorMessageCreateOrder($!form.fields.arriveTimeHour.message)
+            						 #errorMessageCreateOrder($!form.fields.arriveTimeMinute.message)
+            		                </p>
+            	                </div>
+                            </li>
+            				
+            				
+            				
+            				#set($afterWorkFromSelectHour = $form.fields.afterWorkFromTimeHour.value)
+            	            #set($afterWorkFromSelectMinute = $form.fields.afterWorkFromTimeMinute.value)
+            	            
+                            <li id="J_arriveTime">
+                            	<div class="info-title">
+                                	<em>*</em>下班时间：
+                                </div>
+            	            	<div class="reg_info_li_box">
+            						<p>
+            							#set($hours = [0 .. 23])
+            							<select name="$form.fields.afterWorkFromTimeHour.name">
+            								<option value="-1"></option>
+            								#foreach ($hour in $hours)
+            									<option value="$hour" #if ("$!afterWorkFromSelectHour" == "$!hour") selected #end>$hour时</option>
+            								#end
+            			                </select>
+            							
+            			                #set($minuteIndice = [0 .. 11])
+            			                <select name="$form.fields.afterWorkFromTimeMinute.name">
+            			                	 <option value="-1"></option>
+            			                	#foreach($minuteIndex in $minuteIndice)
+            			                		#set($minute = $minuteIndex * 5)
+            									<option value="$minute" #if("$!afterWorkFromSelectMinute" == "$!minute") selected #end>$minute分</option>
+            								#end
+            			                </select>
+            		                </p>
+            		                 #errorMessageCreateOrder($!form.fields.afterWorkFromTimeHour.message)
+            						 #errorMessageCreateOrder($!form.fields.afterWorkFromTimeMinute.message)
+            		                </p>
+            	                </div>
+                            </li>
+            
+            				<li>
+            	                <div class="info-title">
+                                	描述：
+                                </div>
+            	            	<div class="reg_info_li_box">
+            		            	<p>
+            		            		<textarea cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!{form.fields.description.value}</textarea>
+            		            	</p>
+            		            	#errorMessageCreateOrder($!form.fields.description.message)
+            	            	</div>
+            	            	
+                        	</li> 
+                        	
+                            <li>
+                            	<div class="info-title">
+                                	<em>*</em> 验证码：
+                                </div>
+            	            	<div class="reg_info_li_box">
+            		            	<p>
+            		            		<input class="input_95" type="text" id="$!form.fields.checkCode.name" maxlength="4" name="$form.fields.checkCode.name" value="" />
+            		            		$control.setTemplate('common/checkCode.vm')
+            		            	</p>
+            		            	#errorMessageCreateOrder($!form.fields.checkCode.message)
+            	            	</div>
+            	            	
+                        	</li>
+                        	
+                            <li>
+                            	#errorMessageCreateOrder($!csrfmessage)
+            					#errorMessageCreateOrder($!resultmessage.message)
+            					
+            					<div class="info-title">&nbsp;</div>
+                            	<button id="xxxx" type="submit" class="but_cjpc" value="提交"></button>
+                            </li> 
+            	            
+            	       </ul>
+                    </form>
                     </div>
-                    
-                    <div class="reg_info_li_box">
-                     	<input  class="order_type_selector" name="$!form.fields.type.name" type="radio" value="3" checked />
-                    </div>
-                </li>
+            
+                </div><!--left end-->
 				
-				<li id="J_creator_type">
-                	<div class="info-title">
-                    	<em>*</em> 发起人身份：
-                    </div>
-                    <div class="reg_info_li_box">
-                    	<label for="$!{form.fields.creatorCarOwnerType.name}-1">
-                        	<input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-1" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="1" #if ("$!form.fields.creatorCarOwnerType.value" == "1") checked #end />我是车主
-                        </label>
-                        <label for="$!{form.fields.creatorCarOwnerType.name}-2">
-                        <input class="creator_car_owner_type_selector" id="$!{form.fields.creatorCarOwnerType.name}-2" name="$!form.fields.creatorCarOwnerType.name" type="radio" style="border:none" value="2" #if ("$!form.fields.creatorCarOwnerType.value" == "2") checked #end />我是乘客
-                        </label>
-                     #errorMessageCreateOrder($!form.fields.creatorCarOwnerType.message)
-                    </div>
-                </li>
-				
-	        	<li id="J_car_no" #if(!$showCarNo) style="display:none" #end>
-                    <div class="info-title">
-                    	<em>*</em> 车牌号：
-                    </div>
-                    <div class="reg_info_li_box">
-                    	<p>
-                        	<input name="$!form.fields.carNo.name" type="text" class="input_95" value="$!form.fields.carNo.value" />
-                        </p>
-                        #errorMessageCreateOrder($!form.fields.carNo.message)
-                        <p class="color_gray attention">
-                            		如实填写车牌号，拼客才会对相信您的拼车信息，方便您快速完成拼车体验
-                        </p>
-                   </div>
-                </li>
-                
-	        	<li id="J_totalSeats" #if(!$showSeats) style="display:none" #end>
-		            <div class="info-title">
-                    	<em>*</em> 空余座位数：
-                    </div>
-		            <div class="reg_info_li_box">
-		            	<p>
-		            		<input class="input_95" type="text" id="$!form.fields.totalSeats.name" name="$!form.fields.totalSeats.name" value="$!form.fields.totalSeats.value"/>
-		            	</p>
-		            	#errorMessageCreateOrder($!form.fields.totalSeats.message)
-		            	<p class="color_gray attention">
-                             	空余座位数不包括您自己。
-                        </p>
-		            </div>
-	            </li>
-	        	
-	            <li>
-		            <div class="info-title">
-                    	<em>*</em> 出发城市：
-                    </div>
-		            <div class="reg_info_li_box">
-			            <p>
-			            	<input type="text" class="input_95" id="$!form.fields.fromCity.name" name="$!form.fields.fromCity.name" value="$!form.fields.fromCity.value" />
-			           		<a href="#" id="change_from_city">选择城市...</a>
-			            </p>
-			             #errorMessageCreateOrder($!form.fields.fromCity.message)
-		            </div>
-	            </li>
-	            
-	            <li>
-		            <div class="info-title">
-                    	<em>*</em> 出发地：
-                    </div>
-		            <div class="reg_info_li_box">
-		            <p>
-		           		<input class="input_400" type="text" id="$!form.fields.fromAddr.name" name="$!form.fields.fromAddr.name" value="$!form.fields.fromAddr.value" />
-		            </p>
-		            #errorMessageCreateOrder($!form.fields.fromAddr.message)
-		            </div>
-	            </li>
-	            
-				<li>
-		            <div class="info-title">
-                    	<em>*</em> 目的城市：
-                    </div>
-		            <div class="reg_info_li_box">
-			            <p>
-			            	<input type="text" class="input_95" id="$!form.fields.arriveCity.name" name="$!form.fields.arriveCity.name" value="$!form.fields.arriveCity.value" />
-			           		<a href="#" id="change_arrive_city">选择城市...</a>
-			            </p>
-			             #errorMessageCreateOrder($!form.fields.arriveCity.message)
-		            </div>
-	            </li>
-				
-				
-				
-	            <li>
-		            <div class="info-title">
-                    	<em>*</em> 公司地址：
-                    </div>
-		            <div class="reg_info_li_box">
-			        <p>
-		           		<input class="input_400" type="text" id="$!form.fields.companyAddr.name" name="$!form.fields.companyAddr.name" value="$!form.fields.companyAddr.value" />
-		            </p>
-		            #errorMessageCreateOrder($!form.fields.companyAddr.message)
-		            </div>
-	            </li>
-	            
-	            <li>
-		            <div class="info-title">
-                    	途径：
-                    </div>
-		            <div class="reg_info_li_box">
-		            	<p style="width:100%">
-                            	<textarea name="$!form.fields.approach.name" class="textarea400">$!form.fields.approach.value</textarea>
-                         </p>
-		            	#errorMessageCreateOrder($!form.fields.approach.message)
-		            </div>
-		            
-	            </li>
-	            
-	            <li>
-	            	<div class="info-title">
-                    	<em>*</em> 有效日期：
-                    </div>
-	            	
-	            	#set($fromTimeWeek = $form.fields.fromTimeWeek.values)
-					<div class="reg_info_li_box">
-			        <p>
-		           		<input class="" type="checkbox" id="1$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="1" #showChecked($fromTimeWeek 1)/>星期一
-						<input class="" type="checkbox" id="2$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="2" #showChecked($fromTimeWeek 2)/>星期二
-						<input class="" type="checkbox" id="3$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="3" #showChecked($fromTimeWeek 3)/>星期三
-						<input class="" type="checkbox" id="4$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="4" #showChecked($fromTimeWeek 4)/>星期四
-						<input class="" type="checkbox" id="5$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="5" #showChecked($fromTimeWeek 5)/>星期五
-						<input class="" type="checkbox" id="6$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="6" #showChecked($fromTimeWeek 6)/>星期六
-						<input class="" type="checkbox" id="7$!form.fields.fromTimeWeek.name" name="$!form.fields.fromTimeWeek.name" value="7" #showChecked($fromTimeWeek 7)/>星期日
-						<!--  <input class="" type="checkbox" id="checkedAllFromTimeWork" name="checkedAllFromTimeWork" />全选/取消全选 -->
-		            </p>
-		            #errorMessageCreateOrder($!form.fields.fromTimeWeek.message)
-		            </div>
-					
-	            	<!--
-					#if ("$!fromDate" == "")
-	            		#set($fromDate = $!dateUtil.formatDate($defaultCreateDate, 'yyyy-MM-dd'))
-	            	#end
-	            	
-		            <div class="reg_info_li_box">
-						<p>
-							<input type="text" readonly="readonly" class="input_95 date-pick" name="$!form.fields.fromTimeDate.name" value="$!fromDate" /> 
-		                </p>
-		                 #errorMessageCreateOrder($!form.fields.fromTimeDate.message)
-		            </div>
-					-->
-		        </li>
-	            
-	            
-	           	<li>
-	            	<div class="info-title"><em>*</em> 出发时间：</div>
-	            	#set($selectedHour = $form.fields.fromTimeHour.value)
-	            	#if ("$!selectedHour" == "")
-	            		#set($selectedHour = $fromHour)
-	            	#end
-	            	
-	            	#set($selectedMinute = $form.fields.fromTimeMinute.value)
-	            	#if ("$!selectedMinute" == "")
-	            		#set($selectedMinute = $fromMinute)
-	            	#end
-	            	
-		            <div class="reg_info_li_box">
-						<p>
-							#set($hours = [0 .. 23])
-							<select name="$!form.fields.fromTimeHour.name">
-								#foreach ($hour in $hours)
-									<option value="$hour" #if ("$!selectedHour" == "$!hour") selected #end>$hour时</option>
-								#end
-			                </select>
-							
-			                #set($minuteIndice = [0 .. 11])
-			                <select name="$!form.fields.fromTimeMinute.name">
-			                	#foreach($minuteIndex in $minuteIndice)
-			                		#set($minute = $minuteIndex * 5)
-									<option value="$minute" #if("$!selectedMinute" == "$!minute") selected #end>$minute分</option>
-								#end
-			                </select>
-		                </p>
-		                #errorMessageCreateOrder($!form.fields.fromTimeHour.message)
-						#errorMessageCreateOrder($!form.fields.fromTimeMinute.message)
-	                </div>
-	            </li>
-                
-                
-                #set($arriveSelectedHour = $form.fields.arriveTimeHour.value)
-	            #set($arriveSelectedMinute = $form.fields.arriveTimeMinute.value)
-	            
-	            
-                <li id="J_arriveTime">
-                	<div class="info-title">
-                    	<em>*</em>上班到达时间：
-                    </div>
-	            	<div class="reg_info_li_box">
-						<p>
-							#set($hours = [0 .. 23])
-							<select name="$form.fields.arriveTimeHour.name">
-								<option value="-1"></option>
-								#foreach ($hour in $hours)
-									<option value="$hour" #if ("$!arriveSelectedHour" == "$!hour") selected #end>$hour时</option>
-								#end
-			                </select>
-							
-			                #set($minuteIndice = [0 .. 11])
-			                <select name="$form.fields.arriveTimeMinute.name">
-			                	 <option value="-1"></option>
-			                	#foreach($minuteIndex in $minuteIndice)
-			                		#set($minute = $minuteIndex * 5)
-									<option value="$minute" #if("$!arriveSelectedMinute" == "$!minute") selected #end>$minute分</option>
-								#end
-			                </select>
-		                </p>
-		                 #errorMessageCreateOrder($!form.fields.arriveTimeHour.message)
-						 #errorMessageCreateOrder($!form.fields.arriveTimeMinute.message)
-		                </p>
-	                </div>
-                </li>
-				
-				
-				
-				#set($afterWorkFromSelectHour = $form.fields.afterWorkFromTimeHour.value)
-	            #set($afterWorkFromSelectMinute = $form.fields.afterWorkFromTimeMinute.value)
-	            
-                <li id="J_arriveTime">
-                	<div class="info-title">
-                    	<em>*</em>下班时间：
-                    </div>
-	            	<div class="reg_info_li_box">
-						<p>
-							#set($hours = [0 .. 23])
-							<select name="$form.fields.afterWorkFromTimeHour.name">
-								<option value="-1"></option>
-								#foreach ($hour in $hours)
-									<option value="$hour" #if ("$!afterWorkFromSelectHour" == "$!hour") selected #end>$hour时</option>
-								#end
-			                </select>
-							
-			                #set($minuteIndice = [0 .. 11])
-			                <select name="$form.fields.afterWorkFromTimeMinute.name">
-			                	 <option value="-1"></option>
-			                	#foreach($minuteIndex in $minuteIndice)
-			                		#set($minute = $minuteIndex * 5)
-									<option value="$minute" #if("$!afterWorkFromSelectMinute" == "$!minute") selected #end>$minute分</option>
-								#end
-			                </select>
-		                </p>
-		                 #errorMessageCreateOrder($!form.fields.afterWorkFromTimeHour.message)
-						 #errorMessageCreateOrder($!form.fields.afterWorkFromTimeMinute.message)
-		                </p>
-	                </div>
-                </li>
-
-				<li>
-	                <div class="info-title">
-                    	描述：
-                    </div>
-	            	<div class="reg_info_li_box">
-		            	<p>
-		            		<textarea cols="" rows="4" style="width:400px; line-height:25px; color:#666; height:110px;"  id="$!form.fields.description.name" name="$!form.fields.description.name">$!{form.fields.description.value}</textarea>
-		            	</p>
-		            	#errorMessageCreateOrder($!form.fields.description.message)
-	            	</div>
-	            	
-            	</li> 
-            	
-                <li>
-                	<div class="info-title">
-                    	<em>*</em> 验证码：
-                    </div>
-	            	<div class="reg_info_li_box">
-		            	<p>
-		            		<input class="input_95" type="text" id="$!form.fields.checkCode.name" maxlength="4" name="$form.fields.checkCode.name" value="" />
-		            		$control.setTemplate('common/checkCode.vm')
-		            	</p>
-		            	#errorMessageCreateOrder($!form.fields.checkCode.message)
-	            	</div>
-	            	
-            	</li>
-            	
-                <li>
-                	#errorMessageCreateOrder($!csrfmessage)
-					#errorMessageCreateOrder($!resultmessage.message)
-					
-					<div class="info-title">&nbsp;</div>
-                	<button id="xxxx" type="submit" class="but_cjpc" value="提交"></button>
-                </li> 
-	            
-	       </ul>
-        </form>
-        </div>
-
-    </div><!--left end-->
-
+		    </div> <!-- end tabs-1 -->	
+		</div>	 <!-- end tabs -->
+	</div>
+	
+	
   <div class="reg_r_box"><!--right begin-->
      <p class="register_intro">&nbsp;&nbsp;&nbsp;&nbsp;欢迎来到一辆车拼车网！</p>
   </div><!--right end-->
