@@ -14,14 +14,9 @@
 
 <script type="text/javascript">
 	$('.switch_city_link').bind('click', function(){
-		alert(1);
 		var url = "$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity')";
-		alert(url);
 		url = url + "&cityId=" + $('.switch_city_link').attr('cityId');
-		
-		alert(url);
 		location.href=url;
-
 		return false;
 	});
 
