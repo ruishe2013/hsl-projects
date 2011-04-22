@@ -4,8 +4,26 @@
 	<div id="menu" style="display:none;">
     <ul>
     #foreach($city in $hotCities)
-    	<li #if("$!selectedCity.id" == "$!city.id") class="focus" #end ><a href="$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity').add('cityId', $city.id)">$city.name</a></li>
+    	<li #if("$!selectedCity.id" == "$!city.id") class="focus" #end ><a class="switch_city_link" cityId="$cityId" href="$snowModule.setTarget('search/searchOrder').add('fromCity', $city.name)">$city.name</a></li>
     #end
     </ul>
     <div class="menufoot"><a href="$snowModule.setTarget('city/cityList')" >更多城市...</a></div>
 </div>
+
+
+
+<script type="text/javascript">
+	$('.switch_city_link').bind('click', function(){
+		var url = "$snowModule.setTarget('t').add('actionTarget', 'city/switchCityAction').add('actionEvent', 'switchCity')";
+		url = url + "&cityId=" + this.attr('cityId');
+		
+		alert(url);
+		location.href=url;
+
+		return false;
+	});
+
+	
+</script>
+
+
