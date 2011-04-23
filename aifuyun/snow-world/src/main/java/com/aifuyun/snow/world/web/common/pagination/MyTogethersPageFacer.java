@@ -6,13 +6,13 @@ import com.zjuh.splist.core.module.URLModule;
 import com.zjuh.splist.core.module.URLModuleContainer;
 import com.zjuh.splist.web.TemplateContext;
 
-public class MyTogethersPageFacer implements PageFacer {
+public class MyTogethersPageFacer extends BasePageFacer {
 
 	@Override
 	public URLModule gotoPage(int page) {
 		URLModuleContainer container = SplistContext.getSplistComponent().getUrlModuleContainers().get("snowModule");
 		URLModule urlModule = container.setTarget("profile/myTogethers");
-		TemplateContext templateContext = SplistContext.getTemplateContext();
+		TemplateContext templateContext = getTemplateContext();
 		UserOrderQuery query = (UserOrderQuery)templateContext.get("query");
 		urlModule.addQueryData("page", page);
 		urlModule.addQueryData("type", query.getRole());
