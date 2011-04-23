@@ -1,5 +1,7 @@
 package com.aifuyun.snow.world.web.modules.action;
 
+import org.hsqldb.lib.StringUtil;
+
 import com.aifuyun.snow.world.biz.ao.user.LoginAO;
 import com.aifuyun.snow.world.biz.ao.user.UserAO;
 import com.aifuyun.snow.world.dal.dataobject.user.BaseUserDO;
@@ -28,6 +30,9 @@ public class UserFacadeAction extends BaseAction {
 		
 		BaseUserDO baseUserDO = new BaseUserDO();
 		form.apply(baseUserDO);
+		if (StringUtil.isEmpty(baseUserDO.getUsername())) {
+			baseUserDO.setUsername(baseUserDO.getEmail());
+		}
 		String username = baseUserDO.getUsername();
 		String password = baseUserDO.getPassword();
 		Result result = userAO.registerUser(baseUserDO);

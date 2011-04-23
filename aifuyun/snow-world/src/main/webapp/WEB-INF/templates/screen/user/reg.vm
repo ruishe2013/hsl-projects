@@ -19,18 +19,16 @@
 			<input type="hidden" name="regUser" value="$tokenUtil.token('regUser')" />
             <ul>
 	            <li>
-		            <div class="info-title">
-		            	<em>*</em> 用户名：
-		            </div>
-		            <div class="reg_info_li_box">
-			            <p>
-			           		<input id="$!form.fields.username.name" class="input_150" name="$!form.fields.username.name" value="$!form.fields.username.value" type="text" />
-			            </p>
-                        #errorRegMessage($!form.fields.username.message)
-			             <p class="color_gray attention">
-                         用户名长度在3到20个字符之间，(可以是中文汉字，英文字母，数字和下划线)。
-                         </p>
-		            </div>
+	            	<div class="info-title">
+	            		<em>*</em> 电子邮箱：
+	            	</div>
+	            	<div class="reg_info_li_box">
+		            	<p>
+		            	<input id="$!form.fields.email.name" class="input_150" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text"/>
+		            	</p>
+                        #errorRegMessage($!form.fields.email.message)
+		            	 <p class="color_gray attention">电子邮件是您以后的登录凭证。</p>
+	            	</div>
 	            </li>
 	            
 	            <li>
@@ -58,18 +56,6 @@
 		            </div>
 	            </li>
 	            
-	            <li>
-	            	<div class="info-title">
-	            		<em>*</em> 电子邮箱：
-	            	</div>
-	            	<div class="reg_info_li_box">
-		            	<p>
-		            	<input id="$!form.fields.email.name" class="input_150" name="$!form.fields.email.name" value="$!form.fields.email.value" type="text"/>
-		            	</p>
-                        #errorRegMessage($!form.fields.email.message)
-		            	 <p class="color_gray attention">请输入您的电子邮箱以便我们方便联系。</p>
-	            	</div>
-	            </li>
                 <li style="padding-left:100px;">
                     <p>
                       <input name="checkAgreement" type="checkbox" value="1" checked="checked" style="border:none"/>
