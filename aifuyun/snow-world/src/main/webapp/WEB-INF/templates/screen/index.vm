@@ -53,36 +53,108 @@
 
 <div class="hr_6"></div>
 <div id="cArea"><!--content-2 begin-->
-<div class="newcar_t">
-    <div class="newcar_title">最新拼车</div>
-	    <div class="but_release" style="text-align:right; line-height:35px;>
-			<span class="col_g mr10">已经有5236人发起拼车 <a href="$snowModule.setTarget('search/searchOrder')">更多...</a></span>
+
+	#if ($!recentTaxiOrders && !$!recentTaxiOrders.empty)
+		<div class="newcar_t">
+	   		<div class="newcar_title">拼出租车</div>
+		    <div class="but_release" style="text-align:right; line-height:35px;>
+				<span class="col_g mr10">已有34267人发起拼出租车 <a href="$snowModule.setTarget('search/searchOrder')">更多...</a></span>
+		    </div>
 	    </div>
-    </div>
-	<div class="newcar_c">
-	<table width="100%" cellpadding="0" cellspacing="0">
-	  <tr class="font_12_b bgc_dy">
-	    <td>类型</td>
-	    <td>出发地</td>
-	    <td>目的地</td>
-	    <td>发车时间</td>                         
-	    <td>操作</td>
-	  </tr>
-	#set($index=0)
-	#foreach($order in $recentOrders)
-		<tr #if( $index % 2 !=0 )class="bgc_dg" #end>
-			<td>$!order.togetherTypeEnum.name</td>
-		    <td>$!order.fromCity $!order.fromAddr</td>
-		    <td>$!order.arriveCity $!order.arriveAddr</td>
-		    <td>$!dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm')</td>
-		    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_pcbg">查看详情</a></td>
-		</tr>
-		#set($index= $index + 1)
+		<div class="newcar_c">
+			<table width="100%" cellpadding="0" cellspacing="0">
+			  <tr class="font_12_b bgc_dy">
+			    <td>类型</td>
+			    <td>出发地</td>
+			    <td>目的地</td>
+			    <td>出发时间</td>
+			    <td>操作</td>
+			  </tr>
+			#set($index=0)
+			#foreach($order in $recentTaxiOrders)
+				<tr #if( $index % 2 !=0 )class="bgc_dg" #end>
+					<td>$!order.togetherTypeEnum.name</td>
+				    <td>$!order.fromCity $!order.fromAddr</td>
+				    <td>$!order.arriveCity $!order.arriveAddr</td>
+				    <td>$!dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm')</td>
+				    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_pcbg">查看详情</a></td>
+				</tr>
+				#set($index= $index + 1)
+			#end
+			</table>
+		</div>
+		<p>&nbsp;</p>
 	#end
-</table>
+	
+	#if ($!recentSfcOrders && !$!recentSfcOrders.empty)
+		<div class="newcar_t">
+	   		<div class="newcar_title">拼顺风车</div>
+		    <div class="but_release" style="text-align:right; line-height:35px;>
+				<span class="col_g mr10">已有36423人发起拼顺风车 <a href="$snowModule.setTarget('search/searchOrder')">更多...</a></span>
+		    </div>
+	    </div>
+	    
+		<div class="newcar_c">
+			<table width="100%" cellpadding="0" cellspacing="0">
+			  <tr class="font_12_b bgc_dy">
+			    <td>类型</td>
+			    <td>出发地</td>
+			    <td>目的地</td>
+			    <td>出发时间</td>
+			    <td>操作</td>
+			  </tr>
+			#set($index=0)
+			#foreach($order in $recentSfcOrders)
+				<tr #if( $index % 2 !=0 )class="bgc_dg" #end>
+					<td>$!order.togetherTypeEnum.name</td>
+				    <td>$!order.fromCity $!order.fromAddr</td>
+				    <td>$!order.arriveCity $!order.arriveAddr</td>
+				    <td>$!dateUtil.formatDate($order.fromTime, 'yyyy-MM-dd HH:mm')</td>
+				    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_pcbg">查看详情</a></td>
+				</tr>
+				#set($index= $index + 1)
+			#end
+			</table>
+		</div>
+		<p>&nbsp;</p>
+	#end
 
-</div>
-
+	#if ($!recentWorkOrders && !$!recentWorkOrders.empty)
+		<div class="newcar_t">
+	   		<div class="newcar_title">上下班拼车</div>
+		    <div class="but_release" style="text-align:right; line-height:35px;>
+				<span class="col_g mr10">已有5293人发起上下班拼车 <a href="$snowModule.setTarget('search/searchOrder')">更多...</a></span>
+		    </div>
+	    </div>
+		<div class="newcar_c">
+			<table width="100%" cellpadding="0" cellspacing="0">
+			  <tr class="font_12_b bgc_dy">
+			    <td>类型</td>
+			    <td>出发地</td>
+			    <td>目的地</td>
+			    <td>上班出发时间</td>
+			    <td>上班到达时间</td>
+			    <td>下班出发时间</td>
+			    <td>操作</td>
+			  </tr>
+			#set($index=0)
+			#foreach($order in $recentWorkOrders)
+				<tr #if( $index % 2 !=0 )class="bgc_dg" #end>
+					<td>$!order.togetherTypeEnum.name</td>
+				    <td>$!order.fromCity $!order.fromAddr</td>
+				    <td>$!order.arriveCity $!order.arriveAddr</td>
+				    <td>$!dateUtil.formatDate($order.fromTime, 'HH:mm')</td>
+				    <td>$!dateUtil.formatDate($order.arriveTime, 'HH:mm')</td>
+				    <td>$!dateUtil.formatDate($order.afterWorkFromTime, 'HH:mm')</td>
+				    <td><a href="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" class="but_pcbg">查看详情</a></td>
+				</tr>
+				#set($index= $index + 1)
+			#end
+			</table>
+		</div>
+		<p>&nbsp;</p>
+	#end
+	
 </div><!--content-2 end-->
 
 <script type="text/javascript">

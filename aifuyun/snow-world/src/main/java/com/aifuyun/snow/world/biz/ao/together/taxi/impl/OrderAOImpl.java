@@ -569,14 +569,24 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 			
 			orderBO.updateStatus(orderId, OrderStatusEnum.WAIT_CONFIRM);
 			
+			
 			// 主动失效缓存
-			cacheManager.delete(CacheContants.RECENT_CITY_ORDERS, order.getCityId());
+			invalidRecentOrdersCache(order);
 			
 			result.setSuccess(true);
 		} catch (Exception e) {
 			log.error("确认订单失败", e);
 		}
 		return result;
+	}
+	
+	private void invalidRecentOrdersCache(OrderDO order) {
+		int type = order.getType();
+		if (type == OrderTypeEnum.SFC.getValue() || type == OrderTypeEnum.TAXI.getValue()) {
+			cacheManager.delete(CacheContants.RECENT_CITY_TAXI_ORDERS, order.getCityId());
+		} else if (type == OrderTypeEnum.WORK.getValue()) {
+			cacheManager.delete(CacheContants.RECENT_CITY_WORK_ORDERS, order.getCityId());
+		}
 	}
 	
 	@Override
