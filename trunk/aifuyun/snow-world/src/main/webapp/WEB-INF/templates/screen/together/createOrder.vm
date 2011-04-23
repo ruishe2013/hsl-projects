@@ -1,3 +1,5 @@
+#set($pageTitle="´´½¨Æ´³µ")
+$rundata.setAttribute('pageTitle', $pageTitle)
 #set($form = $formFactory.createForm("together.createOrder"))
 
 #macro(errorMessageCreateOrder, $str)

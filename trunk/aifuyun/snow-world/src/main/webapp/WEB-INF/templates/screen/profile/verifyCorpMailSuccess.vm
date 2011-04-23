@@ -1,3 +1,5 @@
+#set($pageTitle="认证成功")
+$rundata.setAttribute('pageTitle', $pageTitle)
 
 <div id="cArea">
   <div class="hr_10"></div>

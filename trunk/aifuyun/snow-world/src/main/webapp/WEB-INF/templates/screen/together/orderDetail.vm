@@ -1,11 +1,11 @@
+#set($pageTitle="从$!{order.fromCity}$!{order.fromAddr} 到 $!{order.arriveCity}$!{order.arriveAddr} 的拼车")
+$rundata.setAttribute('pageTitle', $pageTitle)
+
 #macro(errorMessageOrderDetail, $str)
 	#if( "$!str" != "")
 		<div class="common-error-message">${str}</div>
 	#end
 #end
-
-#set($pageTitle="从$!{order.fromCity}$!{order.fromAddr} 到 $!{order.arriveCity}$!{order.arriveAddr} 的拼车")
-$rundata.setAttribute('pageTitle', $pageTitle)
 
 <div id="cArea"><!--content begin-->
 #errorMessageOrderDetail($!result.message)

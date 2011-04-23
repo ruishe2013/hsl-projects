@@ -1,3 +1,6 @@
+#set($pageTitle="用户登录")
+$rundata.setAttribute('pageTitle', $pageTitle)
+
 #set($form = $formFactory.createForm("login"))
 #macro(errorMessageLogin, $str)
 	#if( "$!str" != "")
@@ -6,9 +9,6 @@
         </div>
 	#end
 #end
-
-#set($pageTitle="用户登录")
-$rundata.setAttribute('pageTitle', $pageTitle)
 
 <div id="cArea">
     <div class="loginbox">

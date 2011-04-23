@@ -1,3 +1,6 @@
+#set($pageTitle="用户认证")
+$rundata.setAttribute('pageTitle', $pageTitle)
+
 #macro(errorVerifyMessage, $str)
 	#if( "$!str" != "")
 		<p class="color_gray error-tip">

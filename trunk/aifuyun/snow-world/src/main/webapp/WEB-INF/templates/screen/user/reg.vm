@@ -1,3 +1,6 @@
+#set($pageTitle="ÓÃ»§×¢²á")
+$rundata.setAttribute('pageTitle', $pageTitle)
+
 #macro(errorRegMessage, $str)
 	#if( "$!str" != "")
 		<p class="color_gray error-tip">

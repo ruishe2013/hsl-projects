@@ -1,3 +1,6 @@
+#set($pageTitle="ĞŞ¸ÄÃÜÂë")
+$rundata.setAttribute('pageTitle', $pageTitle)
+
 #set($form = $formFactory.createForm("user.changePwd"))
 
 #macro(errorMessageChangPwd, $str)
