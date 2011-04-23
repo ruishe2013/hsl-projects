@@ -1,8 +1,5 @@
 package com.aifuyun.snow.world.web.modules.screen.together;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import com.aifuyun.snow.world.biz.ao.together.taxi.OrderAO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.web.common.base.BaseScreen;
