@@ -52,7 +52,7 @@
 			            <input id="$!form.fields.confirmPassword.name" class="input_150" name="$!form.fields.confirmPassword.name" value="$!form.fields.confirmPassword.value" type="password" />
 			            </p>
                          #errorRegMessage($!form.fields.confirmPassword.message)
-			             <p class="color_gray attention">请再输一便刚才输入的密码。</p>
+			             <p class="color_gray attention">请再输入一遍刚才的密码。</p>
 		            </div>
 	            </li>
 	            
