@@ -1,3 +1,6 @@
+#set($pageTitle="Òâ¼û·´À¡")
+$rundata.setAttribute('pageTitle', $pageTitle)
+
 #set($form = $formFactory.createForm("feedback.leaveWord"))
 
 #macro(errorMessageForLeaveWorld, $str)

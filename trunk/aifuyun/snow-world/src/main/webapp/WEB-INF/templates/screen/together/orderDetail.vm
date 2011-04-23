@@ -4,6 +4,8 @@
 	#end
 #end
 
+#set($pageTitle="从$!{order.fromCity}$!{order.fromAddr} 到 $!{order.arriveCity}$!{order.arriveAddr} 的拼车")
+$rundata.setAttribute('pageTitle', $pageTitle)
 
 <div id="cArea"><!--content begin-->
 #errorMessageOrderDetail($!result.message)
@@ -31,7 +33,7 @@
         
         <div class="details_l">
 		    <ul>
-		        $control.setTemplate('together/orderInfo.vm').addAttribute('order', $order).addAttribute('joinersCount', $joinersCount).addAttribute('dateUtil', $dateUtil).addAttribute('fromWeekFormat', $fromWeekFormat)
+		        $control.setTemplate('together/orderInfo.vm')
 		         
 		        #if ("$!order.status" != "20" )
 		        	#if ($isCreatorSelf)
@@ -124,7 +126,7 @@
 		    </ul>
 		</div>
         
-        $control.setTemplate('together/creatorInfo.vm').addAttribute('creator', $creator).addAttribute('showContactInfo', $showContactInfo)
+        $control.setTemplate('together/creatorInfo.vm')
         
         <div class="hr_6"></div>
     
@@ -140,13 +142,13 @@
 	            <div class="text_cyr">
 	                
 	                #if ($showJoiners)
-	                	$control.setTemplate('together/joinedUsers.vm').addAttribute('confirmedJoiners', $confirmedJoiners).addAttribute('isCreatorSelf', $isCreatorSelf).addAttribute('order', $order)
+	                	$control.setTemplate('together/joinedUsers.vm')
 	                #end
 	                
 	                <div class="hr_10"></div>
 	                
 	                #if ($isCreatorSelf)
-	               		$control.setTemplate('together/waitConfirmUsers.vm').addAttribute('waitConfirmJoiners', $waitConfirmJoiners)
+	               		$control.setTemplate('together/waitConfirmUsers.vm')
 	                #end
 	                
 	            </div>
