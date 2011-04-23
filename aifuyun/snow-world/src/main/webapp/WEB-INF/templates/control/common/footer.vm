@@ -3,7 +3,7 @@
 	<a href="#">关于我们</a> | 
  	<a href="#">联系我们</a> | 
  	<a href="#">拼车须知</a> | 
-  	<a href="#">友情链接</a> |
+  	<a href="$snowModule.setTarget('links')">友情链接</a> |
 	<a href="http://yiliangche.uueasy.com/" target="_blank">用户论坛</a> |
 	<a href="$snowModule.setTarget('feedback/leaveWord')">意见反馈</a>
 </p> 
