@@ -102,16 +102,15 @@
                                 </li>
                                 
                 	        	<li id="J_car_type" #if(!$showCarType) style="display:none" #end>
-                                   <div class="info-title"><em>*</em> 汽车类型：</div>
+                                   <div class="info-title"><em>*</em> 汽车型号：</div>
                                    <div class="reg_info_li_box">
                                     	<p>
-                                    		<select name="$!form.fields.carType.name" id="$!form.fields.carType.name">
-                                    		#foreach($carType in $carTypes)
-                                    			<option value="$!carType.value" #if("$!form.fields.carType.value" == "$!carType.value") selected #end >$!carType.name</option>
-                                    		#end
-                                    		</select>
+                                    		<input name="$!form.fields.carType.name" type="text" class="input_95" value="$!form.fields.carType.value" />
                                         </p>
                                         #errorMessageCreateOrder($!form.fields.carType.message)
+                                        <p class="color_gray attention">
+                                            	请输入您的汽车型号。（比如吉利熊猫，标致307，马六等）
+                                        </p>
                                    </div>
                                 </li>
                                 
