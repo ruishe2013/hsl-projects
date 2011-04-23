@@ -89,7 +89,7 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 	}
 	
 	private List<OrderDO> getRecentSfcOrders(int cityId) {
-		return getRecentOrders(cityId, CacheContants.RECENT_CITY_TAXI_ORDERS, OrderTypeEnum.SFC);
+		return getRecentOrders(cityId, CacheContants.RECENT_CITY_SFC_ORDERS, OrderTypeEnum.SFC);
 	}
 
 	public void setOrderBO(OrderBO orderBO) {
