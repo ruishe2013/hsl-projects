@@ -34,7 +34,7 @@
 		            <div class="hr_2"></div>
 		            <p>
 		                <span class="color_gray">发起人：</span> $!{order.creatorRealName} &nbsp;&nbsp;&nbsp;&nbsp;
-		                <span class="color_gray">总座位数：</span> $!{order.totalSeats} &nbsp;&nbsp;&nbsp;&nbsp;
+		                <span class="color_gray">空闲座位数：</span> $!{order.totalSeats} &nbsp;&nbsp;&nbsp;&nbsp;
 		                <span class="color_gray">出发时间：</span> $!dateUtil.formatFullDate($!order.fromTime)
 		            </p>
 		            <p>
@@ -43,8 +43,13 @@
 		            
 		            #if ($!order.type == "2")
 		            	<p>
-			                <span class="color_gray">发起人是否提供车</span> $!{order.creatorCarOwnerTypeEnum.name}
+			                <span class="color_gray">发起人类型：</span> $!{order.creatorCarOwnerTypeEnum.name}
+			            	&nbsp;&nbsp;&nbsp;&nbsp;
+			            	#if ("$!order.creatorCarOwnerType" == "1")
+				                <span class="color_gray">汽车型号：</span> $!{order.carType}
+			            	#end
 			            </p>
+			           
 		            #end
 		            <p>
 		                <span class="color_gray">途径：</span> $!{order.approach}

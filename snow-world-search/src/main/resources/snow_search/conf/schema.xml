@@ -62,7 +62,7 @@
 		
 		<field name="fromWeek" type="string" indexed="false" stored="true" multiValued="false" />
 		<field name="afterWorkFromTime" type="string" indexed="false" stored="true" multiValued="false" />
-		<field name="carType" type="pint" indexed="true" stored="true" multiValued="false" />
+		<field name="carType" type="string" indexed="false" stored="true" multiValued="false" />
 		
 		<field name="creatorCarOwnerType" type="int" indexed="false" stored="true" multiValued="false" />
 		<field name="carNo" type="string" indexed="false" stored="true" multiValued="false" />

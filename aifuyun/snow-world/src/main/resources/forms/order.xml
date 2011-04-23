@@ -18,15 +18,16 @@
 			</validator>
 		</field>
 		<field name="carNo">
-			<validator type="string" message="车牌号不能超过14个字符!" >
-				<param name="max" value="14" />
+			<validator type="string" message="车牌号不能超过20个字符!" >
+				<param name="max" value="20" />
 			</validator>
 		</field>
 		<field name="carType">
-			<validator type="com.aifuyun.snow.world.web.common.validators.CreateOrderCarNoValidator" message="请选择汽车类型!" >
+			<validator type="com.aifuyun.snow.world.web.common.validators.CreateOrderCarNoValidator" message="请输入汽车型号!" >
 			</validator>
-			<validator type="int" message="请选择汽车类型!" >
+			<validator type="string" message="汽车型号不能超过40个字符!" >
 				<param name="min" value="1" />
+				<param name="max" value="40" />
 			</validator>
 		</field>
 		<field name="totalSeats">
