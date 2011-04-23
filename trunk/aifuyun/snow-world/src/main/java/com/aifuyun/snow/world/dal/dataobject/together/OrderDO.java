@@ -5,10 +5,9 @@ import java.util.Date;
 
 import com.aifuyun.snow.world.common.SnowConstants;
 import com.aifuyun.snow.world.dal.dataobject.BaseDO;
-import com.aifuyun.snow.world.dal.dataobject.enums.CarTypeEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.CarOwnerTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
-import com.aifuyun.snow.world.dal.dataobject.enums.CarOwnerTypeEnum;
 
 /**
  * 拼车单
@@ -90,7 +89,7 @@ public class OrderDO extends BaseDO {
 	/**
 	 * 汽车类型
 	 */
-	private int carType;
+	private String carType;
 	
 	/**
 	 * 状态
@@ -322,16 +321,12 @@ public class OrderDO extends BaseDO {
 		this.fromWeek = fromWeek;
 	}
 
-	public int getCarType() {
+	public String getCarType() {
 		return carType;
 	}
 
-	public void setCarType(int carType) {
+	public void setCarType(String carType) {
 		this.carType = carType;
-	}
-
-	public CarTypeEnum getCarTypeEnum() {
-		return CarTypeEnum.valueOf(carType);
 	}
 
 }

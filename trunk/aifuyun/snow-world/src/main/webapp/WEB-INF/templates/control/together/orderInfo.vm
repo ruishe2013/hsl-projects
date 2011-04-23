@@ -9,7 +9,7 @@
 	#if ("$!order.creatorCarOwnerType" == "1")
 	## 显示车牌号
 		<li>
-		    <span class="col_gray">汽车类型：</span>$!order.carTypeEnum.name
+		    <span class="col_gray">汽车型号：</span>$!order.carType
 		</li>
 		<li>
 		    <span class="col_gray">车牌号：</span>$!order.carNo
@@ -35,10 +35,10 @@
 </li>
 #if($order.isWork())
 	<li>
-        <span  style="width:48%" class="fl dis">
+        <span style="width:48%" class="fl dis">
 			<span class="col_gray">下班时间：</span>$!dateUtil.formatDate($order.afterWorkFromTime, "HH:mm:ss")  
         </span>	
-         <span  style="width:48%" class="fl dis">
+         <span style="width:48%" class="fl dis">
 			<span class="col_gray">有效日期：</span>$!fromWeekFormat
          </span>	
     </li> 

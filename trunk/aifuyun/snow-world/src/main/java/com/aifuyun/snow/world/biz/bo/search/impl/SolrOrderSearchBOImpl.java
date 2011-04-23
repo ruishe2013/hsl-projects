@@ -85,7 +85,7 @@ public class SolrOrderSearchBOImpl implements OrderSearchBO {
 		orderDO.setCarNo(simpleSolrDocument.getStringValue("carNo"));
 		orderDO.setFromWeek(simpleSolrDocument.getStringValue("fromWeek"));
 		orderDO.setAfterWorkFromTime(dumpTime2Date(simpleSolrDocument,"afterWorkFromTime"));
-		orderDO.setCarType(simpleSolrDocument.getIntValue("carType"));
+		orderDO.setCarType(simpleSolrDocument.getStringValue("carType"));
 		return orderDO;
 	}
 	
