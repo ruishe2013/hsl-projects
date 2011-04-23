@@ -19,7 +19,7 @@
 				<input type="hidden" name="actionTarget" value="login_action.htm" />
 				<input type="hidden" name="actionEvent" value="login" />
             	<div class="field">
-            		<span style="font-size:14px;">用户名：</span><input type="text" class="input_230" name="$form.fields.username.name" value="$!form.fields.username.value"/>
+            		<span style="font-size:14px;">邮箱名：</span><input type="text" class="input_230" name="$form.fields.username.name" value="$!form.fields.username.value"/>
             	</div>
 				#errorMessageLogin($!form.fields.username.message)
 				
