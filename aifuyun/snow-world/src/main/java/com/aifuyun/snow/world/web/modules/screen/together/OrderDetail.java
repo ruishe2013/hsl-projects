@@ -19,7 +19,6 @@ public class OrderDetail extends BaseScreen {
 		if (result.isSuccess()) {
 			this.result2Context(result, templateContext);
 			
-			// #set($title="从 $!{order.fromCity}$!{order.fromAddr} 到 $!{order.arriveCity}$!{order.arriveAddr} 的拼车")
 			OrderDO order = (OrderDO)result.getModels().get("order");
 			templateContext.put("title", buildTitle(order));
 			// 把 1,2 替换成 星期一 星期二
@@ -37,9 +36,6 @@ public class OrderDetail extends BaseScreen {
 		fromWeek = numberToChina(fromWeek);
 		return "星期"+StringUtil.replaceAll(fromWeek, ',', "星期");
 	}
-	
-	
-	
 
 	private String numberToChina(String fromWeek) {
 		fromWeek = StringUtil.replaceAll(fromWeek, '1', "一  ");
