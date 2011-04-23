@@ -22,7 +22,7 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 	
 	private int defaultCityId = 1;
 	
-	private int cityCount = 10;
+	private int cityCount = 5;
 	
 	/**
 	 * 最新拼车， 10分钟缓存
