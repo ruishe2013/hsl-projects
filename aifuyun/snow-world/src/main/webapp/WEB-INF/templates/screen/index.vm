@@ -10,6 +10,7 @@
                 <label for="inp_name">城市：</label>
 				<p>
 				<input class="input_95" name="fromCity" value="$!{selectedCity.name}" type="text"/>        
+                <a href="$snowModule.setTarget('city/cityList')" >切换城市</a>
                 </p>
                 </li>
 
