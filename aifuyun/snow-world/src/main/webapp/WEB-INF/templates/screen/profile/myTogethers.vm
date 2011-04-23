@@ -1,7 +1,10 @@
+#set($pageTitle="ÎÒµÄÆ´³µ")
+$rundata.setAttribute('pageTitle', $pageTitle)
+
 <div id="cArea">
   <div class="hr_10"></div>
     
-    $control.setTemplate('profile/userCenterMenu.vm').addAttribute('snowUtil', $snowUtil)
+    $control.setTemplate('profile/userCenterMenu.vm')
     
     <div class="content">
     	<div class="content-inner">

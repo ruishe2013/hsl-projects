@@ -1,3 +1,5 @@
+#set($pageTitle="ĞŞ¸ÄÃÜÂë³É¹¦")
+$rundata.setAttribute('pageTitle', $pageTitle)
 
 <div id="cArea">
   <div class="hr_10"></div>

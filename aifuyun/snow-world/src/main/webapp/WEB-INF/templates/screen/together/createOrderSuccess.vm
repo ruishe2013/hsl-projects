@@ -1,3 +1,6 @@
+#set($pageTitle="创建拼车成功")
+$rundata.setAttribute('pageTitle', $pageTitle)
+
 <div id="cArea"><!--content begin-->
 <div class="cbox">
 	<div class="create_cutbread">

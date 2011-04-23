@@ -1,3 +1,6 @@
+#set($pageTitle="确认个人信息")
+$rundata.setAttribute('pageTitle', $pageTitle)
+
 #set($form = $formFactory.createForm("together.personalInfo"))
 
 #macro(errorMessagePersonalInfo, $str)
