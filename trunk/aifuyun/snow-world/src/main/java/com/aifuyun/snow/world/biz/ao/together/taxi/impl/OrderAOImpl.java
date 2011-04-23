@@ -582,8 +582,10 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 	
 	private void invalidRecentOrdersCache(OrderDO order) {
 		int type = order.getType();
-		if (type == OrderTypeEnum.SFC.getValue() || type == OrderTypeEnum.TAXI.getValue()) {
+		if (type == OrderTypeEnum.TAXI.getValue()) {
 			cacheManager.delete(CacheContants.RECENT_CITY_TAXI_ORDERS, order.getCityId());
+		} else if( type == OrderTypeEnum.SFC.getValue()) {
+			cacheManager.delete(CacheContants.RECENT_CITY_SFC_ORDERS, order.getCityId());
 		} else if (type == OrderTypeEnum.WORK.getValue()) {
 			cacheManager.delete(CacheContants.RECENT_CITY_WORK_ORDERS, order.getCityId());
 		}
