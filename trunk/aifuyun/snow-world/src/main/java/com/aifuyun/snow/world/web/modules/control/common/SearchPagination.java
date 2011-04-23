@@ -11,7 +11,7 @@ public class SearchPagination extends BaseControl {
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		String name = (String)templateContext.get("pageFacerName");
-		PageFacer pageFacer = PageFacerFactory.getPageFacer(name);
+		PageFacer pageFacer = PageFacerFactory.getPageFacer(name, templateContext);
 		templateContext.put("pageChangerFaced", pageFacer);
 	}
 

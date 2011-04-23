@@ -2,7 +2,7 @@ package com.aifuyun.snow.world.web.common.pagination;
 
 import com.zjuh.splist.core.module.URLModule;
 
-public class MockPageFacer implements PageFacer {
+public class MockPageFacer extends BasePageFacer {
 
 	@Override
 	public URLModule gotoPage(int page) {

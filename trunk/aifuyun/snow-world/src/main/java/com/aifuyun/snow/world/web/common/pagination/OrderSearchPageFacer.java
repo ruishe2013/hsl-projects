@@ -9,13 +9,13 @@ import com.zjuh.splist.core.module.URLModule;
 import com.zjuh.splist.core.module.URLModuleContainer;
 import com.zjuh.splist.web.TemplateContext;
 
-public class OrderSearchPageFacer implements PageFacer {
+public class OrderSearchPageFacer extends BasePageFacer {
 
 	@Override
 	public URLModule gotoPage(int page) {
 		URLModuleContainer container = SplistContext.getSplistComponent().getUrlModuleContainers().get("snowModule");
 		URLModule urlModule = container.setTarget("search/searchOrder");
-		TemplateContext templateContext = SplistContext.getTemplateContext();
+		TemplateContext templateContext = getTemplateContext();
 		SearchOrderQuery query = (SearchOrderQuery)templateContext.get("query");
 		urlModule.addQueryData("page", page);
 		
