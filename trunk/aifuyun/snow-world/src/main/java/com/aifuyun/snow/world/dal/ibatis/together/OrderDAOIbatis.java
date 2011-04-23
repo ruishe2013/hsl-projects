@@ -17,6 +17,11 @@ public class OrderDAOIbatis extends BaseIbatisDAO implements OrderDAO {
 	public List<OrderDO> queryRecentOrders(OrderQuery orderQuery) {
 		return (List<OrderDO>)getSqlMapClientTemplate().queryForList("OrderDAO.queryRecentOrders", orderQuery);
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<OrderDO> queryRecentTypeOrders(OrderQuery orderQuery) {
+		return (List<OrderDO>)getSqlMapClientTemplate().queryForList("OrderDAO.queryRecentTypeOrders", orderQuery);
+	}
 
 	@Override
 	public long create(OrderDO orderDO) {

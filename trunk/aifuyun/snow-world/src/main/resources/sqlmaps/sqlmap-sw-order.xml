@@ -83,6 +83,28 @@
 			#startRow#, #pageSize#
 	</select>
 	
+	<select id="queryRecentTypeOrders" resultMap="orderMapping" parameterClass="orderQuery">
+		select
+			<include refid="order-full-columns"/>
+		from
+			sw_order t
+		where
+			<![CDATA[
+				t.status <> 0
+			]]>
+			<isNotEqual property="cityId" prepend="and" compareValue="0">
+				t.city_id = #cityId# 
+			</isNotEqual>
+			and t.deleted = 0
+			and t.type= #type#
+		order
+			by gmt_modified desc
+		limit
+			#startRow#, #pageSize#
+	</select>
+	
+	
+	
 	<update id="delete" parameterClass="long">
 		update sw_order t set t.deleted = 1, t.gmt_modified = NOW() where t.id = #value#
 	</update>

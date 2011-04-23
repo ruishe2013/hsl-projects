@@ -17,6 +17,16 @@ public interface CacheContants {
 	/**
 	 * 每个城市的最新拼车
 	 */
-	int RECENT_CITY_ORDERS = 3;
+	int RECENT_CITY_TAXI_ORDERS = 3;
+	
+	/**
+	 * 每个城市的上下班拼车
+	 */
+	int RECENT_CITY_SFC_ORDERS = 4;
+	
+	/**
+	 * 每个城市的上下班拼车
+	 */
+	int RECENT_CITY_WORK_ORDERS = 5;
 
 }

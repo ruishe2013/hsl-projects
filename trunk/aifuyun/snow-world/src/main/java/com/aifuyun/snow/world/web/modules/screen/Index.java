@@ -12,7 +12,7 @@ public class Index extends BaseScreen {
 	
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
-		Result result = snowWorldAO.handleForTaxiIndex();
+		Result result = snowWorldAO.handleIndex();
 		if (result.isSuccess()) {
 			this.result2Context(result, templateContext);
 		} else {

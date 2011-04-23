@@ -13,6 +13,8 @@ public class OrderQuery extends Query {
 	
 	private int cityId;
 	
+	private int type;
+	
 	public int getOrderUserRole() {
 		return orderUserRole;
 	}
@@ -35,6 +37,14 @@ public class OrderQuery extends Query {
 
 	public void setCityId(int cityId) {
 		this.cityId = cityId;
+	}
+
+	public int getType() {
+		return type;
+	}
+
+	public void setType(int type) {
+		this.type = type;
 	}
 	
 }

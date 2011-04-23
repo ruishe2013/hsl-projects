@@ -4,6 +4,6 @@ import com.zjuh.sweet.result.Result;
 
 public interface SnowWorldAO {
 	
-	Result handleForTaxiIndex();
+	Result handleIndex();
 
 }

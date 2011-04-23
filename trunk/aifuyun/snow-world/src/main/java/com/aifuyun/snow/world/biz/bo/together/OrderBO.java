@@ -37,4 +37,6 @@ public interface OrderBO {
 	
 	List<OrderDO> queryRecentOrders(OrderQuery orderQuery);
 	
+	List<OrderDO> queryRecentTypeOrders(OrderQuery orderQuery);
+	
 }
