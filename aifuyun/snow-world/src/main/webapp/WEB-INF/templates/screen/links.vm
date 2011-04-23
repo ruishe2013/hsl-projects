@@ -1,3 +1,5 @@
+#set($pageTitle="ÓÑÇéÁ´½Ó")
+$rundata.setAttribute('pageTitle', $pageTitle)
 
 <div id="cArea"><!--content-2 begin-->
 	<div class="cbox"><!--left end-->

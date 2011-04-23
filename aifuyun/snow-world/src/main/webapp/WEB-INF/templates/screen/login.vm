@@ -1,5 +1,4 @@
 #set($form = $formFactory.createForm("login"))
-
 #macro(errorMessageLogin, $str)
 	#if( "$!str" != "")
 		 <div style="clear:both; margin:5px 0 0 55px; width:200px;" class="error-tip">
@@ -7,6 +6,9 @@
         </div>
 	#end
 #end
+
+#set($pageTitle="ÓÃ»§µÇÂ¼")
+$rundata.setAttribute('pageTitle', $pageTitle)
 
 <div id="cArea">
     <div class="loginbox">

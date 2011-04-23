@@ -1,5 +1,7 @@
-<div id="cArea"><!--content begin-->
+#set($pageTitle="搜索拼车")
+$rundata.setAttribute('pageTitle', $pageTitle)
 
+<div id="cArea"><!--content begin-->
 <div class="index_search">
     <form action="" method="get">
 	        出发地： <input class="input_150" name="fromAddr" type="text" value="$!rundata.getQueryString().getString("fromAddr")"/>
@@ -11,7 +13,7 @@
 </div>
 <div class="list_box"><!--列表 begin-->
 	#if(!$!orders || $!orders.size() == 0)
-		<div class="create_box font_14_b col_gray" style="margin-bottom: 15px;margin-top:30px">
+		<div class="create_box font_14_b col_gray" style="margin-bottom:15px; margin-top:30px">
 			<img src="$imgServer/emblem.png" border="0" height="90" width="100" class="fl"/>
 			<div class="fl" style="padding:30px 10px;">
 				抱歉，未找到相关拼车。
