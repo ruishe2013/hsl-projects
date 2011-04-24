@@ -215,9 +215,9 @@ public class OrderAction extends BaseAction {
 	
 	@DefaultTarget("together/createOrderWork")
 	public void doCreateOrderWork(RunData rundata, TemplateContext templateContext) {
-		if (!checkCsrf(templateContext, "createOrderWork")) {
+		/*if (!checkCsrf(templateContext, "createOrderWork")) {
 			return;
-		}
+		}*/
 		final Form form = rundata.getForm("together.createOrderWork");
 		if (!form.validate()) {
 			return;
