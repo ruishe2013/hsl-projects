@@ -38,7 +38,6 @@ public class BaiduQueryResult extends BaseScreen {
 		}
 		String firstToken = null;
 		String lastToken = null;
-		StringBuilder mToken = new StringBuilder();
 		while (stringTokenizer.hasMoreTokens()) {
 			String token = stringTokenizer.nextToken();
 			if (firstToken == null) {
@@ -46,11 +45,10 @@ public class BaiduQueryResult extends BaseScreen {
 			} else {
 				lastToken = token;
 			}
-			mToken.append(token);			
 		}
 		
-		searchParam.from = firstToken + mToken;
-		searchParam.to = lastToken + mToken;
+		searchParam.from = firstToken;
+		searchParam.to = lastToken;
 		
 		return searchParam;
 	}
