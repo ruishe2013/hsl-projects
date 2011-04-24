@@ -48,6 +48,7 @@
 				<value>feedback/leaveWord</value>
 				<value>feedback/leaveWordSuccess</value>
 				<value>feedbackAction</value>
+				<value>baidu/baiduQueryResult</value>
 			</set>
 		</property>
 	</bean>
