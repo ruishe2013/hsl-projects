@@ -26,7 +26,7 @@
 			<validator type="com.aifuyun.snow.world.web.common.validators.CreateOrderCarNoValidator" message="请输入汽车型号!" >
 			</validator>
 			<validator type="string" message="汽车型号不能超过40个字符!" >
-				<param name="min" value="1" />
+				<param name="min" value="0" />
 				<param name="max" value="40" />
 			</validator>
 		</field>
