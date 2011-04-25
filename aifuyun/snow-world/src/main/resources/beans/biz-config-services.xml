@@ -3,7 +3,7 @@
     "-//SPRING//DTD BEAN//EN"
      "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans>
-	
+
 	<bean id="interceptorContainer" class="com.zjuh.splist.core.interceptor.container.DefaultInterceptorContainer">
 		<property name="interceptorsForModules">
 			<list>
@@ -14,12 +14,13 @@
 		</property>
 	</bean>
 
-	
+
 	<bean id="pullSerivceIncerceptor" class="com.zjuh.sweet.interceptors.PullSerivceIncerceptor" init-method="init">
 		<property name="pullToolClasses">
 			<map>
 				<entry key="dateUtil" value="com.zjuh.sweet.lang.DateUtil" />
 				<entry key="snowUtil" value="com.aifuyun.snow.world.common.SnowUtil" />
+				<entry key="baiduOpenUtil" value="com.aifuyun.snow.world.common.BaiduOpenUtil" />
 			</map>
 		</property>
 	</bean>
@@ -48,10 +49,11 @@
 				<value>feedback/leaveWord</value>
 				<value>feedback/leaveWordSuccess</value>
 				<value>feedbackAction</value>
+				<value>search/baiduOpenData</value>
 				<value>baidu/baiduQueryResult</value>
 			</set>
 		</property>
 	</bean>
-	
-	
+
+
 </beans>

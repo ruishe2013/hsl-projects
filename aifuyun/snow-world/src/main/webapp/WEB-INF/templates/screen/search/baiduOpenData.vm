@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<DOCUMENT>
+#if($!count>0)
+#foreach($order in $orders)
+<item>
+	<key><![CDATA[$baiduOpenUtil.getKey($order)]]></key>
+	<display>
+		<title><![CDATA[$baiduOpenUtil.getTitle($order)]]></title>
+		<url><![CDATA[$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)]]></url>
+		<content1><![CDATA[$baiduOpenUtil.getArriveDetail($order)]]></content1>
+		<content2><![CDATA[$baiduOpenUtil.getFromDetail($order)]]></content2>
+		<content3><![CDATA[$baiduOpenUtil.getStatusDetail($order)]]></content3>
+		<link linkurl="$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)" linkcontent="加入拼车" />
+		<showurl><![CDATA[$baiduOpenUtil.getShowurl("$snowModule.setTarget('together/orderDetail').add('orderId', $order.id)")]]></showurl>
+	</display>
+</item>
+#end
+#end
+</DOCUMENT>
