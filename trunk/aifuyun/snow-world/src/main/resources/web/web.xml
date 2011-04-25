@@ -21,7 +21,10 @@
   <servlet-mapping>
   	<servlet-name>SplistServlet</servlet-name>
   	<url-pattern>*.htm</url-pattern>
+  	<!--  
+  	jboss的web容器不支持多个url-pattern....
   	<url-pattern>/search/baidu-open-data.xml</url-pattern>
+  	-->
   </servlet-mapping>
 
 </web-app>
