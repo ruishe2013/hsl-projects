@@ -4,6 +4,10 @@
      "http://www.springframework.org/dtd/spring-beans.dtd">
 <beans default-autowire="byName">
 	
+	<bean id="configurationService" class="com.aifuyun.snow.world.biz.bo.misc.impl.ConfigurationServiceImpl">
+		<property name="importOrderDataPath" value="${configuration.import.order.data.path}"></property>
+		<property name="randomUsersPath" value="${configuration.import.order.rand.user.path}"></property>
+	</bean>
 	<bean id="checkCodeService" class="com.aifuyun.snow.world.biz.bo.captcha.impl.CheckCodeServiceImpl"></bean>
 	<bean id="cityIpBO" class="com.aifuyun.snow.world.biz.bo.area.impl.CityIpBOImpl"></bean>
 	<bean id="cityBO" class="com.aifuyun.snow.world.biz.bo.area.impl.CityBOImpl"></bean>
