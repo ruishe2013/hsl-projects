@@ -24,12 +24,10 @@ public class SearchOrder extends BaseScreen {
 		String arriveAddr = rundata.getQueryString().getString("arriveAddr");
 		String fromTime = rundata.getQueryString().getString("fromTime");
 		String arriveTime = rundata.getQueryString().getString("arriveTime");
-		boolean ignoreStartFromTime = rundata.getQueryString().getBoolean("ignoreStartFromTime", false);
 		
 		SearchOrderQuery searchOrderQuery = new SearchOrderQuery();
 		searchOrderQuery.setPageSize(pageSize);
 		searchOrderQuery.setPageNo(page);
-		
 		
 		searchOrderQuery.setFromCity(fromCity);
 		searchOrderQuery.setFromAddr(fromAddr);
@@ -38,9 +36,6 @@ public class SearchOrder extends BaseScreen {
 		searchOrderQuery.setArriveCity(arriveCity);
 		searchOrderQuery.setArriveAddr(arriveAddr);
 		searchOrderQuery.setArriveTime(DateTimeUtil.date2long(arriveTime));
-		
-		searchOrderQuery.setIgnoreStartFromTime(ignoreStartFromTime);
-		
 		
 		Result result = orderSearchAO.searchOrder(searchOrderQuery);
 		

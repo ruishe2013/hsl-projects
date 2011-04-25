@@ -91,25 +91,6 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 			sb.append(" +fromTime_ymd:").append(fromTime);
 		}
 
-		long arriveTime = searchOrderQuery.getArriveTime();
-		if (fromTime > 0L) {
-			sb.append(" +arriveTime_ymd:").append(arriveTime);
-		} else {
-			sb.append(" +arriveTime_ymd:[");
-			if (searchOrderQuery.getMinArriveTime() > 0L) {
-				sb.append(searchOrderQuery.getMinArriveTime());
-			} else {
-				sb.append("*");
-			}
-			sb.append(" TO ");
-			if (searchOrderQuery.getMaxArriveTime() > 0L) {
-				sb.append(searchOrderQuery.getMaxArriveTime());
-			} else {
-				sb.append("*");
-			}
-			sb.append("]");
-		}
-
 		// ÅÅ³ýµÄ×´Ì¬
 		List<OrderStatusEnum> excludeStatus = searchOrderQuery.getExcludeStatus();
 		if (excludeStatus != null) {
