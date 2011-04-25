@@ -17,10 +17,11 @@
 	  		<param-value>${product.mode}</param-value>
 	  	</init-param>
 	  </servlet>
-  
+
   <servlet-mapping>
   	<servlet-name>SplistServlet</servlet-name>
   	<url-pattern>*.htm</url-pattern>
+  	<url-pattern>/search/baidu-open-data.xml</url-pattern>
   </servlet-mapping>
 
 </web-app>

@@ -15,6 +15,7 @@ import com.aifuyun.snow.world.biz.query.search.SearchQuery;
 import com.aifuyun.snow.world.biz.query.search.SearchResult;
 import com.aifuyun.snow.world.biz.query.search.SortField;
 import com.aifuyun.snow.world.common.SearchUtil;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.zjuh.sweet.lang.CollectionUtil;
 import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.result.Result;
@@ -23,7 +24,7 @@ import com.zjuh.sweet.result.ResultSupport;
 public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 
 	private OrderSearchBO orderSearchBO;
-	
+
 	@Override
 	public Result searchOrder(SearchOrderQuery searchOrderQuery) {
 		Result result = new ResultSupport(false);
@@ -33,11 +34,11 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 			searchQuery.setQ(q);
 			searchQuery.setRows(searchOrderQuery.getPageSize());
 			searchQuery.setStartRow(searchOrderQuery.getStartRow());
-			
+
 			// 按出发时间倒序排
 			SortField sf = new SortField("gmtModified", FieldOrder.DESC);
 			searchQuery.setSortFields(CollectionUtil.asList(sf));
-			
+
 			SearchResult<SearchOrderDO> searchResult = orderSearchBO.queryOrders(searchQuery);
 			long numFound = searchResult.getNumFound();
 			List<SearchOrderDO> orders = searchResult.getResult();
@@ -52,6 +53,7 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 
 	/**
 	 * 只能搜索到当前1个小时前和1年内的数据
+	 * 
 	 * @param sb
 	 */
 	void filterFromDate(StringBuilder sb) {
@@ -60,9 +62,9 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 		sb.append(" +fromTime:[").append(DateUtil.formatDate(searchDate, "yyyyMMddHHmmss"));
 		sb.append(" TO ").append(DateUtil.formatDate(DateUtil.addDay(new Date(), 365), "yyyyMMddHHmmss"));
 		sb.append("]");
-		
+
 	}
-	
+
 	private String buildSearchQuery(SearchOrderQuery searchOrderQuery) {
 		StringBuilder sb = new StringBuilder();
 		String arriveAddr = searchOrderQuery.getArriveAddr();
@@ -75,30 +77,57 @@ public class OrderSearchAOImpl extends BaseAO implements OrderSearchAO {
 		if (!StringUtil.isEmpty(arriveAddr)) {
 			sb.append(" +arriveAddrText:").append(SearchUtil.filter(arriveAddr));
 		}
-		
+
 		if (!StringUtil.isEmpty(cityName)) {
 			sb.append(" +fromCity:").append(SearchUtil.filter(cityName));
 		}
-		
+
 		if (!StringUtil.isEmpty(fromAddr)) {
 			sb.append(" +fromAddrText:").append(SearchUtil.filter(fromAddr));
 		}
-		
+
 		long fromTime = searchOrderQuery.getFromTime();
 		if (fromTime > 0L) {
 			sb.append(" +fromTime_ymd:").append(fromTime);
 		}
-		
+
+		long arriveTime = searchOrderQuery.getArriveTime();
+		if (fromTime > 0L) {
+			sb.append(" +arriveTime_ymd:").append(arriveTime);
+		} else {
+			sb.append(" +arriveTime_ymd:[");
+			if (searchOrderQuery.getMinArriveTime() > 0L) {
+				sb.append(searchOrderQuery.getMinArriveTime());
+			} else {
+				sb.append("*");
+			}
+			sb.append(" TO ");
+			if (searchOrderQuery.getMaxArriveTime() > 0L) {
+				sb.append(searchOrderQuery.getMaxArriveTime());
+			} else {
+				sb.append("*");
+			}
+			sb.append("]");
+		}
+
+		// 排除的状态
+		List<OrderStatusEnum> excludeStatus = searchOrderQuery.getExcludeStatus();
+		if (excludeStatus != null) {
+			for (OrderStatusEnum status : excludeStatus) {
+				sb.append(" -status:").append(status.getValue());
+			}
+		}
+
 		// 过滤已删除的
 		sb.append(" +deleted:0");
-		
+
 		String ret = sb.toString();
 		if (StringUtil.isEmpty(ret)) {
 			return "*:*";
 		}
 		return ret;
 	}
-	
+
 	public void setOrderSearchBO(OrderSearchBO orderSearchBO) {
 		this.orderSearchBO = orderSearchBO;
 	}
