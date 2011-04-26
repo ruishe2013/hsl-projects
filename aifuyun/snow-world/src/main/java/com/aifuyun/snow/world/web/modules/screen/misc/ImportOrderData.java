@@ -235,6 +235,10 @@ public class ImportOrderData extends BaseScreen {
 		inputCreator.setQq(randQQ(properties));
 		inputCreator.setCareer("其他");
 		
+		if (StringUtil.isEmpty(orderDO.getFromCity())) {
+			log.warn("无城市消息。");
+		}
+		
 		randomUser(users);
 		ResultCode resultCode = importOrderData(orderDO, inputCreator);
 		if (resultCode != null) {
