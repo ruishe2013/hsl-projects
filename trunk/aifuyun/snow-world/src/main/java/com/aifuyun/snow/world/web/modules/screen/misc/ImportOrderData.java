@@ -236,7 +236,7 @@ public class ImportOrderData extends BaseScreen {
 		inputCreator.setCareer("其他");
 		
 		if (StringUtil.isEmpty(orderDO.getFromCity())) {
-			log.warn("无城市消息。");
+			log.warn("无城市信息。");
 		}
 		
 		randomUser(users);
