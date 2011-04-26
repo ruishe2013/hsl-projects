@@ -19,6 +19,8 @@ import com.aifuyun.snow.world.biz.ao.together.taxi.OrderAO;
 import com.aifuyun.snow.world.biz.bo.misc.ConfigurationService;
 import com.aifuyun.snow.world.biz.bo.user.UserBO;
 import com.aifuyun.snow.world.dal.dataobject.enums.BirthYearEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.CarOwnerTypeEnum;
+import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.SexEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderUserDO;
@@ -29,7 +31,6 @@ import com.zjuh.splist.web.TemplateContext;
 import com.zjuh.sweet.author.LoginContext;
 import com.zjuh.sweet.author.SimpleUser;
 import com.zjuh.sweet.lang.CollectionUtil;
-import com.zjuh.sweet.lang.ConvertUtil;
 import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.lang.RandomStringUtil;
 import com.zjuh.sweet.result.Result;
@@ -220,15 +221,18 @@ public class ImportOrderData extends BaseScreen {
 		orderDO.setFromAddr(properties.get("【起点】"));
 		orderDO.setArriveAddr(properties.get("【目的地】")); 
 		orderDO.setDescription(properties.get("【备注】")); 
-		orderDO.setFromTime(guessDate(properties.get("【目的地】"), new Date()));
+		orderDO.setApproach(properties.get("【途径】")); 
+		orderDO.setFromTime(guessDate(properties.get("【出发时间】"), new Date()));
+		orderDO.setAfterWorkFromTime(guessDate(properties.get("【下班时间】"), null));
 		orderDO.setTotalSeats(3);
-		orderDO.setType(randType());
+		orderDO.setType(randType(properties));
+		orderDO.setCreatorCarOwnerType(carOwnerType(properties));
 		
 		inputCreator.setRealName(properties.get("【联系人】"));
 		inputCreator.setBirthYear(BirthYearEnum.YEAR_80S.getValue());
-		inputCreator.setPhone(randPhone());
+		inputCreator.setPhone(randPhone(properties));
 		inputCreator.setSex(randSex(inputCreator.getRealName()).getValue());
-		inputCreator.setQq(randQQ());
+		inputCreator.setQq(randQQ(properties));
 		inputCreator.setCareer("其他");
 		
 		randomUser(users);
@@ -244,7 +248,20 @@ public class ImportOrderData extends BaseScreen {
 	
 	private static final String[] PHONE_PREFIX = {"130","132", "131", "135", "136", "137", "138", "158", "159"};
 	
-	private String randPhone() {
+	private int carOwnerType(Map<String, String> properties) {
+		String typeName = properties.get("【拼客性质】");
+		CarOwnerTypeEnum carOwnerTypeEnum = CarOwnerTypeEnum.valueOfName(typeName);
+		if (carOwnerTypeEnum == null) {
+			carOwnerTypeEnum = CarOwnerTypeEnum.CAR_OWNER;
+		}
+		return carOwnerTypeEnum.getValue();
+	}
+	
+	private String randPhone(Map<String, String> properties) {
+		String phone = properties.get("【联系电话】");
+		if (!StringUtil.isEmpty(phone)) {
+			return phone;
+		}
 		String prefix = PHONE_PREFIX[rand.nextInt(PHONE_PREFIX.length)];
 		return prefix + RandomStringUtil.randomNumeric(8);
 	}
@@ -262,11 +279,20 @@ public class ImportOrderData extends BaseScreen {
 		return (System.currentTimeMillis() % 2 == 0) ? SexEnum.FEMAILE: SexEnum.MALE;
 	}
 		
-	private int randType() {
+	private int randType(Map<String, String> properties) {
+		String typeName = properties.get("【拼车类型】");
+		OrderTypeEnum orderTypeEnum = OrderTypeEnum.valueOfName(typeName);
+		if (orderTypeEnum  != null) {
+			return orderTypeEnum.getValue();
+		}
 		return rand.nextInt(2) + 1;
 	}
 	
-	private String randQQ() {
+	private String randQQ(Map<String, String> properties) {
+		String qq = properties.get("【QQ】");
+		if (!StringUtil.isEmpty(qq)) {
+			return qq;
+		}
 		int num = rand.nextInt(3) + 8;
 		return RandomStringUtil.randomNumeric(num);
 	}

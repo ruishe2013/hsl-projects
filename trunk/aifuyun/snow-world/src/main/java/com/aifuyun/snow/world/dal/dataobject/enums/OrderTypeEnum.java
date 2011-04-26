@@ -6,7 +6,7 @@ package com.aifuyun.snow.world.dal.dataobject.enums;
  */
 public enum OrderTypeEnum {
 	
-	TAXI(1, "拼出租车"),
+	TAXI(1, "拼的士"),
 	SFC(2, "顺风车"),
 	WORK(3,"上下班拼车")
 	;
@@ -23,6 +23,15 @@ public enum OrderTypeEnum {
 	public static OrderTypeEnum valueOf(int value) {
 		for (OrderTypeEnum e : values()) {
 			if (e.getValue() == value) {
+				return e;
+			}
+		}
+		return null;
+	}
+	
+	public static OrderTypeEnum valueOfName(String name) {
+		for (OrderTypeEnum e : values()) {
+			if (e.getName().equals(name)) {
 				return e;
 			}
 		}

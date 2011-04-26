@@ -25,6 +25,15 @@ public enum CarOwnerTypeEnum {
 		return null;
 	}
 	
+	public static CarOwnerTypeEnum valueOfName(String name) {
+		for (CarOwnerTypeEnum s : CarOwnerTypeEnum.values()) {
+			if (s.getName().equals(name)) {
+				return s;
+			}
+		}
+		return null;
+	}
+	
 	public int getValue() {
 		return value;
 	}
