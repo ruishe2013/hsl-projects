@@ -285,6 +285,9 @@ public class ImportOrderData extends BaseScreen {
 		
 	private int randType(Map<String, String> properties) {
 		String typeName = properties.get("【拼车类型】");
+		if ("上下班".equals(typeName)) {
+			return OrderTypeEnum.WORK.getValue();
+		}
 		OrderTypeEnum orderTypeEnum = OrderTypeEnum.valueOfName(typeName);
 		if (orderTypeEnum  != null) {
 			return orderTypeEnum.getValue();
