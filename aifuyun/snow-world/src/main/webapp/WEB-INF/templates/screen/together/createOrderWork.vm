@@ -32,6 +32,7 @@
             	        <!-- <input type="hidden" name="createOrderWork" value="$tokenUtil.token('createOrderWork')" />  -->
             			<input type="hidden" name="actionTarget" value="together/orderAction" />
             			<input type="hidden" name="actionEvent" value="createOrderWork" />
+						<input type="hidden" name="orderId" value="$order.id" />
             			
             			#set($showCarNo = true)
             			#set($showSeats = true)
