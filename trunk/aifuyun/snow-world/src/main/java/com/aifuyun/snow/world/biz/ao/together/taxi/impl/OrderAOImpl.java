@@ -80,6 +80,50 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 		}
 		return result;
 	}
+	
+	@Override
+	public Result viewCreateOrder(long orderId, int type) {
+		Result result = new ResultSupport(false);
+
+		// 创建
+		if (orderId <= 0) {
+			result = viewCreateOrder(type);
+			result.getModels().put("idEdit", false);
+			return result;
+		}
+
+		// 编辑
+		try {
+			long userId = this.getLoginUserId();
+			BaseUserDO baseUserDO = userBO.queryById(userId);
+			if (baseUserDO == null) {
+				result.setResultCode(UserResultCodes.USER_NOT_EXIST);
+				return result;
+			}
+
+			OrderDO order = orderBO.queryById(orderId);
+			if (order == null) {
+				result.setResultCode(OrderResultCodes.ORDER_NOT_EXIST);
+				return result;
+			}
+
+			boolean hasPermission = (order.getCreatorId() == userId);
+			if (!hasPermission) {
+				result.setResultCode(OrderResultCodes.INVALID_ROLE_VALUE);
+				return result;
+			}
+
+			result.getModels().put("order", order);
+			result.getModels().put("isEdit", true);
+			result.setSuccess(true);
+			
+		} catch (Exception e) {
+			log.error("编辑订单出错", e);
+		}
+
+		return result;
+	}
+
 
 	@Override
 	public Result cancelOrder(long orderId) {
@@ -841,6 +885,8 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 		Result result = new ResultSupport(false);
 		try {
 			final long userId = this.getLoginUserId();
+			long orderId = orderDO.getId();
+			
 			if (userId <= 0L) {
 				result.setResultCode(CommonResultCodes.USER_NOT_LOGIN);
 				return result;
@@ -861,13 +907,33 @@ public class OrderAOImpl extends BaseAO implements OrderAO {
 				orderDO.setArriveCityId(arriveCityDO.getId());
 			}
 			
-			long orderId = orderBO.createOrder(orderDO);
-			
-			result.getModels().put("orderId", orderId);			
+			//  编辑
+			if(orderId > 0) {
+				OrderDO oldOrder = orderBO.queryById(orderId);
+				if (oldOrder == null) {
+					result.setResultCode(OrderResultCodes.ORDER_NOT_EXIST);
+					return result;
+				}
+
+				boolean hasPermission = (oldOrder.getCreatorId() == userId);
+				if (!hasPermission) {
+					result.setResultCode(OrderResultCodes.INVALID_ROLE_VALUE);
+					return result;
+				}
+				
+				orderBO.updateOrder(orderDO);
+				result.getModels().put("orderId", orderDO.getId());
+				result.getModels().put("isEdit", true);
+			} else {
+				// 创建
+				long newOrderId = orderBO.createOrder(orderDO);
+				result.getModels().put("orderId", newOrderId);	
+				result.getModels().put("isEdit", false);
+			}
 			
 			result.setSuccess(true);
 		} catch (Exception e) {
-			log.error("创建拼的失败", e);
+			log.error("创建或编辑拼车失败", e);
 		}
 		return result;
 	}

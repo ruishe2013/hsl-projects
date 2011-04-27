@@ -35,6 +35,8 @@ public interface OrderBO {
 	 */
 	void updateStatus(long id, OrderStatusEnum orderStatus);
 	
+	void updateOrder(OrderDO newOrderDO);
+	
 	List<OrderDO> queryRecentOrders(OrderQuery orderQuery);
 	
 	List<OrderDO> queryRecentTypeOrders(OrderQuery orderQuery);

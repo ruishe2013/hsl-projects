@@ -206,6 +206,11 @@ public class OrderAction extends BaseAction {
 		Result result = orderAO.createOrder(orderDO);
 		if (result.isSuccess()) {
 			long orderId = (Long)result.getModels().get("orderId");
+			boolean isEdit = (Boolean)result.getModels().get("isEdit");
+			if(isEdit) {
+				// TODO .....跳转到哪里呢。。
+				return;
+			}
 			sendToPersonalInfoPage(orderId);			
 		} else {
 			this.handleError(result, rundata, templateContext);
@@ -225,11 +230,13 @@ public class OrderAction extends BaseAction {
 		OrderDO orderDO = new OrderDO();
 		form.apply(orderDO);
 		
+		orderDO.setId(rundata.getQueryString().getLong("orderId", 0L));
 		orderDO.setArriveAddr(rundata.getQueryString().getString("companyAddr"));
 		String[] fromTimeWeek = rundata.getQueryString().getStrings("fromTimeWeek");
 		orderDO.setFromWeekByArray(fromTimeWeek);
 		
 		Date now = new Date();
+		
 		// 上班出发时间
 		int fromTimeHour =  rundata.getQueryString().getInt("fromTimeHour");
 		int fromTimeMinute =  rundata.getQueryString().getInt("fromTimeMinute");
@@ -281,6 +288,10 @@ public class OrderAction extends BaseAction {
 		Result result = orderAO.createOrder(orderDO);
 		if (result.isSuccess()) {
 			long orderId = (Long)result.getModels().get("orderId");
+			boolean isEdit = (Boolean)result.getModels().get("isEdit");
+			if(isEdit) {
+				// TODO .....是否跳转到哪里呢。。
+			}
 			sendToPersonalInfoPage(orderId);			
 		} else {
 			this.handleError(result, rundata, templateContext);

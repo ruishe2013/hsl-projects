@@ -106,4 +106,6 @@ public interface OrderAO {
 	
 	Result viewCreateOrder(int type);
 	
+	Result viewCreateOrder(long orderId, int type);
+	
 }

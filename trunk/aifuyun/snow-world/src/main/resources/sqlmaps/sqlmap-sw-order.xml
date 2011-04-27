@@ -118,7 +118,6 @@
 			update sw_order set 
 				gmt_modified= now(),
 				from_addr= #fromAddr#,
-				gmt_create= #gmtCreate#,
 				creator_username= #creatorUsername#,
 				status= #status#,
 				city_id= #cityId#,
