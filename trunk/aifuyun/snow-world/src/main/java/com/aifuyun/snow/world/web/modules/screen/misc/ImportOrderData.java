@@ -222,9 +222,15 @@ public class ImportOrderData extends BaseScreen {
 		orderDO.setArriveAddr(properties.get("【目的地】")); 
 		orderDO.setDescription(properties.get("【备注】")); 
 		orderDO.setApproach(properties.get("【途径】")); 
-		orderDO.setFromTime(guessDate(properties.get("【出发时间】"), new Date()));
-		orderDO.setAfterWorkFromTime(guessDate(properties.get("【下班时间】"), null));
+		
+		Date fromTime = guessDate(properties.get("【出发时间】"), new Date());
+		orderDO.setFromTime(fromTime);
+		
+		orderDO.setArriveTime(DateUtil.addHour(fromTime, 1));
+		
+		orderDO.setAfterWorkFromTime(guessDate(properties.get("【下班时间】"), randomAfterWorkDate()));
 		orderDO.setTotalSeats(3);
+		orderDO.setFromWeek("1,2,3,4,5");
 		orderDO.setType(randType(properties));
 		orderDO.setCreatorCarOwnerType(carOwnerType(properties));
 		
@@ -251,6 +257,17 @@ public class ImportOrderData extends BaseScreen {
 	}
 	
 	private static final String[] PHONE_PREFIX = {"130","132", "131", "135", "136", "137", "138", "158", "159"};
+	
+	private static final Date[] AFTER_WORK_DATES = {
+			DateUtil.parseDate("17:00", "HH:mm"),
+			DateUtil.parseDate("17:30", "HH:mm"),
+			DateUtil.parseDate("18:00", "HH:mm")
+		};
+	
+	
+	private Date randomAfterWorkDate() {
+		return AFTER_WORK_DATES[rand.nextInt(AFTER_WORK_DATES.length)];
+	}
 	
 	private int carOwnerType(Map<String, String> properties) {
 		String typeName = properties.get("【拼客性质】");

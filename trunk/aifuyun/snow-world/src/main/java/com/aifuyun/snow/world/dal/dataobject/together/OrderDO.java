@@ -1,13 +1,14 @@
 package com.aifuyun.snow.world.dal.dataobject.together;
 
 
+import java.util.Arrays;
 import java.util.Date;
 
-import com.aifuyun.snow.world.common.SnowConstants;
 import com.aifuyun.snow.world.dal.dataobject.BaseDO;
 import com.aifuyun.snow.world.dal.dataobject.enums.CarOwnerTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderStatusEnum;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
+import com.zjuh.sweet.lang.CollectionUtil;
 
 /**
  * Æ´³µµ¥
@@ -123,16 +124,7 @@ public class OrderDO extends BaseDO {
 	
 	
 	public void setFromWeekByArray(String[] fromWeekArray) {
-		this.fromWeek = "";
-		if (fromWeekArray != null && fromWeekArray.length > 0) {
-			for (int i = 0; i < fromWeekArray.length; i++) {
-				if (i != fromWeekArray.length - 1) {
-					this.fromWeek += fromWeekArray[i] + SnowConstants.SPIIT;
-					continue;
-				}
-				this.fromWeek += fromWeekArray[i];
-			}
-		}
+		this.fromWeek = CollectionUtil.join(Arrays.asList(fromWeekArray), ",");
 	}
 	
 	public String getCarNo() {
