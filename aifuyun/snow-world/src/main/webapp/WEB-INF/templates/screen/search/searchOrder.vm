@@ -41,7 +41,7 @@ $rundata.setAttribute('pageTitle', $pageTitle)
 		                #if ($!order.type == "3")
 		                	$!dateUtil.formatDate($!order.fromTime, 'HH:mm')
 		                #else
-		                 $!dateUtil.formatFullDate($!order.fromTime)
+		                 	$!dateUtil.formatFullDate($!order.fromTime)
 		                #end
 		            </p>
 		            <p>
