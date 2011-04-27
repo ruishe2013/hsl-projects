@@ -26,4 +26,5 @@ public interface OrderDAO {
 	
 	List<OrderDO> queryRecentTypeOrders(OrderQuery orderQuery);
 	
+	
 }

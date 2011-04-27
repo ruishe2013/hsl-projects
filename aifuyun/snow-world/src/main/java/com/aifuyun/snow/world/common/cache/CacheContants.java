@@ -28,5 +28,10 @@ public interface CacheContants {
 	 * 每个城市的上下班拼车
 	 */
 	int RECENT_CITY_WORK_ORDERS = 5;
+	
+	/**
+	 * 全局最近拼车单
+	 */
+	int GLOBAL_RECENT_CITY_ORDERS = 6;
 
 }

@@ -1,5 +1,6 @@
 package com.aifuyun.snow.world.biz.ao.misc.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import com.aifuyun.snow.world.common.cache.CacheContants;
 import com.aifuyun.snow.world.dal.dataobject.area.CityDO;
 import com.aifuyun.snow.world.dal.dataobject.enums.OrderTypeEnum;
 import com.aifuyun.snow.world.dal.dataobject.together.OrderDO;
+import com.zjuh.sweet.lang.CollectionUtil;
 import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.result.Result;
 import com.zjuh.sweet.result.ResultSupport;
@@ -22,7 +24,7 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 	
 	private int defaultCityId = 1;
 	
-	private int cityCount = 5;
+	private int ordersCount = 5;
 	
 	/**
 	 * 最新拼车， 10分钟缓存
@@ -68,16 +70,50 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 	private List<OrderDO> getRecentOrders(int cityId, int cacheArea, OrderTypeEnum orderTypeEnum) {
 		List<OrderDO> recentOrders = (List<OrderDO>)this.cacheManager.get(cacheArea, cityId);
 		if (recentOrders != null) {
-			return recentOrders;
+			return adjustOrderCount(orderTypeEnum, recentOrders);
 		}
 		OrderQuery orderQuery = new OrderQuery();
 		orderQuery.setCityId(cityId);
-		orderQuery.setPageSize(cityCount);
+		orderQuery.setPageSize(ordersCount);
 		orderQuery.setPageNo(1);
 		orderQuery.setType(orderTypeEnum.getValue());
 		recentOrders = orderBO.queryRecentTypeOrders(orderQuery);
 		cacheManager.put(cacheArea, cityId, recentOrders, recentOrdersExpire);
+		return adjustOrderCount(orderTypeEnum, recentOrders);
+	}
+	
+	@SuppressWarnings("unchecked")
+	private List<OrderDO> getGlobalRecentOrders(OrderTypeEnum orderTypeEnum) {
+		List<OrderDO> recentOrders = (List<OrderDO>)this.cacheManager.get(CacheContants.GLOBAL_RECENT_CITY_ORDERS, orderTypeEnum.getValue());
+		if (recentOrders != null) {
+			return recentOrders;
+		}
+		OrderQuery orderQuery = new OrderQuery();
+		orderQuery.setPageSize(ordersCount);
+		orderQuery.setPageNo(1);
+		orderQuery.setType(orderTypeEnum.getValue());
+		recentOrders = orderBO.queryRecentTypeOrders(orderQuery);
+		cacheManager.put(CacheContants.GLOBAL_RECENT_CITY_ORDERS,  orderTypeEnum.getValue(), recentOrders, recentOrdersExpire);
 		return recentOrders;
+	}
+	
+	private List<OrderDO> adjustOrderCount(OrderTypeEnum orderTypeEnum, List<OrderDO> inputOrders) {
+		if (CollectionUtil.isEmpty(inputOrders)) {
+			return getGlobalRecentOrders(orderTypeEnum);
+		}
+		int leftSize = ordersCount - inputOrders.size();
+		if (leftSize > 0) {
+			List<OrderDO> ret = new ArrayList<OrderDO>(inputOrders);
+			List<OrderDO> globalOrders = getGlobalRecentOrders(orderTypeEnum);
+			if (globalOrders.size() < leftSize) {
+				ret.addAll(globalOrders);
+			} else {
+				ret.addAll(globalOrders.subList(0, leftSize));
+			}
+			return ret;
+		} else {
+			return inputOrders;
+		}
 	}
 	
 	private List<OrderDO> getRecentWorkOrders(int cityId) {
@@ -100,8 +136,12 @@ public class SnowWorldAOImpl extends BaseAO implements SnowWorldAO {
 		this.defaultCityId = defaultCityId;
 	}
 
-	public void setCityCount(int cityCount) {
-		this.cityCount = cityCount;
+	public int getOrdersCount() {
+		return ordersCount;
+	}
+
+	public void setOrdersCount(int ordersCount) {
+		this.ordersCount = ordersCount;
 	}
 
 	public void setRecentOrdersExpire(int recentOrdersExpire) {

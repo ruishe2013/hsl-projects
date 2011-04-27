@@ -44,8 +44,9 @@ public class OrderBOImpl implements OrderBO {
 		 orderDAO.update(newOrderDO);
 	}
 
+	@Override
 	public List<OrderDO> queryRecentTypeOrders(OrderQuery orderQuery) {
 		return orderDAO.queryRecentTypeOrders(orderQuery);
 	}
-	
+
 }
