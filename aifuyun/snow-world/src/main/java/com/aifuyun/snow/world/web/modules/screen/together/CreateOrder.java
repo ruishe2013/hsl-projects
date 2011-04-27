@@ -6,6 +6,7 @@ import com.aifuyun.snow.world.web.common.base.BaseScreen;
 import com.zjuh.splist.core.form.Form;
 import com.zjuh.splist.web.RunData;
 import com.zjuh.splist.web.TemplateContext;
+import com.zjuh.sweet.lang.DateUtil;
 import com.zjuh.sweet.result.Result;
 
 public class CreateOrder extends BaseScreen {
@@ -15,7 +16,8 @@ public class CreateOrder extends BaseScreen {
 	@Override
 	public void execute(RunData rundata, TemplateContext templateContext) {
 		int orderType = rundata.getQueryString().getInt("orderType",1);
-		Result result = orderAO.viewCreateOrder(orderType);
+		long orderId = rundata.getQueryString().getLong("orderId", 0L);
+		Result result = orderAO.viewCreateOrder(orderId, orderType);
 		if (result.isSuccess()) {
 			final Form form = rundata.getForm("together.createOrder");
 			OrderDO order = (OrderDO)result.getModels().get("order");
@@ -25,6 +27,15 @@ public class CreateOrder extends BaseScreen {
 			
 			if (!form.isHeldValues()) {
 				form.holdValues(order);
+				if(order != null) {
+					setFieldValue(form.getFields().get("fromTimeDate"), DateUtil.formatDateYMD(order.getFromTime()));
+					
+					setFieldValue(form.getFields().get("fromTimeHour"), trimZero(DateUtil.formatDate(order.getFromTime(), "HH")));
+					setFieldValue(form.getFields().get("fromTimeMinute"), trimZero(DateUtil.formatDate(order.getFromTime(), "mm")));
+					
+					setFieldValue(form.getFields().get("arriveTimeHour"), trimZero(DateUtil.formatDate(order.getArriveTime(), "HH")));
+					setFieldValue(form.getFields().get("arriveTimeMinute"),  trimZero(DateUtil.formatDate(order.getArriveTime(), "mm")));
+				}
 			}
 		} else {
 			this.handleError(result, rundata, templateContext);

@@ -38,6 +38,11 @@ public class OrderBOImpl implements OrderBO {
 	public void updateStatus(long id, OrderStatusEnum orderStatus) {
 		orderDAO.updateStatus(id, orderStatus);
 	}
+	
+	@Override
+	public void updateOrder(OrderDO newOrderDO) {
+		 orderDAO.update(newOrderDO);
+	}
 
 	public List<OrderDO> queryRecentTypeOrders(OrderQuery orderQuery) {
 		return orderDAO.queryRecentTypeOrders(orderQuery);

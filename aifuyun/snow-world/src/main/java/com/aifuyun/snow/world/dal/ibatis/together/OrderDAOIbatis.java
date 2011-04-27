@@ -42,7 +42,7 @@ public class OrderDAOIbatis extends BaseIbatisDAO implements OrderDAO {
 	public void update(OrderDO orderDO) {
 		getSqlMapClientTemplate().update("OrderDAO.update", orderDO);
 	}
-	
+
 	public void updateStatus(long id, OrderStatusEnum orderStatus) {
 		// 只更新一个status字段，比update方法高效
 		Map<String, Object> param = CollectionUtil.newHashMap();
