@@ -3,13 +3,12 @@ package com.zjuh.waibao.pxsearch.dataprovider.cource;
 import java.util.Date;
 
 import com.aifuyun.search.build.TimeSupport;
-import com.aifuyun.search.util.DateUtil;
 
 public class IncrCourseDataProvider extends BaseCourseDataProvider implements TimeSupport {
 
-	private Date start;
+	Date start;
 	
-	private Date end;
+	Date end;
 	
 	@Override
 	public void setTime(Date start, Date end) {
@@ -19,8 +18,7 @@ public class IncrCourseDataProvider extends BaseCourseDataProvider implements Ti
 
 	@Override
 	protected String getSqlCondition() {
-		return " t.gmt_modified >= '"+ DateUtil.formatDate(start) 
-		+"' and t.gmt_modified <= '"+  DateUtil.formatDate(end) + "'" ;
+		return " 1 = 2 " ;
 	}  
 
 }

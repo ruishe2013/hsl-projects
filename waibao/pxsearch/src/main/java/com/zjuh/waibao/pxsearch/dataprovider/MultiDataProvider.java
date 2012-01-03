@@ -33,9 +33,14 @@ public class MultiDataProvider implements DataProvider {
 			return true;
 		}
 		
-		ret = turnToNextDataProvider();
-		while ( !ret ) {
+		while ( true ) {
 			ret = turnToNextDataProvider();
+			if (ret) {
+				break;
+			}
+			if (currentDataProvider == null) {
+				return false;
+			}
 		}
 		return ret;
 	}
@@ -48,18 +53,24 @@ public class MultiDataProvider implements DataProvider {
 		turnToNextDataProvider();
 	}
 
+	private void clearCurrentDataProvider() {
+		if (currentDataProvider != null) {
+			// 关闭当前
+			currentDataProvider.close();
+			currentDataProvider = null;
+		}
+	}
+	
 	private boolean turnToNextDataProvider() {
 		if (dataProviderIterator == null) {
 			return false;
 		}
 		if (!dataProviderIterator.hasNext()) {
+			clearCurrentDataProvider();
 			return false;
 		}
 		DataProvider nextDataProvider = dataProviderIterator.next();
-		if (currentDataProvider != null) {
-			// 关闭当前
-			currentDataProvider.close();
-		}
+		clearCurrentDataProvider();
 		// 初始化下一个
 		nextDataProvider.init();
 		currentDataProvider = nextDataProvider;

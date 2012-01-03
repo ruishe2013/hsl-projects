@@ -98,5 +98,8 @@ public abstract class CommonDataProvider implements DataProvider {
 		return sql + " and " + condition;
 	}
 	
+	protected String makeId(String id, String type) {
+		return type + "_" + id;
+	}
 	
 }
