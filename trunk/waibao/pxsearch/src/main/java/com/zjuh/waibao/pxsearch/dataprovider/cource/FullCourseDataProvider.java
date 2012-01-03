@@ -6,7 +6,7 @@ public class FullCourseDataProvider extends BaseCourseDataProvider {
 
 	@Override
 	protected String getSqlCondition() {
-		return " t.deleted = 0 ";
+		return "";
 	}
 
 }

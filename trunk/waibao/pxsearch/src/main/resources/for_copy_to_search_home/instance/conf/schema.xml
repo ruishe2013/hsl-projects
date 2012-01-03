@@ -42,29 +42,16 @@
 	</types>
 
 	<fields>
-		<field name="id" type="long" indexed="true" stored="true" multiValued="false" required="true" />
-		<field name="userId" type="long" indexed="true" stored="true" multiValued="false" required="true" />
-		<field name="catId" type="long" indexed="true" stored="true" multiValued="false" required="true" />
-		<field name="phone" type="string" indexed="false" stored="true" multiValued="false" />
-		<field name="status" type="int" indexed="true" stored="true" multiValued="false" />
-		<field name="longitude" type="int" indexed="false" stored="true" multiValued="false" />
-		<field name="latitude" type="int" indexed="false" stored="true" multiValued="false" />
-		<field name="altitude" type="int" indexed="false" stored="true" multiValued="false" />
-		<field name="name" type="string_sd" indexed="true" stored="true" multiValued="false" />
-		<field name="description" type="string_sd" indexed="true" stored="true" multiValued="false" />
-		<field name="defaultImage" type="string" indexed="false" stored="true" multiValued="false" />
-		
-		<field name="price" type="long" indexed="true" stored="true" multiValued="false" />
-		<field name="originalPrice" type="long" indexed="true" stored="true" multiValued="false" />
-		
-		<field name="gmtCreate" type="tlong" indexed="false" stored="true" multiValued="false" />
-		<field name="gmtModified" type="tlong" indexed="true" stored="true" multiValued="false" />
-		<field name="deleted" type="pint" indexed="true" stored="false" multiValued="false" />
-		
+		<field name="id" type="string" indexed="true" stored="true" multiValued="false" required="true" />
+		<field name="docId" type="int" indexed="true" stored="true" multiValued="false" required="true" />
+		<field name="type" type="int" indexed="true" stored="true" multiValued="false" required="true" />
+		<field name="title" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="tags" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="content" type="string_sd" indexed="true" stored="true" multiValued="false" />
 	</fields>
 
 	<uniqueKey>id</uniqueKey>
-	<defaultSearchField>name</defaultSearchField>
+	<defaultSearchField>title</defaultSearchField>
 	<solrQueryParser defaultOperator="OR" />
 	
 </schema>
