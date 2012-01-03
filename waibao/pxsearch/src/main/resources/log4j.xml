@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="gbk"?>    
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" threshold="null" debug="null">
+    <!-- ===================================================================== -->
+    <!--  以下是appender的定义                                                 -->
+    <!-- ===================================================================== -->
+    <appender name="PROJECT" class="com.zjuh.sweet.log4j.DailyRollingFileAppender">
+        <param name="file" value="${pxsearch.log.dir}/pxsearch.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <param name="threshold" value="info"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%X{requestURIWithQueryString}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="PROJECT-DEBUG" class="com.zjuh.sweet.log4j.FileAppender">
+        <param name="file" value="${pxsearch.log.dir}/pxsearch-debug.log"/>
+        <param name="append" value="false"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%X{requestURIWithQueryString}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="FILTER" class="com.zjuh.sweet.log4j.DailyRollingFileAppender">
+        <param name="file" value="${pxsearch.log.dir}/pxsearch-filter.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="APACHE" class="com.zjuh.sweet.log4j.FileAppender">
+        <param name="file" value="${pxsearch.log.dir}/pxsearch-apache.log"/>
+        <param name="append" value="false"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d [%X{requestURIWithQueryString}] %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    <appender name="VELOCITY" class="com.zjuh.sweet.log4j.DailyRollingFileAppender">
+        <param name="file" value="${pxsearch.log.dir}/pxsearch-velocity.log"/>
+        <param name="append" value="true"/>
+        <param name="encoding" value="GBK"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%d %-5p %c{2} - %m%n"/>
+        </layout>
+    </appender>
+    
+    <!-- ===================================================================== -->
+    <!--  以下是logger的定义                                                   -->
+    <!-- ===================================================================== -->
+    <logger name="com.zjuh.splist.filter" additivity="false">
+        <level value="warn"/>
+        <appender-ref ref="FILTER"/>
+    </logger> 
+    <logger name="com.zjuh.splist.util.VelocityUtil" additivity="false">
+        <level value="warn"/>
+        <appender-ref ref="VELOCITY"/>
+    </logger>
+    <logger name="org.apache" additivity="false">
+        <level value="warn"/>
+        <appender-ref ref="APACHE"/>
+    </logger>
+    <logger name="org.apache.commons.beanutils">
+        <level value="error"/>
+    </logger>
+    <logger name="org.apache.commons.digester">
+        <level value="error"/>
+    </logger>
+    
+    <!-- ===================================================================== -->
+    <!--  Root logger的定义                                                    -->
+    <!-- ===================================================================== -->
+    <root>
+        <level value="debug"/>
+        <appender-ref ref="PROJECT"/>
+        <appender-ref ref="PROJECT-DEBUG"/>
+    </root>
+</log4j:configuration>
