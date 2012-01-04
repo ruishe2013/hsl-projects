@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GprsSet">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="GprsSet" type="com.htc.domain.GprsSet" />
+	<typeAlias alias="pager" type="com.htc.domain.Pager" />
+
+	<cacheModel id="GprsSetCache" type="FIFO">
+		<flushInterval hours="1" />
+		<flushOnExecute statement="GprsSet.insertGprsSet" />
+		<flushOnExecute statement="GprsSet.updateGprsSet" />
+		<flushOnExecute statement="GprsSet.deleteGprsSetById" />
+		<property name="size" value="100" />
+	</cacheModel>
+
+	<select id="getCounts" parameterClass="pager" resultClass="int"
+		cacheModel="GprsSetCache">
+		SELECT count(gprsSetId) FROM tgprsset 
+	</select>
+
+	<!-- 查找用户的特定记录数 分页查询 -->
+	<select id="getListByPager" parameterClass="pager" resultClass="GprsSet"
+		cacheModel="GprsSetCache">
+		SELECT 
+			gprsSetId,
+			numId,
+			alias,
+			mesFormat,
+			remark
+		FROM tgprsset
+		where gprsSetId > 0
+		LIMIT
+		$pageSizeCurrentPage$, $pageSize$    
+    </select>
+
+	<!-- Select with no parameters using the result map for User class. -->
+	<select id="selectAll" resultClass="GprsSet" cacheModel="GprsSetCache">
+  	<![CDATA[
+    select 
+			gprsSetId,
+			numId,
+			alias,
+			mesFormat,
+			remark
+		from tgprsset
+		where gprsSetId > 0
+   	]]>
+	</select>
+
+	<!-- gprsSetId用来编辑，numId和alias是检测唯一性  -->
+	<select id="selectGprsSet" parameterClass="GprsSet" resultClass="GprsSet"
+		cacheModel="GprsSetCache">
+		select
+			gprsSetId,
+			numId,
+			alias,
+			mesFormat,
+			remark
+		from tgprsset
+		where gprsSetId > 0
+		<isGreaterThan prepend=" and" property="gprsSetId"
+			compareValue="0">
+			gprsSetId = #gprsSetId#
+   		</isGreaterThan>
+		<isGreaterThan prepend=" and" property="numId"
+			compareValue="0">
+			(numId = #numId#
+   		</isGreaterThan>
+		<isNotEmpty prepend=" or" property="alias">
+			alias = #alias#)
+		</isNotEmpty>
+	</select>
+
+	<!-- Insert example, using the Account parameter class -->
+	<insert id="insertGprsSet" parameterClass="GprsSet">
+  	<![CDATA[
+    insert into tgprsset (
+		numId,	 alias,		mesFormat,	remark
+   ) values (
+		#numId#, #alias#,	#mesFormat#,#remark#
+    )
+   	]]>
+	</insert>
+
+	<!-- Update example, using the Account parameter class -->
+	<update id="updateGprsSet" parameterClass="GprsSet">
+  	<![CDATA[
+    update tgprsset set
+		numId = #numId#,
+		alias = #alias#,
+		mesFormat = #mesFormat#,
+		remark = #remark#
+    where
+      gprsSetId = #gprsSetId#
+    ]]>
+	</update>
+
+	<!-- Delete example, using an integer as the parameter class -->
+	<delete id="deleteGprsSetById" parameterClass="int">
+  	<![CDATA[
+    delete from tgprsset where gprsSetId = #gprsSetId#
+	]]>
+	</delete>
+	
+  <statement id="truncateGprsSet">
+  	truncate table tgprsset
+  </statement>	  	
+
+</sqlMap>

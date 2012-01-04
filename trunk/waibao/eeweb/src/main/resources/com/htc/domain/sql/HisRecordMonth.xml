@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="HisRecordMonth">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="HisRecord" type="com.htc.domain.HisRecord" />
+	<typeAlias alias="BeanForRecord" type="com.htc.bean.BeanForRecord"/>
+	<typeAlias alias="BeanForSearchRecord" type="com.htc.bean.BeanForSearchRecord"/>
+
+	<!--Select with no parameters using the result map for HisRecord class.	-->
+	<select id="selectStatItmes" resultClass="BeanForRecord" parameterClass="BeanForSearchRecord">
+		select recId,equipmentId,recTime,tempavg,tempmax,tempmin,humiavg,humimax,humimin
+		from thisrecordmonth
+		where (recTime between #alarmStartFrom# and #alarmStartTo#)
+		 	and equipmentId in ($placeList$)
+    <isEqual property="orderByType" compareValue="1" >
+    	order by recTime, equipmentId
+    </isEqual>
+    <isEqual property="orderByType" compareValue="2" >
+    	order by equipmentId, recTime 
+    </isEqual>
+  </select>
+  	
+  <select id="getEarlyTime" resultClass="string">
+		SELECT min(rectime) FROM thisrecordmonth
+	</select>
+	
+  	<select id="getLastTime" resultClass="string" >
+		SELECT max(rectime) FROM thisrecordmonth
+	</select>
+
+	<!-- Insert example, using the Account parameter class -->
+	<insert id="insertHisRecord" parameterClass="HisRecord">
+  	<![CDATA[
+    insert into thisrecordmonth (
+		equipmentId,recTime,
+		tempavg,tempmax,tempmin,
+		humiavg,humimax,humimin )
+	select  
+		equipmentId,#recTimeStr# as recTime,
+		FORMAT(avg(tempavg),2) as tempavg, max(tempmax) as tempmax, min(tempmin) as tempmin,
+		FORMAT(avg(humiavg),2) as humiavg, max(humimax) as humimax, min(humimin) as humimin   
+    from thisrecorddailay
+    where (recTime between #alarmStartFrom# and #alarmStartTo#) 
+    group by equipmentId
+   	]]>
+	</insert>
+
+	<!-- Update example, using the Account parameter class -->
+	<!-- parameterClass="java.lang.Integer"-->
+	<update id="updateHisRecord" parameterClass="HisRecord">
+  	<![CDATA[
+    update thisrecordmonth set
+		tempavg = #tempavg#,
+		tempmax = #tempmax#,
+		tempmin = #tempmin#,
+		humiavg = #humiavg#,
+		humimax = #humimax#,
+		humimin = #humimin#
+    where
+      recId = #recId#
+    ]]>
+	</update>
+
+	<!-- Delete example, using an integer as the parameter class deleteHisRecordById -->
+	<delete id="deleteHisRecordById" parameterClass="int">
+  	<![CDATA[
+    delete from thisrecordmonth where recId = #recId#
+	]]>
+	</delete>
+
+</sqlMap>

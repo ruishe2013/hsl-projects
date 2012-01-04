@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Record">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Record" type="com.htc.domain.Record"/>
+  <typeAlias alias="BeanForRecord" type="com.htc.bean.BeanForRecord"/>
+	<typeAlias alias="BeanForSearchRecord" type="com.htc.bean.BeanForSearchRecord"/>  
+  
+  <select id="getEarlyTime" resultClass="string">
+		SELECT min(rectime) FROM trecord
+	</select>
+	
+  	<select id="getLastTime" resultClass="string">
+		SELECT max(rectime) FROM trecord
+	</select>
+	
+  <select id="selectAllBean" parameterClass="BeanForSearchRecord" resultClass="BeanForRecord">
+    select
+    	recTime,equipmentId,temperature,humidity 
+    from tRecord
+    where (recTime between #alarmStartFrom# and #alarmStartTo#) 
+     	and equipmentId in ($placeList$)
+    <isEqual property="orderByType" compareValue="1" >
+    	order by recTime, equipmentId
+    </isEqual>
+    <isEqual property="orderByType" compareValue="2" >
+    	order by equipmentId, recTime 
+    </isEqual>
+  </select>
+  
+  <!-- Select with no parameters using the result map for Record class. -->
+  <select id="selectAll" parameterClass="Record" resultClass="Record" >
+    select
+    	temperature,humidity,recTime,equipmentId 
+    from tRecord
+    where (recTime between #alarmStartFrom# and #alarmStartTo#) 
+    	  and equipmentId in ($placeList$)
+  </select>
+  
+  <select id="selectAvg" parameterClass="Record" resultClass="Record" >
+    select 
+		FORMAT(avg(temperature),2) as temperature,
+		FORMAT(avg(humidity),2) as humidity,
+		equipmentId	    
+    from tRecord
+    where (recTime between #alarmStartFrom# and #alarmStartTo#) 
+    	  and equipmentId in ($placeList$)
+    group by equipmentId
+  </select>
+  
+  <select id="selectMin" parameterClass="Record" resultClass="Record" >
+    select 
+		min(temperature) as temperature,
+		min(humidity) as humidity,
+		equipmentId	    
+    from tRecord
+    where (recTime between #alarmStartFrom# and #alarmStartTo#) 
+    	  and equipmentId in ($placeList$)
+    group by equipmentId
+  </select>
+  
+  <select id="selectMax" parameterClass="Record" resultClass="Record" >
+    select 
+		max(temperature) as temperature,
+		max(humidity) as humidity,
+		equipmentId	    
+    from tRecord
+    where (recTime between #alarmStartFrom# and #alarmStartTo#) 
+    	  and equipmentId in ($placeList$)
+    group by equipmentId
+  </select>    
+  
+  <!-- Insert example, using the Account parameter class -->
+  <insert id="insertRecord" parameterClass="Record">
+  	<![CDATA[
+    insert into tRecord (
+		temperature,humidity,recTime,equipmentId	
+    )values (
+      #temperature#, #humidity#, #recTime#, #equipmentId#
+    )
+   	]]>
+  </insert>
+
+  <!-- Update example, using the Account parameter class -->
+  <!-- parameterClass="java.lang.Integer"-->
+  <update id="updateRecord" parameterClass="Record">
+  	<![CDATA[
+    update tRecord set
+			temperature = #temperature#,
+			humidity = #humidity#
+    where
+      recTime = #recTime#
+    ]]>
+  </update>
+
+  <!-- Delete example, using an integer as the parameter class -->
+  <delete id="deleteRecordByTime" parameterClass="string">
+  	<![CDATA[
+    delete from tRecord where recTime = #recTime#
+	]]>   
+  </delete>
+  
+  <delete id="deleteRecordBatch" parameterClass="string">
+  	<![CDATA[
+    delete from tRecord where recTime <= #recTime#
+	]]>   
+  </delete>
+  
+  <statement id="truncateRecord">
+  	truncate table tRecord
+  </statement>
+
+</sqlMap>

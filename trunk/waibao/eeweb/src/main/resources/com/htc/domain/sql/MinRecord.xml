@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="MinRecord">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="BeanForPortData" type="com.htc.bean.BeanForPortData"/>
+  <typeAlias alias="BeanForMinRec" type="com.htc.bean.BeanForMinRec"/>
+  
+  <select id="getCounts" resultClass="int">
+  	SELECT count(*) FROM trecordmin
+  </select>
+  	
+  <select id="getNewestRec" resultClass="BeanForPortData" parameterClass="BeanForMinRec">
+		SELECT 
+			equipmentId,address,temp,humi,dewPoint,
+			powerV,state,recTime,recLong,mark  
+		FROM trecordmin
+		where equipmentId in ($placeList$) and	recLong = #recLong#
+	</select>
+	
+	<select id="lastRecTime" resultClass="long">
+  	SELECT max(recLong) FROM trecordmin
+  </select>
+  
+	<select id="earlyRecTime" resultClass="long">
+  	SELECT min(recLong) FROM trecordmin
+  </select>
+	
+  <!-- Select with no parameters using the result map for Record class. -->
+  <select id="selectAllRec"  resultClass="BeanForPortData" parameterClass="string">
+    select
+			equipmentId,address,temp,humi,dewPoint,
+			powerV,state,recTime,recLong,mark     
+	  from trecordmin
+	  where recLong > 0 and equipmentId in ($placeList$)
+	  order by recLong, equipmentId
+  </select>
+  
+  <!-- Insert example, using the Account parameter class -->
+  <insert id="insertRecord" parameterClass="BeanForPortData">
+  	<![CDATA[
+    insert into trecordmin (
+			equipmentId,address,temp,humi,dewPoint,
+			powerV,state,recTime,recLong,mark
+    )values (
+      #equipmentId#, #address#, #temp#, #humi#, #dewPoint#,
+      #powerV#, #state#, #recTime#, #recLong#, #mark#
+    )
+   	]]>
+  </insert>
+
+  <!-- Update example, using the Account parameter class -->
+  <!-- parameterClass="java.lang.Integer"-->
+  <update id="updateRecord" parameterClass="BeanForPortData">
+    update trecordmin set
+			temp = #temp#, 
+			humi = #humi#, 
+			dewPoint = #dewPoint#,
+      powerV = #powerV#, 
+      state = #state#, 
+      recTime = #recTime#, 
+      recLong = #recLong#, 
+      mark = #mark#
+    where
+      equipmentId = #equipmentId# and recLong = #oldrecLong#
+  </update>
+
+  <!-- Delete example, using an integer as the parameter class -->
+  <delete id="deleteAll">
+  	<![CDATA[
+    delete from trecordmin
+	]]>   
+  </delete>
+  
+  <statement id="truncateRecord">
+  	truncate table trecordmin
+  </statement>
+  
+</sqlMap>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="gbk" ?> 
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" 
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<settings 
+		cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" errorTracingEnabled="true" 
+		maxRequests="50" maxSessions="50" 
+		maxTransactions="50" useStatementNamespaces="true" />
+
+  <transactionManager type="JDBC" commitRequired="false">  
+    <dataSource type="com.htc.ibatis.ProxoolDataSourceFactory">  
+      <property name="driver" value="com.mysql.jdbc.Driver"/>  
+      <property name="driverUrl" value="jdbc:mysql://127.0.0.1:3306/htcweb?characterEncoding=GBK"/>  
+      <property name="user" value="yanghtcwebzl"/>  
+      <property name="password" value="yanghtcwebzl"/>  
+      <property name="alias" value="default"/>  
+      
+      <property name="housekeepingsleeptime" value="30"/>
+      <property name="maximumActiveTime" value="5"/>  
+      <property name="minimumConnectionCount" value="5"/>  
+      <property name="maximumConnectionCount" value="15"/>  
+      <property name="maximumConnectionLifetime" value="4"/>  
+      <property name="overloadWithoutRefusalLifetime" value="60"/>  
+      <property name="prototypeCount" value="0"/>  
+      <property name="simultaneousBuildThrottle" value="10"/>  
+      <property name="statistics" value="10m"/>  
+    </dataSource>  
+  </transactionManager>  	
+
+	<sqlMap resource="com/htc/domain/sql/AlarmRec.xml" />	
+	<sqlMap resource="com/htc/domain/sql/BackUpList.xml" />	
+	<sqlMap resource="com/htc/domain/sql/EquipData.xml" />	
+	<sqlMap resource="com/htc/domain/sql/EquiType.xml" />	
+	<sqlMap resource="com/htc/domain/sql/GprsSet.xml" />	
+	<sqlMap resource="com/htc/domain/sql/HisRecordDailay.xml" />	
+	<sqlMap resource="com/htc/domain/sql/HisRecordMonth.xml" />	
+	<sqlMap resource="com/htc/domain/sql/MinRecord.xml" />	
+	<sqlMap resource="com/htc/domain/sql/PhoneList.xml" />	
+	<sqlMap resource="com/htc/domain/sql/Power.xml" />	
+	<sqlMap resource="com/htc/domain/sql/Record.xml" />
+	<sqlMap resource="com/htc/domain/sql/SysParam.xml" />
+	<sqlMap resource="com/htc/domain/sql/TLog.xml" />
+	<sqlMap resource="com/htc/domain/sql/User.xml" />
+	<sqlMap resource="com/htc/domain/sql/WorkPlace.xml" />
+
+</sqlMapConfig>

@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Workplace">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="Workplace" type="com.htc.domain.Workplace" />
+	<typeAlias alias="pager" type="com.htc.domain.Pager" />
+
+	<cacheModel id="WorkplaceCache" type="FIFO">
+		<flushInterval hours="1" />
+		<flushOnExecute statement="Workplace.insertWorkplace" />
+		<flushOnExecute statement="Workplace.updateWorkplace" />
+		<flushOnExecute statement="Workplace.updateUseless" />
+		<flushOnExecute statement="Workplace.deleteWorkplaceByName" />
+		<flushOnExecute statement="EquipData.insertEquipData" />
+		<flushOnExecute statement="EquipData.updateEquipData" />
+		<flushOnExecute statement="EquipData.deleteEquipDataById" />
+		<flushOnExecute statement="EquipData.updateEquiOrder" />
+		<flushOnExecute statement="EquipData.updateUseless" />		
+		<property name="size" value="100" />
+	</cacheModel>
+
+	<!--
+		Result maps describe the mapping between the columns returned from a
+		query, and the class properties. A result map isn't necessary if the
+		columns (or aliases) match to the properties exactly.
+	-->
+	<select id="getCounts" parameterClass="pager" resultClass="int" cacheModel="WorkplaceCache">
+		SELECT count(placeId) FROM tworkplace 
+		where useless = 1 and placeId > 0
+    <isNotNull prepend=" and" property="name">
+			placeName like concat('%','$name$','%')
+		</isNotNull>			
+	</select>
+
+	<!-- 查找用户的特定记录数 分页查询 -->
+	<select id="getListByPager" parameterClass="pager" resultClass="Workplace" cacheModel="WorkplaceCache">
+		SELECT *
+		FROM tworkplace
+		where useless = 1 and placeId > 0
+    <isNotNull prepend=" and" property="name">
+			placeName like concat('%','$name$','%')
+		</isNotNull>		
+		LIMIT $pageSizeCurrentPage$,$pageSize$    
+    </select>
+
+	<!-- 查找是否有子元素 -->
+	<select id="getChlidCount" parameterClass="string" resultClass="int" cacheModel="WorkplaceCache">
+		SELECT  
+			count(wp.placeId)
+			FROM  TEQUIPDATA ed RIGHT JOIN (tworkplace wp)
+					ON (ed.placeId = wp.placeId)
+			where wp.placeName =  #placeName#
+				and  ed.useless = 1 and wp.useless = 1
+    </select>	
+
+	<!-- Select with no parameters using the result map for User class. -->
+	<select id="selectAll" parameterClass="int" resultClass="Workplace" cacheModel="WorkplaceCache">
+  	<![CDATA[
+    select *
+		from tworkplace
+		where placeId > 0 and useless >= #useless#
+   	]]>
+	</select>
+
+	<!--
+		A simpler select example without the result map. Note the aliases to
+		match the properties of the target result class.
+	-->
+	<select id="selectWorkplace" parameterClass="Workplace"	resultClass="Workplace" cacheModel="WorkplaceCache">
+		select *
+			from tworkplace
+		where placeId > 0 and useless >= 1
+		<isNotNull prepend=" and" property="placeName">
+			placeName = #placeName#
+		</isNotNull>
+		<isGreaterThan prepend=" and" property="placeId" compareValue="0">
+			placeId = #placeId#
+		</isGreaterThan>
+	</select>
+
+	<!-- Insert example, using the Account parameter class -->
+	<insert id="insertWorkplace" parameterClass="Workplace">
+  	<![CDATA[
+    insert into tworkplace (
+      placeName,useless,remark
+    )values (
+      #placeName#,#useless#,#remark#
+    )
+   	]]>
+	</insert>
+
+	<!-- Update example, using the Account parameter class -->
+	<!-- parameterClass="java.lang.Integer"-->
+	<update id="updateWorkplace" parameterClass="Workplace">
+    update tWorkplace set
+    	<isNotEmpty prepend=" " property="placeName">
+      	placeName = #placeName#
+    	</isNotEmpty>	
+    	<isNotNull prepend=" " property="remark">
+    		remark = #remark#
+    	</isNotNull>	
+    where
+      placeId = #placeId# and useless = 1
+	</update>
+	
+	
+	<update id="updateUseless" parameterClass="string">
+  	<![CDATA[
+    update tWorkplace set
+      useless = 0
+    where
+      useless = 1 and placeName = #placeName#  
+    ]]>
+	</update>	
+
+	<!-- Delete example, using an integer as the parameter class -->
+	<delete id="deleteWorkplaceByName" parameterClass="string">
+  	<![CDATA[
+    delete from tworkplace where placeName = #placeName#
+	]]>
+	</delete>
+	
+  <statement id="truncateEquipdata">
+  	truncate table tequipdata
+  </statement>	 	
+	
+  <statement id="truncateWorkplace">
+  	truncate table tworkplace
+  </statement>	
+
+</sqlMap>

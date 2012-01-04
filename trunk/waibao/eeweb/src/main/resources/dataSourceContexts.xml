@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="gbk"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PreferencesPlaceholderConfigurer">
+		<property name="location" value="classpath:properties/c3p0-config.properties" />
+	</bean>	
+	
+	<!-- spring 的数据源的配置 定义数据源Bean，使用C3P0数据源实现 -->
+	<!-- mysql数据源 c3p0 -->
+	<bean id="dataSource4Mysql" class="com.mchange.v2.c3p0.ComboPooledDataSource"	destroy-method="close">
+			<property name="driverClass" value="${driverClassName}" />
+			<property name="jdbcUrl" value="${url}" />
+			<property name="user" value="${username}" />
+			<property name="password" value="${password}" />
+
+			<property name="acquireIncrement" value="${acquireIncrement}" />
+			<property name="acquireRetryAttempts" value="${acquireRetryAttempts}" />
+			<property name="acquireRetryDelay" value="${acquireRetryDelay}" />
+			<property name="autoCommitOnClose" value="${autoCommitOnClose}" />
+			<property name="automaticTestTable" value="${automaticTestTable}" />
+			<property name="breakAfterAcquireFailure" value="${breakAfterAcquireFailure}" />
+			<property name="checkoutTimeout" value="${checkoutTimeout}" />
+			<property name="idleConnectionTestPeriod" value="${idleConnectionTestPeriod}" />
+			<property name="initialPoolSize" value="${initialPoolSize}" />
+			<property name="maxIdleTime" value="${maxIdleTime}" />
+			<property name="maxPoolSize" value="${maxPoolSize}" />
+			<property name="maxStatements" value="${maxStatements}" />
+			<property name="maxStatementsPerConnection" value="${maxStatementsPerConnection}" />
+			<property name="minPoolSize" value="${minPoolSize}" />
+			<property name="propertyCycle" value="${propertyCycle}" />
+			<property name="testConnectionOnCheckin" value="${testConnectionOnCheckin}" />
+			<property name="usesTraditionalReflectiveProxies"	value="${usesTraditionalReflectiveProxies}" />
+	</bean>
+	
+	<!-- mysql数据源 dbcp 
+	<bean id="dataSource4Mysql" class="org.apache.commons.dbcp.BasicDataSource"	destroy-method="close">
+			<property name="driverClassName" value="${driverClassName}" />
+			<property name="url" value="${url}" />
+			<property name="username" value="${username}" />
+			<property name="password" value="${password}" />
+
+			<property name="initialSize" value="5" />
+			<property name="maxIdle" value="10" />
+			<property name="maxActive" value="50" />
+			<property name="maxWait" value="10000" />
+			<property name="defaultAutoCommit" value="true" />
+	</bean>-->
+	
+	<!-- access数据源 dbcp-->
+	<bean id="dataSource4Access" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="sun.jdbc.odbc.JdbcOdbcDriver"/>
+		<property name="url" value="jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=D:/eeField/accessdb/DSR_DB.mdb"/>
+		<property name="username" value=""/>
+		<property name="password" value=""/>
+	</bean> 
+	<!--<property name="driverClass" value="com.hxtt.sql.access.AccessDriver" />
+   <property name="jdbcUrl"	value="jdbc:access:///D:/htc/accessdb/DSR_DB.mdb" />-->   		
+	<!-- access数据源 c3p0
+	<bean id="dataSource4Access" class="com.mchange.v2.c3p0.ComboPooledDataSource"	destroy-method="close">
+		<property name="driverClass" value="sun.jdbc.odbc.JdbcOdbcDriver" /> 
+		<property name="jdbcUrl" value="jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=D:/htc/accessdb/DSR_DB.mdb" />
+		<property name="user" value="" />
+		<property name="password" value="" />
+	</bean>-->
+	
+	<!-- sqlserver数据源 -->
+	<bean id="dataSource4Sqlserver" class="com.mchange.v2.c3p0.ComboPooledDataSource"	destroy-method="close">
+		<property name="driverClass" value="com.microsoft.sqlserver.jdbc.SQLServerDriver" />
+		<property name="jdbcUrl" value="jdbc:sqlserver://localhost:1433;databaseName=Client_Monitor" />
+		<property name="user" value="sa" />
+		<property name="password" value="sa" />	
+			
+		<property name="acquireIncrement" value="3"/>
+		<property name="minPoolSize" value="3" />
+		<property name="maxPoolSize" value="15"/>
+		<property name="maxIdleTime" value="60"/>
+		<property name="idleConnectionTestPeriod" value="60"/>
+	</bean> 
+	
+</beans>

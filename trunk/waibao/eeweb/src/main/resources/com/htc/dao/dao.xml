@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<!DOCTYPE daoConfig
+    PUBLIC "-//ibatis.apache.org//DTD DAO Configuration 2.0//EN"
+    "http://ibatis.apache.org/dtd/dao-2.dtd">
+
+<daoConfig>
+
+  <context>
+
+    <transactionManager type="SQLMAP">
+      <property name="SqlMapConfigResource"
+        value="com/htc/domain/sql/SqlMapConfig.xml"/>
+
+    </transactionManager>
+
+    <dao interface="com.htc.dao.iface.AlarmRecDao"
+      implementation="com.htc.dao.impl.AlarmRecSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.BackUpListDao"
+      implementation="com.htc.dao.impl.BackUpListSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.EquipDataDao"
+      implementation="com.htc.dao.impl.EquipDataSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.EquiTypeDao"
+      implementation="com.htc.dao.impl.EquiTypeSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.GprsSetDao"
+      implementation="com.htc.dao.impl.GprsSetSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.MinRecordDao"
+      implementation="com.htc.dao.impl.MinRecordSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.HisRecordDao"
+      implementation="com.htc.dao.impl.HisRecordSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.PhoneListDao"
+      implementation="com.htc.dao.impl.PhoneListSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.PowerDao"
+      implementation="com.htc.dao.impl.PowerSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.RecordDao"
+      implementation="com.htc.dao.impl.RecordSqlMapDao"/>
+      
+    <dao interface="com.htc.dao.iface.SysParamDao"
+      implementation="com.htc.dao.impl.SysParamSqlMapDao"/>      
+      
+    <dao interface="com.htc.dao.iface.TLogDao"
+      implementation="com.htc.dao.impl.TLogSqlMapDao"/>      
+      
+    <dao interface="com.htc.dao.iface.UserDao"
+      implementation="com.htc.dao.impl.UserSqlMapDao"/>      
+      
+    <dao interface="com.htc.dao.iface.WorkPlaceDao"
+      implementation="com.htc.dao.impl.WorkPlaceSqlMapDao"/>
+     
+    <dao interface="com.htc.dao.iface.BasePageDao"
+      implementation="com.htc.dao.impl.BasePageSqlMapDao"/>
+      
+     
+  </context>
+
+</daoConfig>

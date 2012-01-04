@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TLog">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="TLog" type="com.htc.domain.TLog" />
+	<typeAlias alias="pager" type="com.htc.domain.Pager" />
+
+	<select id="getCounts" parameterClass="pager" resultClass="int">      
+    	SELECT count(id) FROM tlog
+    	<isNotNull prepend=" " property="timeStart">
+	    	where logtime between #timeStart# and #timeEnd#
+    	</isNotNull>
+			<isGreaterThan prepend=" and" property="type" compareValue="0">
+				logtype = #type#
+			</isGreaterThan>    	
+    	LIMIT $pageSizeCurrentPage$, $pageSize$  
+	</select>
+
+	<!-- 查找用户的特定记录数 分页查询 -->
+	<select id="getListByPager" parameterClass="pager" resultClass="TLog">
+		SELECT id,logtype,logtime,logcontent 
+		FROM tlog
+		<isNotNull prepend=" " property="timeStart">
+			where logtime between #timeStart# and #timeEnd#
+		</isNotNull>
+		<isGreaterThan prepend=" and" property="type" compareValue="0">
+			logtype = #type#
+		</isGreaterThan>
+		order by logtime desc 
+		LIMIT $pageSizeCurrentPage$, $pageSize$    
+    </select> 
+
+  <!-- Insert example, using the Account parameter class -->
+  <insert id="insertTLog" parameterClass="TLog">
+  	<![CDATA[
+    insert into tlog (logtype, logtime,logcontent) 
+    values (#logtype#, #logtime#, #logcontent#)
+   	]]>
+  </insert>
+
+  <!-- Delete example, using an integer as the parameter class -->
+  <delete id="deletetlog" parameterClass="int">
+  	<![CDATA[
+    delete from tlog where id = #id#
+	]]>   
+  </delete>
+
+</sqlMap>

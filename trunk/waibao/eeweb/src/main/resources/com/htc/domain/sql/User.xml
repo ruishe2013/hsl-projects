@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="User">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="User" type="com.htc.domain.User" />
+	<typeAlias alias="pager" type="com.htc.domain.Pager" />
+
+	<cacheModel id="UserCache" type="FIFO">
+		<flushInterval hours="1" />
+		<flushOnExecute statement="User.deleteUserByName" />
+		<flushOnExecute statement="User.updateUser" />
+		<flushOnExecute statement="User.insertUser" />
+		<flushOnExecute statement="User.updateUseless" />
+		<property name="size" value="100" />
+	</cacheModel>
+
+	<select id="getCounts" parameterClass="pager" resultClass="int" cacheModel="UserCache">      
+    	SELECT count(userId) FROM tuser
+    	where userId > 0 and useless = 1 and power != 0  and name!='admin'
+		<isGreaterThan prepend=" and" property="power" compareValue="0">
+			power = #power#
+		</isGreaterThan>
+    <isNotNull prepend=" and" property="name">
+    	name like concat('%','$name$','%')
+    </isNotNull>
+	    			
+	</select>
+
+	<!-- 查找用户的特定记录数 分页查询 -->
+	<select id="getListByPager" parameterClass="pager" resultClass="User" cacheModel="UserCache">
+		SELECT 
+	      u.userId as userId,
+	      u.name as name,
+	      u.password as password,
+	      p.powerName as powerStr,
+	      u.personStr as personStr
+		FROM tuser u LEFT JOIN (tpower p) ON 
+		(u.power = p.powerId)
+		where userId > 0 and useless = 1 and power != 0  and name!='admin' 
+		<isGreaterThan prepend=" and" property="power" compareValue="0">
+			power = #power#
+		</isGreaterThan>
+    <isNotNull prepend=" and" property="name">
+    	name like concat('%','$name$','%')
+    </isNotNull>	
+		LIMIT $pageSizeCurrentPage$, $pageSize$    
+    </select> 
+
+  <!-- A simpler select example without the result map.  Note the 
+       aliases to match the properties of the target result class. -->
+  <select id="selectUser" parameterClass="User" resultClass="User" cacheModel="UserCache">
+    select * 
+    from tuser
+    where useless = 1 and userId > 0
+    <isGreaterThan prepend=" and" property="userId" compareValue="0">
+			userId = #userId#
+		</isGreaterThan>
+    <isNotNull prepend=" and" property="name">
+			name = #name#
+		</isNotNull>
+    <isNotNull prepend=" and" property="password">
+			password =#password#
+		</isNotNull>
+  </select>
+   
+  <!-- Insert example, using the Account parameter class -->
+  <insert id="insertUser" parameterClass="User">
+  	<![CDATA[
+    insert into tuser (
+      name,
+      password,
+      power,
+      useless,
+      placeAStr,
+      placeBStr,
+      personStr
+    )values (
+      #name#, #password#, #power#,1,'0','0',''
+    )
+   	]]>
+  </insert>
+
+  <!-- Update example, using the Account parameter class -->
+  <!-- parameterClass="java.lang.Integer"-->
+  <update id="updateUser" parameterClass="User">
+    update tuser set
+      power = #power#
+      <isNotEmpty prepend=", " property="password">
+      password = #password#
+      </isNotEmpty>
+      <isEqual prepend="," property="updateFlag" compareValue="1">
+	      placeAStr = #placeAStr#
+      </isEqual>
+      <isEqual prepend="," property="updateFlag" compareValue="2">
+	      placeBStr = #placeBStr#
+      </isEqual>
+      <isNotEmpty prepend=", " property="personStr">
+      personStr = #personStr#
+      </isNotEmpty>
+      <isEqual prepend=" " property="userId" compareValue="0">
+		    where  name = #name# and useless = 1
+      </isEqual>
+      <isGreaterThan prepend="," property="userId" compareValue="0">
+      		name = #name#
+		    where  userId = #userId# and useless = 1
+      </isGreaterThan>      
+  </update>
+
+
+  <!-- parameterClass="java.lang.Integer"-->
+  <update id="updateUseless" parameterClass="int">
+    update tuser set
+      useless = 0    
+    where
+      userId = #userId# and useless = 1 
+  </update>
+
+  <!-- Delete example, using an integer as the parameter class -->
+  <delete id="deleteUserByName" parameterClass="string">
+  	<![CDATA[
+    delete from tuser where name = #name#
+	]]>   
+  </delete>
+
+</sqlMap>

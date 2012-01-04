@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SysParam">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="SysParam" type="com.htc.domain.SysParam" />
+
+	<cacheModel id="SysParamCache" type="FIFO">
+		<flushInterval hours="1" />
+		<flushOnExecute statement="SysParam.updateSysParam" />
+		<property name="size" value="100" />
+	</cacheModel>
+
+	<!-- Select with no parameters using the result map for User class. -->
+	<select id="selectAllParam" resultClass="SysParam" cacheModel="SysParamCache">
+  	<![CDATA[
+    select argsValue,argsKey  from tsysparam
+   	]]>
+	</select>
+
+	<update id="updateSysParam" parameterClass="SysParam">
+  	<![CDATA[
+    update tsysparam set
+      argsValue = #argsValue#
+    where
+      argsKey = #argsKey#
+    ]]>
+	</update>
+	
+</sqlMap>

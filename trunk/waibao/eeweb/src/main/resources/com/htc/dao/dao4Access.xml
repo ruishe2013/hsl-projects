@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="gbk"?>
+
+<!DOCTYPE daoConfig
+    PUBLIC "-//ibatis.apache.org//DTD DAO Configuration 2.0//EN"
+    "http://ibatis.apache.org/dtd/dao-2.dtd">
+
+<daoConfig>
+
+  <context>
+
+    <transactionManager type="SQLMAP">
+      <property name="SqlMapConfigResource"
+        value="com/htc/domain/sql/SqlMap4Access.xml"/>        
+    </transactionManager>
+
+    <dao interface="com.htc.dao.iface.TAccessDao"
+      implementation="com.htc.dao.impl.TAccessSqlMapDao"/>
+     
+  </context>
+
+</daoConfig>

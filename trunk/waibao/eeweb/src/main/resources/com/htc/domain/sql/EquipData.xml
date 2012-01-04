@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="EquipData">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="EquipData" type="com.htc.domain.EquipData" />
+	<typeAlias alias="BeanForEqOrder" type="com.htc.bean.BeanForEqOrder" />
+	<typeAlias alias="BeanForEqTypeCount" type="com.htc.bean.BeanForEqTypeCount" />
+	<typeAlias alias="pager" type="com.htc.domain.Pager" />
+
+	<cacheModel id="EquipDataCache" type="FIFO">
+		<flushInterval hours="1" />
+		<flushOnExecute statement="EquipData.insertEquipData" />
+		<flushOnExecute statement="EquipData.updateEquipData" />
+		<flushOnExecute statement="EquipData.deleteEquipDataById" />
+		<flushOnExecute statement="EquipData.updateEquiOrder" />
+		<flushOnExecute statement="EquipData.updateEquiDev" />
+		<flushOnExecute statement="EquipData.updateUseless" />
+		<flushOnExecute statement="Workplace.updateWorkplace" />
+		<property name="size" value="100" />
+	</cacheModel>
+
+	<select id="getCounts" parameterClass="pager" resultClass="int"
+		cacheModel="EquipDataCache">
+		SELECT count(equipmentId) FROM tequipdata
+		where useless = 1 and equipmentId > 0
+		<isGreaterThan prepend=" and" property="placeId"
+			compareValue="0">
+			placeId = #placeId#
+		</isGreaterThan>
+		<isGreaterThan prepend=" and" property="type"		compareValue="0">
+			equitype = #type#
+		</isGreaterThan>
+		<isNotNull prepend=" and" property="mark">
+			mark like concat('%','$mark$','%')
+	  </isNotNull>
+	</select>
+
+	<!-- 查找用户的特定记录数 分页查询 -->
+	<select id="getListByPager" parameterClass="pager" resultClass="EquipData" 
+		cacheModel="EquipDataCache">
+		SELECT 
+			ed.equipmentId as equipmentId,
+			ed.address	  as address,
+			ed.equitype   as equitype,
+			et.typename	  as typeStr,
+			ed.mark		  as mark,
+			ed.remark	  as remark,
+			ed.tempUp	  as tempUp,
+			ed.tempDown	  as tempDown,
+			ed.tempDev	  as tempDev,
+			ed.humiUp	  as humiUp,
+			ed.humiDown	  as humiDown,
+			ed.humiDev	  as humiDev,
+			ed.equiorder  as equiorder,
+			ed.showPower as showPower,
+			ed.powerType as powerType,
+			ed.dsrsn as dsrsn,
+			ed.showAccess as showAccess,
+			ed.conndata as conndata,
+			
+			wp.placeName  as placeStr    		
+		
+		FROM  TEQUIPDATA ed LEFT JOIN (tequitype et, tworkplace wp)
+		ON (et.tyepId = ed.equitype and   ed.placeId = wp.placeId)
+		
+		where ed.useless = 1 and wp.useless >= 1 and equipmentId > 0
+		<isGreaterThan prepend=" and" property="placeId"	compareValue="0">
+			ed.placeId = #placeId#
+		</isGreaterThan>
+		<isGreaterThan prepend=" and" property="type"	compareValue="0">
+			ed.equitype = #type#
+		</isGreaterThan>
+		<isNotNull prepend=" and" property="mark">
+		   	ed.mark like concat('%','$mark$','%')
+		</isNotNull>
+		order by ed.equipmentId  
+		LIMIT $pageSizeCurrentPage$, $pageSize$    
+    </select> 
+
+	<select id="selcetEquiOrderStr" parameterClass="BeanForEqOrder" resultClass="EquipData"	cacheModel="EquipDataCache">
+		SELECT  
+			ed.*,  
+			wp.placeName as placeStr
+			FROM  tequipdata ed LEFT JOIN (tworkplace wp)
+					ON (ed.placeId = wp.placeId)
+			where ed.equipmentId > 0 and ed.useless >= #useless# and wp.useless >= #useless# 
+			<isEqual prepend=" " property="eqorderType" compareValue="0" >
+				order by ed.equiorder
+			</isEqual>
+			<isEqual prepend=" " property="eqorderType" compareValue="1" >
+				order by ed.equipmentid
+			</isEqual>
+	</select>
+	
+	<!--
+		A simpler select example without the result map. Note the aliases to
+		match the properties of the target result class.
+	-->
+	<select id="selectEquipData" parameterClass="EquipData"	resultClass="EquipData" cacheModel="EquipDataCache">
+		select 
+			equipmentId, address,		equitype,			mark,		remark,		tempUp,		tempDown, tempDev,		
+			humiUp,		humiDown,	humiDev,		equiorder,		placeId,		useless, showPower, powerType, dsrsn, showAccess, conndata
+		from tequipdata
+	
+    where useless = 1 and equipmentId > 0
+    <isGreaterThan prepend=" and" property="equipmentId" compareValue="0">
+    		equipmentId = #equipmentId#
+    </isGreaterThan>
+	  <isGreaterThan prepend=" and" property="placeId" compareValue="0">
+			(placeId = #placeId#
+		</isGreaterThan>
+    <isNotNull prepend=" and " property="mark">
+			mark = #mark#
+		</isNotNull>
+    <isGreaterThan prepend=" or " property="address" compareValue="0">
+			address = #address#)
+		</isGreaterThan>
+    <isNotNull prepend=" or " property="dsrsn">
+			dsrsn = #dsrsn#
+		</isNotNull>
+  </select>
+  
+	<select id="selectEqCountByType" resultClass="BeanForEqTypeCount">
+		SELECT
+			equitype as eqType, 
+			count(equitype) as eqCount 
+		FROM tequipdata 
+		where useless = 1
+		group by equitype
+  </select>
+  
+  <!-- Insert example, using the Account parameter class -->
+  <insert id="insertEquipData" parameterClass="EquipData">
+  	<![CDATA[
+    insert into tequipdata (
+			address,		equitype,			mark,		remark,		tempUp,		tempDown, tempDev,		
+			humiUp,		humiDown,	humiDev,		equiorder,		placeId,		useless, showPower, powerType, dsrsn, showAccess, conndata
+    ) values (
+			#address#,		#equitype#,			#mark#,			#remark#,		#tempUp#,		#tempDown#, #tempDev#,		
+			#humiUp#,		#humiDown#,		#humiDev#,		#equiorder#,		#placeId#,	#useless#, #showPower#, #powerType#, #dsrsn#,
+			#showAccess#, #conndata#
+    )
+   	]]>
+  </insert>
+
+  <!-- Update example, using the Account parameter class -->
+  <!-- parameterClass="java.lang.Integer"-->
+  <update id="updateEquipData" parameterClass="EquipData">
+  	<![CDATA[
+    update tequipdata set
+			address = #address#,
+			equitype= #equitype#,
+			mark	= #mark#,
+			remark	= #remark#,
+			tempUp	= #tempUp#,
+			tempDown= #tempDown#,
+			tempDev= #tempDev#,
+			humiUp	= #humiUp#,
+			humiDown= #humiDown#,
+			humiDev= #humiDev#,
+			placeId	= #placeId#,
+			showPower = #showPower#,
+			powerType = #powerType#,
+			dsrsn = #dsrsn#,
+			showAccess = #showAccess#, 
+			conndata = #conndata#
+    where
+      equipmentId = #equipmentId# and useless = 1
+    ]]>
+  </update>
+  
+  <update id="updateEquiDev" parameterClass="EquipData">
+     update tequipdata set
+			tempDev	= #tempDev#,
+			humiDev	= #humiDev#
+    where
+ 	    equipmentId = #equipmentId# and useless = 1
+  </update>
+  
+  <update id="updateEquiOrder" parameterClass="EquipData">
+      update tequipdata set
+		equiorder	= #equiorder#
+    where
+      equipmentId = #equipmentId# and useless = 1
+  </update>
+  
+  <update id="updateUseless" parameterClass="int">
+      update tequipdata set
+		useless	= 0
+    where
+      equipmentId = #equipmentId# and useless = 1
+  </update>
+
+  <!-- Delete example, using an integer as the parameter class -->
+  <delete id="deleteEquipDataById" parameterClass="int">
+  	<![CDATA[
+    delete from tequipdata where equipmentId = #equipmentId#
+	]]>   
+  </delete>
+  
+  <statement id="truncateEquipdata">
+  	truncate table tequipdata
+  </statement>	  
+
+</sqlMap>
