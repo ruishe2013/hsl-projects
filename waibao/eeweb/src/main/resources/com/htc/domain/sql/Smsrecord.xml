@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="smsrecord">
+
+	<typeAlias alias="SmsRecord" type="com.htc.domain.SmsRecord" />
+
+	<select id="selectRecs" parameterClass="SmsRecord" resultClass="SmsRecord">
+    select id,smsphone,smscontent,smsrectime,smstype
+		from tsmsrecord
+		where smsphone in ($smsphone$) and
+					(smsrectime between #smsStart# and #smsTo#) and 
+					smstype in ($typeStr$)
+		order by smsrectime desc
+	</select>
+
+	<insert id="insertRecord" parameterClass="SmsRecord">
+  	<![CDATA[
+    insert into tsmsrecord (
+      smsphone,smscontent,smsrectime,smstype
+    )values (
+      #smsphone#,#smscontent#,#smsrectime#,#smstype#
+    )
+   	]]>
+	</insert>
+
+</sqlMap>

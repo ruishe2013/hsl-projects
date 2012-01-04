@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="gbk"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+	<!-- spring 的数据源的配置 定义数据源Bean，使用C3P0数据源实现 -->
+	<import resource="classpath:dataSourceContexts.xml"/>
+	<!-- 为业务逻辑组件注入DAO组件,实现层的注入 -->
+	<import resource="classpath:daoContext.xml"/>
+	
+	<!-- MySql 事务的定义 --> 
+	<bean id="transactionManager"	class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource4Mysql" />
+	</bean>	
+	<!-- 配置事务切面Bean,指定事务管理器 -->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<!-- 用于配置详细的事务语义 -->
+		<tx:attributes>
+			<!-- 所有以'get, search, select'开头的方法是read-only的 -->
+			<tx:method name="get*" read-only="true"/>
+			<tx:method name="search*" read-only="true"/>
+			<tx:method name="select*" read-only="true"/>
+			<!-- 其他方法使用默认的事务设置 -->
+			<tx:method name="*"/>
+		</tx:attributes>
+	</tx:advice>
+	<aop:config>
+		<!-- 配置一个切入点，匹配服务类下面的包,所有以Impl结尾的类的所有方法的执行 -->
+		<aop:pointcut id="pointcut"	expression=	"execution(* com.htc.model.*Service.*(..))"/>
+		<!-- 指定在txAdvice切入点应用txAdvice事务切面 -->
+		<aop:advisor advice-ref="txAdvice"	pointcut-ref="pointcut"/>
+	</aop:config>	
+	
+	<!-- 定义quartz任务-->
+	<import resource="classpath:quartzContext.xml"/> 
+		
+</beans>

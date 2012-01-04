@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 指定Spring配置文件的DTD信息 -->
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN"
+	"http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<!-- Spring配置文件的根元素 -->
+<beans>
+
+	<!-- 读取ibatis配置文件 -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:com/htc/domain/sqlmap/SqlMapConfig.xml" />
+		<property name="dataSource" ref="dataSource4Mysql" />
+	</bean>		
+	
+	<bean id="daoTemplate" abstract="true" lazy-init="true">
+		<property name="sqlMapClient" ref="sqlMapClient"/>
+	</bean>
+
+	<!-- 为业务逻辑组件注入DAO组件 -->
+	<bean id="alarmRecDao"	class="com.htc.dao.impl.AlarmRecSqlMapDao" parent="daoTemplate"/>
+	<bean id="backUpListDao"	class="com.htc.dao.impl.BackUpListSqlMapDao" parent="daoTemplate"/>
+	<bean id="basePageDao"	class="com.htc.dao.impl.BasePageSqlMapDao" parent="daoTemplate"/>
+	<bean id="equipDataDao"	class="com.htc.dao.impl.EquipDataSqlMapDao"	parent="daoTemplate"/>
+	<bean id="equitypeDao"	class="com.htc.dao.impl.EquiTypeSqlMapDao"	parent="daoTemplate"/>
+	<bean id="gprsSetDao"	class="com.htc.dao.impl.GprsSetSqlMapDao"	parent="daoTemplate"/>
+	<bean id="hisRecordDao"	class="com.htc.dao.impl.HisRecordSqlMapDao"	parent="daoTemplate"/>
+	<bean id="minRecordDao"	class="com.htc.dao.impl.MinRecordSqlMapDao"		parent="daoTemplate"/>
+	<bean id="phoneListDao"	class="com.htc.dao.impl.PhoneListSqlMapDao"	parent="daoTemplate"/>
+	<bean id="powerDao"	class="com.htc.dao.impl.PowerSqlMapDao"	parent="daoTemplate"/>
+	<bean id="recordDao"	class="com.htc.dao.impl.RecordSqlMapDao"	parent="daoTemplate"/>
+	<bean id="smsRecordDao"	class="com.htc.dao.impl.SmsRecordSqlMapDao"	parent="daoTemplate"/>
+	<bean id="sysParamDao"	class="com.htc.dao.impl.SysParamSqlMapDao"	parent="daoTemplate"/>
+	<bean id="tLogDao"	class="com.htc.dao.impl.TLogSqlMapDao"	parent="daoTemplate"/>
+	<bean id="userDao"	class="com.htc.dao.impl.UserSqlMapDao"	parent="daoTemplate"/>
+	<bean id="workplaceDao"	class="com.htc.dao.impl.WorkPlaceSqlMapDao"	parent="daoTemplate"/>
+	
+	<!-- 为业务逻辑组件注入Service组件-->
+	<bean id="mainService"	class="com.htc.model.MainService">
+		<property name="alarmRecDao" ref="alarmRecDao" />
+		<property name="recordDao" ref="recordDao" />
+		<property name="hisRecordDao" ref="hisRecordDao"/>
+		<property name="minRecordDao" ref="minRecordDao" />
+		<property name="reclogDao" ref="tLogDao" />
+		<property name="smsRecordDao" ref="smsRecordDao" />
+		<property name="basePageDao" ref="basePageDao" />
+	</bean>
+	<bean id="manaService"	class="com.htc.model.ManaService">
+		<property name="workplaceDao" ref="workplaceDao" />
+		<property name="equipDataDao" ref="equipDataDao"/>
+		<property name="equitypeDao" ref="equitypeDao" />
+		<property name="basePageDao" ref="basePageDao" />
+	</bean>
+	<bean id="setSysService"	class="com.htc.model.SetSysService">
+		<property name="gprsSetDao" ref="gprsSetDao" />
+		<property name="phoneListDao" ref="phoneListDao" />
+		<property name="backUpListDao" ref="backUpListDao"/>
+		<property name="sysParamDao" ref="sysParamDao"/>
+		<property name="basePageDao" ref="basePageDao" />
+	</bean>
+	<bean id="userService"	class="com.htc.model.UserService">
+		<property name="userDao" ref="userDao" />
+		<property name="powerDao" ref="powerDao" />
+		<property name="basePageDao" ref="basePageDao" />
+	</bean>
+	
+	<!-- 为公共组件注入Service组件-->
+	<bean id="commonDataUnit"	class="com.htc.common.CommonDataUnit">
+		<property name="manaService" ref="manaService" />
+		<property name="setSysService" ref="setSysService" />
+		<property name="mainService" ref="mainService" />
+		<property name="serviceAccess" ref="serviceAccess" />
+		<property name="simCard_Unit" ref="simCard_Unit" />
+	</bean>
+	
+	<!-- 为串口通信组件注入Service组件-->
+	<bean id="first_Level"	class="com.htc.model.seriaPort.Level_First_Serial">
+		<property name="commonDataUnit" ref="commonDataUnit" />
+		<property name="second_Level" ref="second_Level" />
+		<property name="mainService" ref="mainService" />
+		<property name="serialPortQuartz" ref="serialPortQuartz" />
+	</bean>
+	<bean id="second_Level"	class="com.htc.model.seriaPort.Level_Second_Serial">
+		<property name="final_Level" ref="final_Level" />
+		<property name="commonDataUnit" ref="commonDataUnit" />
+		<property name="mainService" ref="mainService" />
+		<property name="serviceAccess" ref="serviceAccess" />		
+	</bean>
+	<bean id="final_Level"	class="com.htc.model.seriaPort.Level_Final_Serial" scope="prototype"/>
+	
+	<!-- 短信发送模块 -->
+	<bean id="simCard_Unit"	class="com.htc.model.seriaPort.SimCard_Unit">
+		<property name="simCard_Serial" ref="simCard_Serial" />
+		<property name="commonDataUnit" ref="commonDataUnit" />		
+	</bean>
+	<bean id="simCard_Serial"	class="com.htc.model.seriaPort.SimCard_Serial" scope="prototype"/>
+	
+	
+	<!-- 为监听器组件注入Service组件-->
+	<bean id="serialPortListener"	class="com.htc.listener.SerialPortListener">
+		<property name="commonDataUnit" ref="commonDataUnit" />
+		<property name="first_Level" ref="first_Level" />
+		<property name="simCard_Unit" ref="simCard_Unit" />
+	</bean>
+	
+	<!-- Access 需要组件 -->
+	<bean id="sqlMapClient4Acc" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:com/htc/domain/sqlmap/SqlMap4Access.xml" />
+		<property name="dataSource" ref="dataSource4Access" />
+	</bean>		
+	<bean id="dao4AccessTemp" abstract="true" lazy-init="true">
+		<property name="sqlMapClient" ref="sqlMapClient4Acc"/>
+	</bean>	
+	<!-- 为业务逻辑组件注入DAO组件 -->
+	<bean id="accessDao"	class="com.htc.dao.impl.TAccessSqlMapDao"	parent="dao4AccessTemp"/>	
+	<!-- 为业务逻辑组件注入Service组件-->
+	<bean id="serviceAccess"	class="com.htc.model.ServiceAccess">
+		<property name="accessDao" ref="accessDao" />
+		<property name="commonDataUnit" ref="commonDataUnit" />
+	</bean>	
+	
+	<!-- Sqlserver 需要组件  -->
+	<bean id="sqlMapClient4Sql" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:com/htc/domain/sqlmap/SqlMap4Sqlserver.xml" />
+		<property name="dataSource" ref="dataSource4Sqlserver" />
+	</bean>		
+	<bean id="dao4SqlserverTemp" abstract="true" lazy-init="true">
+		<property name="sqlMapClient" ref="sqlMapClient4Sql"/>
+	</bean>
+	<!-- 为业务逻辑组件注入DAO组件 -->		
+	<bean id="zjHistroyDao"	class="com.htc.dao.impl.ZjHistroySqlMapDao"	parent="dao4SqlserverTemp"/>	
+	<bean id="zjMonitorDao"	class="com.htc.dao.impl.ZjMonitorSqlMapDao"	parent="dao4SqlserverTemp"/>
+	<!-- 为业务逻辑组件注入Service组件-->	
+	<bean id="serviceSqlServer"	class="com.htc.model.ServiceSqlServer">
+		<property name="zjMonitorDao" ref="zjMonitorDao" />
+		<property name="zjHistroyDao" ref="zjHistroyDao" />
+	</bean>
+	
+</beans>

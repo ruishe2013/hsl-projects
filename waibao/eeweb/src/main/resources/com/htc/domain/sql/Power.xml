@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Power">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="Power" type="com.htc.domain.Power" />
+
+	<select id="selectAll" resultClass="Power">
+  	<![CDATA[
+    select 
+			powerId,
+			powerName
+		from tpower
+		where powerId > 0
+   	]]>
+	</select>
+
+</sqlMap>

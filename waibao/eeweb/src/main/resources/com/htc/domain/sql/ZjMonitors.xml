@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ZjMonitors">
+
+	<typeAlias alias="ZjMonitors" type="com.htc.domain.ZjMonitors" />
+
+	<select id="select4TestLink" resultClass="int" >
+		SELECT count(*) FROM monitors 
+	</select>
+	
+	<select id="selectAllZjMonitor" resultClass="ZjMonitors" >
+		SELECT * FROM monitors 
+	</select>
+	
+	<insert id="insertZjMonitors" parameterClass="ZjMonitors">
+  	<![CDATA[
+    insert into monitors (
+        MonitorID,	MonitorName,	StoreID,		T_High,	T_Low,	H_High,	H_Low,
+				NoID,				Sendcmd,			LicenseNo,	ZgCode 
+    )values (
+				#MonitorID#,	#MonitorName#,	#StoreID#,		#T_High#,	#T_Low#,	#H_High#,	#H_Low#,
+        #NoID#,				#Sendcmd#,			#LicenseNo#,	#ZgCode# 
+    )
+   	]]>
+	</insert>
+
+	<update id="updateZjMonitors" parameterClass="ZjMonitors">
+    update monitors set
+				MonitorName = #MonitorName#,	
+				StoreID = #StoreID#,		
+				T_High = #T_High#,	
+				T_Low = #T_Low#,	
+				H_High = #H_High#,	
+				H_Low = #H_Low#,
+        NoID = #NoID#,				
+        Sendcmd = #Sendcmd#,			
+        LicenseNo = #LicenseNo#,	
+        ZgCode = #ZgCode#
+    	where MonitorID = #MonitorID#
+	</update>
+	
+	<delete id="deleteZjMonitors" parameterClass="ZjMonitors">
+		delete from monitors where MonitorID = #MonitorID#	
+	</delete>
+	
+</sqlMap>

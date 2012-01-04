@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ZjHistory">
+
+	<typeAlias alias="ZjHistory" type="com.htc.domain.ZjHistory" />
+	<typeAlias alias="BeanForZjHisRec" type="com.htc.bean.BeanForZjHisRec" />
+
+	<select id="selectZjHisRec" parameterClass="BeanForZjHisRec" resultClass="ZjHistory" >
+  	<![CDATA[
+    select 
+			a.HID as HID,
+			a.MonitorID as MonitorID,
+			a.Temperature as Temperature,
+			a.Humidity as Humidity,
+			a.CheckTime as CheckTime,
+			a.bSend as bSend,
+			b.MonitorName as MonitorName,
+			b.LicenseNo as LicenseNo    
+		from history a LEFT JOIN monitors b on (a.MonitorID = b.MonitorID)
+		where a.MonitorID in ($placeList$) and 
+			(a.CheckTime between #timeFrom# and #timeTo#) and
+			(a.Temperature between #lowTemp# and #highTemp#) and 
+			(a.Humidity between #lowHumi# and #highHumi#)
+		order by a.CheckTime desc, MonitorID		
+   	]]>
+	</select>
+
+</sqlMap>

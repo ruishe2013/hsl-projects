@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+	
+  <!-- 定义调度任务   -->
+	<bean	id="instantDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<!-- 指定任务Bean的实现类 -->
+		<property name="jobClass" value="com.htc.model.quartz.TaskForInstantData"/>
+		<!-- 为任务Bean注入属性 -->
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="commonDataUnit" value-ref="commonDataUnit"/>
+				<entry key="first_Level" value-ref="first_Level"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean	id="dailyDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<!-- 指定任务Bean的实现类 -->
+		<property name="jobClass" value="com.htc.model.quartz.TaskForStateDailyMonth"/>
+		<!-- 为任务Bean注入属性 -->
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="commonDataUnit" value-ref="commonDataUnit"/>
+				<entry key="first_Level" value-ref="first_Level"/>
+				<entry key="mainService" value-ref="mainService"/>
+				<entry key="setSysService" value-ref="setSysService"/>
+			</map>
+		</property>
+	</bean>
+
+	<bean	id="smsDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<!-- 指定任务Bean的实现类 -->
+		<property name="jobClass" value="com.htc.model.quartz.TaskForSms"/>
+		<!-- 为任务Bean注入属性 -->
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="commonDataUnit" value-ref="commonDataUnit"/>
+				<entry key="simCard_Unit" value-ref="simCard_Unit"/>
+				<entry key="mainService" value-ref="mainService"/>
+			</map>
+		</property>
+	</bean>
+	
+	<!-- 执行实际的调度调度 -->
+	<bean	id="quartzScheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="applicationContextSchedulerContextKey"  value="applicationContextKey" />
+		<property name="configLocation" value="classpath:quartz.properties"/>
+	</bean>
+	
+	<bean id="serialPortQuartz"	class="com.htc.model.quartz.SerialPortQuartz">
+		<property name="scheduler" ref="quartzScheduler" />
+		<property name="instantDetail" ref="instantDetail" />
+		<property name="dailyDetail" ref="dailyDetail" />
+		<property name="smsDetail" ref="smsDetail" />
+	</bean>
+	
+	<!-- 时间固定的配置方案 -->
+  <!-- 配置调度任务
+	<bean id="instantTask"	class="org.springframework.scheduling.quartz.SimpleTriggerBean">
+		<property name="jobDetail">
+			使用嵌套Bean的方式来定义任务Bean
+			<bean	id="instantDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+				指定任务Bean的实现类
+				<property name="jobClass" value="com.htc.model.quartz.TaskForInstantData"/>
+				为任务Bean注入属性
+				<property name="jobDataAsMap">
+					<map>
+						<entry key="commonDataUnit" value-ref="commonDataUnit"/>
+						<entry key="first_Level" value-ref="first_Level"/>
+					</map>
+				</property>
+			</bean>
+		</property>
+		指定Cron表达式：每隔10秒 执行调度
+		<property name="cronExpression" value="0/10 * * * * ?"/>
+		以毫秒作为单位,每10秒执行一次
+		<property name="repeatInterval" value="10000"/>
+		以毫秒作为单位,启动时延时15秒
+		<property name="startDelay" value="15000" />
+	</bean>
+	
+	<bean id="dailyTask"	class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			使用嵌套Bean的方式来定义任务Bean
+			<bean	id="dailyDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
+				指定任务Bean的实现类
+				<property name="jobClass" value="com.htc.model.quartz.TaskForStateDailyMonth"/>
+				为任务Bean注入属性
+				<property name="jobDataAsMap">
+					<map>
+						<entry key="commonDataUnit" value-ref="commonDataUnit"/>
+						<entry key="first_Level" value-ref="first_Level"/>
+						<entry key="mainService" value-ref="mainService"/>
+						<entry key="setSysService" value-ref="setSysService"/>
+					</map>
+				</property>
+			</bean>
+		</property> 
+		指定Cron表达式：每天的0:0:0 执行调度 
+		<property name="cronExpression"	value="0 0 0 * * ?"/>
+	</bean>
+	
+	执行实际的调度调度 
+	<bean	class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="applicationContextSchedulerContextKey"  value="applicationContextKey" />
+		<property name="configLocation" value="classpath:quartz.properties"/>
+		<property name="triggers">
+			<list>
+				<ref local="instantTask"/>
+				<ref local="dailyTask"/>
+			</list>
+		</property>
+	</bean>	-->
+	
+</beans>

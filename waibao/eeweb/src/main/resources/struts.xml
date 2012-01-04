@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="gbk" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="gbk"/>    
+	<constant name="struts.action.extension" value="action,," />
+	<constant name="struts.custom.i18n.resources" value="properties.messages" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<constant name="struts.objectFactory" value="spring" />
+
+	<constant name="struts.i18n.reload" value="false" />
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.configuration.xml.reload" value="false" />
+	<!--<constant name="struts.multipart.saveDir" value="/tmp"/>-->
+
+	<package name="default" extends="struts-default">
+		<interceptors>
+			<interceptor name="loginInterceptor" class="com.htc.Inteceptor.LoadInterceptor" />
+			<interceptor-stack name="htc_Stack">
+				<interceptor-ref name="exception" />
+				<interceptor-ref name="alias" />
+				<interceptor-ref name="servletConfig" />
+				<interceptor-ref name="prepare" />
+				<interceptor-ref name="i18n" />
+				<interceptor-ref name="chain" />
+				<interceptor-ref name="debugging" />
+				<interceptor-ref name="profiling" />
+				<interceptor-ref name="scopedModelDriven" />
+				<interceptor-ref name="modelDriven" />
+				<interceptor-ref name="fileUpload" />
+				<interceptor-ref name="checkbox" />
+				<interceptor-ref name="staticParams" />
+				<interceptor-ref name="params">
+					<param name="excludeParams">dojo\..*</param>
+				</interceptor-ref>
+				<interceptor-ref name="validation">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+				<interceptor-ref name="workflow">
+					<param name="excludeMethods">input,back,cancel,browse</param>
+				</interceptor-ref>
+				<interceptor-ref name="exception" />
+			</interceptor-stack>
+
+			<interceptor-stack name="htcStack">
+				<interceptor-ref name="htc_Stack" />
+				<interceptor-ref name="loginInterceptor" />
+			</interceptor-stack>
+
+		</interceptors>
+		<global-results>
+			<result name="index" type="redirect">/index.html</result>
+			<result name="not_login_yet" type="redirect">/common/unload.html</result>
+			<result name="not_power_yet" type="redirect">/common/unpower.html</result>
+			<result name="page_err" type="redirect">/common/errorpage.html</result>
+		</global-results>
+	</package>
+
+	<package name="user" extends="default" namespace="/userdo">
+	
+		<action name="user_*_Action" class="com.htc.action.UserAction" method="{1}">
+			<result name="percreate">/user/userAdd.jsp</result>
+			<result name="perupdate">/user/userUpdate.jsp</result>
+			<result name="perupdatepass">/user/userUpdatepass.jsp</result>
+			<result name="success">/user/userList.jsp</result>
+			<interceptor-ref name="htc_Stack" />
+			<interceptor-ref name="loginInterceptor" />
+		</action>
+	
+		<action name="loginAction" class="com.htc.action.UserAction"	method="login">
+			<result name="loginOut">/user/userLoad.jsp</result>
+			<result name="loginIn" type="redirect">/main/MainBarAction</result>
+			<interceptor-ref name="htc_Stack" />
+		</action>
+		
+		<action name="loginOutAction" class="com.htc.action.UserAction"	method="loginOut">
+			<interceptor-ref name="htc_Stack" />
+		</action>
+		
+		<action name="userload">
+			<result>/user/userLoad.jsp</result>
+			<interceptor-ref name="htc_Stack" />
+		</action>
+				
+		<!-- 测试用 -->
+    <action name="excelActionTest" class="com.htc.action.exportxlsAction" method="testExport">
+	     <result name="excel" type="stream">
+	         <param name="contentType">application/vnd.ms-excel</param>
+	         <param name="inputName">excelStream</param>
+	         <param name="bufferSize">1024</param>
+	     </result>
+     </action>
+     
+     <!--
+     <param name="contentDisposition">attachment;filename="${fileName}"</param> 
+      -->
+     <action name="excelAction" class="com.htc.action.exportxlsAction" method="exportFile">
+	     <result name="success" type="stream">
+	         <param name="contentType">application/vnd.ms-excel</param>
+	         <param name="inputName">excelStream</param>
+	         <param name="bufferSize">40960</param>
+	     </result>
+	     <result name="noDataReturn">/main/noDataReturn.jsp</result>		
+				<interceptor-ref name="htc_Stack" />
+				<interceptor-ref name="loginInterceptor" />
+     </action>
+     
+     <action name="sysArgsAction" class="com.htc.action.exportxlsAction" method="exportSysConfig">
+	     <result name="success" type="stream">
+	         <param name="contentType">text/x-setext</param>
+	         <param name="inputName">excelStream</param>
+	         <param name="bufferSize">40960</param>
+	     </result>
+	     <result name="noDataReturn">/main/noDataReturn.jsp</result>		
+				<interceptor-ref name="htc_Stack" />
+				<interceptor-ref name="loginInterceptor" />
+     </action>
+     
+		<action name="configUploadAction" class="com.htc.action.exportxlsAction" method="configUpload">
+	    <result name="success">/main/inoutData.jsp</result>		
+	    <result name="noDataReturn">/main/noDataReturn.jsp</result>		
+			<interceptor-ref name="fileUploadStack"></interceptor-ref>
+			<interceptor-ref name="htc_Stack" />
+			<interceptor-ref name="loginInterceptor" />			
+		</action>     
+     
+    <action name="htcexcel" class="com.htc.action.exportxlsAction" method="exportExcel">
+    	<result>/main/exportxls.jsp</result>
+    	<interceptor-ref name="htc_Stack" />
+    </action>
+     
+	</package>
+
+	<package name="manage" extends="default" namespace="/mana">
+		<default-interceptor-ref name="htcStack" />
+
+		<action name="area_*_Action" class="com.htc.action.AreaAction" method="{1}">
+			<result name="percreate">/manage/area_add.jsp</result>
+			<result name="perupdate">/manage/area_update.jsp</result>
+			<result name="pergsm">/manage/area_gsm.jsp</result>
+			<result name="success">/manage/area_List.jsp</result>
+		</action>
+		
+		<action name="equi_*_Action" class="com.htc.action.EquiAction" method="{1}">
+			<result name="percreate">/manage/equi_add.jsp</result>
+			<result name="perupdate">/manage/equi_update.jsp</result>		
+			<result name="success">/manage/equi_List.jsp</result>
+			<result name="showOrder">/manage/equi_Order.jsp</result>
+			<result name="noDataReturn">/main/noDataReturn.jsp</result>			
+		</action>
+
+		<action name="gprsTestAction" class="com.htc.action.GprsTestAction">
+			<result>/manage/gprsTestInfo.jsp</result>
+		</action>
+		
+		<action name="phone_*_Action" class="com.htc.action.GprsPhoneAction" method="{1}">
+			<result name="percreate">/manage/grpsPhone_add.jsp</result>
+			<result name="perupdate">/manage/grpsPhone_update.jsp</result>
+			<result name="success">/manage/grpsPhone_List.jsp</result>
+		</action>
+		
+		<action name="gprs_*_Action" class="com.htc.action.GprsSetAction" method="{1}">
+			<result name="percreate">/manage/gprs_add.jsp</result>
+			<result name="perupdate">/manage/gprs_update.jsp</result>
+			<result name="success">/manage/gprs_List.jsp</result>
+		</action>
+		
+		<action name="sys_*_Action" class="com.htc.action.SetSysAction" method="{1}">
+			<result name="backup">/main/histroyBackUp.jsp</result>
+			<result name="setting">/manage/sysSetting.jsp</result>
+			<result name="noDataReturn">/main/noDataReturn.jsp</result>
+		</action>
+
+		<action name="*">
+			<result>/manage/{1}.jsp</result>
+		</action>
+	</package>
+	
+	<package name="managejson" namespace="/mana" extends="json-default">
+		<!-- GPRS处理数据json -->
+		<action name="gprsTestlinkJson" class="com.htc.action.GprsTestAction"	method="link">
+			<result type="json"/>
+		</action>
+		<action name="gprsTestdislinkJson" class="com.htc.action.GprsTestAction"	method="dislink">
+			<result type="json"/>
+		</action>
+		<action name="gprsTestsendJson" class="com.htc.action.GprsTestAction"	method="send">
+			<result type="json"/>
+		</action>
+	</package>	
+
+	<package name="main" extends="default" namespace="/main">
+		<default-interceptor-ref name="htcStack" />
+
+		<!-- 即时数据 -->
+		<action name="MainBarAction" class="com.htc.action.MainRecentDataAction">
+			<param name="tagFlag">1</param>
+			<result>/main/allBars.jsp</result>
+		</action>
+		
+		<action name="MainLineAction" class="com.htc.action.MainRecentDataAction">
+			<param name="tagFlag">2</param>
+			<result>/main/allLines.jsp</result>
+		</action>
+		
+		<action name="tempDataAction" class="com.htc.action.MainRecentDataAction" method="tempData">
+			<result>/main/showdata.jsp</result>
+		</action>
+		
+		<action name="tempconfigAction" class="com.htc.action.MainRecentDataAction" method="tempConfig">
+			<result>/main/showconfig.jsp</result>
+		</action>
+		
+		<action name="humiDataAction" class="com.htc.action.MainRecentDataAction" method="humiData">
+			<result>/main/showdata.jsp</result>
+		</action>
+		
+		<action name="humiconfigAction" class="com.htc.action.MainRecentDataAction" method="humiConfig">
+			<result>/main/showconfig.jsp</result>
+		</action>
+
+		<!-- 历史数据 -->
+		<action name="historyDataAction" class="com.htc.action.MainHistoryAction">
+			<param name="showType">1</param>
+			<result>/main/history.jsp</result>
+			<result name="printOut">/main/statForData.jsp</result>			
+			<result name="noDataReturn">/main/noDataReturn.jsp</result>			
+		</action>
+		
+		<action name="historyFlashAction" class="com.htc.action.MainHistoryAction">
+			<param name="showType">2</param>
+			<result>/main/history.jsp</result>
+			<result name="printOut">/main/statForFlash.jsp</result>			
+			<result name="noDataReturn">/main/noDataReturn.jsp</result>		
+		</action>
+		
+		<action name="hisZjDataAction" class="com.htc.action.MainHistoryAction" method="hisZj">
+			<result>/main/history4zj.jsp</result>
+			<result name="printOut">/main/statForData.jsp</result>			
+			<result name="noDataReturn">/main/noDataReturn.jsp</result>			
+		</action>		
+
+		<!-- 报警数据 statForwarn.jsp warnDate -->
+		<action name="warnDataAction" class="com.htc.action.WarnDataAction">
+			<result>/main/warnDate.jsp</result>
+			<result name="printOut">/main/statForwarn.jsp</result>
+			<result name="noDataReturn">/main/noDataReturn.jsp</result>			
+		</action>
+		
+		<!-- 系统日志数据 -->
+		<action name="syslogAction" class="com.htc.action.TLogAction">
+			<result>/main/syslogInfo.jsp</result>
+		</action>		
+		
+		<!-- 短信信息数据 -->
+		<action name="smsRecAction" class="com.htc.action.SmsDataAction">
+			<result>/main/smsDate.jsp</result>
+			<result name="printOut">/main/statForsms.jsp</result>
+			<result name="noDataReturn">/main/noDataReturn.jsp</result>						
+		</action>		
+		
+		<action name="*">
+			<result>/main/{1}.jsp</result>
+		</action>
+	</package>
+
+	<package name="mainjson" namespace="/main" extends="json-default">
+		<!-- 即时数据json -->
+		<action name="barChartJson" class="com.htc.action.MainRecentDataAction"	method="barChartJson">
+			<result type="json"/>
+		</action>
+		<action name="lineChartJson" class="com.htc.action.MainRecentDataAction" method="lineChartJson">
+			<result type="json" />
+		</action>
+		<action name="soundJson" class="com.htc.action.SoundAction" >
+			<result type="json" />
+		</action>
+	</package>
+
+	<package name="serial" extends="default" namespace="/seri">
+		<default-interceptor-ref name="htcStack" />
+
+		<action name="serialportAction" class="com.htc.action.SerialPortAction">
+			<result>/serialport/watchPort.jsp</result>
+		</action>
+
+		<action name="serialSetDataAction" class="com.htc.action.SerialSetAction">
+			<result>/serialport/serialSetData.jsp</result>
+		</action>
+		
+		<action name="*serialSetAction" class="com.htc.action.SerialSetAction" method="{1}">
+			<result>/serialport/serialSetData.jsp</result>
+		</action>
+	</package>	
+	
+	<package name="htcbasic" extends="default" namespace="/sys">
+		<action name="imexport" class="com.htc.action.SerialPortAction">
+			<result>/main/inoutData.jsp</result>
+		</action>	
+		<action name="restart">
+			<result>/main/restartSys.jsp</result>
+		</action>	
+		<action name="restartAction" class="com.htc.action.SerialPortAction" method="restart">
+			<result>/main/restartSys.jsp</result>
+		</action>
+	</package>	
+	
+	<package name="common" extends="default" namespace="/main">
+		<default-interceptor-ref name="htcStack" />
+		<action name="OnLineWarnAction" class="com.htc.action.OnLineWarnDataAction">
+			<result>/main/allonLineWarn.jsp</result>
+		</action>
+		<action name="openSoundAction" class="com.htc.action.OnLineWarnDataAction" method="openBackSound">
+			<result>/main/allonLineWarn.jsp</result>
+		</action>
+		<action name="closeSoundAction" class="com.htc.action.OnLineWarnDataAction" method="closeBackSound">
+			<result>/main/allonLineWarn.jsp</result>
+		</action>
+	</package>
+
+	<package name="commonJson" extends="json-default" namespace="/main">
+		<!-- 获取公司名称的json -->
+		<action name="comJson" class="com.htc.action.ComNameAction"	>
+			<result type="json" />
+		</action>
+		
+		<!-- 报警数据复位结果 -->
+		<action name="doWarnJson" class="com.htc.action.OnLineWarnDataAction"	method="doWarnJson">
+			<result type="json" />
+		</action>
+		<action name="warnInfoJson" class="com.htc.action.OnLineWarnDataAction">
+			<result type="json" />
+		</action>
+	</package>
+
+</struts>

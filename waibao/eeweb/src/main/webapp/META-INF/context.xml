@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <Context >
+  <Resource name="jdbc/htcweb"
+            auth="Container"
+            type="javax.sql.DataSource"
+            username="root"
+            password="admin"
+            driverClassName="com.mysql.jdbc.Driver"
+            url="jdbc:mysql://127.0.0.1:3306/htcweb?autoReconnect=true&amp;characterEncoding=GBK"
+            maxActive="100"
+            maxIdle="30"
+            maxWait="10000"
+            description="mySql Database for  htcweb"/>
+</Context>

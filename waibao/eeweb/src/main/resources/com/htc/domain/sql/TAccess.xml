@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="TAccess">
+
+	<typeAlias alias="Data4Access" type="com.htc.domain.Data4Access" />
+	
+	<select id="getList" resultClass="Data4Access" >
+		SELECT strDSRSN, strDSRName,strDateTime,strTemp,strHUM,strAirPress,strEquipmentType	FROM tbl_Data 
+  </select> 	
+
+  <insert id="insertData" parameterClass="Data4Access">
+  	<![CDATA[
+    insert into tbl_Data (strDSRSN, strDSRName,strDateTime,strTemp,strHUM,strAirPress,strEquipmentType) 
+    values (#strDSRSN#, #strDSRName#, #strDateTime#, #strTemp#, #strHUM#, #strAirPress#, #strEquipmentType#)
+   	]]>
+  </insert>
+
+  <update id="updateData" parameterClass="Data4Access">
+  	<![CDATA[
+    update tbl_Data set
+      strDateTime = '$strDateTime$',
+      strTemp = '$strTemp$',
+			strHUM = '$strHUM$',
+			strAirPress = '$strAirPress$'          
+    where
+      strDSRSN = '$strDSRSN$' 
+    ]]>
+  </update>
+  
+  <delete id="deletetData" parameterClass="string">
+  	<![CDATA[
+    delete from tbl_Data where strDSRSN = #strDSRSN#
+		]]>   
+  </delete>
+  
+  <delete id="deleteAll">
+  	<![CDATA[
+    delete from tbl_Data
+		]]>   
+  </delete>
+
+</sqlMap>

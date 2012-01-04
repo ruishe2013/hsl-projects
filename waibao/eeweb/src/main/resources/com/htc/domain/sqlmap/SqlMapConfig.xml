@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="gbk" ?> 
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN" 
+"http://ibatis.apache.org/dtd/sql-map-config-2.dtd">
+
+<sqlMapConfig>
+
+	<settings 
+		cacheModelsEnabled="true" enhancementEnabled="true"
+		lazyLoadingEnabled="true" errorTracingEnabled="true" 
+		maxRequests="50" maxSessions="50" 
+		maxTransactions="50" useStatementNamespaces="true" />
+
+	<sqlMap resource="com/htc/domain/sql/AlarmRec.xml" />	
+	<sqlMap resource="com/htc/domain/sql/BackUpList.xml" />	
+	<sqlMap resource="com/htc/domain/sql/EquipData.xml" />	
+	<sqlMap resource="com/htc/domain/sql/EquiType.xml" />	
+	<sqlMap resource="com/htc/domain/sql/GprsSet.xml" />	
+	<sqlMap resource="com/htc/domain/sql/HisRecordDailay.xml" />	
+	<sqlMap resource="com/htc/domain/sql/HisRecordMonth.xml" />	
+	<sqlMap resource="com/htc/domain/sql/MinRecord.xml" />	
+	<sqlMap resource="com/htc/domain/sql/PhoneList.xml" />	
+	<sqlMap resource="com/htc/domain/sql/Power.xml" />	
+	<sqlMap resource="com/htc/domain/sql/Record.xml" />
+	<sqlMap resource="com/htc/domain/sql/Smsrecord.xml" />
+	<sqlMap resource="com/htc/domain/sql/SysParam.xml" />
+	<sqlMap resource="com/htc/domain/sql/TLog.xml" />
+	<sqlMap resource="com/htc/domain/sql/User.xml" />
+	<sqlMap resource="com/htc/domain/sql/WorkPlace.xml" />
+
+</sqlMapConfig>

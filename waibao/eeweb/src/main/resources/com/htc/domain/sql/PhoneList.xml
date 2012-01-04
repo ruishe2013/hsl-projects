@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="PhoneList">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="PhoneList" type="com.htc.domain.PhoneList" />
+	<typeAlias alias="pager" type="com.htc.domain.Pager" />
+
+	<cacheModel id="PhoneListCache" type="FIFO">
+		<flushInterval hours="1" />
+		<flushOnExecute statement="PhoneList.insertPhoneList"/>
+		<flushOnExecute statement="PhoneList.updatePhoneList"/>
+		<flushOnExecute statement="PhoneList.deletePhoneListById"/>
+		<flushOnExecute statement="PhoneList.updateUseless"/>
+		<property name="size" value="100" />
+	</cacheModel>
+
+
+	<select id="getCounts" parameterClass="pager" resultClass="int"
+		cacheModel="PhoneListCache">
+		SELECT count(listId) FROM tphonelist 
+		where useless = 1 and listId > 0
+    <isNotNull prepend=" and" property="name">
+    	name like concat('%','$name$','%')
+    </isNotNull>			
+	</select>
+
+	<!-- 查找用户的特定记录数 分页查询 -->
+	<select id="getListByPager" parameterClass="pager" resultClass="PhoneList"
+		cacheModel="PhoneListCache">
+		SELECT listId,	name,	phone, remark
+		FROM tphonelist
+		where useless = 1 and listId > 0
+    <isNotNull prepend=" and" property="name">
+    	name like concat('%','$name$','%')
+    </isNotNull>			
+		LIMIT $pageSizeCurrentPage$, $pageSize$    
+    </select>
+
+	<select id="selectAll" resultClass="PhoneList" cacheModel="PhoneListCache">
+  	<![CDATA[
+    select 
+			listId,	name,	phone, remark, useless
+		from tphonelist
+		where useless = 1 and listId > 0
+   	]]>
+	</select>
+	
+	<select id="selectPhoneByIds" parameterClass="String" resultClass="PhoneList">
+  	<![CDATA[
+    select 
+			listId,	name,	phone, remark, useless
+		from tphonelist
+		where listId in ($listIds$)
+   	]]>
+	</select>
+
+	<!-- listId用来编辑，name和phone是检测唯一性  -->
+	<select id="selectPhoneList" parameterClass="PhoneList"
+		resultClass="PhoneList" cacheModel="PhoneListCache" >
+		select
+			listId, name,	phone,	remark, useless
+		from tphonelist
+		where useless = 1 and listId > 0
+		<isGreaterThan prepend=" and" property="listId" compareValue="0">
+				listId =#listId#
+		</isGreaterThan>
+		<isNotEmpty prepend=" and" property="name">
+			( name = #name#
+		</isNotEmpty>
+		<isNotEmpty prepend=" or" property="phone">
+			phone = #phone# )
+		</isNotEmpty>
+	</select>
+
+	<!-- Insert example, using the Account parameter class -->
+	<insert id="insertPhoneList" parameterClass="PhoneList">
+  	<![CDATA[
+    insert into tphonelist (
+		name,
+		phone,
+		remark,
+		useless
+    )values (
+		#name#,		#phone#,	#remark#,	1
+    )
+   	]]>
+	</insert>
+
+	<!-- Update example, using the Account parameter class -->
+	<!-- parameterClass="java.lang.Integer"-->
+	<update id="updatePhoneList" parameterClass="PhoneList">
+  	<![CDATA[
+    update tphonelist set
+		name = #name#,
+		phone = #phone#,
+		remark = #remark#
+    where
+      listId = #listId# and useless = 1
+    ]]>
+	</update>
+
+	<update id="updateUseless" parameterClass="int">
+  	<![CDATA[
+    update tphonelist set
+		useless = 0
+    where
+      listId = #listId# and useless = 1
+    ]]>
+	</update>
+	<!-- Delete example, using an integer as the parameter class -->
+	<delete id="deletePhoneListById" parameterClass="int">
+  	<![CDATA[
+    delete from tphonelist where listId = #listId#
+	]]>
+	</delete>
+
+</sqlMap>

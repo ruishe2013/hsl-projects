@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="AlarmRec">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="AlarmRec" type="com.htc.domain.AlarmRec" />
+	<typeAlias alias="BeanForAlarm" type="com.htc.bean.BeanForAlarm" />
+
+  <select id="selectAllBean" parameterClass="AlarmRec" resultClass="AlarmRec">
+		select
+			alarmId,			temperature,			humidity,			alarmStart,			alarmEnd,
+			alarmtype,		state,						alarmmode,		equipmentId,		username,
+			placeName,		normalArea,				equitype,			gprsFlag			
+		from TalarmRec
+		where (equipmentId in ($placeList$)) and state = #state# and alarmtype in($alarmtypeStr$)
+		<isNotEmpty prepend=" and" property="username">
+			username like concat('%','$username$','%')
+		</isNotEmpty>
+		<isEqual prepend=" and" property="whichToSearch" compareValue="1">
+			(alarmStart between #alarmStart# and #alarmEnd#)
+			order by alarmStart $ascOrDesc$
+		</isEqual>
+		<isEqual prepend=" and" property="whichToSearch" compareValue="2">
+			(alarmEnd between #alarmStart# and #alarmEnd#)
+			order by alarmEnd $ascOrDesc$
+		</isEqual>
+		LIMIT 0, $pageSize$
+  </select>	
+  
+  <select id="selectUndoRec" resultClass="AlarmRec">
+		select
+			alarmId,			temperature,			humidity,			alarmStart,			alarmEnd,
+			alarmtype,		state,						alarmmode,		equipmentId,		username,
+			placeName,		normalArea,				equitype,			gprsFlag			
+		from TalarmRec  
+		where	state = 2
+  </select>	
+  
+  <select id="selectRec" parameterClass="BeanForAlarm" resultClass="AlarmRec" >
+		select
+			alarmId,			temperature,			humidity,			alarmStart,			alarmEnd,
+			alarmtype,		state,						alarmmode,		equipmentId,		username,
+			placeName,		normalArea,				equitype			
+		from TalarmRec  
+		where	alarmStart = #alarmStart#	and equipmentId = #equipmentId# and state = 2
+  </select>	
+  
+  <select id="selectMaxRec" parameterClass="int" resultClass="long" >
+  	SELECT max(alarmStart) FROM TalarmRec where equipmentId = #equipmentId#
+  </select>	
+
+	<!-- Insert example, using the Account parameter class -->
+	<insert id="insertAlarm" parameterClass="AlarmRec">
+  	<![CDATA[
+    insert into talarmrec (
+    	temperature,		humidity,				alarmStart,		alarmEnd,			alarmtype,			state,
+    	alarmmode,			equipmentId,		username,			placeName,		normalArea,			equitype,		gprsFlag
+   )values (
+    	#temperature#,	#humidity#,			#alarmStart#,		#alarmEnd#,		#alarmtype#,	#state#,					
+    	#alarmmode#,		#equipmentId#,	#username#,			#placeName#,	#normalArea#,	#equitype#, #gprsFlag# 
+    )
+   	]]>
+	</insert>
+
+	<!-- parameterClass="java.lang.Integer"-->
+	<update id="updateAlarm" parameterClass="AlarmRec">
+		update talarmrec set
+			alarmEnd = #alarmEnd#,
+			state = #state#,
+			alarmmode = #alarmmode#,
+			username =	#username#
+		where
+			alarmId = #alarmId# and state = 2
+	</update>
+
+	<update id="updateAlarming" parameterClass="AlarmRec">
+		update talarmrec set
+			alarmEnd = #alarmEnd#
+		where
+			alarmId = #alarmId#
+	</update>
+
+	<!-- Delete example, using an integer as the parameter class -->
+	<delete id="deleteAlarmById" parameterClass="int">
+  	<![CDATA[
+    delete from talarmrec where alarmId = #alarmId#
+	]]>   
+	</delete>
+
+</sqlMap>

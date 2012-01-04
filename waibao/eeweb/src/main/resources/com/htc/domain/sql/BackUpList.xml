@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="gbk" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="BackUpList">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="BackUpList" type="com.htc.domain.BackUpList" />
+	<typeAlias alias="pager" type="com.htc.domain.Pager" />
+
+	<select id="getCounts" resultClass="int" >   
+    SELECT count(backId) FROM tbackuplist    
+   	<isNotNull prepend=" " property="timeStart">
+    	where backtime between #timeStart# and #timeEnd#
+    	<isNotEmpty prepend=" and " property="mark">
+    		remark = #mark#
+    	</isNotEmpty>    	
+   	</isNotNull>    
+	</select>
+ 
+	<!-- 查找用户的特定记录数 分页查询 -->
+	<select id="getListByPager" parameterClass="pager" resultClass="BackUpList" >
+		SELECT backId, fileName,   backtime,  remark
+		FROM tbackuplist
+   	<isNotNull prepend=" " property="timeStart">
+    	where backtime between #timeStart# and #timeEnd# 
+    	<isNotEmpty prepend=" and " property="mark">
+    		remark = #mark#
+    	</isNotEmpty>
+   	</isNotNull>		
+		order by backId desc
+		LIMIT $pageSizeCurrentPage$, $pageSize$    
+  </select>
+
+	<select id="selectBackUpList" parameterClass="BackUpList" resultClass="BackUpList">
+		select	backId, fileName,   backtime,  remark
+		from tbackuplist
+		where backId = #backId#
+	</select>
+	
+  <select id="getLastTime" resultClass="string">
+		SELECT max(backtime) FROM tbackuplist
+	</select>	
+
+	<!-- Insert example, using the Account parameter class -->
+	<insert id="insertBackUp" parameterClass="BackUpList">
+  	<![CDATA[
+    insert into tbackuplist (
+      fileName,
+      backtime,
+      remark
+    )values (
+     #fileName#, #backtime#,#remark#)
+   	]]>
+	</insert>
+	
+	<!-- Update example, using the Account parameter class -->
+	<update id="updateBackUp" parameterClass="BackUpList">
+  	<![CDATA[
+    update tbackuplist set
+		fileName = #fileName#,
+		backtime = #backtime#,
+		remark = #remark#
+    where
+      backId = #backId#
+    ]]>
+	</update>	
+
+	<!-- Delete example, using an integer as the parameter class -->
+	<delete id="deleteBackUpById" parameterClass="int">
+  	<![CDATA[
+    delete from tbackuplist where backId = #backId#
+	]]>
+	</delete>
+
+</sqlMap>
