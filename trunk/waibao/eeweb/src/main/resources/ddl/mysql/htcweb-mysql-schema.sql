@@ -219,14 +219,10 @@ CREATE TABLE `tequipdata` (
   `dsrsn` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0',
   `showAccess` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
   `conndata` tinyint(1) UNSIGNED NOT NULL DEFAULT '0',
-  PRIMARY KEY(`equipmentId`),
-  INDEX `FK_tequipdata_1`(`placeId`),
-  CONSTRAINT `FK_tequipdata_1` FOREIGN KEY (`placeId`)
-    REFERENCES `tworkplace`(`placeId`)
-    ON DELETE RESTRICT
-    ON UPDATE RESTRICT
-)
-ENGINE=INNODB;
+  PRIMARY KEY(`equipmentId`)
+)ENGINE=INNODB;
+create index placeId_fk on tequipdata(placeId);
+
 
 -- DROP TABLE tlog
 DROP TABLE IF EXISTS `tlog`;

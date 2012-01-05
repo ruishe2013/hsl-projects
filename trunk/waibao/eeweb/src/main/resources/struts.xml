@@ -51,10 +51,16 @@
 		</interceptors>
 		<global-results>
 			<result name="index" type="redirect">/index.html</result>
-			<result name="not_login_yet" type="redirect">/common/unload.html</result>
+			<result name="not_login_yet" type="redirect">/common/unload</result>
 			<result name="not_power_yet" type="redirect">/common/unpower.html</result>
 			<result name="page_err" type="redirect">/common/errorpage.html</result>
 		</global-results>
+	</package>
+	
+	<package name="commomPage" extends="default" namespace="/common">
+		<action name="unload">
+			<result>/common/unload.jsp</result>
+		</action>
 	</package>
 
 	<package name="user" extends="default" namespace="/userdo">
@@ -320,7 +326,7 @@
 	</package>
 
 	<package name="commonJson" extends="json-default" namespace="/main">
-		<!-- 获取公司名称的json -->
+		<!-- 获取名称的json -->
 		<action name="comJson" class="com.htc.action.ComNameAction"	>
 			<result type="json" />
 		</action>
