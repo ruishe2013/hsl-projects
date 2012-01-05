@@ -1,12 +1,11 @@
 package com.htc.model.EnDeCode;
+import java.lang.reflect.Method;
+
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
 
 /**
  * @ DES3.java
@@ -21,6 +20,8 @@ public class DES3 {
 	public DES3(){
 		
 	}
+	
+	private static final Class<?> BYTE_ARRAY_CLASS = new byte[0].getClass();
 	
 	/**
 	 * º”√‹
@@ -37,8 +38,11 @@ public class DES3 {
 		IvParameterSpec iv = new IvParameterSpec(IV.getBytes("GBK"));
 		cipher.init(Cipher.ENCRYPT_MODE, secretKey, iv);
 		byte[] b=cipher.doFinal(message.getBytes("GBK"));
-		BASE64Encoder encoder = new BASE64Encoder();
-		return encoder.encode(b);
+		
+		Class<?> encoderClazz = Class.forName("sun.misc.BASE64Encoder");
+		Object encoder = encoderClazz.newInstance();
+		Method m = encoderClazz.getMethod("encode", new Class[]{ BYTE_ARRAY_CLASS });
+		return (String)m.invoke(encoder, new Object[] { b });
 	}
 
 	/**
@@ -49,8 +53,10 @@ public class DES3 {
 	 * @throws Exception
 	 */
 	public static String decrypt(String message) throws Exception {
-		BASE64Decoder decoder = new BASE64Decoder();
-		byte[] bytesrc = decoder.decodeBuffer(message);
+		Class<?> decodeClazz = Class.forName("sun.misc.BASE64Decoder");
+		Object decode = decodeClazz.newInstance();
+		Method m = decodeClazz.getMethod("decodeBuffer", new Class<?>[] {String.class});
+		byte[] bytesrc = (byte[])m.invoke(decode, new Object[] {message});
 		Cipher cipher = Cipher.getInstance("DES/CBC/PKCS5Padding"); 
 		DESKeySpec desKeySpec = new DESKeySpec(PASSWORD_CRYPT_KEY.getBytes("GBK"));
 		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
