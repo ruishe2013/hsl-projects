@@ -49,11 +49,6 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 		<dependency>
-			<groupId>com.ibatis</groupId>
-			<artifactId>ibatis-dao</artifactId>
-			<version>2.1.0.565</version>
-		</dependency>
-		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.9</version>
@@ -100,6 +95,11 @@
 		    <artifactId>commons-dbcp</artifactId>
 		    <version>1.4</version>
 		</dependency>
+		<dependency>
+			<groupId>opensymphony</groupId>
+			<artifactId>xwork</artifactId>
+			<version>2.0.3</version>
+		</dependency>
 
 		<!-- 
 		以下依赖不在maven中心库
@@ -128,6 +128,11 @@
 			<groupId>ibatis</groupId>
 			<artifactId>ibatis</artifactId>
 			<version>2.3.4.726</version>
+		</dependency>
+		<dependency>
+			<groupId>ibatis-dao</groupId>
+			<artifactId>ibatis-dao</artifactId>
+			<version>2</version>
 		</dependency>
 	</dependencies>
 
@@ -169,107 +174,7 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>7.3.0.v20110203</version>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.1.1</version>
-				<configuration>
-					<webResources>
-						<resource>
-							<directory>${basedir}/src/main/resources/web</directory>
-							<targetPath>WEB-INF</targetPath>
-							<filtering>true</filtering>
-							<includes>
-								<include>**/*.xml</include>
-							</includes>
-						</resource>
-					</webResources>
-				</configuration>
-			</plugin>
 		</plugins>
-
-		<filters>
-			<filter>${basedir}/src/main/filters/eeweb-dev.properties</filter>
-		</filters>
-
-		<testResources>
-			<testResource>
-				<directory>${basedir}/src/test/resources</directory>
-				<filtering>true</filtering>
-			</testResource>
-		</testResources>
-		<resources>
-			<resource>
-				<directory>${basedir}/src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
 	</build>
-
-
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<build>
-				<filters>
-					<filter>${basedir}/src/main/filters/eeweb-dev.properties</filter>
-				</filters>
-				<testResources>
-					<testResource>
-						<directory>${basedir}/src/test/resources</directory>
-						<filtering>true</filtering>
-					</testResource>
-				</testResources>
-				<resources>
-					<resource>
-						<directory>${basedir}/src/main/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
-			</build>
-		</profile>
-
-		<profile>
-			<id>daily</id>
-			<build>
-				<filters>
-					<filter>${basedir}/src/main/filters/eeweb-daily.properties</filter>
-				</filters>
-				<testResources>
-					<testResource>
-						<directory>${basedir}/src/test/resources</directory>
-						<filtering>true</filtering>
-					</testResource>
-				</testResources>
-				<resources>
-					<resource>
-						<directory>${basedir}/src/main/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
-			</build>
-		</profile>
-
-		<profile>
-			<id>product</id>
-			<build>
-				<filters>
-					<filter>${basedir}/src/main/filters/eeweb-product.properties</filter>
-				</filters>
-				<testResources>
-					<testResource>
-						<directory>${basedir}/src/test/resources</directory>
-						<filtering>true</filtering>
-					</testResource>
-				</testResources>
-				<resources>
-					<resource>
-						<directory>${basedir}/src/main/resources</directory>
-						<filtering>true</filtering>
-					</resource>
-				</resources>
-			</build>
-		</profile>
-	</profiles>
 
 </project>
