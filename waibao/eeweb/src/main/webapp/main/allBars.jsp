@@ -6,7 +6,7 @@
 
 	<script type="text/javascript" src="../js/jquery-1.3.2.js"></script>	
 	<script type="text/javascript" src="../js/jquery.jmp3.js"></script>
-	<script type="text/javascript" src="../js/page/bar.js"></script>
+	<script type="text/javascript" src="../js/page/bar2.js"></script>
  	<style type="text/css">   
 		.bar_head {text-align:center; font-size:12px; color:#FFF; background-image: url(../images/main_08_01.jpg); height: 29px;}	
 		.bar_body{font-size:56px; color:#FFF; font-weight:bold; line-height:59px; text-align:right; background-image: url(../images/main_08_02.jpg);}

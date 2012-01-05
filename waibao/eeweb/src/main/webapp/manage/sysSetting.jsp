@@ -37,7 +37,7 @@
 									<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0" class="table_warp" style="margin-left: 10px;">
 									  <tr>
 									  	<td>
-									  		<strong><label>公司名称</label></strong>
+									  		<strong><label>名称</label></strong>
 												<s:if test="#session.userpowertag == 86">
 													<s:textfield name="sysArgs['company_name']" id="company_name" size="24"></s:textfield>
 												</s:if>

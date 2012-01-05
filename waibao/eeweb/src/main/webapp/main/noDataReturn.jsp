@@ -50,6 +50,8 @@
 					      	<s:property value="headDetail" escape="false"/>
 					      	<br/><br/><br/>
 					      	<a href="#" onclick="window.close();">[关闭本页]</a>
+					      	
+					      	<a href="${pageContext.request.contextPath}/main/MainBarAction">[返回总览画面]</a>
 					      </td>
 					    </tr>
 					  </table>

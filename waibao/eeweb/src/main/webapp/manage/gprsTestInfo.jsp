@@ -36,7 +36,7 @@
 										<strong>连接短信模块</strong>
 								</td>
 							</tr>
-							<s:form namespace="/mana" theme="simple" validate="ture" name="gprsTestForm">
+							<s:form namespace="/mana" theme="simple" validate="true" name="gprsTestForm">
 							<s:hidden name="runFlag" id="runFlag"></s:hidden>
 							<tr>
 								<td class="user_list_01" align="center">
@@ -64,7 +64,7 @@
 						<div>
 			    	<%-- 右侧 短信测试 --%>
 			    <table width="100%" cellspacing="0" cellpadding="0" border="0">
-							<s:form namespace="/mana" theme="simple" validate="ture" name="gprsSendForm" >
+							<s:form namespace="/mana" theme="simple" validate="true" name="gprsSendForm" >
 							<tr>
 								<td class="table-tr-top" align="center">
 										<strong>短信测试</strong>

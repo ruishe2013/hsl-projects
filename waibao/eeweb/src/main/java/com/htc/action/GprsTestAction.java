@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.htc.bean.BeanForSysArgs;
 import com.htc.domain.GprsSet;
 import com.htc.domain.Pager;
 import com.htc.model.SetSysService;
 import com.htc.model.seriaPort.Level_First_Serial;
 import com.htc.model.seriaPort.SimCard_Unit;
-import com.htc.model.seriaPort.Smslib_SendJob;
 
 /**
  * @ GprsTestAction.java
@@ -74,6 +74,8 @@ public class GprsTestAction extends AbstractActionForHigh {
 			runFlag = 2;
 			stateStr = "还没有运行...";
 		}
+		centerNo = this.commonDataUnit.getSysArgsByKey(BeanForSysArgs.SMS_CENTER_NUMBER);
+		
 		return SUCCESS;
 	}
 

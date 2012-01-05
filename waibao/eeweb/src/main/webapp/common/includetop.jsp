@@ -88,9 +88,9 @@
 							<s:if test="showSms==2">
 								<li><a href="${pageContext.request.contextPath}/mana/phone_getList_Action">无线设置</a>
 									<ul class="subnav">
-										<s:if test="#session.userpowertag == 86">
-											<li><a href="${pageContext.request.contextPath}/mana/gprsTestAction">通讯测试</a></li>
-										</s:if>
+									<s:if test="#session.userpowertag >= 2">
+										<li><a href="${pageContext.request.contextPath}/mana/gprsTestAction">通讯测试</a></li>
+									</s:if>	
 				            <!-- 
 				            <li><a href="${pageContext.request.contextPath}/mana/gprs_getList_Action">短信格式</a></li>
 				             -->
@@ -100,7 +100,7 @@
 								</li>
 							</s:if>
 						</s:if>
-						<s:if test="#session.userpowertag == 86">
+						<s:if test="#session.userpowertag >= 2">
 							<li><a href="${pageContext.request.contextPath}/seri/serialportAction">串口管理</a>
 								<ul class="subnav">
 									<li><a href="${pageContext.request.contextPath}/seri/serialportAction">串口调试</a></li>

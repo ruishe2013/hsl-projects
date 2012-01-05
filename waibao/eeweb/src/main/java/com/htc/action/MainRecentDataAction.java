@@ -135,7 +135,7 @@ public class MainRecentDataAction extends AbstractAction {
 	
 	//柱状图
 	public String barChartJson(){
-		fillBarFlashData();		//封装flash数据，并检测是否有数据存在
+		fillBarFlashData2();		//封装flash数据，并检测是否有数据存在
 		return SUCCESS;
 	}
 	
@@ -188,6 +188,106 @@ public class MainRecentDataAction extends AbstractAction {
 	 * @date:2009-11-5
 	 */
 	public void fillBarFlashData(){
+		BeanForPortData serialPortDataBean;			// 从串口产生的数据格式
+		BeanForlBarData serialBarDataBean;			// 封装到页面的数据格式
+		EquipData equipData ; 						// 仪器信息
+		int tempType;								// 显示温度类型(1:摄氏	2:华氏)
+		int equipmentId;
+		String temp, humi, colorTemp,colorHumi ,label, state, power;
+		
+		barData = null;		//清理缓存
+		barData = new TreeMap<Integer, BeanForlBarData>();
+		
+		// 得到用户自身所使用的地址列表 --经过排序的
+		List<Integer> listPlaces = getAddressList(userPlaceList);
+		
+		//串口服务 -- 获取串口即时数据
+		//Level_First_Serial  first_Level = Level_First_Serial.getInstance();
+		//Map<Integer, BeanForPortData> tempDataBean = first_Level.getAddressData();
+		// 从数据库获取 最新数据
+		Map<Integer, BeanForPortData> tempDataBean = mainService.getNewestMinRec(userPlaceList);
+		
+		//	显示温度类型
+		tempType = Integer.parseInt(commonDataUnit.getSysArgsByKey(BeanForSysArgs.TEMP_SHOW_TYPE));
+			
+		// 根据地址列表, 封装要显示的数据
+		userPlaceList = "";
+		recTimeStr = "";
+		int len = listPlaces.size();
+		int realTemp=0;//真实的温度值.摄氏时不变。华氏时要做转换
+		for (int i = 0; i < len; i++) {
+			
+			// 过滤不正确的仪器ID
+			equipmentId = listPlaces.get(i);//euipmentId
+			if (equipmentId == 0) {continue;}
+			
+			// 并把排序后的结果赋值给userPlaceList,这样页面就能按仪器顺序正确显示
+			userPlaceList += equipmentId + ((i+1) == len? "" : ",");
+			
+			// 得到选择仪器信息
+			equipData = null;
+			equipData = commonDataUnit.getEquipByID(equipmentId);
+			
+			// 获取单个数据集合
+			serialPortDataBean = null;
+			serialPortDataBean = tempDataBean == null ? null : 
+					tempDataBean.containsKey(equipmentId) ? tempDataBean.get(equipmentId) : null;
+			serialPortDataBean = serialPortDataBean == null? null : serialPortDataBean.getMark()==0? 
+					null: serialPortDataBean;
+					
+			// 数据bean
+			serialBarDataBean = null ;
+			serialBarDataBean = new BeanForlBarData(); 
+			
+			// 封装数据  到 页面数据
+			label = null; temp = null; humi = null; colorTemp = null; colorHumi = null; state = null;
+			serialBarDataBean.setEquipmentId(equipmentId);										// 主键--已存在bean里面
+			label = commonDataUnit.getEquiMapStrById(equipmentId);
+//			label = FunctionUnit.substringByByte( 			
+//					commonDataUnit.getEquiMapStrById(equipmentId), 34, "...");					// 标签 -- 现在在页面中处理
+			serialBarDataBean.setLabel(label);
+			temp = serialPortDataBean == null ? "-" : equipData.getEquitype() == EquipData.TYPE_HUMI_ONLY?"-" :
+				getTempHumiStr(serialPortDataBean.getTemp(), tempType);	// 温度
+			realTemp = temp.equals("-")?0:(int) (Float.parseFloat(temp)*100);
+			serialBarDataBean.setTemp(temp);
+			serialBarDataBean.setAppt(tempType == 1 ? "℃" : "F"); 		//温度显示后缀(1:摄氏 2:华氏)
+			humi = serialPortDataBean == null ? "-" : equipData.getEquitype()== EquipData.TYPE_TEMP_ONLY?"-" :
+				getTempHumiStr(serialPortDataBean.getHumi(), 0);		// 湿度
+			serialBarDataBean.setHumi(humi);
+			serialBarDataBean.setApph("%RH");							// 湿度显示后缀
+			if ( serialPortDataBean == null ){	
+				colorTemp = commonDataUnit.getSysArgsByKey(BeanForSysArgs.LOW_COLORDEF); 		// 没有数据则显示低温报警颜色
+				colorHumi = commonDataUnit.getSysArgsByKey(BeanForSysArgs.LOW_COLORDEF); 		// 没有数据则显示低温报警颜色
+				state = "暂无数据";
+				power = equipData == null? "暂无电量" : equipData.getShowPower() == 1 ? "暂无电量" : "";
+			}else{
+				colorTemp = equipData.getEquitype() == EquipData.TYPE_HUMI_ONLY?
+						commonDataUnit.getSysArgsByKey(BeanForSysArgs.NORMAL_COLORDEF) :
+						getColorString(realTemp, 1, equipData );
+						
+				colorHumi = equipData.getEquitype()== EquipData.TYPE_TEMP_ONLY ?
+						commonDataUnit.getSysArgsByKey(BeanForSysArgs.NORMAL_COLORDEF):	
+					getColorString(serialPortDataBean.getHumi(), 2, equipData );
+						
+				state = getStateStr(tempType, realTemp,serialPortDataBean.getHumi(), equipData );
+				power = equipData.getShowPower() == 1 ? getPowerString
+						(serialPortDataBean.getPowerV(),equipData.getPowerType()) : "";
+				serialBarDataBean.setStateInt(serialPortDataBean.getState());			//暂无用处(保留)
+				//最新更新记录数据的时间
+				if ( recTimeStr.length() < 5 ){
+					recTimeStr = FunctionUnit.getTime_Long_Str(serialPortDataBean.getRecTime());
+				}
+			}
+			serialBarDataBean.setPower(power);												// 电量
+			serialBarDataBean.setColorTemp(colorTemp);										// 温度颜色		
+			serialBarDataBean.setColorHumi(colorHumi);										// 湿度颜色		
+			serialBarDataBean.setStateStr(state);											// 状态
+			//保存数据
+			barData.put(equipmentId, serialBarDataBean); 
+		}//end for
+	}
+	
+	public void fillBarFlashData2(){
 		BeanForPortData serialPortDataBean;			// 从串口产生的数据格式
 		BeanForlBarData serialBarDataBean;			// 封装到页面的数据格式
 		EquipData equipData ; 						// 仪器信息

@@ -126,11 +126,11 @@
 	</delete>
 	
   <statement id="truncateEquipdata">
-  	truncate table tequipdata
+  	delete from tequipdata
   </statement>	 	
 	
   <statement id="truncateWorkplace">
-  	truncate table tworkplace
+  	delete from tworkplace
   </statement>	
 
 </sqlMap>
