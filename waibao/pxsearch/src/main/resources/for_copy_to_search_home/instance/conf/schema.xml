@@ -45,9 +45,11 @@
 		<field name="id" type="string" indexed="true" stored="true" multiValued="false" required="true" />
 		<field name="docId" type="int" indexed="true" stored="true" multiValued="false" required="true" />
 		<field name="type" type="int" indexed="true" stored="true" multiValued="false" required="true" />
+		
 		<field name="title" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="tags" type="string_sd" indexed="true" stored="true" multiValued="false" />
 		<field name="content" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		
 	</fields>
 
 	<uniqueKey>id</uniqueKey>
