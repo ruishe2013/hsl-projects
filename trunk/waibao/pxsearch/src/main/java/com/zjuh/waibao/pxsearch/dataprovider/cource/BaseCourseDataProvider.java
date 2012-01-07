@@ -1,6 +1,7 @@
 package com.zjuh.waibao.pxsearch.dataprovider.cource;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,23 +20,41 @@ public abstract class BaseCourseDataProvider extends CommonDataProvider {
 			ret.put("id", makeId(pid, type));
 			ret.put("docId", pid);
 			
-			String titleString = rs.getString("Name");
-			titleString += rs.getString("EnName");
+			StringBuilder sbTitle = new StringBuilder();
+			appendIfNotNull(sbTitle, rs, "Name");
+			appendIfNotNull(sbTitle, rs, "EnName");
 			
-			ret.put("title", titleString);
 			
-			String content = rs.getString("Intro");
-			content += rs.getString("Description");
-			content += rs.getString("PageTitle");
+			StringBuilder sbContent = new StringBuilder();
+			appendIfNotNull(sbContent, rs, "Intro");
+			appendIfNotNull(sbContent, rs, "Description");
+			appendIfNotNull(sbContent, rs, "PageTitle");
+			String content = sbContent.toString();
 			
+			String tags = rs.getString("Keyword");
+			
+			ret.put("title", sbTitle.toString());
 			ret.put("content", content);
-			ret.put("tags", rs.getString("Keyword"));
+			ret.put("tags", tags);
+			
+			ret.put("title", sbTitle.toString());
+			ret.put("content", content);
+			ret.put("tags", tags);
+			
 			ret.put("type", type);
 			
 		} catch (Exception e) {
 			log.error("≤È—Ø ß∞‹", e);
 		}
 		return ret;
+	}
+	
+	private void appendIfNotNull(StringBuilder sb, ResultSet rs, String field) throws SQLException {
+		String value = rs.getString(field);
+		if (value != null) {
+			sb.append(" ");
+			sb.append(value);
+		}
 	}
 	
 	protected String getSql() {
