@@ -37,10 +37,6 @@ public abstract class BaseCourseDataProvider extends CommonDataProvider {
 			ret.put("content", content);
 			ret.put("tags", tags);
 			
-			ret.put("title", sbTitle.toString());
-			ret.put("content", content);
-			ret.put("tags", tags);
-			
 			ret.put("type", type);
 			
 		} catch (Exception e) {
