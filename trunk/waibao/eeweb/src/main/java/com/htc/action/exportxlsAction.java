@@ -207,8 +207,15 @@ public class exportxlsAction extends AbstractAction {
 				nodataInfo(2,2);// 没有仪器添加
 				return "noDataReturn";
 			}else if (rsint == 2){
-				nodataInfo(5,4);// 数据库链接出错
-				return "noDataReturn";
+				// 端口连接失败？？
+		/*		nodataInfo(5,4);// 
+				return "noDataReturn";*/
+				// 如果仅仅是端口连接失败，也认为是成功
+				
+				showTipMsg = 1;
+				addFieldError("showsucc", "导入配置成功");
+				return SUCCESS;
+				
 			}else {// rsint == 0
 				showTipMsg = 1;
 				addFieldError("showsucc", "导入配置成功");

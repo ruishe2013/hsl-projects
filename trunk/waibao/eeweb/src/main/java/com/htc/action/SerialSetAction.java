@@ -1,10 +1,10 @@
 package com.htc.action;
 
-import java.util.*;
+import java.util.Map;
 
 import com.htc.bean.BeanForSetData;
 import com.htc.common.FunctionUnit;
-import com.htc.model.seriaPort.*;
+import com.htc.model.seriaPort.Level_First_Serial;
 
 /**
  * @ SerialSetAction.java
@@ -14,7 +14,7 @@ import com.htc.model.seriaPort.*;
  * 1.0          2009-11-4     YANGZHONLI       create
  */
 @SuppressWarnings("serial")
-public class SerialSetAction extends AbstractActionForOEM {
+public class SerialSetAction extends AbstractAction {
 	
 	// 页面显示
 	private BeanForSetData serialData;				// 页面显示Bean

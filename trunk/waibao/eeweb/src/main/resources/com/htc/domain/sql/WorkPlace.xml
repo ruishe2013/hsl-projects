@@ -93,6 +93,16 @@
     )
    	]]>
 	</insert>
+	
+	<insert id="insertWorkplaceWithId" parameterClass="Workplace">
+  	<![CDATA[
+    insert into tworkplace (
+      placeId, placeName,useless,remark
+    )values (
+      #placeId#, #placeName#,#useless#,#remark#
+    )
+   	]]>
+	</insert>
 
 	<!-- Update example, using the Account parameter class -->
 	<!-- parameterClass="java.lang.Integer"-->
@@ -126,11 +136,11 @@
 	</delete>
 	
   <statement id="truncateEquipdata">
-  	delete from tequipdata
+  	truncate table tequipdata
   </statement>	 	
 	
   <statement id="truncateWorkplace">
-  	delete from tworkplace
+  	truncate table tworkplace
   </statement>	
 
 </sqlMap>

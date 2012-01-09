@@ -17,6 +17,19 @@
  </listener>
  
  <filter>
+ 	<filter-name>ResourceJettyHackerFilter</filter-name>
+ 	<filter-class>com.htc.util.ResourceJettyHackerFilter</filter-class>
+ </filter>
+ <filter-mapping>
+ 	<filter-name>ResourceJettyHackerFilter</filter-name>
+ 	<url-pattern>*.js</url-pattern>
+ </filter-mapping>
+  <filter-mapping>
+ 	<filter-name>ResourceJettyHackerFilter</filter-name>
+ 	<url-pattern>*.css</url-pattern>
+ </filter-mapping>
+ 
+ <filter>
   <filter-name>struts2</filter-name>
   <filter-class>org.apache.struts2.dispatcher.FilterDispatcher</filter-class>
  </filter>
