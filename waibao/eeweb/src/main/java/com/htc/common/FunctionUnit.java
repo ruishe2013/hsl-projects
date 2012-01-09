@@ -436,6 +436,9 @@ public class FunctionUnit {
 		return rsStr;
 	}
 	
+	public static String getStatFloatAvg(String strA, int powerA, String strB, int powerB){
+		return FLOAT_DATA_FORMAT.format((powerA *Float.parseFloat(strA)+ powerB * Float.parseFloat(strB))/(powerB+ powerA));
+	}
 	/**
 	 * 中文转unicode
 	 * @param source 需要转换的中文

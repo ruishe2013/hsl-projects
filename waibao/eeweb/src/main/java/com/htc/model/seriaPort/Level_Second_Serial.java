@@ -78,6 +78,10 @@ public class Level_Second_Serial {
 	
 	// 临时数据区
 	private Map<Integer, Record> currentNewRecords;						// 当前最新的记录,用来批量保存到数据库用
+	
+	private Map<Integer, PoweredValue> poweredTemperature;						// 
+	private Map<Integer, PoweredValue> poweredHumidity;						// 
+	
 	private Map<Integer, BeanForPortData> addressData;					// 总览画面"用的临时数据集
 	
 	//private Map<Integer, BeanForPortData> tempFlashData;				// "实时曲线"Flash数据的单元数据
@@ -112,6 +116,8 @@ public class Level_Second_Serial {
 		//appendMillsec = 150;				//	附加毫秒数 150
 		bytes = 20;							//  发送是字节数
 		currentNewRecords = new ConcurrentHashMap<Integer, Record>();
+		poweredTemperature = new ConcurrentHashMap<Integer, PoweredValue>();
+		poweredHumidity = new ConcurrentHashMap<Integer, PoweredValue>();
 		addressData = new ConcurrentHashMap<Integer, BeanForPortData>();
 		//currentFlashData = new CopyOnWriteArrayList<Map<Integer,BeanForPortData>>();
 		//final_Level = new Level_Final_Serial();
@@ -793,6 +799,15 @@ public class Level_Second_Serial {
 		addressData.put(record.getEquipmentId(), record);		
 	}
 
+	static class PoweredValue {
+		int power = 1;
+		String value;
+		public PoweredValue(String value) {
+			super();
+			this.value = value;
+		}
+	}
+	
 	/**
 	 * @describe: 数据插入临时缓存,等到下一个重复EquipmentId时,然后把缓存的数据批量插入数据库
 	 * @param record 含有温湿度信息的数据单元
@@ -807,11 +822,23 @@ public class Level_Second_Serial {
 				if (FunctionUnit.getTypeTime(record.getRecTime(), Calendar.MINUTE) ==
 					FunctionUnit.getTypeTime(currentNewRecords.get(equipId).getRecTime(), Calendar.MINUTE) ){
 					String statStr = "";
-					statStr = FunctionUnit.getStatFloat(record.getTemperature(), 
-							currentNewRecords.get(equipId).getTemperature(), FunctionUnit.STAT_AVG, 1);
+					
+				//	getStatFloatAvg();
+					
+					PoweredValue temperatureValue = poweredTemperature.get(equipId);
+					statStr = FunctionUnit.getStatFloatAvg(temperatureValue.value, temperatureValue.power, record.getTemperature(), 1);
+					temperatureValue.value = statStr;
+					temperatureValue.power ++;
+				//	statStr = FunctionUnit.getStatFloat(record.getTemperature(), 
+				//			currentNewRecords.get(equipId).getTemperature(), FunctionUnit.STAT_AVG, 1);
 					record.setTemperature(statStr);
-					statStr = FunctionUnit.getStatFloat(record.getHumidity(), 
-							currentNewRecords.get(equipId).getHumidity(), FunctionUnit.STAT_AVG, 0);
+					
+					PoweredValue humidityValue = poweredHumidity.get(equipId);
+					statStr = FunctionUnit.getStatFloatAvg(humidityValue.value, humidityValue.power, record.getHumidity(), 1);
+					humidityValue.value = statStr;
+					humidityValue.power ++;
+/*					statStr = FunctionUnit.getStatFloat(record.getHumidity(), 
+							currentNewRecords.get(equipId).getHumidity(), FunctionUnit.STAT_AVG, 0);*/
 					record.setHumidity(statStr);
 				}else{
 					// 在Access存储功能开启的情况下处理
@@ -848,6 +875,9 @@ public class Level_Second_Serial {
 					mainService.insertRecordBatch(currentNewRecords);
 					// 清理缓存
 					currentNewRecords.clear();
+					
+					poweredTemperature.clear();
+					poweredHumidity.clear();
 				}
 				
 //				// 把数据插入即时数据表(批量),然后清理缓存--测试用--开始
@@ -876,6 +906,8 @@ public class Level_Second_Serial {
 		}
 		//把数据插入缓存
 		currentNewRecords.put(record.getEquipmentId(), record);
+		poweredTemperature.put(record.getEquipmentId(), new PoweredValue(record.getTemperature()));
+		poweredHumidity.put(record.getEquipmentId(), new PoweredValue(record.getHumidity()));
 	}
 	
 	/**

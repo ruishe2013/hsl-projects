@@ -204,7 +204,7 @@
   </delete>
   
   <statement id="truncateEquipdata">
-  	delete from tequipdata
+  	truncate table tequipdata
   </statement>	  
 
 </sqlMap>

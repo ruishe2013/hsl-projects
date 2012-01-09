@@ -1,9 +1,9 @@
 package com.htc.action;
 
-import java.util.*;
+import java.util.List;
 
-import com.htc.domain.*;
-import com.htc.model.seriaPort.*;
+import com.htc.domain.EquipData;
+import com.htc.model.seriaPort.Level_First_Serial;
 
 /**
  * @ SerialPortAction.java
@@ -13,7 +13,7 @@ import com.htc.model.seriaPort.*;
  * 1.0          2009-11-4     YANGZHONLI       create
  */
 @SuppressWarnings("serial")
-public class SerialPortAction extends AbstractActionForOEM {
+public class SerialPortAction extends AbstractAction {
 	
 	// Ò³Ãæ
 	private String stateStr="";						// Ò³ÃæÏÔÊ¾×´Ì¬×Ö·û

@@ -41,7 +41,7 @@ public class WorkPlaceSqlMapDao extends BaseSqlMapDao implements WorkPlaceDao {
 		
 		getSqlMapClientTemplate().getSqlMapClient().startBatch();	//开始批量
 		for (Workplace workplace : worklist) {
-			getSqlMapClientTemplate().insert(nameplace + "insertWorkplace",workplace);
+			getSqlMapClientTemplate().insert(nameplace + "insertWorkplaceWithId",workplace);
 			batch++;			// 每500条批量提交一次。 				
 			if(batch == BATCH_SIZE){ 
 				getSqlMapClientTemplate().getSqlMapClient().executeBatch(); //提交批量
