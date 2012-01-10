@@ -95,6 +95,8 @@
 			</div>
 		</div>	
 			
+		<div id="test_div"></div>
+			
 		<s:form namespace="/main" name="jumpToLineForm" theme="simple" validate="ture">
 			<s:hidden name="userPlaceList" id="jumpPlaceList"/>
 		</s:form>

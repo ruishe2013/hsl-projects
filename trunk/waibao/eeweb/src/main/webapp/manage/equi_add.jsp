@@ -59,12 +59,14 @@
 							  			listValue="value" value="equipData.conndata"/>											
 									</td>
 							  </tr>
+							  <%--
 							  <tr>
 							    <td class="table_left"><strong>电量值(v)</strong></td>
 							    <td class="table_right"><s:select list="powerValues" name="equipData.powerType" listKey="key"
 							     			listValue="value" value="equipData.powerType"/>
 							    </td>
-							  </tr>							  
+							  </tr>	
+							  --%>			  
 							  <tr>
 							    <td class="table_left"><strong><label>区域名</label></strong></td>
 							    <td class="table_right"><s:select list="areaMap" name="equipData.placeId" listKey="key"	listValue="value"/></td>
