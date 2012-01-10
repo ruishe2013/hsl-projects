@@ -83,20 +83,20 @@
 		</div>
 		
 		<%-- flash ÏÔÊ¾ÇøÓò --%>
-		<div class="main_content">
-			<div class="zl">
-				<ul id="resultDiv">
-					<div class="main_content1 mi-top">
+		<div class="main_content_bars">
+			<div class="bars-zl2">
+				<div id="resultDiv">
+					<div class="main_content1_loading mi-top" style="margin: 0 auto;">
 						<div class="user_list">
-							<div id="loadingDiv" class="list_no_data"></div>
+							<div id="loadingDiv" class="list_no_data" ></div>
 						</div>
 					</div>
-				</ul>
+				</div>
 			</div>
 		</div>	
-			
-		<div id="test_div"></div>
-			
+		
+		<div style="clear:both;"></div>
+		
 		<s:form namespace="/main" name="jumpToLineForm" theme="simple" validate="ture">
 			<s:hidden name="userPlaceList" id="jumpPlaceList"/>
 		</s:form>

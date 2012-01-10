@@ -301,7 +301,7 @@ public class MainRecentDataAction extends AbstractAction {
 	
 	public static class WorkPlaceEntity {
 		String name;
-		List<BeanForlBarData> datas = CollectionUtil.newArrayList();
+		List<BeanForlBarData> barDatas = CollectionUtil.newArrayList();
 		public WorkPlaceEntity(String name) {
 			super();
 			this.name = name;
@@ -312,11 +312,11 @@ public class MainRecentDataAction extends AbstractAction {
 		public void setName(String name) {
 			this.name = name;
 		}
-		public List<BeanForlBarData> getDatas() {
-			return datas;
+		public List<BeanForlBarData> getBarDatas() {
+			return barDatas;
 		}
 		public void addData(BeanForlBarData beanForlBarData) {
-			datas.add(beanForlBarData);
+			barDatas.add(beanForlBarData);
 		}
 	}
 	
