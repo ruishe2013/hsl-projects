@@ -72,15 +72,22 @@ function callRun(callType) {
 		$("#loadingDiv").html("还没选择仪器列表...");
 	}else{
 		//发送请求
-		paramArgs = {userPlaceList: userPlaceList};
+		try {
+			paramArgs = {"userPlaceList": userPlaceList};
+		} catch (e) {
+			alert(e.description);
+			return;
+		}
 		$.post(actionPath, paramArgs, function(data) {
-		
-			//将JSON转化为一个对象,并且名为joson
-//			try {
-				var json = eval("(" + data +")");
-//			} catch (e) {
-//				alert(e.description+ ":" + data);
-//			}
+			$("#test_div").text(data);
+			//将JSON转化为一个对象,并且名为json
+			var json = null;
+			try {
+				json = eval("(" + data +")");
+			} catch (e) {
+				alert(e.description+ ":" + data);
+				return;
+			}
 			// 背景音乐
 			if (json.palyFalg == 2){ 
 				if ($("#sounddl").text()==""){//背景声音开启
@@ -95,6 +102,14 @@ function callRun(callType) {
 		        	
 		  // 系统仪器类型 
 		  var sysEqCount = Number($("#systemEqType").val());
+		  
+		  	var workPlaceBarDatas = json.workPlaceBarDatas;
+		  	for (var workPlaceId in workPlaceBarDatas) {
+		  		var workPlace = workPlaceBarDatas[workPlaceId];
+		  		var workPlaceName = workPlace[name];
+		  		var workPlaceBarDatas = workPlace[datas];
+		  		
+		  	}
 		  
 			//填充数据-json.userPlaceList是经过排序的地址列表 
 			var tempEquipmentId;

