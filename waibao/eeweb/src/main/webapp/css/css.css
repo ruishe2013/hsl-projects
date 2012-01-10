@@ -111,7 +111,9 @@ html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
 .main_content_address_left { float:left; width:9%;}
 .main_content_address_right { float:right; width:91%; height:27px; font-size:12px; line-height:27px; color:#666;}
 .main_content { width:984px; padding-bottom:10px; padding-top:0px;margin:0 auto;}
+.main_content_bars { min-width:492px; padding-bottom:10px; padding-top:0px; margin-left: 50px; margin-right: 50px;}
 .main_content1 { width:984px; padding-bottom:10px; padding-top:10px; margin:0 auto; background-color:#EEEEEE;margin-bottom:10px;}
+.main_content1_loading { width:984px; padding-bottom:10px; padding-top:10px; margin:0 auto; background-color:#EEEEEE;margin-bottom:10px;}
 .main_content_redbg { width:984px; padding-top:10px; margin:0 auto; text-align:center;font-weight:bold;background-color:#FF0000;color:#fff;line-height:70px; font-size:50px;}
 
 .historydata_check {width:940px; margin:0 auto; margin-top:10px; border:1px solid #ccc; padding:5px; font-size:12px; line-height:30px;}
@@ -149,9 +151,18 @@ html ul.topnav li ul.subnav li a:hover { /*--Hover effect for subnav links--*/
 .user_list_line {text-align:center;}
 
 /*¡¡×ÜÀÀ */
-.zl {width:984px; padding-bottom:10px;float:left;}
+.zl {min-width:492px; padding-bottom:10px;float:left;}
 .zl ul {list-style:none;margin:0;}
 .zl li {display:inline; width:246px; float:left; margin-top:10px;}
+
+/*¡¡×ÜÀÀ */
+.zl2 {width:984px; padding-bottom:10px;float:left;}
+.zl2 ul {list-style:none;margin:0;}
+.zl2 li {display:inline; width:246px; float:left; margin-top:10px;}
+
+.bars-zl2 { padding-bottom:10px;}
+.bars-zl2 ul {list-style:none;margin:0;}
+.bars-zl2 li {display:inline; width:246px; float:left; margin-top:10px;}
 
 /* µ×²¿ */
 #footer_w{ position: relative;

@@ -1,5 +1,5 @@
 //创建图表显示单元 根据id创建单元 ,type(0:清除内容  非0:不清除内容)
-function autoCreateDiv(sysEqCount, equipmentId, type){
+function autoCreateDiv(sysEqCount, equipmentId, type, workPlaceId){
 	if (type == 0){
 		$("#resultDiv").empty();
 	}
@@ -24,8 +24,18 @@ function autoCreateDiv(sysEqCount, equipmentId, type){
 	"	</tr>" + 
 	"</table></li>";
 	
-	$("#resultDiv").append(elements);
-	
+	var workPlaceDiv = queryOrCreateWorkPlaceDiv(workPlaceId);
+	workPlaceDiv.append(elements);
+}
+
+function queryOrCreateWorkPlaceDiv(workPlaceId) {
+	var workPlaceAttrId = "workPlaceId-" + workPlaceId;
+	var obj = $("#" + workPlaceAttrId);
+	if (obj.length > 0) {
+		return obj;
+	}
+	$("#resultDiv").append("<ul id=\""+ workPlaceAttrId + "\" style=\"display:block; float:left;\"></ul><div style=\"clear:both;\"></div>");
+	return $("#" + workPlaceAttrId);
 }
 
 function jumpToLine(equipmentId){
@@ -66,6 +76,7 @@ function callRun(callType) {
 		$("#loadingDiv").html("正在加载...");
 	}
 	
+	
 	// 发送用户选择的地址列表
 	userPlaceList = $("input:hidden[name='userPlaceList']").val();
 	if ( (userPlaceList == undefined) || (userPlaceList == "0")) { // 地址列表不为空才发送请求
@@ -79,7 +90,7 @@ function callRun(callType) {
 			return;
 		}
 		$.post(actionPath, paramArgs, function(data) {
-			$("#test_div").text(data);
+		//	$("#test_div").text(data);
 			//将JSON转化为一个对象,并且名为json
 			var json = null;
 			try {
@@ -102,39 +113,34 @@ function callRun(callType) {
 		        	
 		  // 系统仪器类型 
 		  var sysEqCount = Number($("#systemEqType").val());
-		  
+		  	var barIndex = 0;
 		  	var workPlaceBarDatas = json.workPlaceBarDatas;
 		  	for (var workPlaceId in workPlaceBarDatas) {
 		  		var workPlace = workPlaceBarDatas[workPlaceId];
-		  		var workPlaceName = workPlace[name];
-		  		var workPlaceBarDatas = workPlace[datas];
-		  		
+		  		var workPlaceName = workPlace.name;
+		  		var workPlaceDiv = queryOrCreateWorkPlaceDiv(workPlaceId);
+		  		for (var i = 0; i < workPlace.barDatas.length; ++i) {
+		  			var barData = workPlace.barDatas[i];
+			  		(function() {
+			  			var equipmentId = barData.equipmentId;
+			  			if (callType == 1){
+			  				autoCreateDiv(sysEqCount, equipmentId, barIndex, workPlaceId);
+			  			}
+			  			fillDivData(sysEqCount,
+							equipmentId, 
+							barData.temp, 
+							barData.appt,
+							barData.humi,
+							barData.apph,
+							barData.label,
+							barData.colorTemp,
+							barData.colorHumi,
+							barData.stateStr,
+							barData.power);
+			  		})();
+			  		++barIndex;
+		  		}
 		  	}
-		  
-			//填充数据-json.userPlaceList是经过排序的地址列表 
-			var tempEquipmentId;
-			var equiIds = json.userPlaceList.split(",");
-			for (var i=0; i< equiIds.length ;i++){
-				tempEquipmentId = equiIds[i];
-				if (callType == 1){
-					// 第一次进入页面  - 创建图表显示单元 
-					autoCreateDiv(sysEqCount, tempEquipmentId, i);
-				}
-				//数据填充
-				if (json.barData[tempEquipmentId] != null){
-				fillDivData(sysEqCount,
-					tempEquipmentId, 
-					json.barData[tempEquipmentId].temp, 
-					json.barData[tempEquipmentId].appt,
-					json.barData[tempEquipmentId].humi,
-					json.barData[tempEquipmentId].apph,
-					json.barData[tempEquipmentId].label,
-					json.barData[tempEquipmentId].colorTemp,
-					json.barData[tempEquipmentId].colorHumi,
-					json.barData[tempEquipmentId].stateStr,
-					json.barData[tempEquipmentId].power);
-				}
-			}//end for
 			
 			//显示记录时间
 			if (json.recTimeStr != ""){
