@@ -14,8 +14,20 @@ import com.htc.bean.BeanForPortData;
 import com.htc.bean.BeanForRecord;
 import com.htc.bean.BeanForSearchRecord;
 import com.htc.common.FunctionUnit;
-import com.htc.dao.iface.*;
-import com.htc.domain.*;
+import com.htc.dao.iface.AlarmRecDao;
+import com.htc.dao.iface.BasePageDao;
+import com.htc.dao.iface.HisRecordDao;
+import com.htc.dao.iface.MinRecordDao;
+import com.htc.dao.iface.RecordDao;
+import com.htc.dao.iface.SmsRecordDao;
+import com.htc.dao.iface.TLogDao;
+import com.htc.domain.AlarmRec;
+import com.htc.domain.EquipData;
+import com.htc.domain.HisRecord;
+import com.htc.domain.Pager;
+import com.htc.domain.Record;
+import com.htc.domain.SmsRecord;
+import com.htc.domain.TLog;
 
 /**
  * @ MainService.java
@@ -420,6 +432,14 @@ public class MainService {
 			}
 		}
 		return rsMap;
+	}
+	
+	public List<BeanForPortData> getNewestMinRecAll() {
+		try {
+			return minRecordDao.getNewestRecAll();
+		} catch (Exception e) {
+			throw new RuntimeException("返回最新数据错误:", e);
+		}
 	}
 	
 	public List<BeanForPortData> selectMinAllRec(String userPlaceList) {

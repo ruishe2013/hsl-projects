@@ -1,7 +1,10 @@
 package com.htc.dao.impl;
 
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.Map.Entry;
 
 import com.htc.bean.BeanForMinRec;
@@ -30,6 +33,13 @@ public class MinRecordSqlMapDao extends BaseSqlMapDao implements MinRecordDao {
 		beanMinRec.setPlaceList(userPlaceList);
 		beanMinRec.setRecLong(lastRecTime());// 得到最新是记录时间
 		return (List<BeanForPortData>)getSqlMapClientTemplate().queryForList(nameplace + "getNewestRec", beanMinRec);
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<BeanForPortData> getNewestRecAll(){
+		BeanForMinRec beanMinRec = new BeanForMinRec();
+		beanMinRec.setRecLong(lastRecTime());// 得到最新是记录时间
+		return (List<BeanForPortData>)getSqlMapClientTemplate().queryForList(nameplace + "getNewestRecAll", beanMinRec);
 	}
 	
 	public long lastRecTime(){

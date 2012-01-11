@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.htc.bean.BeanForRecord;
 import com.htc.bean.BeanForSearchRecord;
-import com.htc.domain.*;
+import com.htc.bean.interfaces.DataRecord;
+import com.htc.bean.query.HistoryRecordQuery;
+import com.htc.domain.HisRecord;
 
 public interface HisRecordDao {
 	
@@ -23,6 +25,8 @@ public interface HisRecordDao {
 	public void deleteHisRecord(int recId, int stattype) throws Exception;
 
 	public void deleteHisRecordBatch(int[] recIds, int stattype) throws Exception;
+	
+	public List<DataRecord> getHistoryDataRecords(HistoryRecordQuery historyRecordQuery);
 	
 
 }

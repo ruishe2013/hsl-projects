@@ -198,6 +198,7 @@ public class MainRecentDataAction extends AbstractAction {
 	/**
 	 * @describe: 检测是否有数据存在性,然后 封装bar flash数据.
 	 * @date:2009-11-5
+	 * @deprecated see fillBarFlashData2
 	 */
 	public void fillBarFlashData(){
 		BeanForPortData serialPortDataBean;			// 从串口产生的数据格式

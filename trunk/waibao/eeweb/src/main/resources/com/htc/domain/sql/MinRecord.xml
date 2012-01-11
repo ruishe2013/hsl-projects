@@ -22,6 +22,14 @@
 		where equipmentId in ($placeList$) and	recLong = #recLong#
 	</select>
 	
+  <select id="getNewestRecAll" resultClass="BeanForPortData" parameterClass="BeanForMinRec">
+		SELECT 
+			equipmentId,address,temp,humi,dewPoint,
+			powerV,state,recTime,recLong,mark  
+		FROM trecordmin
+		where recLong = #recLong#
+	</select>
+	
 	<select id="lastRecTime" resultClass="long">
   	SELECT max(recLong) FROM trecordmin
   </select>

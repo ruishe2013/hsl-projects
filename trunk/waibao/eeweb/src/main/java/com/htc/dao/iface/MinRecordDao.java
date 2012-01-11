@@ -24,4 +24,6 @@ public interface MinRecordDao {
 	
 	public void truncateRecord() throws Exception;
 	
+	public List<BeanForPortData> getNewestRecAll()  throws Exception;
+	
 }
