@@ -1,0 +1,51 @@
+
+查询历史数据（返回json格式）
+/interfaces-json/historyData.action
+
+参数
+placeId=15 区域id （可选，默认全部区域）
+startTime=2012-01-09 16:08:00 开始时间 （可选，默认不限制）
+endTime=2012-01-09 16:18:00 结束时间 （可选，默认不限制）
+pageSize=20 每页最多返回记录数 （可选，默认50条）
+page=2	查询第几页 （可选，默认第1页）
+
+
+返回结果为json
+格式：
+{"dataRecords":[{"state":"1","address":"12","dsrsn":"12","humidity":"65.77","placeName":"测试区域2","recordTime":"2012-01-09 15:48:00.0","temperature":"10.68"},{"state":"1","address":"12","dsrsn":"12","humidity":"65.62","placeName":"测试区域2","recordTime":"2012-01-09 15:49:00.0","temperature":"10.74"}],"resultCode":0,"resultMessage":""}
+
+resultCode返回结果代码，如果为0，则表示没有错误，其他值均表示发生错误，如果发生错误，错误信息放在resultMessage字段中。
+
+数据各字段意义：
+state: 0：仪器没有连接， 1：仪器连接正常， 大于1，其他错误
+address: 设备地址(com端口号)
+dsrsn: 仪器编号
+humidity: 湿度
+temperature: 温度
+placeName: 设备所在区域
+recordTime: 记录时间
+
+
+
+
+
+
+
+查询即时数据（返回json格式）
+/interfaces-json/lastData.action
+
+{"lastDatas":[[{"address":"44","dsrsn":"44","humidity":"0.0","placeName":"测试区域1","recordTime":"2012-01-11 12:33:01","state":"0","temperature":"0.0"},{"address":"55","dsrsn":"55","humidity":"0.0","placeName":"测试区域1","recordTime":"2012-01-11 12:33:01","state":"0","temperature":"0.0"},{"address":"41","dsrsn":"41","humidity":"0.0","placeName":"测试区域1","recordTime":"2012-01-11 12:33:01","state":"0","temperature":"0.0"},{"address":"42","dsrsn":"42","humidity":"0.0","placeName":"测试区域1","recordTime":"2012-01-11 12:33:01","state":"0","temperature":"0.0"},{"address":"43","dsrsn":"43","humidity":"0.0","placeName":"测试区域1","recordTime":"2012-01-11 12:33:01","state":"0","temperature":"0.0"},{"address":"46","dsrsn":"46","humidity":"0.0","placeName":"测试区域1","recordTime":"2012-01-11 12:33:01","state":"0","temperature":"0.0"}],[{"address":"12","dsrsn":"12","humidity":"0.0","placeName":"测试区域2","recordTime":"2012-01-11 12:33:01","state":"0","temperature":"0.0"},{"address":"52","dsrsn":"52","humidity":"0.0","placeName":"测试区域2","recordTime":"2012-01-11 12:33:01","state":"0","temperature":"0.0"}]],"resultCode":0,"resultMessage":""}
+
+
+
+
+resultCode返回结果代码，如果为0，则表示没有错误，其他值均表示发生错误，如果发生错误，错误信息放在resultMessage字段中。
+
+数据各字段意义：
+state: 0：仪器没有连接， 1：仪器连接正常， 大于1，其他错误
+address: 设备地址(com端口号)
+dsrsn: 仪器编号
+humidity: 湿度
+temperature: 温度
+placeName: 设备所在区域
+recordTime: 记录时间

@@ -34,6 +34,9 @@
 	<bean id="workplaceDao"	class="com.htc.dao.impl.WorkPlaceSqlMapDao"	parent="daoTemplate"/>
 	
 	<!-- 为业务逻辑组件注入Service组件-->
+	<bean id="interfacesService" class="com.htc.model.InterfacesService">
+		<property name="hisRecordDao" ref="hisRecordDao" />
+	</bean>
 	<bean id="mainService"	class="com.htc.model.MainService">
 		<property name="alarmRecDao" ref="alarmRecDao" />
 		<property name="recordDao" ref="recordDao" />

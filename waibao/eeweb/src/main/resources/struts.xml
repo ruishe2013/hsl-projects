@@ -339,5 +339,14 @@
 			<result type="json" />
 		</action>
 	</package>
+	
+	<package name="interfaces-json" extends="json-default" namespace="/interfaces-json">
+		<action name="historyData" class="com.htc.action.interfaces.HistoryData">
+			<result type="json" />
+		</action>
+		<action name="lastData" class="com.htc.action.interfaces.LastData">
+			<result type="json" />
+		</action>
+	</package>
 
 </struts>

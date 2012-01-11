@@ -10,6 +10,38 @@
   <typeAlias alias="Record" type="com.htc.domain.Record"/>
   <typeAlias alias="BeanForRecord" type="com.htc.bean.BeanForRecord"/>
 	<typeAlias alias="BeanForSearchRecord" type="com.htc.bean.BeanForSearchRecord"/>  
+	
+	<typeAlias alias="historyRecordQuery" type="com.htc.bean.query.HistoryRecordQuery"/>  
+	<typeAlias alias="dataRecord" type="com.htc.bean.interfaces.DataRecord"/>  
+  
+  <resultMap id="dataRecordMapping" class="dataRecord">
+		<result property="temperature" column="temperature"/>
+		<result property="humidity" column="humidity"/>
+		<result property="recordTime" column="recordTime"/>
+		<result property="dsrsn" column="dsrsn"/>
+		<result property="address" column="address"/>
+		<result property="placeName" column="placeName"/>
+	</resultMap>
+  
+  <select id="getHistoryDataRecords" parameterClass="historyRecordQuery" resultMap="dataRecordMapping">
+  	select 
+		rec.temperature temperature, rec.humidity humidity, rec.recTime recordTime, equ.dsrsn dsrsn, equ.address address, place.placeName placeName
+	from 
+		trecord rec, tequipdata equ, tworkplace place 
+	where 
+		rec.equipmentId = equ.equipmentId and equ.placeId = place.placeId
+		 <isNotNull property="placeId" >
+		 	and equ.placeId = #placeId#
+		 </isNotNull>
+		 <isNotNull property="startTime" >
+		 	and rec.recTime &gt;= #startTime#
+		 </isNotNull>
+		 <isNotNull property="endTime" >
+		 	and rec.recTime &lt;= #endTime#
+		 </isNotNull>
+	limit
+		#startRow#, #pageSize#
+  </select>
   
   <select id="getEarlyTime" resultClass="string">
 		SELECT min(rectime) FROM trecord

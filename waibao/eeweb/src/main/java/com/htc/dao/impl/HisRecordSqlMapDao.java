@@ -5,6 +5,8 @@ import java.util.*;
 
 import com.htc.bean.BeanForRecord;
 import com.htc.bean.BeanForSearchRecord;
+import com.htc.bean.interfaces.DataRecord;
+import com.htc.bean.query.HistoryRecordQuery;
 import com.htc.common.FunctionUnit;
 import com.htc.dao.iface.HisRecordDao;
 import com.htc.domain.*;
@@ -106,4 +108,12 @@ public class HisRecordSqlMapDao extends BaseSqlMapDao implements HisRecordDao {
 		getSqlMapClientTemplate().getSqlMapClient().executeBatch();			//提交批量
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<DataRecord> getHistoryDataRecords(HistoryRecordQuery historyRecordQuery) {
+		return (List<DataRecord>)getSqlMapClientTemplate().queryForList("Record.getHistoryDataRecords", historyRecordQuery);
+	}
+
+	
+	
 }
