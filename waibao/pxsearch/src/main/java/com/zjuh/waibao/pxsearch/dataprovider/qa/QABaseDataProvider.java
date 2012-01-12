@@ -1,30 +1,84 @@
 package com.zjuh.waibao.pxsearch.dataprovider.qa;
 
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.ResultSet;
+import java.util.HashMap;
 import java.util.Map;
 
 import com.zjuh.waibao.pxsearch.dataprovider.CommonDataProvider;
+import com.zjuh.waibao.pxsearch.doc.Types;
+import com.zjuh.waibao.pxsearch.util.HtmlUtil;
 import com.zjuh.waibao.pxsearch.util.WordUtil;
 
 public class QABaseDataProvider extends CommonDataProvider {
 
 	@Override
 	protected String getSql() {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "select PID, Name, Keywords, Details, WordFilename from c_textbook where [State] = 2 ";
+		return sql;
 	}
 
 	@Override
 	protected String getSqlCondition() {
-		// TODO Auto-generated method stub
-		return null;
+		return "";
+	}
+	
+	private String getWordContent(String wordFilename) {
+		if (wordFilename == null) {
+			return null;
+		}
+		FileInputStream is = null;
+		try {
+			is = new FileInputStream(wordFilename);
+			return WordUtil.getWordText(is);
+		} catch (Exception e) {
+			log.error("∂¡»°word ß∞‹", e);
+			return null;
+		} finally {
+			if (is != null) {
+				try {
+					is.close();
+				} catch (IOException e) {
+					// ignore
+				}
+			}
+		}
 	}
 
 	@Override
 	protected Map<String, String> mappingResult(ResultSet rs) {
-		// TODO Auto-generated method stub
-		return null;
+		Map<String, String> ret = new HashMap<String, String>();
+		try {
+			String pid = rs.getString("PID");
+			String name = rs.getString("name");
+			String tags = rs.getString("Keywords");
+			String details = rs.getString("Details");
+			String wordFilename = rs.getString("WordFilename");
+			String type = Types.QA;
+			
+			ret.put("id", makeId(pid, type));
+			ret.put("docId", pid);
+			ret.put("title", name);
+			ret.put("tags", tags);
+			ret.put("type", type);
+			
+			details = HtmlUtil.removeHtmlTags(details);
+			String wordContent = getWordContent(wordFilename);
+			
+			StringBuilder sbContent = new StringBuilder();
+			if (details != null) {
+				sbContent.append(details);
+			}
+			if (wordContent != null) {
+				sbContent.append(wordContent);
+			}
+			ret.put("content", sbContent.toString());
+		} catch (Exception e) {
+			log.error("≤È—Ø ß∞‹", e);
+		}
+		return ret;
 	}
 
 	

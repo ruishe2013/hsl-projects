@@ -14,6 +14,8 @@ public class MultiDataProvider implements DataProvider {
 	
 	private DataProvider currentDataProvider;
 	
+	private boolean hasNextRow = false;
+	
 	public MultiDataProvider(List<? extends DataProvider> dataProviders) {
 		super();
 		this.dataProviders = dataProviders;
@@ -26,8 +28,7 @@ public class MultiDataProvider implements DataProvider {
 		}
 	}
 
-	@Override
-	public boolean hasNext() {
+	private boolean hasNextImpl() {
 		boolean ret = currentDataProvider.hasNext();
 		if (ret) {
 			return true;
@@ -35,14 +36,21 @@ public class MultiDataProvider implements DataProvider {
 		
 		while ( true ) {
 			ret = turnToNextDataProvider();
-			if (ret) {
-				break;
-			}
-			if (currentDataProvider == null) {
+			if (!ret) {
 				return false;
 			}
+			if (currentDataProvider.hasNext()) {
+				return true;
+			} else {
+				continue;
+			}
 		}
-		return ret;
+	}
+	
+	@Override
+	public boolean hasNext() {
+		hasNextRow = hasNextImpl();
+		return hasNextRow;
 	}
 
 	@Override
@@ -80,6 +88,9 @@ public class MultiDataProvider implements DataProvider {
 	
 	@Override
 	public Map<String, String> next() {
+		if (!hasNextRow) {
+			return null;
+		}
 		return currentDataProvider.next();
 	}
 

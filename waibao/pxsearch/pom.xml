@@ -36,9 +36,9 @@
 			<version>1.2.4</version>
 		</dependency>
 		<dependency>
-		    <groupId>org.apache.poi</groupId>
-		    <artifactId>poi</artifactId>
-		    <version>3.7</version>
+			<groupId>org.textmining</groupId>
+			<artifactId>tm-extractors</artifactId>
+			<version>0.4</version>
 		</dependency>
 	</dependencies>
 
