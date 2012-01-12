@@ -1,9 +1,10 @@
 请求
 
-http://127.0.0.1:8080/pxsearch/select/?q=关键字&start=10&rows=5
+http://127.0.0.1:8080/pxsearch/select/?q=关键字&start=0&rows=3&fq=type:1
 q=关键字
 start=xxx 起始行数(默认0)
 rows=xxx 返回记录数（默认10）
+fq=type:1  课程 fq=type:2 问题 （默认全部）
 
 
 
@@ -11,73 +12,16 @@ rows=xxx 返回记录数（默认10）
 
 响应
 
+
 <?xml version="1.0" encoding="UTF-8"?>
 <response>
-<lst name="responseHeader">
-<int name="status">0</int>	<!-- 查询结果：0、成功，其他失败 -->
-<int name="QTime">33</int>	<!-- 查询时间（毫秒） -->
-<lst name="params">
-<str name="start">10</str>	<!-- 起始行数 -->
-<str name="q">分词结果</str>		
-<str name="rows">5</str>	<!-- 返回记录数 -->
-</lst>
-</lst>
-<result name="response" numFound="128" start="10">	<!-- 命中的记录数 -->
-<doc>
-<str name="content">
-政治经济学（Political Economy），是一门以人们的社会生产关系即经济关系为研究对象的科学，它阐明人类社会各个发展阶段上支配物质资料的生产和分配的规律。 思考力学院提供MBA、EMBA在线课程。政治经济学在线学习，提供政治经济学视频、政治经济学案例分析、ppt。null
-</str>	<!-- 内容 -->
-<int name="docId">17</int>	<!-- 对应数据在数据库中的id -->
-<str name="id">1_17</str>
-<str name="tags">政治经济学原理 政治经济学课程 政治经济学在线讲座</str>  <!-- 标签 -->
-<str name="title">政治经济学Political Economics</str>	<!-- 标题 -->
-<int name="type">1</int>	<!-- 文档类型：1、课程，2、问答 -->
-</doc>
-<doc>
-<str name="content">
-博弈论（Game Theory），亦名“对策论”、“赛局理论”，属应用数学的一个分支, 目前在生物学、经济学、国际关系、计算机科学、政治学、军事战略和其他很多学科都有广泛的应用。博弈论主要研究公式化了的激励结构间的相互作用。是研究具有斗争或竞争性质现象的数学理论和方法。也是运筹学的一个重要学科。 博弈论考虑游戏中的个体的预测行为和实际行为，并研究它们的优化策略。生物学家使用博弈理论来理解和预测进化论的某些结果。思考力学院提供MBA、EMBA在线课程。博弈论在线学习，提供博弈论视频、博弈论案例分析、ppt。null
-</str>
-<int name="docId">18</int>
-<str name="id">1_18</str>
-<str name="tags">博弈论 博弈论在线课程 博弈论视频 博弈论讲座 博弈论MBA 博弈论课件</str>
-<str name="title">博弈论Game Theory</str>
-<int name="type">1</int>
-</doc>
-<doc>
-<str name="content">
-网络营销（On-line Marketing或E-Marketing）就是以国际互联网络为基础，利用数字化的信息和网络媒体的交互性来辅助营销目标实现的一种新型的市场营销方式。简单的说，网络营销就是以互联网为主要手段进行的，为达到一定营销目的的营销活动。 思考力学院提供MBA、EMBA在线课程。网络营销在线学习，提供网络营销视频、网络营销案例分析、书籍。null
-</str>
-<int name="docId">19</int>
-<str name="id">1_19</str>
-<str name="tags">
-网络营销 网络营销方案 网络营销技巧 网络营销案例 网络营销课程 网络营销讲座 网络营销视频 网络营销MBA在线课程 网络营销课件
-</str>
-<str name="title">网络营销On-line Marketing</str>
-<int name="type">1</int>
-</doc>
-<doc>
-<str name="content">
-创业管理不同于传统管理，它主要研究企业管理层的创业行为，研究企业管理层如何延续注入创业精神和创新活力，增强企业的战略管理柔性和竞争优势。 思考力学院提供MBA、EMBA在线课程。创业管理在线学习，提供创业管理视频、创业管理案例分析、ppt。null
-</str>
-<int name="docId">20</int>
-<str name="id">1_20</str>
-<str name="tags">
-创业管理 创业管理视频 创业管理案例 创业管理在线视频 创业管理在线课程 创业管理讲座 创业管理课件 创业学MBA课程
-</str>
-<str name="title">创业管理Entrepreneurial Management</str>
-<int name="type">1</int>
-</doc>
-<doc>
-<str name="content">
-物流管理（Logistics Management）是指在社会在生产过程中，根据物质资料实体流动的规律，应用管理的基本原理和科学方法，对物流活动进行计划、组织、指挥、协调、控制和监督，使各项物流活动实现最佳的协调与配合，以降低物流成本，提高物流效率和经济效益。现代物流管理是建立在系统论、信息论和控制论的基础上的。 思考力学院提供MBA、EMBA在线课程。物流管理在线学习，提供物流管理视频、物流管理案例分析、ppt，供应链管理讲座，在线课程null
-</str>
-<int name="docId">21</int>
-<str name="id">1_21</str>
-<str name="tags">
-物流管理 物流管理系统 供应链物流管理 物流管理PPT 物流管理讲座 物流管理在线课程 供应链管理在线讲座课程
-</str>
-<str name="title">供应链物流管理Logistics Management</str>
-<int name="type">1</int>
-</doc>
-</result>
+<lst name="responseHeader"><int name="status">0</int><int name="QTime">16</int><lst name="params"><str name="start">0</str><str name="q">(+title:管^100.0 +title:理^100.0 ) OR (+tags:管^10.0 +tags:理^10.0 ) OR (+content:管 +content:理 )</str><str name="rows">3</str></lst></lst><result name="response" numFound="69" start="0"><doc><str name="content"> 管理心理学是把心理学的知识应用于分析、说明、指导管理活动中的个体和群体行为的工业心理学分支，是研究管理过程中人们的心理现象、心理过程及其发展规律的科学。
+ 思考力学院提供MBA、EMBA在线课程。管理心理在线学习，提供管理心理视频、管理心理案例分析、ppt。</str><int name="docId">22</int><str name="id">1_22</str><str name="tags">管理心理学 管理心理学在线课程 管理心理学ppt 管理心理学视频讲座 </str><str name="title"> 管理心理学 Management psychology </str><int name="type">1</int></doc><doc><str name="content"> 《管理学》是高等院校经济管理类专业的主干课程之一，是经济管理类专业本科生必修的专业基础课。通过学习管理学，掌握管理学的相关理论与管理职能，以帮助管理者做好从事管理的准备。
+ 思考力学院提供MBA、EMBA在线课程。管理学原理、企业管理学、管理学基础、经济管理学、工商管理学、管理学原理在线学习，提供管理学视频、管理学案例分析、管理学书籍</str><int name="docId">7</int><str name="id">1_7</str><str name="tags">管理学原理 企业管理学 管理学基础 经济管理学 工商管理学 管理学视频 管理学原理 管理学书籍</str><str name="title"> 管理学 Principles of Management</str><int name="type">1</int></doc><doc><str name="content"> 管理咨询（Management Consulting），管理咨询是具有丰富的管理知识和经验，并且掌握了咨询技法的人所从事的高智能的服务事业，是咨询人员在企业提出要求的基础上深入企业，并且和企业管理人员密切结合，应用科学的方法，找出企业存在的主要问题，进行定量和确有论据的定性分析，查出存在问题的原因，提出切实可行的改善方案，进而指导实施方案，使企业的运行机制得到改善，提高企业的管理水平和经济效益。
+ 思考力学院提供MBA、EMBA在线课程。管理咨询在线学习，提供管理咨询视频、管理咨询
+案例分析、书籍。</str><int name="docId">43</int><str name="id">1_43</str><str name="tags">管理咨询 管理咨询师 管理咨询公司 企业管理咨询 管理咨询公司排名 企业管理咨询公司 管理咨询师考试 毕博管理咨询
+</str><str name="title"> 管理咨询 Management Consulting </str><int name="type">1</int></doc></result><lst name="highlighting"><lst name="1_22"><arr name="title"><str> &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;心&lt;em&gt;理&lt;/em&gt;学 Management psychology </str></arr><arr name="tags"><str>&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;心&lt;em&gt;理&lt;/em&gt;学 &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;心&lt;em&gt;理&lt;/em&gt;学在线课程 &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;心&lt;em&gt;理&lt;/em&gt;学ppt &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;心&lt;em&gt;理&lt;/em&gt;学视频讲座 </str></arr><arr name="content"><str> &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;心&lt;em&gt;理&lt;/em&gt;学是把心&lt;em&gt;理&lt;/em&gt;学的知识应用于分析、说明、指导&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;活动中的个体和群体行为的工业心&lt;em&gt;理&lt;/em&gt;学分支，是研究&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;过程中人们的心&lt;em&gt;理&lt;/em&gt;现象、心&lt;em&gt;理&lt;/em&gt;过程及其发展规律的科学。
+ 思考力学院提供MBA、EMBA在线课程</str></arr></lst><lst name="1_7"><arr name="title"><str> &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学 Principles of Management</str></arr><arr name="tags"><str>&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学原&lt;em&gt;理&lt;/em&gt; 企业&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学 &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学基础 经济&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学 工商&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学 &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学视频 &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学原&lt;em&gt;理&lt;/em&gt; &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学书籍</str></arr><arr name="content"><str> 《&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学》是高等院校经济&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;类专业的主干课程之一，是经济&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;类专业本科生必修的专业基础课。通过学习&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学，掌握&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;学的相关&lt;em&gt;理&lt;/em&gt;论与&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;职能，以帮助&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;者做好从事&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;的准备。
+ 思考力学院提供MBA</str></arr></lst><lst name="1_43"><arr name="title"><str> &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询 Management Consulting </str></arr><arr name="tags"><str>&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询 &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询师 &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询公司 企业&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询 &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询公司排名 企业&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询公司 &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询师考试 毕博&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询
+</str></arr><arr name="content"><str> &lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询（Management Consulting），&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;咨询是具有丰富的&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;知识和经验，并且掌握了咨询技法的人所从事的高智能的服务事业，是咨询人员在企业提出要求的基础上深入企业，并且和企业&lt;em&gt;管&lt;/em&gt;&lt;em&gt;理&lt;/em&gt;</str></arr></lst></lst>
 </response>
