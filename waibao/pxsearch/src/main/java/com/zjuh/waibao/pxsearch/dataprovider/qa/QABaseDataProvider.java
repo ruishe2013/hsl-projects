@@ -1,5 +1,6 @@
 package com.zjuh.waibao.pxsearch.dataprovider.qa;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -14,6 +15,8 @@ import com.zjuh.waibao.pxsearch.util.WordUtil;
 
 public class QABaseDataProvider extends CommonDataProvider {
 
+	private File baseWordDir = new File("D:/wwwroot/SIKAOLI.COM/docs");
+	
 	@Override
 	protected String getSql() {
 		String sql = "select PID, Name, Keywords, Details, WordFilename from c_textbook where [State] = 2 ";
@@ -29,9 +32,11 @@ public class QABaseDataProvider extends CommonDataProvider {
 		if (wordFilename == null) {
 			return null;
 		}
+		//D:\wwwroot\SIKAOLI.COM\docs
 		FileInputStream is = null;
 		try {
-			is = new FileInputStream(wordFilename);
+			File wordFile = new File(baseWordDir, wordFilename);
+			is = new FileInputStream(wordFile);
 			return WordUtil.getWordText(is);
 		} catch (Exception e) {
 			log.error("∂¡»°word ß∞‹", e);
@@ -85,5 +90,5 @@ public class QABaseDataProvider extends CommonDataProvider {
 	protected String getWordContent(InputStream is) {
 		return WordUtil.getWordText(is);
 	}
-	
+
 }

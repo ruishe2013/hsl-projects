@@ -55,7 +55,7 @@ public abstract class BaseCourseDataProvider extends CommonDataProvider {
 	
 	protected String getSql() {
 		String sql = "select PID, Name, EnName, Code, Intro, Keyword, Description, PageTitle from c_courses t" +
-		" where 1=1 ";
+		" where IsView=1 ";
 		return sql;
 	}
 	
