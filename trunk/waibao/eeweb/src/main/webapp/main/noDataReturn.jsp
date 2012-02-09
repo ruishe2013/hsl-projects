@@ -56,7 +56,7 @@
 					    </tr>
 					  </table>
 					</div>
-					<div class="foot">版权所有&copy;EEFIELD</div>  
+					<div class="foot">版权所有&copy;杭州成前科技有限公司</div>  
 				</td>
 		  </tr>
 		</table> 

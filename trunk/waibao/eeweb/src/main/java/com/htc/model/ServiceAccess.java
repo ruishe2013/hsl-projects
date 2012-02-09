@@ -1,13 +1,13 @@
 package com.htc.model;
 
-import java.util.*;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import com.htc.common.CommonDataUnit;
-import com.htc.dao.iface.*;
-import com.htc.domain.*;
+import com.htc.dao.iface.TAccessDao;
+import com.htc.domain.Data4Access;
 
 /**
  * @ UserService.java
@@ -22,9 +22,61 @@ public class ServiceAccess {
 	
 //	private DaoManager daoMgr = Dao4AccessConfig.getDaoManager();
 //	private static ServiceAccess accessService = new ServiceAccess();
-	private TAccessDao accessDao; 
+	private TAccessDao accessDao = new AccessDaoMock(); 
 	private CommonDataUnit commonDataUnit; 
 
+	static class AccessDaoMock implements TAccessDao {
+
+		@Override
+		public void deleteAll() throws Exception {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void deleteBatch(String[] strDSRSNs) throws Exception {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void deleteDataById(String strDSRSN) throws Exception {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public List<Data4Access> getlist() throws Exception {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public void insertBatch(List<Data4Access> datas) throws Exception {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void insertData(Data4Access data4Access) throws Exception {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void updateBatch(List<Data4Access> datas) throws Exception {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void updateData(Data4Access data4Access) throws Exception {
+			// TODO Auto-generated method stub
+			
+		}
+		
+	}
+	
 	// 构造方法  
 	public ServiceAccess() {
 	} 
@@ -32,6 +84,12 @@ public class ServiceAccess {
 	public void setCommonDataUnit(CommonDataUnit commonDataUnit) {
 		this.commonDataUnit = commonDataUnit;
 	}
+	
+	
+	/**
+	 * @deprecated DSR_DB.mdb文件废弃
+	 * @param accessDao
+	 */
 	public void setAccessDao(TAccessDao accessDao) {
 		this.accessDao = accessDao;
 	}

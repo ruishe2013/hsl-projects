@@ -1,6 +1,6 @@
 function submitForm(){
 	var bool = true;			
-	if (bool){bool = checkData("company_name","stringLen","公司名称");}
+	if (bool){bool = checkData("company_name","stringLen","名称");}
 	if (bool){bool = checkData("syscolora","color","超出上限时显示的颜色");}
 	if (bool){bool = checkData("syscolorb","color","正常运行时显示的颜色");}
 	if (bool){bool = checkData("syscolorc","color","低于下限时显示的颜色");}

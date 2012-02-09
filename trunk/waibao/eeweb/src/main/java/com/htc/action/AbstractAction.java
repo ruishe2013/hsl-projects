@@ -24,7 +24,7 @@ public class AbstractAction extends ActionSupport {
 	/**
 	 * 厂家账户
 	 */
-	public String OEMNAME = "eeadmin"; 
+	public String OEMNAME = "cqadmin"; 
 	/**
 	 * 保留账户不能登录
 	 */

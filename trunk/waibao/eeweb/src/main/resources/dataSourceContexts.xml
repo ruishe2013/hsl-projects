@@ -49,12 +49,14 @@
 	</bean>-->
 	
 	<!-- access数据源 dbcp-->
+	<!-- 
 	<bean id="dataSource4Access" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="sun.jdbc.odbc.JdbcOdbcDriver"/>
 		<property name="url" value="jdbc:odbc:driver={Microsoft Access Driver (*.mdb)};DBQ=D:/eeField/accessdb/DSR_DB.mdb"/>
 		<property name="username" value=""/>
 		<property name="password" value=""/>
 	</bean> 
+	 -->
 	<!--<property name="driverClass" value="com.hxtt.sql.access.AccessDriver" />
    <property name="jdbcUrl"	value="jdbc:access:///D:/htc/accessdb/DSR_DB.mdb" />-->   		
 	<!-- access数据源 c3p0

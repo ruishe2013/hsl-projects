@@ -105,18 +105,26 @@
 	</bean>
 	
 	<!-- Access 需要组件 -->
+	<!--
 	<bean id="sqlMapClient4Acc" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation" value="classpath:com/htc/domain/sqlmap/SqlMap4Access.xml" />
 		<property name="dataSource" ref="dataSource4Access" />
 	</bean>		
+	  -->
+	  <!-- 
 	<bean id="dao4AccessTemp" abstract="true" lazy-init="true">
 		<property name="sqlMapClient" ref="sqlMapClient4Acc"/>
 	</bean>	
+	 -->
 	<!-- 为业务逻辑组件注入DAO组件 -->
+	<!-- 
 	<bean id="accessDao"	class="com.htc.dao.impl.TAccessSqlMapDao"	parent="dao4AccessTemp"/>	
+	 -->
 	<!-- 为业务逻辑组件注入Service组件-->
 	<bean id="serviceAccess"	class="com.htc.model.ServiceAccess">
+	<!--  
 		<property name="accessDao" ref="accessDao" />
+		-->
 		<property name="commonDataUnit" ref="commonDataUnit" />
 	</bean>	
 	
