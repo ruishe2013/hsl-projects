@@ -78,7 +78,7 @@ body {
 
 			
 
-			<div style="text-align:center; font-size:12px; line-height:45px;">版权所有&copy;EEFIELD</div>  
+			<div style="text-align:center; font-size:12px; line-height:45px;">版权所有&copy;杭州成前科技有限公司</div>  
 
 		</td>
 

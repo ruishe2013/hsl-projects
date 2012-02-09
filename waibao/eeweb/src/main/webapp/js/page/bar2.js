@@ -5,7 +5,7 @@ function autoCreateDiv(sysEqCount, equipmentId, type, workPlaceId){
 	}
 	var elements =
 	"<li><table width=\"242px\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">" +
-	"	<tr><td class=\"bar_head\"><a href=\"#\" id=\"label" + equipmentId + "\" onclick=\"jumpToLine("+equipmentId+")\"></a>" +
+	"	<tr><td class=\"bar_head\"><a href=\"#\" id=\"label" + equipmentId + "\" onclick=\"jumpToLine("+equipmentId+")\" style=\"color:#fff;\"></a>" +
 	"	</td></tr>" +
 	"	<tr><td class=\"bar_body\">" +
 	"		<table width=\"238px\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">" + 

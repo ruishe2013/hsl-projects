@@ -56,17 +56,18 @@
 												</s:else>							    		        
 									  	</td>
 									  </tr>		
-									  <s:if test="#session.userpowertag == 86">
-										  <tr>
-										  	<td><strong><label>串口波特率</label></strong>
-										    	<s:select list="baudRatelList" name="sysArgs['baudrate_number']" listKey="key" listValue="value"/>	        
-										  	</td>
-										  </tr>		
-										  <tr>
-										  	<td><strong><label>串口数据通讯周期</label></strong>
-										    	<s:select list="flashTimeList" name="sysArgs['data_flashtime']" listKey="key" listValue="value"/>	        
-										  	</td>
-										  </tr>		
+									  
+									  <tr>
+									  	<td><strong><label>串口波特率</label></strong>
+									    	<s:select list="baudRatelList" name="sysArgs['baudrate_number']" listKey="key" listValue="value"/>	        
+									  	</td>
+									  </tr>		
+									  <tr>
+									  	<td><strong><label>串口数据通讯周期</label></strong>
+									    	<s:select list="flashTimeList" name="sysArgs['data_flashtime']" listKey="key" listValue="value"/>	        
+									  	</td>
+									  </tr>		
+									 <s:if test="#session.userpowertag == 86">
 										  <tr>
 										  	<td><strong><label>温度显示格式</label></strong>
 										    	<s:radio list="tempshowSel" name="sysArgs['temp_show_type']"></s:radio>	        
@@ -83,7 +84,8 @@
 										  		<strong><label>发送帧附加毫秒数</label></strong>
 										  		<s:textfield name="sysArgs['seri_addition_time']" id="seri_addition_time" size="5" maxlength="3"></s:textfield>
 										  	</td>
-										  </tr>		
+										  </tr>	
+										  	
 									  </s:if>
 									  <s:else>
 										  <tr>
@@ -115,23 +117,17 @@
 													cssStyle="width: 60px;" cssClass="iColorPicker" />									    		        
 									  	</td>
 									  </tr>
-									  <s:if test="#session.userpowertag == 86">
-										  <tr class="user_list_01">
-										  	<td>
-													<label for="accessLabel" style="cursor: pointer">
-													<s:checkbox  name="showGroup['doaccess']" id="accessLabel" />启用药监联功能</label>
-													<s:if test="showGroup['doaccess']">
-														<a href="#" onclick="checkAccess();">检测</a>
-													</s:if>							  	
-										  	</td>
-										  </tr>
-											<tr>
-												<td><br/>
-													<strong>* 药监联网功能,目前应用群体:</strong><br/>
-													<strong>①:需要接入浙江省药监局系统的企业</strong>
-												</td>
-											</tr>		
-									  </s:if>
+									  
+										<tr>
+											<td><br/>
+												<div style="color:#f00;">
+												<strong></strong><br/>
+												<strong>需要接入省药监局系统的企业</strong><br/>
+												<strong>请与我们联系，电话 0571-88192051</strong><br/>
+												</div>
+											</td>
+										</tr>		
+									  
 									</table>  		        
 								</td>
 				      </tr>

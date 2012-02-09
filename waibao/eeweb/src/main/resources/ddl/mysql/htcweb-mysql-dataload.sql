@@ -18,7 +18,7 @@ insert into tworkplace(placeName,useless) values('未定义',2);
 --open_short_message(短信报警	默认关闭=1)
 --open_pcsound			(声卡报警	默认开启=2)
 --open_access_store	(药监信息	默认关闭=1)
-insert into tsysparam(argsKey, argsValue) values('company_name','名称'); 
+insert into tsysparam(argsKey, argsValue) values('company_name','Web版温湿度监控平台'); 
 insert into tsysparam(argsKey, argsValue) values('alarm_playfile','alarmHtc1.mp3'); 
 insert into tsysparam(argsKey, argsValue) values('open_short_message','1'); 
 insert into tsysparam(argsKey, argsValue) values('open_pcsound','2'); 
