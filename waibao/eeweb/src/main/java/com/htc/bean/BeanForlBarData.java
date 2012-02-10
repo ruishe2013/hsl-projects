@@ -54,6 +54,18 @@ public class BeanForlBarData {
 	 */
 	private String label; 
 	
+	private int address;
+	
+	@Override
+	public String toString() {
+		return "BeanForlBarData [address=" + address + ", equipmentId=" + equipmentId + "]";
+	}
+	public int getAddress() {
+		return address;
+	}
+	public void setAddress(int address) {
+		this.address = address;
+	}
 	public int getEquipmentId() {
 		return equipmentId;
 	}
