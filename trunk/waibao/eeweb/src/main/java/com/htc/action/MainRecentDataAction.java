@@ -1,6 +1,8 @@
 package com.htc.action;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -382,7 +384,10 @@ public class MainRecentDataAction extends AbstractAction {
 			
 			// 封装数据  到 页面数据
 			label = null; temp = null; humi = null; colorTemp = null; colorHumi = null; state = null;
-			serialBarDataBean.setEquipmentId(equipmentId);										// 主键--已存在bean里面
+			serialBarDataBean.setEquipmentId(equipmentId);							// 主键--已存在bean里面
+			if (equipData != null) {
+				serialBarDataBean.setAddress(equipData.getAddress());
+			}
 			label = commonDataUnit.getEquiMapStrById(equipmentId);
 //			label = FunctionUnit.substringByByte( 			
 //					commonDataUnit.getEquiMapStrById(equipmentId), 34, "...");					// 标签 -- 现在在页面中处理
@@ -427,7 +432,35 @@ public class MainRecentDataAction extends AbstractAction {
 			//barData.put(equipmentId, serialBarDataBean); 
 			appendBarData(workPlaceBarDatas, equipData.getPlaceId(), serialBarDataBean, equipData.getPlaceStr());
 		}//end for
-		
+		// sort by address
+		sortDataByAddress();
+	}
+	
+	private void sortDataByAddress() {
+		for (Map.Entry<Integer, WorkPlaceEntity> entry : workPlaceBarDatas.entrySet()) {
+			WorkPlaceEntity workPlaceEntity = entry.getValue();
+			if (workPlaceEntity == null) {
+				continue;
+			}
+			List<BeanForlBarData> datas = workPlaceEntity.getBarDatas();
+			Collections.sort(datas, new Comparator<BeanForlBarData>(){
+
+				@Override
+				public int compare(BeanForlBarData o1, BeanForlBarData o2) {
+					if (o1 == null && o1 == null) {
+						return 0;
+					}
+					if (o1 == null) {
+						return -1;
+					}
+					if (o2 == null) {
+						return 1;
+					}
+					return o1.getAddress() - o2.getAddress();
+				}
+				
+			});
+		}
 	}
 	
 	private void appendBarData(Map<Integer, WorkPlaceEntity> workPlaceBarData, int workPlace, BeanForlBarData beanForlBarData, String placeName) {
