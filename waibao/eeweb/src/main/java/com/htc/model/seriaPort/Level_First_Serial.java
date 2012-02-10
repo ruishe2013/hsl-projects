@@ -143,7 +143,8 @@ public class Level_First_Serial{
 			rsint = 1;	// 无仪器增加
 		}else{
 			// 1: 波特率
-			int baudRateNo = Integer.parseInt(commonDataUnit.getSysArgsByKey(BeanForSysArgs.BAUDRATE_NUMBER));
+			String baudRate = commonDataUnit.getSysArgsByKey(BeanForSysArgs.BAUDRATE_NUMBER);
+			int baudRateNo = Integer.parseInt(baudRate);
 			// 2: 刷新时间( 单位为秒)
 			int flashTime = Integer.parseInt(commonDataUnit.getSysArgsByKey(BeanForSysArgs.DATA_FLASHTIME));
 			// 3: 串口通信错误时, 重发的次数(默认5次)
@@ -161,6 +162,7 @@ public class Level_First_Serial{
 		}
 		return rsint;
 	}
+	
 	
 	/**
 	 * @describe:关闭串口和 暂停任务
