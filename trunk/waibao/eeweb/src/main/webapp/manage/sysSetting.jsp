@@ -44,8 +44,10 @@
 												<s:else>
 													<label class="showFont"><s:property value="sysArgs['company_name']"/></label>
 													<s:hidden name="sysArgs['company_name']" id="company_name"></s:hidden>
+													<%-- 这两个参数已经包括在admin权限的select组件中
 													<s:hidden name="sysArgs['baudrate_number']"></s:hidden>
 													<s:hidden name="sysArgs['data_flashtime']"></s:hidden>
+													--%>
 													<s:hidden name="sysArgs['temp_show_type']"></s:hidden>
 													<s:hidden name="sysArgs['seri_retry_time']" id="seri_retry_time"></s:hidden>
 													<s:hidden name="sysArgs['seri_addition_time']" id="seri_addition_time"></s:hidden>

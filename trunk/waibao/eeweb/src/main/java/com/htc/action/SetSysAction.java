@@ -2,13 +2,20 @@ package com.htc.action;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import com.htc.bean.BeanForSysArgs;
-import com.htc.common.*;
-import com.htc.domain.*;
-import com.htc.model.ServiceAccess;
+import com.htc.common.FunctionUnit;
+import com.htc.domain.BackUpList;
+import com.htc.domain.Pager;
 import com.htc.model.ManaService;
+import com.htc.model.ServiceAccess;
 import com.htc.model.ServiceSqlServer;
 import com.htc.model.SetSysService;
 import com.htc.model.seriaPort.Level_First_Serial;
@@ -25,6 +32,8 @@ public class SetSysAction extends AbstractActionForHigh {
 	
 	// 序列化号
 	private static final long serialVersionUID = -1969123516449503773L;
+	
+	private static final Log log = LogFactory.getLog(SetSysAction.class);
 
 	// 服务类
 	private SetSysService setSysService;
@@ -105,59 +114,69 @@ public class SetSysAction extends AbstractActionForHigh {
 	}
 	
 	public String initSys(){
-		showTipMsg = 0;
-		
-		//实例化服务类
-		//setSysService = setSysService == null ? new SetSysService() : setSysService ;
-		sysArgs = setSysService.getSysParamMap();
-		
-		boolean tempBool = true;
-		showGroup = showGroup == null ? new HashMap<String, Boolean>() : showGroup;
-		
-		tempBool = (sysArgs.get(BeanForSysArgs.OPEN_SHORT_MESSAGE)).equals("2");
-		showGroup.put(KEY_MSSSAGE, tempBool);
-		tempBool = (sysArgs.get(BeanForSysArgs.OPEN_PCSOUND)).equals("2");
-		showGroup.put(KEY_PCSOUND, tempBool);
-		tempBool = (sysArgs.get(BeanForSysArgs.OPEN_ACCESS_STORE)).equals("2");
-		showGroup.put(KEY_ACCESS, tempBool);
-		// 修改系统配置时, 实时曲线的数量
-		oldRecTime = Integer.parseInt(sysArgs.get(BeanForSysArgs.MAX_RS_COUNT_LINE));
-		
+		try {
+			showTipMsg = 0;
+			//实例化服务类
+			//setSysService = setSysService == null ? new SetSysService() : setSysService ;
+			sysArgs = setSysService.getSysParamMap();
+			
+			boolean tempBool = true;
+			showGroup = showGroup == null ? new HashMap<String, Boolean>() : showGroup;
+			
+			tempBool = (sysArgs.get(BeanForSysArgs.OPEN_SHORT_MESSAGE)).equals("2");
+			showGroup.put(KEY_MSSSAGE, tempBool);
+			tempBool = (sysArgs.get(BeanForSysArgs.OPEN_PCSOUND)).equals("2");
+			showGroup.put(KEY_PCSOUND, tempBool);
+			tempBool = (sysArgs.get(BeanForSysArgs.OPEN_ACCESS_STORE)).equals("2");
+			showGroup.put(KEY_ACCESS, tempBool);
+			// 修改系统配置时, 实时曲线的数量
+			oldRecTime = Integer.parseInt(sysArgs.get(BeanForSysArgs.MAX_RS_COUNT_LINE));
+		} catch (Exception e) {
+			log.error("initSys error", e);
+		}
 		return SETTING;
 	}
 	
 	public String update(){
-		String tempStr;
-		
-		// 短信报警是否打开(1:关闭 2:打开)
-		tempStr = showGroup.get(KEY_MSSSAGE)? "2" : "1";
-		sysArgs.put(BeanForSysArgs.OPEN_SHORT_MESSAGE, tempStr);
-		// 声卡报警是否打开(1:关闭 2:打开)
-		tempStr = showGroup.get(KEY_PCSOUND)? "2" : "1";
-		sysArgs.put(BeanForSysArgs.OPEN_PCSOUND, tempStr);
-		// Access数据保存是否打开(1:关闭 2:打开)
-		tempStr = showGroup.get(KEY_ACCESS)? "2" : "1";
-		sysArgs.put(BeanForSysArgs.OPEN_ACCESS_STORE, tempStr);
-		
-		//实例化服务类
-		//setSysService = setSysService == null ? new SetSysService() : setSysService ;
-		// 提交修改
-		if (setSysService.updateSysParam(sysArgs)){
-			//重置系统变量,达到更新的目的
-			if (oldRecTime == Integer.parseInt(sysArgs.get(BeanForSysArgs.MAX_RS_COUNT_LINE))){
-				// 实时曲线的数量 无变化, 不重置 总览&实时曲线关联的数据库
-				commonDataUnit.resetSystem(false,false,false,true,false);
+		try {
+			String tempStr;
+			
+			// 短信报警是否打开(1:关闭 2:打开)
+			tempStr = showGroup.get(KEY_MSSSAGE)? "2" : "1";
+			sysArgs.put(BeanForSysArgs.OPEN_SHORT_MESSAGE, tempStr);
+			// 声卡报警是否打开(1:关闭 2:打开)
+			tempStr = showGroup.get(KEY_PCSOUND)? "2" : "1";
+			sysArgs.put(BeanForSysArgs.OPEN_PCSOUND, tempStr);
+			// Access数据保存是否打开(1:关闭 2:打开)
+			Boolean access = showGroup.get(KEY_ACCESS);
+			if (access == null) {
+				access = Boolean.FALSE;
+			}
+			tempStr = access? "2" : "1";
+			sysArgs.put(BeanForSysArgs.OPEN_ACCESS_STORE, tempStr);
+			
+			//实例化服务类
+			//setSysService = setSysService == null ? new SetSysService() : setSysService ;
+			// 提交修改
+			if (setSysService.updateSysParam(sysArgs)){
+				//重置系统变量,达到更新的目的
+				if (oldRecTime == Integer.parseInt(sysArgs.get(BeanForSysArgs.MAX_RS_COUNT_LINE))){
+					// 实时曲线的数量 无变化, 不重置 总览&实时曲线关联的数据库
+					commonDataUnit.resetSystem(false,false,false,true,false);
+				}else{
+					// 实时曲线的数量 有变化, 重置 总览&实时曲线关联的数据库
+					commonDataUnit.resetSystem(false,false,false,true,true);
+					oldRecTime = Integer.parseInt(sysArgs.get(BeanForSysArgs.MAX_RS_COUNT_LINE));
+				} 
+				tempStr = "系统属性修改成功.";
 			}else{
-				// 实时曲线的数量 有变化, 重置 总览&实时曲线关联的数据库
-				commonDataUnit.resetSystem(false,false,false,true,true);
-				oldRecTime = Integer.parseInt(sysArgs.get(BeanForSysArgs.MAX_RS_COUNT_LINE));
-			} 
-			tempStr = "系统属性修改成功.";
-		}else{
-			tempStr = "系统属性修改失败.";
+				tempStr = "系统属性修改失败.";
+			}
+			showTipMsg = 1;
+			addActionMessage(tempStr);
+		} catch (Exception e) {
+			log.error("initSys error", e);
 		}
-		showTipMsg = 1;
-		addActionMessage(tempStr);
 		return SETTING;
 	}
 	
