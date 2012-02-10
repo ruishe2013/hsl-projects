@@ -28,7 +28,59 @@ function autoCreateDiv(sysEqCount, equipmentId, type, workPlaceId){
 	workPlaceDiv.append(elements);
 }
 
+
+function barsDisplayMode(mode) {
+	setCookie('bars_display_mode', mode);
+	location.reload();
+}
+
+function getBarsDisplayMode() {
+	if (typeof window.g_displayMode == "undefined" || !window.g_displayMode) {
+		window.g_displayMode = getCookie('bars_display_mode');
+	}
+	return window.g_displayMode;
+}
+
+function setCookie(key, value) {
+	var date = new Date();
+	date.setYear(2030);
+	var cookieString = key + "=" + value + "; expires=" + date.toGMTString();
+	document.cookie = cookieString;
+}
+
+
+function getCookie(key) {
+	var cookie = document.cookie;
+	if (!cookie) {
+		return null;
+	}
+	var parts = cookie.split(';');
+	for(var partIndex in parts) {
+		var part = parts[partIndex];
+		var pos = part.indexOf('=');
+		if (pos < 0) {
+			continue;
+		}
+		var name = part.substring(0, pos);
+		name = jQuery.trim(name);
+		if (name == key) {
+			var ret = part.substring(pos+1);
+			return jQuery.trim(ret);
+		}
+	}
+	return null;
+}
+
 function queryOrCreateWorkPlaceDiv(workPlaceId) {
+	var displayMode = getBarsDisplayMode();
+	if ( 1 == displayMode) {
+		// 每个区域独立显示
+		
+	} else if ( 2 == displayMode) {
+		// 所有区域合并显示
+		
+		workPlaceId = "0";
+	}
 	var workPlaceAttrId = "workPlaceId-" + workPlaceId;
 	var obj = $("#" + workPlaceAttrId);
 	if (obj.length > 0) {
