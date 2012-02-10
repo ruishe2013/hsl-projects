@@ -30,10 +30,12 @@
 			<div class="main_content_address_left">
 				<img src="../images/title_add.jpg" style="cursor: pointer;" onclick="toggleDiv();"/>
 			</div>
-			<div class="main_content_address_right">
-				<div id="sounddl" class="mp3" style="margin-top:2px; margin-right: 7px; float: left;"></div>
-				<strong style="color: black; padding-right: 7px;">[总览画面] </strong>
-				<strong id="recTimeLabel"></strong>
+			<div class="main_content_address_right" >
+				<div id="sounddl" class="mp3" style="margin-top:5px; margin-right: 7px; float: left;"></div>
+				<strong style="color: black; padding-right: 7px; display:block; float: left;">[总览画面] </strong>
+				<strong id="recTimeLabel" style="display:block; float: left;"></strong>
+				<img src="../images/align_left16.png" alt="分区域展示" title="分区域展示" style="cursor: pointer; padding-left:20px; padding-top: 5px; display:block; float: left; " onclick="barsDisplayMode(1);"/>
+				<img src="../images/align_justify16.png" alt="合并展示" title="合并展示" style="cursor: pointer; padding-left:10px; padding-top: 5px; display:block; float: left;" onclick="barsDisplayMode(2);"/>
 			</div>
 		</div>		
 		
@@ -113,6 +115,9 @@
 				}				
 		<BGSOUND id="backSound" SRC="" LOOP="-1"/>
 		--%>
+		
+		<div id="test_msg"></div>
+		<div id="test_msg2"></div>
 		
 		<!-- includtop最外层结束 -->		
 		</div>		
