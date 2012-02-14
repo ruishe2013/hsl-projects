@@ -48,10 +48,9 @@ public class TestCom {
 		try {
 
 			// 初始化串口
-			final_Level.init(2000, baudRate, SerialPort.DATABITS_8,SerialPort.STOPBITS_1, SerialPort.PARITY_NONE);
 			int frameInterval = final_Level.getFrameInterval(appendMillsec, bytes, baudRate);
 
-			if (final_Level.initialize()) {
+			if (final_Level.initialize(2000, baudRate, SerialPort.DATABITS_8,SerialPort.STOPBITS_1, SerialPort.PARITY_NONE)) {
 				System.out.print("success!");
 				System.out.println("  间隔:" + frameInterval + "毫秒");
 			} else {

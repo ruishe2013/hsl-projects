@@ -1,6 +1,10 @@
 package com.htc.model.seriaPort;
 
-import gnu.io.*;
+import gnu.io.CommPortIdentifier;
+import gnu.io.PortInUseException;
+import gnu.io.SerialPort;
+import gnu.io.SerialPortEvent;
+import gnu.io.SerialPortEventListener;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -82,20 +86,12 @@ public class Level_Final_Serial implements SerialPortEventListener {
 	 * @param parity 奇偶检验
 	 * @date:2009-11-5
 	 */
-	public void init(int timeOut, int baudrate, int dataBits, int stopBits, int parity) {
+	private void init(int timeOut, int baudrate, int dataBits, int stopBits, int parity) {
 		this.timeOut = timeOut;
 		this.baudrate = baudrate;
 		this.dataBits = dataBits;
 		this.stopBits = stopBits;
 		this.parity = parity;
-	}
-
-	/**
-	 * @describe : 获取串口字符串
-	 * @date:2009-11-5
-	 */
-	public String getPortName() {
-		return PortName;
 	}
 
 	/**
@@ -117,13 +113,10 @@ public class Level_Final_Serial implements SerialPortEventListener {
 		this.PortName = portName;
 	}
 
-	/**
-	 * 初始化串口,要需com口号
-	 */
 	public Level_Final_Serial() {
 		portIsOpenFlag = false;
 	}
-
+	
 	/**
 	 * @describe: 返回串口是否打开
 	 * @return true : 打开 false: 没有打开
@@ -168,7 +161,7 @@ public class Level_Final_Serial implements SerialPortEventListener {
 	 * @describe: 列举并得到需要用串口
 	 * @date:2009-11-5
 	 */
-	public CommPortIdentifier getCommPort() throws Exception {
+	private CommPortIdentifier getCommPort() throws Exception {
 		CommPortIdentifier portIdRs = null;
 		portIdRs = CommPortIdentifier.getPortIdentifier(PortName);
 		return portIdRs;
@@ -214,8 +207,11 @@ public class Level_Final_Serial implements SerialPortEventListener {
 	 * @return true : 初始化串口成功 false: 初始化串口失败 
 	 * @date:2009-11-5
 	 */
-	public boolean initialize() {
+	public boolean initialize(int timeOut, int baudrate, int dataBits, int stopBits, int parity) {
 		// System.out.println("程序名:" + appname + "......");
+		
+		init(timeOut, baudrate, dataBits, stopBits, parity);
+		
 		boolean rsBool = false;
 		try {
 			//获取串口

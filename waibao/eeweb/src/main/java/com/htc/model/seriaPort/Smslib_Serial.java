@@ -57,11 +57,11 @@ public class Smslib_Serial {
 		boolean rsBool = false;
 		
 		// 初始化串口
-		final_Serial.init(timeOut, baudrate, dataBits, stopBits, parity);
+		// final_Serial.init(timeOut, baudrate, dataBits, stopBits, parity);
 		final_Serial.setAppname(appName.toUpperCase());
 		final_Serial.setPortName(portStr);
 		// 打开串口
-		if (final_Serial.initialize()) {
+		if (final_Serial.initialize(timeOut, baudrate, dataBits, stopBits, parity)) {
 			rsBool = true;
 			// 设置帧之间的发送间隔
 			this.frameInterval = getFrameInterval(appendMillsec, bytes, baudrate);		
