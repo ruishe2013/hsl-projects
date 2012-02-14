@@ -1,4 +1,4 @@
-package com.htc.model.seriaPort;
+package com.htc.ports;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -23,6 +23,8 @@ import com.htc.domain.Record;
 import com.htc.domain.TLog;
 import com.htc.model.MainService;
 import com.htc.model.ServiceAccess;
+import com.htc.model.seriaPort.CalcCRC;
+import com.htc.model.seriaPort.SerialPortConstants;
 
 /**
  * 类使用方法: <br>
@@ -35,11 +37,11 @@ import com.htc.model.ServiceAccess;
  * VERSION       DATE            BY       CHANGE/COMMENT
  * 1.0          2009-11-7     YANGZHONLI       create
  */
-public class Level_Second_Serial {
+public class Level_Second_Serial_New {
 	
 	//public static Level_Second_Serial second_Level = new Level_Second_Serial();
 	
-	private Log log = LogFactory.getLog(Level_Second_Serial.class);
+	private Log log = LogFactory.getLog(Level_Second_Serial_New.class);
 	
 	/*-------------串口读写保存类型,用以判断是否把数据保存到数据库------------*/
 	/**
@@ -92,7 +94,7 @@ public class Level_Second_Serial {
 	//private List<Map<Integer,BeanForPortData>> currentFlashData;		// "实时曲线"用的临时数据集-时间一致(短日期:数据对象)
 	private static String SMSAPPNAME = "HtcSerialData";	
 	
-	private Level_Final_Serial final_Level;
+	private PortService portService;
 	private CommonDataUnit commonDataUnit;
 	private MainService mainService;
 	private ServiceAccess serviceAccess;	
@@ -103,15 +105,15 @@ public class Level_Second_Serial {
 	public void setMainService(MainService mainService) {
 		this.mainService = mainService;
 	}
-	public void setFinal_Level(Level_Final_Serial final_Level) {
-		this.final_Level = final_Level;
+	public void setFinal_Level(PortService portService) {
+		this.portService = portService;
 	}
 	public void setServiceAccess(ServiceAccess serviceAccess) {
 		this.serviceAccess = serviceAccess;
 	}
 	
 	// 构造方法
-	public Level_Second_Serial() {
+	public Level_Second_Serial_New() {
 		timeOut = 60;						// 延迟时间(毫秒数)
 		dataBits = SerialPortConstants.DATABITS_8;	// 数据位
 		stopBits = SerialPortConstants.STOPBITS_1;	// 停止位
@@ -124,7 +126,6 @@ public class Level_Second_Serial {
 		poweredHumidity = new ConcurrentHashMap<Integer, PoweredValue>();
 		addressData = new ConcurrentHashMap<Integer, BeanForPortData>();
 		//currentFlashData = new CopyOnWriteArrayList<Map<Integer,BeanForPortData>>();
-		//final_Level = new Level_Final_Serial();
 	}
 
 //	/**
@@ -145,11 +146,11 @@ public class Level_Second_Serial {
 	 * @date:2009-11-5
 	 */
 	public void initialize(String portStr, int baudrate, int appendMillsec) {
-		final_Level.setAppname(SMSAPPNAME);
-		final_Level.setPortName(portStr);
+		portService.setAppname(SMSAPPNAME);
+		portService.setPortName(portStr);
 	//	final_Level.init(timeOut, baudrate, dataBits, stopBits, parity);
 		this.baudrate = baudrate;
-		this.frameInterval = Level_Final_Serial.getFrameInterval(appendMillsec, bytes, baudrate);
+		this.frameInterval = portService.getFrameInterval(appendMillsec, bytes, baudrate);
 	}
 	
 	/**
@@ -158,7 +159,7 @@ public class Level_Second_Serial {
 	 * @date:2009-11-7
 	 */
 	public boolean isPortOpen() {
-		return final_Level.isPortOpen();
+		return portService.isPortOpen();
 	}
 	
 	/**
@@ -167,7 +168,7 @@ public class Level_Second_Serial {
 	 * @date:2009-11-5
 	 */
 	public boolean openPort() {
-		if (final_Level.initialize(timeOut, baudrate, dataBits, stopBits, parity)) {
+		if (portService.initialize(timeOut, baudrate, dataBits, stopBits, parity)) {
 			return true;
 		} else {
 			return false;
@@ -179,7 +180,7 @@ public class Level_Second_Serial {
 	 * @date:2009-11-5
 	 */
 	public void closePort() {
-		final_Level.closePort();
+		portService.closePort();
 	}
 	
 	//****************.初始化.串口运行状态.打开和关闭端口. end  ****************************************//
@@ -227,7 +228,7 @@ public class Level_Second_Serial {
 		char[] rs = {(char)address, (char)funCode, (char)memHigh, (char)menLow, (char)dataHigh, (char)dataLow, 0, 0};
 		rs = CalcCRC.getCrc16(rs);
 		//System.out.println(FunctionUnit.bytesToHexString(rs));
-		final_Level.writePort(rs);
+		portService.writePort(rs);
 		//停止，以保证数据发送成功
 		Thread.sleep(frameInterval);
 	}	
@@ -272,21 +273,21 @@ public class Level_Second_Serial {
 	 */
 	public int readByte(int address, int equipmentId, int readType, int dataLen) throws Exception{
 		
-		if ( final_Level == null){
+		if ( portService == null){
 			return -1;
 		}
 		
 		// 读取数据
-		char[] rsByte = final_Level.readPackData();
+		char[] rsByte = portService.readPackData();
 		if (rsByte != null){
 			 //System.out.println(FunctionUnit.bytesToHexString(rsByte));
 		}
 		int rsState = checkReturn(rsByte, address);
 		
 		//过滤测试数据,对用的数据进行操作
-		if (readType == Level_Second_Serial.READ_USEFULL_DATA){
+		if (readType == Level_Second_Serial_New.READ_USEFULL_DATA){
 			//帧检测无误,把数据存入数据库
-			if ( rsState == Level_Final_Serial.Serial_right_Frame ) {
+			if ( rsState == portService.getPortServiceValues().getSerial_right_Frame() ) {
 				updateDataBean(address, equipmentId, rsByte, rsState, dataLen);
 			}else{
 				if ((rsByte != null)&&(rsByte.length >= 11 )){//正确的数据有1个数据
@@ -321,24 +322,25 @@ public class Level_Second_Serial {
 	 */
 	public int checkReturn(char[] rsByte, int address){
 		boolean rsOut = true;
-		int rsState = Level_Final_Serial.Serial_right_Frame;
+		PortServiceValues portServiceValues = portService.getPortServiceValues();
+		int rsState = portServiceValues.getSerial_right_Frame();
 		
 		//帧判断
 		if (rsByte == null) {
 			//判断是否丢帧
-			rsState = Level_Final_Serial.Serial_Lost_Frame;
+			rsState = portServiceValues.getSerial_Lost_Frame();
 		}else{
 			if (address != -1){
 				//检测地址头			
 				rsOut = rsByte[0] == address;
 			}
 			if (rsOut == false) {
-				rsState = Level_Final_Serial.Serial_wrong_Address;
+				rsState = portServiceValues.getSerial_wrong_Address();
 			}else{
 				//对接收的数据进行crc校验，检查是否通讯故障
 				rsOut = CalcCRC.checkCrc16(rsByte);
 				if (rsOut == false) {
-					rsState = Level_Final_Serial.Serial_wrong_Frame;
+					rsState = portServiceValues.getSerial_wrong_Frame();
 				}
 			}
 		}
@@ -372,13 +374,13 @@ public class Level_Second_Serial {
 			char[]	rs = {0xFB, (char) funCode, 6, rsout[0], rsout[1], rsout[2], rsout[3],rsout[4], rsout[5], 0, 0};
 			 rs = CalcCRC.getCrc16(rs);
 			 //System.out.println("send:"+FunctionUnit.bytesToHexString(rs));
-			 final_Level.writePort(rs);	
+			 portService.writePort(rs);	
 			 rs = null;
 		}else{
 			char[]	rs = {0xFB, (char) funCode, 7, rsout[0], rsout[1], rsout[2], rsout[3],rsout[4], rsout[5], (char) address, 0, 0};
 			rs = CalcCRC.getCrc16(rs);
 			//System.out.println(FunctionUnit.bytesToHexString(rs));
-			final_Level.writePort(rs);
+			portService.writePort(rs);
 			rs = null;
 		}
 		//停止，以保证数据发送成功
@@ -392,12 +394,12 @@ public class Level_Second_Serial {
 	 */
 	public char[] readByteNoDB() throws Exception{
 		// 读取数据
-		char[] rsByte = final_Level.readPackData();
+		char[] rsByte = portService.readPackData();
 		if (rsByte != null){
 			//System.out.println("rece:" + FunctionUnit.bytesToHexString(rsByte));
 		}
 		int rsState = checkReturn(rsByte, -1);
-		rsByte = rsState == Level_Final_Serial.Serial_right_Frame ? rsByte : null;
+		rsByte = rsState == portService.getPortServiceValues().getSerial_right_Frame() ? rsByte : null;
 		return rsByte;
 	}
 	
@@ -421,7 +423,7 @@ public class Level_Second_Serial {
 		second = (char) calendar.get(Calendar.SECOND);
 		char[]	rs = {0xFB, 0x65, 6, year, month, day, hour, minute, second, 0, 0};
 		rs = CalcCRC.getCrc16(rs);
-		final_Level.writePort(rs);
+		portService.writePort(rs);
 		 
 		//停止，以保证数据发送成功
 		Thread.sleep(frameInterval);
@@ -664,7 +666,7 @@ public class Level_Second_Serial {
 //			addressData = new HashMap<Integer, BeanForPortData>();  
 //		}
 		
-		if (state == Level_Final_Serial.Serial_right_Frame){
+		if (state == portService.getPortServiceValues().getSerial_right_Frame()){
 			Date tempDate = new Date();
 			
 			// 根据dataLen,显示 丢帧记录 
@@ -1034,6 +1036,16 @@ public class Level_Second_Serial {
 		rs[4] = (char) Integer.parseInt(serialSetDataBean.getMCNo().substring(0, 2), 16);
 		rs[5] = (char) Integer.parseInt(serialSetDataBean.getMCNo().substring(2, 4), 16);		
 		return rs;
+	}
+	public List<String> getAllComPorts() {
+		return portService.getAllComPorts();
+	}
+	public int getFrameInterval(int appendMillsec, int dataLen, int baudrate) {
+		return portService.getFrameInterval(appendMillsec, dataLen, baudrate);
+	}
+	
+	public PortService getPortService() {
+		return portService;
 	}
 	
 }
