@@ -1,21 +1,21 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-
 	<%@ page language="java" contentType="text/html; charset=gbk"%>
 	<%@ taglib prefix="s" uri="/struts-tags"%>
-
-	<script type="text/javascript" src="../js/jquery-1.3.2.js"></script>	
-	<script type="text/javascript" src="../js/jquery.jmp3.js"></script>
-	<script type="text/javascript" src="../js/page/bar2.js"></script>
- 	<style type="text/css">   
-		.bar_head {text-align:center; font-size:12px; color:#FFF; background-image: url(../images/main_08_01.jpg); height: 29px;}	
-		.bar_body{font-size:56px; color:#FFF; font-weight:bold; line-height:59px; text-align:right; background-image: url(../images/main_08_02.jpg);}
-		.bar_foot {font-size:12px; background-image: url(../images/main_08_03.jpg);}
-		.addr {margin: 0 0 10px 0;}
-		.addr a{ padding:3px 10px 3px 10px; background-image:url(../images/title_add.gif); width:76px; border:1px solid #DC6B00;}
-		.barfone {text-align:left; font-size: 25px;}
-	</style>
-	
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+		<script type="text/javascript" src="../js/jquery-1.3.2.js"></script>	
+		<script type="text/javascript" src="../js/jquery.jmp3.js"></script>
+		<script type="text/javascript" src="../js/page/bar2.js"></script>
+	 	<style type="text/css">   
+			.bar_head {text-align:center; font-size:12px; color:#FFF; background-image: url(../images/main_08_01.jpg); height: 29px;}	
+			.bar_body{font-size:56px; color:#FFF; font-weight:bold; line-height:59px; text-align:right; background-image: url(../images/main_08_02.jpg);}
+			.bar_foot {font-size:12px; background-image: url(../images/main_08_03.jpg);}
+			.addr {margin: 0 0 10px 0;}
+			.addr a{ padding:3px 10px 3px 10px; background-image:url(../images/title_add.gif); width:76px; border:1px solid #DC6B00;}
+			.barfone {text-align:left; font-size: 25px;}
+		</style>
+	</head>
 	<body>
 		
 		<%-- top  --%>
@@ -122,12 +122,19 @@
 		<!-- includtop最外层结束 -->		
 		</div>		
 		
-		<%--进入页面调用,用来显示图表--%> 
-		<script type="text/javascript">
-			$("#addressList").hide();
-			callRun(1);
-		</script>				
+			
 		
 	</body>
+	<%--进入页面调用,用来显示图表--%> 
+		<script type="text/javascript">
+			$(document).ready(function(){
+				$("#addressList").hide();
+				callRun(1);
+				$(window).resize(function() {
+					autoAdjustSize();
+				});
+			});
+			
+		</script>			
 </html>
 

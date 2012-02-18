@@ -2,6 +2,7 @@
 function autoCreateDiv(sysEqCount, equipmentId, type, workPlaceId){
 	if (type == 0){
 		$("#resultDiv").empty();
+		$("#resultDiv").append("<div id=\"result_data_container\" >");		
 	}
 	var elements =
 	"<li><table width=\"242px\" border=\"0\" align=\"center\" cellpadding=\"0\" cellspacing=\"0\">" +
@@ -86,8 +87,30 @@ function queryOrCreateWorkPlaceDiv(workPlaceId) {
 	if (obj.length > 0) {
 		return obj;
 	}
-	$("#resultDiv").append("<ul id=\""+ workPlaceAttrId + "\" style=\"display:block; float:left;\"></ul><div style=\"clear:both;\"></div>");
+	$("#result_data_container").append("<ul id=\""+ workPlaceAttrId + "\" style=\"display:block; \"></ul><div style=\"clear:both;\"></div>");
 	return $("#" + workPlaceAttrId);
+}
+
+function autoAdjustSize() {
+	var adjustData = getAdjustData();
+	var padding = adjustData.padding;
+	var width = adjustData.width;
+	//$("#test_msg2").text('padding: ' + padding + ", width:" + width);
+	$("#result_data_container").css('padding-left', padding);
+}
+
+function getAdjustData() {
+	var w = $(document).width();
+	//$("#test_msg").text('document width:' + w);
+	var a = 0;
+	var b = 248;
+	var n = 1;
+	var x = (w-2*a-n*b);
+	while (x > b) {
+		++n;
+		x = (w-2*a-n*b);
+	}
+	return {'padding': x/2, 'width': (b * n)};
 }
 
 function jumpToLine(equipmentId){
@@ -205,6 +228,8 @@ function callRun(callType) {
 			timeoutID = setTimeout("callRun(2)" ,Number($("#falshTime").val()) * 1000);
 						
 			actionPath = null;	paramArgs = null;
+			
+			autoAdjustSize();
 		});//end post
 	}// end if(userPlaceList == "")
 }
