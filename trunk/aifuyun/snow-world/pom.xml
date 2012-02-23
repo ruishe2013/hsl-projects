@@ -117,7 +117,7 @@
 	</dependencies>
 
 	<build>
-		<finalName>snow-world</finalName>
+		<finalName>snow-world-web</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-surefire-plugin</artifactId>
