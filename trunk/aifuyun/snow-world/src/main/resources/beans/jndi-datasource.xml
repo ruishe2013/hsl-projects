@@ -8,7 +8,7 @@
 	
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-			<value>${jndi.name}</value>
+			<value>${snow.world.jndi.name}</value>
 		</property>
 		<property name="jndiTemplate">
 			<ref local="jndiTemplate"/>
