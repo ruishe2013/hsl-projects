@@ -26,5 +26,12 @@
   	<url-pattern>/search/baidu-open-data.xml</url-pattern>
   	-->
   </servlet-mapping>
+  
+    <resource-ref>
+     <description>My DataSource Reference</description>
+     <res-ref-name>${snow.world.jndi.name}</res-ref-name>
+     <res-type>javax.sql.DataSource</res-type>
+     <res-auth>Container</res-auth>
+  </resource-ref>
 
 </web-app>
