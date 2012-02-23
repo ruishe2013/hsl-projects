@@ -27,6 +27,10 @@
   	-->
   </servlet-mapping>
   
+  <welcome-file-list>
+  	<welcome-file>index.htm</welcome-file>
+  </welcome-file-list>
+  
     <resource-ref>
      <description>My DataSource Reference</description>
      <res-ref-name>${snow.world.jndi.name}</res-ref-name>

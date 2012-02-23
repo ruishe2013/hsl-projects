@@ -3,7 +3,7 @@ CREATE DATABASE `snow-world`;
 use `snow-world`;
 
 delete from mysql.user where User = 'test123';
-grant select,update,delete,insert on `snow-world`.* to 'test123'@'localhost' identified by 'test123';
+grant select,update,delete,insert on `snow-world`.* to 'test123'@'127.0.0.1' identified by 'test123';
 flush privileges;
 
 
