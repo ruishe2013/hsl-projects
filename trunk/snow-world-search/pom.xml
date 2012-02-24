@@ -39,7 +39,7 @@
   </dependencies>
   
   	<build>
-		<finalName>snow-world-search</finalName>
+		<finalName>snow-world-search-web</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
