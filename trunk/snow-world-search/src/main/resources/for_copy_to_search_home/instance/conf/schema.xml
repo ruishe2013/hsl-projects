@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+
+<schema name="example core" version="1.1">
+	<types>
+		<fieldtype name="string" class="solr.TextField" sortMissingLast="true" />
+		<fieldType name="boolean" class="solr.BoolField" sortMissingLast="true" omitNorms="true"/>
+
+		<fieldType name="int" class="solr.TrieIntField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="float" class="solr.TrieFloatField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="long" class="solr.TrieLongField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="double" class="solr.TrieDoubleField" precisionStep="0" omitNorms="true" positionIncrementGap="0"/>
+
+		<fieldType name="tint" class="solr.TrieIntField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="tfloat" class="solr.TrieFloatField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="tlong" class="solr.TrieLongField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+		<fieldType name="tdouble" class="solr.TrieDoubleField" precisionStep="8" omitNorms="true" positionIncrementGap="0"/>
+
+		<fieldType name="date" class="solr.TrieDateField" omitNorms="true" precisionStep="0" positionIncrementGap="0"/>
+		<fieldType name="tdate" class="solr.TrieDateField" omitNorms="true" precisionStep="6" positionIncrementGap="0"/>
+
+		<fieldType name="pint" class="solr.IntField" omitNorms="true"/>
+		<fieldType name="plong" class="solr.LongField" omitNorms="true"/>
+		<fieldType name="pfloat" class="solr.FloatField" omitNorms="true"/>
+		<fieldType name="pdouble" class="solr.DoubleField" omitNorms="true"/>
+
+		<fieldType name="sint" class="solr.SortableIntField" sortMissingLast="true" omitNorms="true"/>
+		<fieldType name="slong" class="solr.SortableLongField" sortMissingLast="true" omitNorms="true"/>
+		<fieldType name="sfloat" class="solr.SortableFloatField" sortMissingLast="true" omitNorms="true"/>
+		<fieldType name="sdouble" class="solr.SortableDoubleField" sortMissingLast="true" omitNorms="true"/>
+
+
+		<fieldType name="string_ws" class="solr.TextField" positionIncrementGap="100">
+			<analyzer>
+				<tokenizer class="solr.WhitespaceTokenizerFactory" />
+			</analyzer>
+		</fieldType>
+		<fieldType name="string_sd" class="solr.TextField" sortMissingLast="true" omitNorms="true">
+			<analyzer>
+				<tokenizer class="solr.StandardTokenizerFactory" />
+				<filter class="solr.ChineseFilterFactory" />
+			</analyzer>
+		</fieldType>
+	</types>
+
+	<fields>
+		<field name="id" type="long" indexed="true" stored="true" multiValued="false" required="true" />
+		<field name="creatorId" type="long" indexed="true" stored="true" multiValued="false" />
+		<field name="creatorUsername" type="string" indexed="true" stored="true" multiValued="false" />
+		<field name="cityId" type="int" indexed="true" stored="true" multiValued="false" />
+		<field name="fromCity" type="string" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveCityId" type="int" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveCity" type="string" indexed="true" stored="true" multiValued="false" />
+		<field name="fromAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveAddr" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="fromTime_ymd" type="tlong" indexed="true" stored="false" multiValued="false" />
+		<field name="arriveTime_ymd" type="tlong" indexed="true" stored="false" multiValued="false" />
+		<field name="description" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="approach" type="string_sd" indexed="true" stored="true" multiValued="false" />
+		<field name="status" type="int" indexed="true" stored="true" multiValued="false" />
+		<field name="deleted" type="pint" indexed="true" stored="false" multiValued="false" />
+		<field name="type" type="pint" indexed="true" stored="true" multiValued="false" />
+		
+		<field name="fromWeek" type="string" indexed="false" stored="true" multiValued="false" />
+		<field name="afterWorkFromTime" type="string" indexed="false" stored="true" multiValued="false" />
+		<field name="carType" type="string" indexed="false" stored="true" multiValued="false" />
+		
+		<field name="creatorCarOwnerType" type="int" indexed="false" stored="true" multiValued="false" />
+		<field name="carNo" type="string" indexed="false" stored="true" multiValued="false" />
+		
+		<field name="totalSeats" type="int" indexed="false" stored="true" multiValued="false" />
+		<field name="creatorRealName" type="string" indexed="false" stored="true" multiValued="false" />
+		
+		<field name="fromTime" type="tlong" indexed="true" stored="true" multiValued="false" />
+		<field name="arriveTime" type="tlong" indexed="true" stored="true" multiValued="false" />
+		<field name="gmtCreate" type="tlong" indexed="false" stored="true" multiValued="false" />
+		<field name="gmtModified" type="tlong" indexed="true" stored="true" multiValued="false" />
+
+		<field name="fromAddrText" type="string_sd" indexed="true" stored="false" multiValued="true" />
+		<field name="arriveAddrText" type="string_sd" indexed="true" stored="false" multiValued="true" />
+	</fields>
+
+	<uniqueKey>id</uniqueKey>
+	<defaultSearchField>arriveAddrText</defaultSearchField>
+	<solrQueryParser defaultOperator="OR" />
+
+</schema>

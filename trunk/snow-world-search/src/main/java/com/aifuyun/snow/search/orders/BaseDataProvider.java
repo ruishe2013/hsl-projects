@@ -12,16 +12,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aifuyun.search.build.DataProvider;
+import com.aifuyun.search.util.ConnectionUtil;
 import com.aifuyun.search.util.DateUtil;
+import com.aifuyun.search.util.SqlUtil;
 import com.aifuyun.search.util.StringUtil;
-import com.aifuyun.snow.search.util.ConnectionPool;
-import com.aifuyun.snow.search.util.SqlUtil;
 
 public abstract class BaseDataProvider implements DataProvider {
 
 	protected final Logger log = LoggerFactory.getLogger(getClass());
-	
-	private ConnectionPool connectionPool = new ConnectionPool();
 	
 	private Connection connection;
 	
@@ -59,8 +57,7 @@ public abstract class BaseDataProvider implements DataProvider {
 
 	@Override
 	public void init() {
-		connectionPool.init();
-		connection = connectionPool.getConnection();
+		connection = ConnectionUtil.getConnection();
 		String sql = genSql();
 		try {
 			log.info("sql: " + sql);
