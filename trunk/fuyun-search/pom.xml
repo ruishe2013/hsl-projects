@@ -4,7 +4,7 @@
   <groupId>fuyun-search</groupId>
   <artifactId>fuyun-search</artifactId>
   <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>fuyun-search</name>
   <url>http://maven.apache.org</url>
   
