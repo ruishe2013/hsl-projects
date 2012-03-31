@@ -104,9 +104,7 @@
 							<li><a href="${pageContext.request.contextPath}/seri/serialportAction">串口管理</a>
 								<ul class="subnav">
 									<li><a href="${pageContext.request.contextPath}/seri/serialportAction">串口调试</a></li>
-									<s:if test="#session.userpowertag == 86">
-										<li><a href="${pageContext.request.contextPath}/seri/serialSetDataAction">串口设置</a></li>
-									</s:if>	
+									<li><a href="${pageContext.request.contextPath}/seri/serialSetDataAction">串口设置</a></li>
 								</ul>
 							</li>
 						</s:if>	
