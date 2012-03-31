@@ -433,10 +433,11 @@ public class MainRecentDataAction extends AbstractAction {
 			appendBarData(workPlaceBarDatas, equipData.getPlaceId(), serialBarDataBean, equipData.getPlaceStr());
 		}//end for
 		// sort by address
-		sortDataByAddress();
+	// ≈≈–Ú
+	//	sortDataByAddress();
 	}
 	
-	private void sortDataByAddress() {
+	void sortDataByAddress() {
 		for (Map.Entry<Integer, WorkPlaceEntity> entry : workPlaceBarDatas.entrySet()) {
 			WorkPlaceEntity workPlaceEntity = entry.getValue();
 			if (workPlaceEntity == null) {

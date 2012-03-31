@@ -15,7 +15,7 @@ import com.zjuh.waibao.pxsearch.util.WordUtil;
 
 public class QABaseDataProvider extends CommonDataProvider {
 
-	private File baseWordDir = new File("D:/wwwroot/SIKAOLI.COM/docs");
+	private File baseWordDir = new File("D:/wwwroot/SIKAOLI.COM");
 	
 	@Override
 	protected String getSql() {
